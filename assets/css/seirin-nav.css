@@ -1,0 +1,118 @@
+/* ==========================================================================
+ * 统一跨页快捷切换胶囊导航 (全站互通)
+ * 供 AyagawaSeirin 模板主页使用
+ * ========================================================================== */
+.seirin-quick-nav {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(33, 33, 33, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px 14px;
+    border-radius: 30px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 13px;
+    animation: fadeInDown 0.3s ease;
+}
+
+.seirin-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #e0e0e0;
+    transition: all 0.2s;
+    font-size: 12.5px;
+    white-space: nowrap;
+}
+
+.seirin-nav-btn:hover {
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
+}
+
+.seirin-nav-btn.active {
+    background: #e91e63;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.4);
+}
+
+.seirin-nav-btn.highlight {
+    background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(33, 150, 243, 0.4);
+}
+
+.seirin-nav-btn.highlight:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.seirin-nav-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.22);
+    margin: 0 2px;
+}
+
+.seirin-music-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    color: #e0e0e0;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.seirin-music-btn:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+.seirin-music-btn.playing {
+    border-color: #e91e63;
+    color: #f48fb1;
+    background: rgba(233, 30, 99, 0.22);
+}
+
+.seirin-music-btn.playing i.fa-music {
+    animation: musicSpin 3s linear infinite;
+}
+
+@keyframes musicSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+    .seirin-quick-nav {
+        top: auto;
+        bottom: 16px;
+        right: 50%;
+        transform: translateX(50%);
+        padding: 5px 8px;
+        gap: 3px;
+    }
+    .seirin-nav-btn {
+        padding: 5px 9px;
+        font-size: 12px;
+    }
+}

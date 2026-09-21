@@ -29,6 +29,7 @@ const COPY_TARGETS = [
   { from: 'home.html', to: 'home.html' },
   { from: 'resume.html', to: 'resume.html' },
   { from: 'assets', to: 'assets' },
+  { from: 'mdui', to: 'mdui' },
   { from: 'uploads', to: 'uploads' },
   { from: 'admin', to: 'admin' }
 ];

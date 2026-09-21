@@ -1,112 +1,350 @@
+<!--
+ * AyagawaSeirin's Page Template
+ * Customized & Integrated for 张栋梁 · 个人主页与作品门户
+ * Background: Cyber Mario Pixel Workshop (GIF)
+ * Audio: Classical BGM (15387.rar)
+-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>张栋梁 · 个人主页 & 作品门户</title>
-  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/css/home.css">
+    <meta charset="utf-8">
+    <title>张栋梁 · 个人主页 & 作品门户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 本地与 CDN 双向保障 MDUI -->
+    <link rel="stylesheet" href="mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="assets/css/seirin-main.css">
+    <link rel="stylesheet" href="assets/css/seirin-index.css">
+    <link rel="stylesheet" href="assets/css/seirin-nav.css">
+    <!-- 图标库: 阿里巴巴 iconfont + FontAwesome -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1625701_q2422cy34wn.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        /* 将背景覆盖为用户指定并上传的赛博马里奥像素工作台动态图 */
+        #rin-bg {
+            background-image: url('assets/images/mario-night.gif') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-attachment: fixed !important;
+        }
+        #rin-bg:after {
+            background-color: rgba(22, 27, 34, 0.68) !important;
+            backdrop-filter: blur(2px) !important;
+            -webkit-backdrop-filter: blur(2px) !important;
+        }
+        /* 保持个人头像比例微调 */
+        .rin-logo img {
+            border-radius: 12px;
+            object-fit: cover;
+            width: 140px;
+            height: 175px;
+            border: 2px solid rgba(255,255,255,0.25);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        }
+        .rin-card {
+            background-color: rgba(20, 24, 33, 0.62) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border: 1px solid rgba(255,255,255,0.14) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
+        }
+        .rin-card-article {
+            background-color: rgba(255,255,255,0.06) !important;
+            border: 1px solid rgba(255,255,255,0.12) !important;
+            border-radius: 8px !important;
+            transition: all 0.25s ease;
+        }
+        .rin-card-article:hover {
+            background-color: rgba(255,255,255,0.12) !important;
+            border-color: rgba(33, 150, 243, 0.5) !important;
+            transform: translateY(-2px);
+        }
+        .rin-btn-resume-cta {
+            background: linear-gradient(135deg, #1976d2 0%, #2196f3 100%) !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.45) !important;
+            margin-bottom: 8px !important;
+        }
+        .rin-btn-resume-cta:hover {
+            filter: brightness(1.12);
+            transform: translateY(-1px);
+        }
+        .tag-pill-badge {
+            display: inline-block;
+            font-size: 11.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(33, 150, 243, 0.18);
+            color: #64b5f6;
+            border: 1px solid rgba(33, 150, 243, 0.35);
+            margin-right: 6px;
+        }
+    </style>
 </head>
-<body>
-  <!-- 全屏赛博马里奥像素夜景背景 -->
-  <div id="home-bg"></div>
+<body class="mdui-theme-primary-pink mdui-theme-accent-pink">
 
-  <!-- 顶部悬浮互通导航胶囊（自由切换主页/简历/投递/后台/音乐） -->
-  <header class="home-quick-bar">
-    <a class="home-nav-btn active" href="/" title="个人主页（当前页）">
-      <i class="fa fa-home"></i> 个人主页
+<!-- 全屏背景层 (马里奥像素 GIF) -->
+<div id="rin-bg"></div>
+
+<!-- 顶部互通胶囊导航栏（主页 ⇄ 简历 ⇄ 投递记录 ⇄ 后台 ⇄ 音乐） -->
+<nav class="seirin-quick-nav">
+    <a class="seirin-nav-btn active" href="/" title="AyagawaSeirin 主页模版（当前页）">
+        <i class="fa fa-home"></i> 个人主页
     </a>
-    <a class="home-nav-btn highlight" href="/resume.html" title="切换至完整在线简历">
-      <i class="fa fa-id-card-o"></i> 个人简历
+    <a class="seirin-nav-btn highlight" href="/resume.html" title="自由切换至完整个人在线简历">
+        <i class="fa fa-id-card-o"></i> 个人简历
     </a>
-    <a class="home-nav-btn" href="/admin/jobs.html" title="查看投递进度看板">
-      <i class="fa fa-table"></i> 投递记录
+    <a class="seirin-nav-btn" href="/admin/jobs.html" title="校招投递记录看板">
+        <i class="fa fa-table"></i> 投递记录
     </a>
-    <a class="home-nav-btn" href="/admin/" title="进入后台管理系统">
-      <i class="fa fa-cog"></i> 后台管理
+    <a class="seirin-nav-btn" href="/admin/" title="进入可视化管理后台">
+        <i class="fa fa-cog"></i> 后台管理
     </a>
-    <span class="bar-divider"></span>
-    <button class="music-toggle-btn" id="btn-toggle-music" title="播放 / 暂停像素背景音乐">
-      <span class="music-disc"><i class="fa fa-music"></i></span>
-      <span id="music-text">背景音乐</span>
+    <span class="seirin-nav-divider"></span>
+    <button class="seirin-music-btn" id="btn-seirin-music" title="播放 / 暂停像素背景音乐">
+        <i class="fa fa-music"></i> <span id="seirin-music-text">音乐</span>
     </button>
-  </header>
+</nav>
 
-  <!-- 音频标签（15387 经典 BGM） -->
-  <audio id="home-bgm-audio" loop preload="none"></audio>
+<!-- 15387 经典 BGM 音频 -->
+<audio id="seirin-audio" src="assets/audio/bgm.mp3" loop preload="none"></audio>
 
-  <!-- 页面主容器（左右悬浮毛玻璃质感双栏） -->
-  <div class="home-container">
-    <!-- 左侧：个人名片卡片 -->
-    <aside class="home-sidebar-card">
-      <div class="home-avatar-wrap">
-        <img id="home-avatar-img" src="assets/images/avatar.jpg" alt="头像">
-      </div>
-      <h1 class="home-name" id="home-name-text">张栋梁</h1>
-      <div class="home-subtitle" id="home-subtitle-text">Dongliang Zhang</div>
-      <div class="home-tagline-badge" id="home-tagline-text">材料科学与工程 / 研发工艺 / AI Agent 探索者</div>
-      <p class="home-slogan" id="home-slogan-text">「多静多思考，反省不张扬」</p>
+<!-- 主页面布局结构 (完全继承 AyagawaSeirin 响应式网格与类名) -->
+<main id="rin-main">
+    <div class="mdui-row">
+        <!-- 左侧名片与导航栏 -->
+        <div class="mdui-col-xs-12 mdui-col-md-3">
+            <div class="rin-left">
+                <div class="rin-logo">
+                    <img id="rin-avatar-img" src="assets/images/avatar.jpg" alt="头像">
+                </div>
+                <div class="rin-left-title" id="rin-name-text">张&nbsp;栋&nbsp;梁</div>
+                <div class="rin-left-title2" id="rin-subtitle-text">Dongliang Zhang</div>
+                <div class="rin-left-slogan" id="rin-slogan-text">「多静多思考，反省不张扬」</div>
 
-      <!-- 核心直达按钮组 -->
-      <div class="home-action-buttons">
-        <a class="action-btn primary" href="/resume.html" title="点击进入完整个人简历">
-          <i class="fa fa-file-text-o"></i> 浏览个人简历
-        </a>
-        <a class="action-btn secondary" href="/admin/jobs.html" title="查看校招投递追踪表">
-          <i class="fa fa-table"></i> 投递记录看板
-        </a>
-        <a class="action-btn secondary" href="/admin/" title="进入可视化后台配置">
-          <i class="fa fa-sliders"></i> 个人主页与简历后台
-        </a>
-      </div>
-    </aside>
+                <!-- 核心行动按钮：一键进入简历 -->
+                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-left rin-btn-resume-cta mdui-text-capitalize" href="/resume.html" title="查看完整学术与工程简历">
+                    <i class="fa fa-file-text-o"></i> 完整个人简历
+                </a>
 
-    <!-- 右侧：主要模块内容卡片 -->
-    <main class="home-main-card">
-      <!-- 模块 1：关于我 -->
-      <section class="section-block">
-        <h2 class="section-title"><i class="fa fa-user-circle-o"></i> 关于我 · About Me</h2>
-        <h3 class="about-greeting" id="about-greeting">你好，我是张栋梁 👋</h3>
-        <p class="about-bio" id="about-bio">
-          材料科学与工程硕士在读，专注于材料计算模拟、催化高通量筛选与 AI Agent 科研工作流研发。热爱工程实践、开源技术与前沿跨界探索。
-        </p>
-        <div class="about-badges-grid" id="about-badges-grid">
-          <!-- JS 动态渲染 -->
+                <!-- 快捷功能直达 -->
+                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="/admin/jobs.html" target="_blank">
+                    <i class="fa fa-table"></i> 投递记录看板
+                </a>
+
+                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="https://github.com/XCai-0213" target="_blank">
+                    <span class="iconfont icongithub"></span> GitHub 主页
+                </a>
+
+                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="mailto:690857@163.com">
+                    <span class="iconfont iconmail_fill"></span> 发送邮件
+                </a>
+
+                <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue rin-btn-left mdui-text-capitalize" href="/admin/">
+                    <i class="fa fa-sliders"></i> 后台管理系统
+                </a>
+            </div>
         </div>
-      </section>
 
-      <!-- 模块 2：核心战斗力与技术栈 -->
-      <section class="section-block">
-        <h2 class="section-title"><i class="fa fa-bolt"></i> 核心战斗力 · Capabilities & Tech Stack</h2>
-        <div class="skills-matrix" id="skills-matrix">
-          <!-- JS 动态渲染 -->
+        <!-- 右侧内容大卡片 -->
+        <div class="mdui-col-xs-12 mdui-col-md-9">
+            <div class="mdui-card rin-card">
+                <!-- 1. 关于我 -->
+                <div class="rin-card-part" id="introduce" style="margin-top: 0;">
+                    <div class="rin-card-title2 mdui-typo"><a href="#introduce">#</a> 关于我 · About Me</div>
+                    <div class="rin-card-content mdui-typo" id="rin-bio-content">
+                        你好，我是<strong>张栋梁</strong> 👋<br>
+                        材料科学与工程硕士研究生（江西师范大学），本科为材料成型及控制工程（黄山学院）。<br>
+                        研究方向聚焦于<strong>第一性原理计算、电催化材料高通量筛选、半导体 FAB 工艺与 AI Agent 科学研究工作流</strong>研发。<br>
+                        中共党员，曾任校学生会主席，荣获国家奖学金。<br>
+                        热爱跨界探索与工程落地，践行 <em>AI for Science</em> 与 <em>AI for All</em>。
+                    </div>
+                </div>
+
+                <!-- 2. 战斗力 (技能熟练度进度条 - Seirin 招牌特色) -->
+                <div class="rin-card-part" id="fighting">
+                    <div class="rin-card-title2 mdui-typo"><a href="#fighting">#</a> 战斗力 · Capabilities</div>
+                    <div class="mdui-container" id="rin-fighting-container">
+                        <div class="mdui-row">
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '第一性原理与催化材料模拟'}">
+                                <div class="rin-progress-title">VASP / CP2K 计算</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '科学计算与批处理脚本'}">
+                                <div class="rin-progress-title">Python / Shell</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '智能体工作流与自动化编排'}">
+                                <div class="rin-progress-title">AI Agent 研发</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 82%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mdui-row" style="margin-top: 14px;">
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '工程制图与三维机械建模'}">
+                                <div class="rin-progress-title">AutoCAD / SolidWorks</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '服务器组装与系统环境维护'}">
+                                <div class="rin-progress-title">Linux 超算集群运维</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                            <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-col-md-4" mdui-tooltip="{content: '薄膜沉积与工艺质量控制'}">
+                                <div class="rin-progress-title">半导体 FAB 工艺</div>
+                                <div class="mdui-progress">
+                                    <div class="mdui-progress-determinate" style="width: 78%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 联系方式 (Seirin 经典风格) -->
+                <div class="rin-card-part" id="contact">
+                    <div class="rin-card-title2 mdui-typo"><a href="#contact">#</a> 找到我的地方</div>
+                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-black mdui-text-capitalize" href="https://github.com/XCai-0213" target="_blank">
+                        <span class="iconfont icongithub"></span> GitHub: XCai-0213
+                    </a>
+                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize" href="mailto:690857@163.com">
+                        <span class="iconfont iconmail_fill"></span> 690857@163.com
+                    </a>
+                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize" href="tel:17855900213">
+                        <i class="fa fa-phone"></i> 17855900213
+                    </a>
+                    <a class="mdui-btn mdui-btn-raised rin-btn rin-btn-blue mdui-text-capitalize" href="javascript:void(0)" mdui-tooltip="{content: '微信同手机号: 17855900213'}">
+                        <i class="fa fa-weixin"></i> 微信咨询
+                    </a>
+                </div>
+
+                <!-- 4. 代表项目与研究成果 (Seirin 经典作品卡片) -->
+                <div class="rin-card-part" id="works">
+                    <div class="rin-card-title2 mdui-typo"><a href="#works">#</a> 代表项目与成果 · Works</div>
+
+                    <a href="/resume.html#section-projects" title="点击在简历中查看技术细节">
+                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 12px;">
+                            <div class="rin-article-title">
+                                <span class="tag-pill-badge">开源工作台</span>
+                                CatGO：AI 驱动的计算材料与催化研究开源平台
+                            </div>
+                            <div class="rin-article-content">
+                                负责项目开发与维护，围绕 DFT 计算、分子动力学模拟及复杂纳米管/异质结建模提供支撑。在 GitHub 社区提供专业技术支持与流程文档分享。
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/resume.html#section-projects" title="点击在简历中查看技术细节">
+                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 12px;">
+                            <div class="rin-article-title">
+                                <span class="tag-pill-badge">独立开发</span>
+                                材料在线实验室：一站式实验记录与错误分析站
+                            </div>
+                            <div class="rin-article-content">
+                                基于 AI Agent 构建结构化实验/工艺知识沉淀库，建立包含 200+ 案例的工艺异常分析模型，自动化提取文献关键参数并形成复盘闭环。
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/resume.html#section-projects" title="点击在简历中查看技术细节">
+                        <div class="mdui-card rin-card rin-card-article" style="margin-bottom: 8px;">
+                            <div class="rin-article-title">
+                                <span class="tag-pill-badge">科研攻关</span>
+                                电催化材料高通量筛选与微观反应动力学研究
+                            </div>
+                            <div class="rin-article-content">
+                                基于 VASP 模拟对比 180+ 种材料表面吸附能与能垒，锁定优质候选体系，将材料早期筛选周期缩短 60%。
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="rin-article-more" href="/resume.html">
+                        前往完整个人简历查看更多项目与实习细节 →
+                    </a>
+                </div>
+
+                <div class="rin-tr"></div>
+
+                <!-- 5. 个人信条 -->
+                <div class="rin-card-part" id="last">
+                    <div class="rin-card-title2">张栋梁 @ Dongliang Zhang</div>
+                    <div class="rin-card-content">「其生若浮，其死若休；多静多思考，反省不张扬。」</div>
+                </div>
+
+                <!-- 6. 页脚 -->
+                <div class="rin-card-part" id="footer">
+                    <div class="rin-card-content">
+                        © 2026 张栋梁 | Powered by <a href="https://github.com/AyagawaSeirin/homepage" target="_blank" rel="noopener">AyagawaSeirin/homepage</a> | BG: Cyber Mario Night
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
+    </div>
+</main>
 
-      <!-- 模块 3：精选作品与项目 -->
-      <section class="section-block">
-        <h2 class="section-title"><i class="fa fa-cubes"></i> 精选项目 · Featured Projects</h2>
-        <div class="projects-grid" id="projects-grid">
-          <!-- JS 动态渲染 -->
-        </div>
-      </section>
+<!-- MDUI 交互脚本 -->
+<script src="mdui/js/mdui.min.js"></script>
 
-      <!-- 模块 4：社交网络与联系 -->
-      <section class="section-block">
-        <h2 class="section-title"><i class="fa fa-paper-plane-o"></i> 联系与社交 · Connect</h2>
-        <div class="social-links-grid" id="social-links-grid">
-          <!-- JS 动态渲染 -->
-        </div>
-      </section>
+<!-- 音乐控制器与动态同步脚本 -->
+<script>
+    (function () {
+        var audio = document.getElementById('seirin-audio');
+        var musicBtn = document.getElementById('btn-seirin-music');
+        var musicText = document.getElementById('seirin-music-text');
 
-      <!-- 底部版权 -->
-      <footer class="home-footer">
-        <p id="home-footer-text">© 2026 张栋梁 · Personal Homepage & Resume System</p>
-      </footer>
-    </main>
-  </div>
+        if (audio && musicBtn) {
+            musicBtn.addEventListener('click', function () {
+                if (audio.paused) {
+                    audio.play().then(function () {
+                        musicBtn.classList.add('playing');
+                        if (musicText) musicText.textContent = '暂停';
+                    }).catch(function (err) {
+                        console.warn('播放受浏览器策略拦截:', err);
+                    });
+                } else {
+                    audio.pause();
+                    musicBtn.classList.remove('playing');
+                    if (musicText) musicText.textContent = '音乐';
+                }
+            });
+        }
 
-  <script src="assets/js/home.js"></script>
+        // 尝试从后台数据源拉取最新配置覆盖
+        fetch('/api/homepage?t=' + Date.now())
+            .then(function (r) { return r.json(); })
+            .then(function (json) {
+                if (json && json.success && json.data && json.data.hero) {
+                    var h = json.data.hero;
+                    if (h.title) {
+                        document.title = h.title + ' · 个人主页 & 作品门户';
+                        var nameEl = document.getElementById('rin-name-text');
+                        if (nameEl) nameEl.textContent = h.title;
+                    }
+                    if (h.subtitle) {
+                        var subEl = document.getElementById('rin-subtitle-text');
+                        if (subEl) subEl.textContent = h.subtitle;
+                    }
+                    if (h.slogan) {
+                        var sloganEl = document.getElementById('rin-slogan-text');
+                        if (sloganEl) sloganEl.textContent = h.slogan;
+                    }
+                    if (h.avatar) {
+                        var avEl = document.getElementById('rin-avatar-img');
+                        if (avEl) avEl.src = h.avatar;
+                    }
+                }
+            }).catch(function () {});
+    })();
+</script>
 </body>
 </html>
