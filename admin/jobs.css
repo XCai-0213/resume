@@ -1,0 +1,403 @@
+/* ==========================================================================
+ * 简历投递记录 - Hexo 博客风表格样式
+ * 设计基调：Hexo 主题（NexT / Butterfly）常见的内容页排版语言
+ *   · 无框线设计，仅用极细分隔线
+ *   · 斑马纹 + 悬停高亮
+ *   · 单元格平时像纯文本，聚焦时才显出输入框
+ *   · 圆角、柔和阴影、充足留白
+ * ========================================================================== */
+
+:root {
+  --primary: #0e83cd;          /* Hexo NexT 经典蓝 */
+  --primary-dark: #0a6aa8;
+  --primary-light: #e8f4fc;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --border: #ebeef5;
+  --border-strong: #dcdfe6;
+  --text: #2c3e50;             /* Hexo 正文色 */
+  --text-soft: #5c6b7a;
+  --text-muted: #99a3af;
+  --danger: #e74c3c;
+  --success: #27ae60;
+  --warning: #f39c12;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, button, input, textarea, select {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+}
+
+body {
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jobs-app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+ * 顶部工具栏
+ * -------------------------------------------------------------------------- */
+.jobs-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 26px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  z-index: 20;
+}
+
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+
+.back-btn {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: #f0f2f5; color: var(--text-muted);
+  text-decoration: none; transition: all 0.2s;
+}
+.back-btn:hover { background: var(--primary-light); color: var(--primary); }
+
+.topbar-left h1 {
+  font-size: 17px; font-weight: 600; letter-spacing: .2px;
+  display: flex; align-items: center; gap: 8px;
+}
+.topbar-left h1 i { color: var(--primary); font-size: 16px; }
+
+.stat-badge {
+  font-size: 12.5px; padding: 2px 10px; border-radius: 20px;
+  background: #f0f2f5; color: var(--text-soft); font-weight: 500;
+}
+.stat-pending { background: #fef5e7; color: #b9770e; }
+.stat-sent { background: #eafaf1; color: #1e8449; }
+
+.topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.search-wrap { position: relative; display: flex; align-items: center; }
+.search-wrap i {
+  position: absolute; left: 12px; color: var(--text-muted);
+  font-size: 12.5px; pointer-events: none;
+}
+.search-wrap input {
+  padding: 7px 14px 7px 32px;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  font-size: 13px; width: 230px; outline: none;
+  transition: all 0.2s; background: #fafbfc;
+}
+.search-wrap input:focus {
+  border-color: var(--primary); background: #fff;
+  box-shadow: 0 0 0 3px rgba(14,131,205,0.1);
+  width: 260px;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 15px; border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+  border: 1px solid transparent; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); box-shadow: 0 2px 8px rgba(14,131,205,.3); }
+.btn-secondary { background: #fff; color: var(--text-soft); border-color: var(--border-strong); }
+.btn-secondary:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+.btn-sm { padding: 5px 12px; font-size: 12.5px; }
+
+/* --------------------------------------------------------------------------
+ * 列显示面板
+ * -------------------------------------------------------------------------- */
+.columns-panel {
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 16px 26px; z-index: 15;
+  animation: slideDown .2s ease;
+}
+@keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+.columns-panel-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.columns-panel-header h3 { font-size: 14px; font-weight: 600; }
+.columns-checkboxes { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+
+.columns-checkboxes label {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; cursor: pointer; padding: 6px 14px;
+  background: #fafbfc; border: 1px solid var(--border);
+  border-radius: 20px; transition: all 0.2s; user-select: none;
+}
+.columns-checkboxes label:hover { border-color: var(--primary); background: var(--primary-light); }
+.columns-checkboxes input[type="checkbox"] {
+  width: 14px; height: 14px; accent-color: var(--primary); cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+ * 表格主体 —— Hexo 风格核心
+ * -------------------------------------------------------------------------- */
+.jobs-main { flex: 1; overflow: hidden; padding: 22px 26px 26px; }
+
+.table-scroll {
+  height: 100%; overflow: auto;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.jobs-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content; min-width: 100%;
+  table-layout: auto;
+}
+
+/* 表头 */
+.jobs-table thead th {
+  position: sticky; top: 0; z-index: 10;
+  background: #fafbfc;
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-soft);
+  letter-spacing: .3px;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border);
+}
+.jobs-table thead th .th-inner { display: flex; align-items: center; gap: 6px; }
+
+/* 表体：斑马纹 + 悬停 */
+.jobs-table tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.jobs-table tbody tr:nth-child(even) { background: #fcfdfe; }
+.jobs-table tbody tr { transition: background 0.15s; }
+.jobs-table tbody tr:hover { background: var(--primary-light) !important; }
+.jobs-table tbody tr:last-child td { border-bottom: none; }
+
+.jobs-table tbody tr.row-new { animation: rowFlash 1.8s ease; }
+@keyframes rowFlash {
+  0% { background: #fef9e7; }
+  100% { background: transparent; }
+}
+
+/* --------------------------------------------------------------------------
+ * 单元格编辑：平时像纯文本，hover 显出底，focus 才显框
+ * -------------------------------------------------------------------------- */
+.cell-input {
+  width: 100%; min-width: 60px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 13.5px;
+  font-family: inherit;
+  line-height: 1.65;
+  color: var(--text);
+  outline: none;
+  transition: all 0.18s;
+  resize: vertical;
+}
+.cell-input:hover {
+  background: #fff;
+  border-color: var(--border);
+}
+.cell-input:focus {
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14,131,205,0.12);
+}
+.cell-input::placeholder { color: #c8ced6; font-weight: 400; }
+textarea.cell-input { min-height: 52px; }
+
+/* 公司名称：加粗突出 */
+.jobs-table tbody td:first-child .cell-input {
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+ * 状态胶囊
+ * -------------------------------------------------------------------------- */
+.status-select {
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  text-align: center;
+  transition: all 0.2s;
+}
+.status-select:hover { filter: brightness(0.96); }
+
+.status-未投递 { background: #f0f2f5; color: #6b7a8d; }
+.status-已投递 { background: #e8f4fc; color: #0e83cd; }
+.status-笔试中 { background: #fef5e7; color: #b9770e; }
+.status-面试中 { background: #f4ecfb; color: #7d3c98; }
+.status-已offer { background: #eafaf1; color: #1e8449; }
+.status-已拒绝 { background: #fdecea; color: #c0392b; }
+.status-已放弃 { background: #f5f6f7; color: #9aa4b0; }
+
+/* --------------------------------------------------------------------------
+ * 类型标签
+ * -------------------------------------------------------------------------- */
+.type-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.tag-央国企 { background: #eef0fd; color: #4a5bc4; border-color: #dfe3fa; }
+.tag-银行 { background: #fdeef4; color: #b03a6a; border-color: #fadce8; }
+.tag-秋招 { background: #fff4e8; color: #c47b1a; border-color: #ffe8d1; }
+.tag-春招 { background: #eafaf1; color: #1e8449; border-color: #d5f2e2; }
+.tag-实习 { background: #e8f6f8; color: #1a7f8e; border-color: #d3edf2; }
+.tag-target { background: #eafaf1; color: #1e8449; border-color: #d5f2e2; }
+.tag-default { background: #f5f6f7; color: #6b7a8d; border-color: #eceef0; }
+
+/* --------------------------------------------------------------------------
+ * 行操作
+ * -------------------------------------------------------------------------- */
+.row-actions { white-space: nowrap; }
+.row-actions .icon-btn {
+  width: 28px; height: 28px;
+  border: none; background: transparent;
+  border-radius: 50%; cursor: pointer;
+  color: var(--text-muted); font-size: 13px;
+  transition: all 0.2s;
+}
+.row-actions .icon-btn:hover { background: #edf1f5; color: var(--text); }
+.row-actions .icon-btn.del:hover { background: #fdecea; color: var(--danger); }
+
+/* --------------------------------------------------------------------------
+ * 空态
+ * -------------------------------------------------------------------------- */
+.empty-state { text-align: center; padding: 90px 20px; color: var(--text-muted); }
+.empty-state i { font-size: 52px; color: #d8dee6; margin-bottom: 18px; display: block; }
+.empty-state h3 { font-size: 16px; font-weight: 600; margin-bottom: 10px; color: var(--text-soft); }
+.empty-state p { font-size: 13.5px; line-height: 1.8; max-width: 520px; margin: 0 auto; }
+
+/* --------------------------------------------------------------------------
+ * 弹窗
+ * -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(44,62,80,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  display: none; align-items: center; justify-content: center; padding: 24px;
+}
+.modal-backdrop.open { display: flex; }
+
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%; max-width: 780px; max-height: 88vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+  animation: modalIn 0.2s ease;
+}
+.modal-sm { max-width: 560px; }
+@keyframes modalIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; border-bottom: 1px solid var(--border);
+}
+.modal-header h3 { font-size: 15.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.modal-header h3 i { color: var(--primary); }
+
+.icon-btn {
+  width: 30px; height: 30px; border: none; background: transparent;
+  border-radius: 50%; cursor: pointer; color: var(--text-muted); font-size: 14px;
+  transition: all 0.2s;
+}
+.icon-btn:hover { background: #f0f2f5; color: var(--text); }
+
+.modal-body { padding: 22px 24px; overflow-y: auto; }
+
+.modal-tip {
+  font-size: 13px; line-height: 1.8; color: var(--text-soft);
+  background: var(--primary-light);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px; margin-bottom: 16px;
+}
+.modal-tip i { color: var(--primary); margin-right: 5px; }
+.modal-tip b { color: var(--primary-dark); }
+
+.modal-textarea {
+  width: 100%; padding: 13px 15px;
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  font-size: 13.5px; font-family: inherit; line-height: 1.7;
+  outline: none; resize: vertical; transition: all 0.2s;
+}
+.modal-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14,131,205,0.12);
+}
+
+.modal-actions {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 18px; flex-wrap: wrap;
+}
+.modal-actions .chk {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; cursor: pointer; color: var(--text-soft);
+}
+.modal-actions .chk input { width: 14px; height: 14px; accent-color: var(--primary); }
+
+/* --------------------------------------------------------------------------
+ * Toast
+ * -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed; bottom: 26px; right: 26px; z-index: 200;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.toast {
+  padding: 12px 20px; border-radius: 6px; color: #fff;
+  font-size: 13.5px; font-weight: 500;
+  display: flex; align-items: center; gap: 9px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.16);
+  animation: toastIn 0.25s ease;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.toast.success { background: var(--success); }
+.toast.error { background: var(--danger); }
+.toast.info { background: var(--primary); }
+
+/* --------------------------------------------------------------------------
+ * 滚动条
+ * -------------------------------------------------------------------------- */
+.table-scroll::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar { width: 8px; height: 8px; }
+.table-scroll::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb {
+  background: #d5dbe2; border-radius: 4px;
+}
+.table-scroll::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover { background: #b9c2cc; }
+.table-scroll::-webkit-scrollbar-track { background: transparent; }
+
+@media (max-width: 900px) {
+  .jobs-topbar { padding: 12px 14px; }
+  .jobs-main { padding: 14px; }
+  .search-wrap input { width: 160px; }
+  .search-wrap input:focus { width: 180px; }
+}

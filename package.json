@@ -1,0 +1,21 @@
+{
+  "name": "resume-system",
+  "version": "1.0.0",
+  "description": "动态个人简历与可视化后台管理系统（支持本地服务器 + 纯静态部署）",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "build:static": "node build-static.js",
+    "deploy": "node build-static.js && edgeone makers deploy ./dist -n my-resume"
+  },
+  "keywords": [
+    "resume",
+    "cms",
+    "portfolio",
+    "admin",
+    "static-site"
+  ],
+  "author": "",
+  "license": "MIT"
+}

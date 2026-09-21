@@ -1,0 +1,111 @@
+{
+  "settings": {
+    "title": "小刀 - 前端开发工程师个人简历",
+    "layout": "two-column",
+    "sideFixed": false,
+    "headerSideBySide": true,
+    "skillMode": "tags",
+    "template": "classic",
+    "themeColor": "#1abc9c",
+    "showAvatar": true,
+    "showQrCode": true,
+    "showSkills": true,
+    "showEducation": true,
+    "showWork": true,
+    "showProjects": true,
+    "showEvaluation": true,
+    "copyright": "© 2025 个人简历 | 后台管理系统驱动"
+  },
+  "basic": {
+    "name": "小刀",
+    "jobTitle": "前端开发工程师 / 杭州",
+    "avatar": "assets/images/avatar.jpg",
+    "signature": "追求代码艺术与用户体验的完美结合"
+  },
+  "profile": [
+    { "label": "个人信息", "value": "小刀 / 男 / 24岁" },
+    { "label": "英语水平", "value": "CET-6" },
+    { "label": "计算机水平", "value": "软考中级" },
+    { "label": "工作经验", "value": "3年" },
+    { "label": "求职状态", "value": "随时到岗" }
+  ],
+  "contact": [
+    { "label": "手机", "value": "151-6868-5222", "link": "tel:15168685222", "icon": "fa-phone" },
+    { "label": "邮箱", "value": "x6dtousu@gmail.com", "link": "mailto:x6dtousu@gmail.com", "icon": "fa-envelope" },
+    { "label": "个人主页", "value": "www.x6d.com", "link": "http://www.x6d.com/", "icon": "fa-globe" },
+    { "label": "Github", "value": "github.com", "link": "https://github.com/", "icon": "fa-github" }
+  ],
+  "skills": [
+    { "name": "HTML5 / CSS3", "level": 90 },
+    { "name": "JavaScript (ES6+) / TypeScript", "level": 85 },
+    { "name": "React / React Router / Redux", "level": 85 },
+    { "name": "Vue.js (Vue3 / Pinia)", "level": 80 },
+    { "name": "Node.js / Express / RESTful API", "level": 75 },
+    { "name": "微信小程序 / 跨端开发", "level": 75 },
+    { "name": "前端工程化 (Vite / Webpack / CI-CD)", "level": 70 }
+  ],
+  "qrcode": {
+    "image": "assets/images/favicon.ico",
+    "text": "扫码在手机上查看在线简历"
+  },
+  "education": [
+    {
+      "school": "浙江大学",
+      "major": "计算机科学与技术（硕士）",
+      "time": "201X.9 - 201X.7",
+      "description": "专业排名 <mark>1/30</mark>，期间发表国际会议英文摘要1篇，国内核心期刊文章2篇（第一作者），获国家奖学金1次、优秀研究生干部称号。"
+    },
+    {
+      "school": "杭州电子科技大学",
+      "major": "软件工程（本科）",
+      "time": "201X.9 - 201X.7",
+      "description": "专业排名 <mark>3/120</mark>，期间发表核心期刊文章1篇，获一等奖学金2次，校三好学生。"
+    }
+  ],
+  "work": [
+    {
+      "company": "杭州某知名科技有限公司",
+      "role": "前端开发工程师",
+      "time": "2021.07 至今",
+      "points": [
+        "深度参与公司主线 SaaS 平台前端架构演进与日常迭代，独立负责大屏可视化、工作流引擎等核心功能模块开发。",
+        "项目采用技术栈 <mark>React + TypeScript + Ant Design + Vite</mark>，实现组件库规范与前后端规范化对接。",
+        "配合产品和后端，针对移动端 H5 及微信环境做深度兼容优化，利用 CDN、路由懒加载使首屏加载时间降低 45%。",
+        "推动团队组件化沉淀与自动化测试，编写 Jest 单元测试用例，覆盖率达 80% 以上。"
+      ]
+    },
+    {
+      "company": "上海互动网络科技有限公司",
+      "role": "前端开发工程师（实习）",
+      "time": "2020.06 - 2021.05",
+      "points": [
+        "深度参与公司主线互动社区前端开发，完成帖子快捷回复、<mark>全站图片懒加载</mark>、活动 banner 等功能。",
+        "实现接入微博、微信、QQ 等<mark>第三方开放平台账号登录</mark>与授权同步功能。",
+        "负责各类大促营销活动页面的快速开发，保障千万级高并发流量下的页面平稳运行。"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "医学科学数据管理与共享平台",
+      "link": "https://example.com/demo1",
+      "time": "2022.03 - 2023.01",
+      "stack": "Vue3 + TypeScript + Pinia + ECharts + Node.js",
+      "target": "实现多类型多来源医学科学数据的提交、清洗、多维度管理与跨机构安全共享。",
+      "team": "担任前端负责人，与 2 位同专业同学紧密协作协同推进。",
+      "contribution": "主导完成从“调研-设计-实现-文档”完整流程，负责系统交互原型设计、复杂表单校验联动引擎，以及基于 ECharts 研制医疗指标多维透视看板。",
+      "effect": "作品最终荣获全国大学生计算机应用技术大赛“一等奖”（排名 2/2000）。"
+    },
+    {
+      "name": "肿瘤流行病大数据可视化分析平台",
+      "link": "https://example.com/demo2",
+      "time": "2021.09 - 2022.02",
+      "stack": "HTML5 + D3.js + ECharts + MySQL + Python",
+      "target": "实现常见肿瘤流行病数据宏观与微观多维度可视化展示、数据透视及发展趋势智能预测。",
+      "team": "与 1 位后端算法同学共同完成。",
+      "contribution": "深入梳理业务指标，清洗整理相关多源异构数据，基于 <mark>D3.js</mark> 和 <mark>ECharts</mark> 开发力导向图、流向地图与动态热力图，并实现自动生成诊断分析报告功能。",
+      "effect": "系统作为重点成果获得国家级学科竞赛“特等奖”（排名 1/1500），并被合作医院接入实际使用。"
+    }
+  ],
+  "selfEvaluation": "热爱前端与计算机交互技术，注重代码整洁与可维护性，推崇 DRY 与敏捷开发理念。“多静多思考，反省不张扬”是我恪守的做事箴言。具备出色的自驱力、快速技术学习能力与跨团队沟通协作素养，能从容应对复杂业务攻坚。"
+}

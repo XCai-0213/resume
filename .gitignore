@@ -1,0 +1,31 @@
+﻿# 依赖
+node_modules/
+pnpm-lock.yaml
+
+# 构建产物
+dist/
+.edgeone/
+*.tgz
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 日志
+*.log
+npm-debug.log*
+
+# 临时文件
+_tmp/
+_temp/
+*.tmp
+
+# Sass 编译缓存
+assets/.sass-cache/
+assets/css/*.map

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简历投递记录管理</title>
+  <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="jobs.css">
+</head>
+<body>
+  <div class="jobs-app">
+    <!-- 顶部工具栏 -->
+    <header class="jobs-topbar">
+      <div class="topbar-left">
+        <a class="back-btn" href="/admin/" title="返回简历后台">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+        <h1><i class="fa fa-table"></i> 简历投递记录管理</h1>
+        <span class="stat-badge" id="stat-total">共 0 条</span>
+        <span class="stat-badge stat-pending" id="stat-pending">未投递 0</span>
+        <span class="stat-badge stat-sent" id="stat-sent">已投递 0</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="search-wrap">
+          <i class="fa fa-search"></i>
+          <input type="text" id="input-search" placeholder="搜索公司 / 岗位 / 地点 / 备注...">
+        </div>
+        <button class="btn btn-secondary" id="btn-toggle-columns">
+          <i class="fa fa-columns"></i> 列显示
+        </button>
+        <button class="btn btn-secondary" id="btn-import-text">
+          <i class="fa fa-paste"></i> 粘贴导入
+        </button>
+        <label class="btn btn-secondary" style="cursor:pointer;margin:0;">
+          <i class="fa fa-file-excel-o"></i> 导入 CSV
+          <input type="file" id="input-csv-file" accept=".csv,.tsv,.txt" style="display:none;">
+        </label>
+        <button class="btn btn-secondary" id="btn-export-csv">
+          <i class="fa fa-download"></i> 导出 Excel
+        </button>
+        <button class="btn btn-primary" id="btn-add-row">
+          <i class="fa fa-plus"></i> 新增记录
+        </button>
+        <button class="btn btn-primary" id="btn-save-all">
+          <i class="fa fa-save"></i> <b>保存</b>
+        </button>
+      </div>
+    </header>
+
+    <!-- 列显示控制面板 -->
+    <section class="columns-panel" id="columns-panel" style="display:none;">
+      <div class="columns-panel-header">
+        <h3>列显示</h3>
+        <div>
+          <button class="btn btn-primary btn-sm" id="btn-close-columns">收起</button>
+          <button class="btn btn-secondary btn-sm" id="btn-reset-columns">恢复全部列</button>
+        </div>
+      </div>
+      <div class="columns-checkboxes" id="columns-checkboxes">
+        <!-- JS 动态渲染 -->
+      </div>
+    </section>
+
+    <!-- 表格主体 -->
+    <main class="jobs-main">
+      <div class="table-scroll" id="table-scroll">
+        <table class="jobs-table" id="jobs-table">
+          <thead id="jobs-thead"></thead>
+          <tbody id="jobs-tbody"></tbody>
+        </table>
+        <div class="empty-state" id="empty-state" style="display:none;">
+          <i class="fa fa-inbox"></i>
+          <h3>暂无投递记录</h3>
+          <p>点击右上角「新增记录」手动添加，或用「粘贴导入」把招聘网站复制来的表格一键转成记录</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- 粘贴导入弹窗 -->
+    <div class="modal-backdrop" id="import-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3><i class="fa fa-paste"></i> 粘贴导入投递信息</h3>
+          <button class="icon-btn" id="btn-close-import"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-tip">
+            <i class="fa fa-lightbulb-o"></i>
+            在招聘网站（如 givemeoc 等投递管理表）中<b>框选表格内容并复制</b>，然后粘贴到下方文本框。
+            系统会自动识别制表符 / 多空格 / 竖线 / 逗号分隔，按「公司名称、公司类型、所属行业、招聘类型、招聘对象、工作地点、岗位、投递进度、更新时间、投递截止、相关链接、招聘公告、笔试情况、公司规模、备注」的顺序解析。
+          </p>
+          <textarea id="import-textarea" class="modal-textarea" rows="10"
+            placeholder="在此粘贴（Ctrl+V）从网页复制的表格内容..."></textarea>
+          <div class="modal-actions">
+            <label class="chk"><input type="checkbox" id="import-append" checked> 追加到现有记录（取消勾选则替换全部）</label>
+            <div>
+              <button class="btn btn-secondary" id="btn-cancel-import">取消</button>
+              <button class="btn btn-primary" id="btn-do-import"><i class="fa fa-magic"></i> 解析并导入</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 编辑单元格弹窗（长文本编辑） -->
+    <div class="modal-backdrop" id="edit-modal">
+      <div class="modal modal-sm">
+        <div class="modal-header">
+          <h3 id="edit-modal-title">编辑</h3>
+          <button class="icon-btn" id="btn-close-edit"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <textarea id="edit-textarea" class="modal-textarea" rows="6"></textarea>
+          <div class="modal-actions">
+            <span></span>
+            <div>
+              <button class="btn btn-secondary" id="btn-cancel-edit">取消</button>
+              <button class="btn btn-primary" id="btn-confirm-edit">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toast-container"></div>
+  </div>
+
+  <script src="static-adapter.js"></script>
+  <script src="jobs.js"></script>
+</body>
+</html>

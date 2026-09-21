@@ -1,0 +1,728 @@
+/* =======================================================
+ * 全局字体设置：英文与数字统一采用新罗马 (Times New Roman)，汉字采用苹果苹方 (PingFang SC) 粗体模式
+ * ======================================================= */
+html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, p, span, a, label, mark, time, li {
+  font-family: "Times New Roman", Times, -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang SC Medium", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+body {
+  font-weight: 500 !important;
+  color: #0f172a !important; /* 深度石板黑，高对比清晰度 */
+  font-size: 13.8px !important;
+  line-height: 1.65 !important;
+}
+
+/* 苹果 iOS 粗体模式质感强化：标题、经历、时间与要点强化加粗 */
+h1, h2, h3, h4 {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+.container .main .info-unit ul li h3 {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  margin-bottom: 5px !important;
+}
+
+.container .main .info-unit ul li h3 time {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  font-size: 14px !important;
+}
+
+.container .main .info-unit ul li {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+  line-height: 1.65 !important;
+  font-size: 13.5px !important;
+}
+
+.container .main .info-unit ul li p {
+  color: #334155 !important;
+  font-weight: 500 !important;
+  line-height: 1.65 !important;
+  font-size: 13.5px !important;
+}
+
+/* 教育经历多行描述：每行独立成段，完整保留在后台输入的换行 */
+.container .main .info-unit ul li p.edu-line {
+  margin: 0 0 1px 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+.container .main .info-unit ul li p.edu-line:last-child {
+  margin-bottom: 0 !important;
+}
+
+.container .main .info-unit ul li .info-content li {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+  line-height: 1.65 !important;
+  font-size: 13.5px !important;
+  margin-bottom: 5px !important;
+}
+
+.header-side-by-side-card .header-name {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+.header-side-by-side-card .header-job {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #334155 !important;
+}
+
+.header-profile-tag {
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.header-profile-tag .tag-val {
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+.header-contact-item {
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  color: #1e293b !important;
+}
+
+.header-contact-item a {
+  font-weight: 600 !important;
+  color: #2563eb !important;
+}
+
+.skill-badge-tag {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 5px 14px !important;
+  color: #0f172a !important;
+}
+
+/* 技能徽章内的品牌 Logo 图片（官方彩色原色展示） */
+.skill-badge-tag .skill-logo-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: -3px;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+/* 进度条模式下的技能 Logo 图片 */
+.container .main .info-unit ul li label .skill-logo-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: -3px;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+/* 徽章内的字体图标间距 */
+.skill-badge-tag i {
+  margin-right: 6px;
+}
+
+/* 头部卡片内的专业技能行 (提升到顶部与头像并列，高度自适应自然换行) */
+.header-side-by-side-card .header-skills-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+  flex-shrink: 0;
+}
+
+.header-side-by-side-card .header-skills-row .header-skills-label {
+  flex-shrink: 0;
+  font-weight: 600 !important;
+  font-size: 12.5px;
+  color: #0f172a;
+  padding-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.header-side-by-side-card .header-skills-row .header-skills-label i {
+  color: var(--primary-color);
+}
+
+.header-side-by-side-card .header-skills-row .header-skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 9px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 头部技能徽章采用与主内容区一致的优雅舒适尺寸 */
+.header-side-by-side-card .header-skills-row .skill-badge-tag {
+  font-size: 12.5px !important;
+  padding: 3px 12px !important;
+  border-radius: 14px !important;
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+}
+
+:root {
+  --primary-color: #1abc9c;
+  --primary-light: rgba(26, 188, 156, 0.12);
+  --primary-hover: #16a085;
+}
+
+/* =======================================================
+ * 1. 头像样式：保留原图比例与形状，彻底移除圆形裁剪
+ * ======================================================= */
+.container .side .me .portrait {
+  width: auto !important;
+  height: auto !important;
+  max-width: 140px !important;
+  max-height: 180px !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #f8fafc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.container .side .me .portrait img {
+  border-radius: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 140px !important;
+  max-height: 180px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* 头部卡片头像框：高度自适应右侧内容 (stretch)，图片保持原始比例居中，绝不裁切变形 */
+.header-side-by-side-card .header-avatar-box {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 134px;
+  min-height: 150px;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #f8fafc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.header-side-by-side-card .header-avatar-box img {
+  border-radius: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* =======================================================
+ * 2. 基本信息和联系方式放在头像右侧的空白（横向头部名片）
+ * ======================================================= */
+.header-side-by-side-card {
+  display: flex;
+  gap: 22px;
+  align-items: stretch; /* 左右等高对齐，高度由实际内容自适应决定 */
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 16px 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border: 1px solid #edf2f7;
+  box-sizing: border-box;
+  min-height: 150px;
+}
+
+/* 内容区高度完全由实际内容自适应，优雅呼吸排版，不强行压缩 */
+.header-side-by-side-card .header-content-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 文字整体在头像高度内垂直居中，视觉最优 */
+  gap: 0;
+  min-width: 0;
+}
+
+/* 右侧二维码盒子同样等高自适应 */
+.header-side-by-side-card .header-qrcode-box {
+  align-self: stretch;
+  justify-content: center;
+}
+
+.header-side-by-side-card .header-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.header-side-by-side-card .header-name {
+  font-size: 27px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+}
+
+.header-side-by-side-card .header-job {
+  font-size: 15px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.header-side-by-side-card .header-signature {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+/* 头像右侧的档案信息药丸标签列表 */
+.header-profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-bottom: 9px;
+  flex-shrink: 0;
+}
+
+.header-profile-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.header-profile-tag .tag-label {
+  color: #64748b;
+}
+
+.header-profile-tag .tag-val {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* 头像右侧的联系方式横向排布 */
+.header-contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+  flex-shrink: 0;
+}
+
+.header-contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.header-contact-item i {
+  color: var(--primary-color);
+  font-size: 13px;
+}
+
+.header-contact-item a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header-contact-item a:hover {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
+/* 头部最右侧二维码盒子 */
+.header-side-by-side-card .header-qrcode-box {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.header-side-by-side-card .header-qrcode-box img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  display: block;
+}
+
+.header-side-by-side-card .header-qrcode-box .header-qrcode-text {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 5px;
+  max-width: 96px;
+  line-height: 1.3;
+}
+
+/* =======================================================
+ * 3. 技能展示：支持移除进度条（现代标签徽章模式）
+ * ======================================================= */
+.skills-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  padding: 4px 0;
+}
+
+.skill-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: var(--primary-light);
+  color: #1e293b;
+  border: 1px solid var(--primary-color);
+  border-radius: 18px;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.skill-badge-tag:hover {
+  background: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* =======================================================
+ * 4. 样式细节与主题色绑定
+ * ======================================================= */
+.container .info-unit h2 i {
+  color: var(--primary-color) !important;
+}
+
+.container .info-unit h2 {
+  border-left: 3px solid var(--primary-color);
+  padding-left: 8px;
+  color: #1e293b;
+  font-size: 15px;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--primary-color) !important;
+}
+progress::-moz-progress-bar {
+  background-color: var(--primary-color) !important;
+}
+
+mark, .mark-txt, .hl-tag {
+  background: var(--primary-light) !important;
+  color: var(--primary-color) !important;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.container .main .info-unit ul li h3 .link {
+  border: 1px solid var(--primary-color) !important;
+}
+.container .main .info-unit ul li h3 .link a {
+  color: var(--primary-color) !important;
+}
+
+/* =======================================================
+ * 5. 一栏单列排版 (One-Column Layout) - 纯正单页无缝连贯排版
+ * ======================================================= */
+.container.layout-one-column {
+  max-width: 900px;
+  margin: 1.5rem auto 3rem auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+  padding: 2.2rem 2.8rem;
+  box-sizing: border-box;
+}
+
+.container.layout-one-column .header-side-by-side-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 0 1.2rem 0 !important;
+  margin: 0 0 1.2rem 0 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.container.layout-one-column .side {
+  position: static !important;
+  width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block;
+}
+
+.container.layout-one-column .main {
+  position: static !important;
+  margin-left: 0 !important;
+  width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block;
+}
+
+.container.layout-one-column #section-qrcode {
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.container.layout-one-column #section-qrcode .qrcode-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.container.layout-one-column #section-qrcode img {
+  width: 68px !important;
+  height: 68px !important;
+  margin: 0 !important;
+}
+
+.container.layout-two-column.side-fixed .side {
+  position: fixed !important;
+}
+
+/* =======================================================
+ * 6. 顶部悬浮快捷栏
+ * ======================================================= */
+.resume-quick-bar {
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12.5px;
+}
+
+.resume-quick-bar .bar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #374151;
+  transition: all 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+}
+
+.resume-quick-bar .bar-btn:hover {
+  background: #f1f5f9;
+  color: var(--primary-color);
+}
+
+.resume-quick-bar .bar-btn.primary {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.resume-quick-bar .bar-btn.primary:hover {
+  background: var(--primary-hover);
+}
+
+/* =======================================================
+ * 7. 打印与导出 PDF 严格单页 (One Single A4 Page) 限制
+ * ======================================================= */
+@page {
+  size: A4 portrait;
+  margin: 5mm 8mm 5mm 8mm; /* 紧凑边距，确保整页容纳 */
+}
+
+@media print {
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    font-size: 10.5pt !important;
+    line-height: 1.32 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 隐藏所有多余元素 */
+  .resume-quick-bar,
+  footer.footer,
+  aside,
+  .switch,
+  .loading {
+    display: none !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .container .side,
+  .container .main,
+  .header-side-by-side-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 2px 0 !important;
+    margin: 0 0 4px 0 !important;
+  }
+
+  .header-side-by-side-card {
+    margin-bottom: 4px !important;
+    padding-bottom: 4px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .header-side-by-side-card .header-avatar-box,
+  .header-side-by-side-card .header-avatar-box img {
+    max-width: 90px !important;
+    max-height: 110px !important;
+  }
+
+  .header-side-by-side-card .header-name {
+    font-size: 19px !important;
+  }
+
+  .header-side-by-side-card .header-job {
+    font-size: 13px !important;
+  }
+
+  .header-side-by-side-card .header-signature {
+    margin-bottom: 3px !important;
+    font-size: 11px !important;
+  }
+
+  .header-profile-tags {
+    gap: 3px 6px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .header-profile-tag {
+    padding: 1px 5px !important;
+    font-size: 10.5px !important;
+  }
+
+  .header-contact-list {
+    gap: 3px 10px !important;
+    padding-top: 3px !important;
+  }
+
+  .info-unit {
+    margin-bottom: 4px !important;
+  }
+
+  .info-unit h2 {
+    font-size: 12px !important;
+    margin-bottom: 2px !important;
+    padding-left: 5px !important;
+    border-left-width: 3px !important;
+  }
+
+  .info-unit hr {
+    margin: 1px 0 3px 0 !important;
+  }
+
+  .info-unit ul {
+    padding-left: 14px !important;
+  }
+
+  .info-unit ul li {
+    margin-bottom: 2px !important;
+    line-height: 1.3 !important;
+    font-size: 10.5px !important;
+  }
+
+  .container .main .info-unit ul li h3 {
+    font-size: 11.5px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .container .main .info-unit ul li .info-content li {
+    margin-bottom: 1px !important;
+    font-size: 10.5px !important;
+  }
+
+  .skill-badge-tag {
+    padding: 1px 6px !important;
+    font-size: 10.5px !important;
+  }
+
+  /* 彻底禁止打印时跨页 */
+  * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+}

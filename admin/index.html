@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简历后台管理系统</title>
+  <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-wrapper">
+    <!-- 左侧菜单 -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <i class="fa fa-id-card-o"></i>
+        <h2>简历内容管理后台</h2>
+      </div>
+      <ul class="sidebar-menu">
+        <li class="active" data-tab="layout-tab">
+          <a href="javascript:void(0)"><i class="fa fa-sliders"></i> <span>布局与外观</span></a>
+        </li>
+        <li data-tab="basic-tab">
+          <a href="javascript:void(0)"><i class="fa fa-user"></i> <span>基本信息</span></a>
+        </li>
+        <li data-tab="profile-tab">
+          <a href="javascript:void(0)"><i class="fa fa-address-book-o"></i> <span>档案资料</span></a>
+        </li>
+        <li data-tab="contact-tab">
+          <a href="javascript:void(0)"><i class="fa fa-phone"></i> <span>联系方式</span></a>
+        </li>
+        <li data-tab="skills-tab">
+          <a href="javascript:void(0)"><i class="fa fa-code"></i> <span>技能特长</span></a>
+        </li>
+        <li data-tab="education-tab">
+          <a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> <span>教育经历</span></a>
+        </li>
+        <li data-tab="work-tab">
+          <a href="javascript:void(0)"><i class="fa fa-briefcase"></i> <span>工作经历</span></a>
+        </li>
+        <li data-tab="projects-tab">
+          <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span>项目经验</span></a>
+        </li>
+        <li data-tab="evaluation-tab">
+          <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span>自我评价</span></a>
+        </li>
+        <li data-tab="qrcode-tab">
+          <a href="javascript:void(0)"><i class="fa fa-qrcode"></i> <span>二维码设置</span></a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        简历管理后台 v1.0
+      </div>
+    </aside>
+
+    <!-- 右侧主区域 -->
+    <main class="admin-main">
+      <!-- 顶部操作栏 -->
+      <header class="admin-topbar">
+        <div class="topbar-title">
+          <h1 id="current-tab-title">布局与外观设置</h1>
+        </div>
+        <div class="topbar-actions">
+          <a class="btn btn-secondary" href="/admin/jobs" title="管理简历投递记录（表格 / 进度跟踪 / 导入导出）">
+            <i class="fa fa-table"></i> <b>投递记录</b>
+          </a>
+          <button class="btn btn-secondary" id="btn-import-resume" title="上传已有简历文件（PDF/Word/Markdown/HTML/文本），自动识别并填入内容">
+            <i class="fa fa-file-text"></i> <b>导入已有简历</b>
+          </button>
+          <button class="btn btn-secondary" id="btn-open-preview">
+            <i class="fa fa-eye"></i> 实时预览
+          </button>
+          <a class="btn btn-secondary" href="/" target="_blank">
+            <i class="fa fa-external-link"></i> 打开前台
+          </a>
+          <button class="btn btn-secondary" id="btn-export-json" title="导出当前配置备份">
+            <i class="fa fa-download"></i> 导出
+          </button>
+          <label class="btn btn-secondary" style="margin: 0; cursor: pointer;" title="导入 JSON 配置">
+            <i class="fa fa-upload"></i> 导入
+            <input type="file" id="input-import-json" accept=".json" style="display: none;">
+          </label>
+          <button class="btn btn-danger btn-sm" id="btn-reset-data" title="重置回初始数据">
+            <i class="fa fa-refresh"></i> 重置默认
+          </button>
+          <button class="btn btn-primary" id="btn-save-all">
+            <i class="fa fa-save"></i> <b>保存所有内容</b>
+          </button>
+        </div>
+      </header>
+
+      <!-- 表单内容主体 -->
+      <div class="admin-body">
+        <div class="admin-content">
+
+          <!-- 1. 布局与外观设置 -->
+          <div class="tab-panel active" id="layout-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-paint-brush"></i> 30 套单栏结构型排版模板库</h3>
+                <span class="header-desc">颜色随主题色联动，版式骨架与排字节奏全方位重构，点击即换</span>
+              </div>
+              <div class="card-body">
+                <!-- 模板结构分类筛选 -->
+                <div class="template-filter-pills" id="template-filter-pills" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                  <span class="cat-pill active" data-filter="all">全部结构 (30)</span>
+                  <span class="cat-pill" data-filter="header">页头架构流 (6)</span>
+                  <span class="cat-pill" data-filter="timeline">经历时间排版流 (5)</span>
+                  <span class="cat-pill" data-filter="heading">章节标题形态流 (7)</span>
+                  <span class="cat-pill" data-filter="bullet">职责要点结构流 (5)</span>
+                  <span class="cat-pill" data-filter="layout">技能与容器版式流 (7)</span>
+                </div>
+
+                <div class="template-selector" id="template-selector">
+                  <!-- 1. 页头架构流 (header) -->
+                  <div class="template-card selected" data-template="classic" data-group="header">
+                    <div class="template-thumb thumb-classic">
+                      <span class="tt-line w60 accent-l"></span>
+                      <span class="tt-line w90"></span>
+                      <span class="tt-line w75"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">经典名片版 <small>classic</small></div>
+                    <div class="template-desc">经典左右头像名片，品牌竖标章节标题，流式胶囊技能标签</div>
+                  </div>
+
+                  <div class="template-card" data-template="center-hero" data-group="header">
+                    <div class="template-thumb thumb-center-hero" style="background:#fff;">
+                      <span style="width:20px;height:24px;background:#cbd5e1;margin:0 auto 4px auto;border-radius:2px;display:block;"></span>
+                      <span class="tt-line w40 centered"></span>
+                      <span class="tt-line w75" style="margin:2px auto;"></span>
+                    </div>
+                    <div class="template-name">中轴居中大气版 <small>center-hero</small></div>
+                    <div class="template-desc">头像正中置顶，大姓名与意向居中，联系方式单行圆点对齐</div>
+                  </div>
+
+                  <div class="template-card" data-template="split-header" data-group="header">
+                    <div class="template-thumb thumb-split-header" style="background:#fff; display:grid; grid-template-columns:1fr 1fr; gap:4px;">
+                      <span class="tt-line w80"></span>
+                      <span class="tt-line w70"></span>
+                      <span class="tt-line w60"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">对称双列页头版 <small>split-header</small></div>
+                    <div class="template-desc">左半区姓名意向顶格，右半区联系方式双列网格，严谨高效</div>
+                  </div>
+
+                  <div class="template-card" data-template="editorial" data-group="header">
+                    <div class="template-thumb thumb-editorial" style="background:#fff;">
+                      <span class="tt-line w70" style="height:8px;background:#0f172a;"></span>
+                      <span class="tt-rule" style="background:#0f172a;height:2px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">杂志报刊刊头版 <small>editorial</small></div>
+                    <div class="template-desc">32px 粗体黑标顶格，意向如主刊副标，下带贯穿加粗分割带</div>
+                  </div>
+
+                  <div class="template-card" data-template="text-pure" data-group="header">
+                    <div class="template-thumb thumb-text-pure" style="background:#fff;">
+                      <span class="tt-line w60" style="height:6px;background:#0f172a;"></span>
+                      <span class="tt-line w90"></span>
+                      <span class="tt-line w80"></span>
+                    </div>
+                    <div class="template-name">纯粹文本流版 <small>text-pure</small></div>
+                    <div class="template-desc">彻底隐藏头像占位，全幅信息无缝展开，超高信息密度与外企范</div>
+                  </div>
+
+                  <div class="template-card" data-template="badge-card" data-group="header">
+                    <div class="template-thumb thumb-badge-card" style="background:#f1f5f9; border:1px solid #cbd5e1;">
+                      <span class="tt-line w50"></span>
+                      <span class="tt-line w80"></span>
+                    </div>
+                    <div class="template-name">工牌内嵌卡片版 <small>badge-card</small></div>
+                    <div class="template-desc">页头带工作证般的内嵌浅底圆角微边框，精致立体仪式感</div>
+                  </div>
+
+                  <!-- 2. 经历时间排版流 (timeline) -->
+                  <div class="template-card" data-template="left-date" data-group="timeline">
+                    <div class="template-thumb thumb-left-date" style="background:#fff; display:grid; grid-template-columns:25px 1fr; gap:6px;">
+                      <span class="tt-line w90" style="background:var(--admin-primary,#1abc9c);"></span>
+                      <span class="tt-line w90"></span>
+                      <span class="tt-line w90" style="background:var(--admin-primary,#1abc9c);"></span>
+                      <span class="tt-line w75"></span>
+                    </div>
+                    <div class="template-name">左侧独立时间轨版 <small>left-date</small></div>
+                    <div class="template-desc">时间抽离至左侧独立列，右侧公司职位展开，视线对齐极度舒适</div>
+                  </div>
+
+                  <div class="template-card" data-template="two-row-grid" data-group="timeline">
+                    <div class="template-thumb thumb-two-row-grid" style="background:#fff;">
+                      <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span class="tt-line w50"></span><span class="tt-line w30"></span></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">两行表格对齐版 <small>two-row-grid</small></div>
+                    <div class="template-desc">首行左公司右时间，次行职位学院，如财务报表般整洁</div>
+                  </div>
+
+                  <div class="template-card" data-template="stream-axis" data-group="timeline">
+                    <div class="template-thumb thumb-stream-axis" style="background:#fff; padding-left:14px; border-left:2px solid #cbd5e1;">
+                      <span class="tt-dot" style="margin-left:-18px;"></span>
+                      <span class="tt-line w80"></span>
+                      <span class="tt-dot" style="margin-left:-18px; margin-top:6px;"></span>
+                      <span class="tt-line w70"></span>
+                    </div>
+                    <div class="template-name">连续时间轴流版 <small>stream-axis</small></div>
+                    <div class="template-desc">左侧 2px 细轴贯穿，条目圆圈挂点，履历脉络如溪流清晰</div>
+                  </div>
+
+                  <div class="template-card" data-template="compact-line" data-group="timeline">
+                    <div class="template-thumb thumb-compact-line" style="background:#fff;">
+                      <span class="tt-line w95" style="margin-bottom:3px;"></span>
+                      <span class="tt-line w85" style="margin-bottom:3px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">紧凑一行流版 <small>compact-line</small></div>
+                    <div class="template-desc">公司与职位、时间全部压缩在一行，最大化利用首行空间</div>
+                  </div>
+
+                  <div class="template-card" data-template="tag-prefix" data-group="timeline">
+                    <div class="template-thumb thumb-tag-prefix" style="background:#fff;">
+                      <span style="display:inline-block;width:24px;height:7px;background:#0f172a;border-radius:2px;margin-bottom:3px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">年份徽章前缀版 <small>tag-prefix</small></div>
+                    <div class="template-desc">时间转化为深色微型年份勋章胶囊，一眼定位职业阶段</div>
+                  </div>
+
+                  <!-- 3. 章节标题形态流 (heading) -->
+                  <div class="template-card" data-template="full-rule" data-group="heading">
+                    <div class="template-thumb thumb-full-rule" style="background:#fff;">
+                      <span class="tt-line w40" style="background:#0f172a;"></span>
+                      <span class="tt-rule" style="background:#0f172a; height:1.5px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">贯穿细横线版 <small>full-rule</small></div>
+                    <div class="template-desc">超级简历 WonderCV 经典标杆，大字标题后 1px 细线贯通全宽</div>
+                  </div>
+
+                  <div class="template-card" data-template="bracket-tag" data-group="heading">
+                    <div class="template-thumb thumb-bracket-tag" style="background:#fff;">
+                      <span class="tt-code-box">// EDUCATION</span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">代码注释前缀版 <small>bracket-tag</small></div>
+                    <div class="template-desc">章节带 // 技术代码前缀，等宽字体，程序员与技术极客首选</div>
+                  </div>
+
+                  <div class="template-card" data-template="band-strip" data-group="heading">
+                    <div class="template-thumb thumb-band-strip" style="background:#fff;">
+                      <span class="tt-band" style="background:#f1f5f9; border-left:4px solid var(--admin-primary,#1abc9c);"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">整行浅底衬带版 <small>band-strip</small></div>
+                    <div class="template-desc">整行浅色衬带包裹标题，左侧色标，政府公文与商务报告稳重感</div>
+                  </div>
+
+                  <div class="template-card" data-template="center-caps" data-group="heading">
+                    <div class="template-thumb thumb-center-caps" style="background:#fdfdfc;">
+                      <span class="tt-line w40 centered" style="background:#111;"></span>
+                      <span class="tt-double"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">学术双横线版 <small>center-caps</small></div>
+                    <div class="template-desc">Overleaf LaTeX 论文简历版式，全衬线字体，居中大写双横线</div>
+                  </div>
+
+                  <div class="template-card" data-template="bottom-accent" data-group="heading">
+                    <div class="template-thumb thumb-bottom-accent" style="background:#fff;">
+                      <span class="tt-line w30" style="background:var(--admin-primary,#1abc9c); height:4px; margin-bottom:4px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">底边短实线版 <small>bottom-accent</small></div>
+                    <div class="template-desc">日系 MUJI 风格，标题下方一条与文字等宽短加粗实线，其余留白</div>
+                  </div>
+
+                  <div class="template-card" data-template="outline-pill" data-group="heading">
+                    <div class="template-thumb thumb-outline-pill" style="background:#fff;">
+                      <span style="display:inline-block;width:40px;height:12px;border:1.5px solid var(--admin-primary,#1abc9c);border-radius:10px;margin-bottom:4px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">胶囊边框标题版 <small>outline-pill</small></div>
+                    <div class="template-desc">标题做成轻巧圆角胶囊线框，柔和现代，文创与运营首选</div>
+                  </div>
+
+                  <div class="template-card" data-template="corner-ribbon" data-group="heading">
+                    <div class="template-thumb thumb-corner-ribbon" style="background:#fff;">
+                      <span class="tt-node-row"><span style="width:6px;height:12px;background:var(--admin-primary,#1abc9c);clip-path:polygon(0 0, 100% 25%, 100% 75%, 0 100%);"></span><span class="tt-line w50"></span></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">立体折角工科版 <small>corner-ribbon</small></div>
+                    <div class="template-desc">工科机械般的立体倒角几何标识，严谨精密，机械与制造</div>
+                  </div>
+
+                  <!-- 4. 职责要点结构流 (bullet) -->
+                  <div class="template-card" data-template="dash-bullet" data-group="bullet">
+                    <div class="template-thumb thumb-dash-bullet" style="background:#fff;">
+                      <span class="tt-line w90" style="border-left:4px solid var(--admin-primary,#1abc9c); padding-left:4px;"></span>
+                      <span class="tt-line w80" style="border-left:4px solid var(--admin-primary,#1abc9c); padding-left:4px; margin-top:4px;"></span>
+                    </div>
+                    <div class="template-name">长破折号清单版 <small>dash-bullet</small></div>
+                    <div class="template-desc">摒弃普通圆点，改用优雅的西文长破折号 — 领衔要点，欧美范</div>
+                  </div>
+
+                  <div class="template-card" data-template="hollow-square" data-group="bullet">
+                    <div class="template-thumb thumb-hollow-square" style="background:#fff;">
+                      <span class="tt-node-row"><span style="width:5px;height:5px;background:#0f172a;flex-shrink:0;"></span><span class="tt-line w85"></span></span>
+                      <span class="tt-node-row" style="margin-top:4px;"><span style="width:5px;height:5px;background:#0f172a;flex-shrink:0;"></span><span class="tt-line w75"></span></span>
+                    </div>
+                    <div class="template-name">实心工整方块版 <small>hollow-square</small></div>
+                    <div class="template-desc">要点前缀为规整黑色小方块 ▪，如卡尺量出一般整齐严密</div>
+                  </div>
+
+                  <div class="template-card" data-template="arrow-lead" data-group="bullet">
+                    <div class="template-thumb thumb-arrow-lead" style="background:#fff;">
+                      <span class="tt-node-row"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">›</span><span class="tt-line w85"></span></span>
+                      <span class="tt-node-row" style="margin-top:4px;"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">›</span><span class="tt-line w75"></span></span>
+                    </div>
+                    <div class="template-name">行动导向箭头版 <small>arrow-lead</small></div>
+                    <div class="template-desc">以推进箭头 › 领衔要点，突出主动作为、结果突破与执行力</div>
+                  </div>
+
+                  <div class="template-card" data-template="hanging-indent" data-group="bullet">
+                    <div class="template-thumb thumb-hanging-indent" style="background:#fff;">
+                      <span class="tt-line w90"></span>
+                      <span class="tt-line w80" style="margin-left:8px; margin-top:3px;"></span>
+                    </div>
+                    <div class="template-name">悬挂缩进排版版 <small>hanging-indent</small></div>
+                    <div class="template-desc">出版级悬挂缩进对齐，行首字对齐极整齐，长文段落阅读感佳</div>
+                  </div>
+
+                  <div class="template-card" data-template="dense-paragraph" data-group="bullet">
+                    <div class="template-thumb thumb-dense-paragraph" style="background:#fff;">
+                      <span class="tt-line w95" style="height:3px; margin-bottom:2px;"></span>
+                      <span class="tt-line w90" style="height:3px; margin-bottom:2px;"></span>
+                      <span class="tt-line w92" style="height:3px;"></span>
+                    </div>
+                    <div class="template-name">紧密连贯段落版 <small>dense-paragraph</small></div>
+                    <div class="template-desc">行距紧致连贯，适合产出描述详实、项目复杂度高的高级研发</div>
+                  </div>
+
+                  <!-- 5. 技能与容器版式流 (layout) -->
+                  <div class="template-card" data-template="skill-matrix" data-group="layout">
+                    <div class="template-thumb thumb-skill-matrix" style="background:#fff; display:grid; grid-template-columns:1fr 1fr; gap:4px;">
+                      <span class="tt-line w90"></span><span class="tt-line w80"></span>
+                      <span class="tt-line w70"></span><span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">技能双列网格版 <small>skill-matrix</small></div>
+                    <div class="template-desc">技能徽章规整为双列矩阵对称排列，整齐治愈强迫症</div>
+                  </div>
+
+                  <div class="template-card" data-template="skill-plain-list" data-group="layout">
+                    <div class="template-thumb thumb-skill-plain-list" style="background:#fff;">
+                      <span class="tt-line w80" style="background:transparent; border-bottom:1px dotted #94a3b8;"></span>
+                      <span class="tt-line w90" style="margin-top:4px;"></span>
+                    </div>
+                    <div class="template-name">极简无框平铺版 <small>skill-plain-list</small></div>
+                    <div class="template-desc">技能彻底去除背景与线框，纯粹文字与 Logo 平铺，极致通透</div>
+                  </div>
+
+                  <div class="template-card" data-template="skill-grouped" data-group="layout">
+                    <div class="template-thumb thumb-skill-grouped" style="background:#fff;">
+                      <span style="display:inline-block;width:30px;height:8px;background:#0f172a;border-radius:2px;margin-bottom:3px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">高反差深底徽章版 <small>skill-grouped</small></div>
+                    <div class="template-desc">技能采用深石板黑色底 + 白字反白，视觉反差极高，高档精致</div>
+                  </div>
+
+                  <div class="template-card" data-template="borderless-pure" data-group="layout">
+                    <div class="template-thumb thumb-borderless-pure" style="background:#fff; border:none; box-shadow:none;">
+                      <span class="tt-line w80"></span>
+                      <span class="tt-line w90" style="margin-top:4px;"></span>
+                    </div>
+                    <div class="template-name">纯白无界通透版 <small>borderless-pure</small></div>
+                    <div class="template-desc">移除所有容器阴影和多余边框，纯白通透，纸张感最强</div>
+                  </div>
+
+                  <div class="template-card" data-template="framed-border" data-group="layout">
+                    <div class="template-thumb thumb-framed-border" style="background:#fff; border:2px solid #94a3b8;">
+                      <span class="tt-line w80"></span>
+                      <span class="tt-line w90" style="margin-top:4px;"></span>
+                    </div>
+                    <div class="template-name">全封闭细线画框版 <small>framed-border</small></div>
+                    <div class="template-desc">页面四周环绕 1px 精细外线框，像证书或公文般庄重</div>
+                  </div>
+
+                  <div class="template-card" data-template="executive-spacious" data-group="layout">
+                    <div class="template-thumb thumb-executive-spacious" style="background:#fff; padding:12px 10px;">
+                      <span class="tt-line w60" style="height:6px; margin-bottom:6px;"></span>
+                      <span class="tt-line w90"></span>
+                    </div>
+                    <div class="template-name">从容大格局版 <small>executive-spacious</small></div>
+                    <div class="template-desc">大行距 1.75，呼吸感与空间感充裕，资深专家/总监/VP 专属</div>
+                  </div>
+
+                  <div class="template-card" data-template="compact-ultra" data-group="layout">
+                    <div class="template-thumb thumb-compact-ultra" style="background:#fff; padding:4px;">
+                      <span class="tt-line w95" style="height:2px; margin-bottom:2px;"></span>
+                      <span class="tt-line w95" style="height:2px; margin-bottom:2px;"></span>
+                      <span class="tt-line w95" style="height:2px; margin-bottom:2px;"></span>
+                      <span class="tt-line w95" style="height:2px;"></span>
+                    </div>
+                    <div class="template-name">极致高密单页版 <small>compact-ultra</small></div>
+                    <div class="template-desc">极限压榨边距与行高，经历再长也能百分百安全塞进一张 A4 纸</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-columns"></i> 简历版式布局（核心设置）</h3>
+                <span class="header-desc">可自由在一栏与两栏布局之间一键切换</span>
+              </div>
+              <div class="card-body">
+                <div class="layout-selector">
+                  <!-- 两栏布局 -->
+                  <div class="layout-card" id="card-layout-two">
+                    <input type="radio" name="layoutRadio" value="two-column" id="radio-two-column">
+                    <div class="layout-card-header">
+                      <i class="fa fa-columns text-primary"></i> 两栏经典布局（双列左右式）
+                    </div>
+                    <p class="layout-card-desc">左侧固定/自适应个人侧边栏（名片、档案、联系方式、技能条），右侧主区域展示教育、工作与项目，信息密度高，排版经典丰富。</p>
+                    <div class="layout-preview-sketch sketch-two-col">
+                      <div class="sketch-side"></div>
+                      <div class="sketch-main"></div>
+                    </div>
+                  </div>
+
+                  <!-- 一栏布局 -->
+                  <div class="layout-card" id="card-layout-one">
+                    <input type="radio" name="layoutRadio" value="one-column" id="radio-one-column">
+                    <div class="layout-card-header">
+                      <i class="fa fa-bars text-primary"></i> 一栏单列布局（自上而下居中式）
+                    </div>
+                    <p class="layout-card-desc">居中自上而下单列通栏排版，顶部大头像与个人名片，下方依次展示基本资料、技能标签、教育、经历与项目，视线聚焦，现代简约大气，打印效果极佳。</p>
+                    <div class="layout-preview-sketch sketch-one-col">
+                      <div class="sketch-header"></div>
+                      <div class="sketch-body"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                  <div class="switch-control" id="side-fixed-control">
+                    <div class="switch-label">
+                      <h4>左侧侧边栏悬浮固定 (仅双栏模式有效)</h4>
+                      <p>开启后左侧栏在页面向下滚动时固定悬浮在视口左侧，方便随时查看个人资料</p>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="field-side-fixed">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="switch-control" id="header-side-by-side-control" style="margin-top: 10px;">
+                    <div class="switch-label">
+                      <h4>基本信息与联系方式排在头像右侧空白处（横向名片）</h4>
+                      <p>推荐开启！将基本信息与联系方式排布在头像右侧的空白区域，空间利用率极高，大幅减少空白浪费并助益单页A4打印</p>
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="field-header-side-by-side" checked>
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 主题风格与颜色 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-paint-brush"></i> 主题风格与色彩</h3>
+                <span class="header-desc">自定义前台简历的高亮主色调</span>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>主题色彩</label>
+                  <div class="theme-colors-list" id="theme-color-presets">
+                    <div class="color-dot" data-color="#1abc9c" style="background: #1abc9c;" title="经典翡翠绿"></div>
+                    <div class="color-dot" data-color="#2563eb" style="background: #2563eb;" title="科技商务蓝"></div>
+                    <div class="color-dot" data-color="#06b6d4" style="background: #06b6d4;" title="极光青"></div>
+                    <div class="color-dot" data-color="#8b5cf6" style="background: #8b5cf6;" title="雅致罗兰紫"></div>
+                    <div class="color-dot" data-color="#ea580c" style="background: #ea580c;" title="活力珊瑚橙"></div>
+                    <div class="color-dot" data-color="#e11d48" style="background: #e11d48;" title="玫瑰艳红"></div>
+                    <div class="color-dot" data-color="#1f2937" style="background: #1f2937;" title="极客玄石黑"></div>
+                    <div class="color-dot" data-color="#4b5563" style="background: #4b5563;" title="沉稳高级灰"></div>
+                    <div class="custom-color-wrap">
+                      <input type="color" id="field-theme-color-picker" class="custom-color-input" title="自定义任意颜色">
+                      <span id="custom-color-hex" style="font-family: monospace; font-size: 13px; color: #6b7280;">#1abc9c</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row" style="margin-top: 20px;">
+                  <div class="form-group">
+                    <label>浏览器网页标题 (Title)</label>
+                    <input type="text" class="form-control" id="field-page-title" placeholder="如：张三 - 资深前端开发工程师个人简历">
+                  </div>
+                  <div class="form-group">
+                    <label>页脚版权信息</label>
+                    <input type="text" class="form-control" id="field-page-copyright" placeholder="如：© 2025 个人简历 | 后台管理驱动">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 模块显示开关 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-toggle-on"></i> 内容模块可见性控制</h3>
+                <span class="header-desc">可按需隐藏不需要的简历板块</span>
+              </div>
+              <div class="card-body">
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>个人头像照片</h4>
+                    <p>是否在简历中展示头像照片</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-avatar" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>二维码模块</h4>
+                    <p>是否在简历底部或侧栏展示二维码</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-qrcode" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>技能特长模块</h4>
+                    <p>是否展示技能进度条与技能列表</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-skills" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>教育经历模块</h4>
+                    <p>是否展示教育背景</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-edu" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>工作经历模块</h4>
+                    <p>是否展示过往工作经历</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-work" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>项目经验模块</h4>
+                    <p>是否展示个人/公司项目经验</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-projects" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                <div class="switch-control">
+                  <div class="switch-label">
+                    <h4>自我评价模块</h4>
+                    <p>是否展示自我评价与职业期望</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="field-show-eval" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- 图标库设置 (阿里巴巴 Iconfont 支持) -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-flag"></i> 阿里 Iconfont 图标库支持</h3>
+                <span class="header-desc">可引入阿里巴巴矢量图标库 (iconfont.cn)</span>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>阿里巴巴 Iconfont 在线 CSS 链接 (可选)</label>
+                  <input type="text" class="form-control" id="field-iconfont-url" placeholder="如：//at.alicdn.com/t/c/font_4413158_t26sz96m1x.css">
+                  <div class="form-help">可直接填入在阿里巴巴矢量图标库（iconfont.cn）创建的项目在线链接，系统自动引入，后台提供可视化直接点选！默认已内置常用通讯、社交与职场图标。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. 基本信息设置 -->
+          <div class="tab-panel" id="basic-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-user"></i> 核心个人信息</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>个人头像照片</label>
+                  <div class="avatar-uploader">
+                    <div class="avatar-preview" id="avatar-preview-box">
+                      <img id="avatar-preview-img" src="" alt="头像预览">
+                    </div>
+                    <div class="uploader-controls">
+                      <div class="upload-btn-wrap">
+                        <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
+                          <i class="fa fa-folder-open-o"></i> 本地选择新图片上传
+                          <input type="file" id="input-avatar-file" accept="image/*" style="display: none;">
+                        </label>
+                      </div>
+                      <input type="text" class="form-control" id="field-basic-avatar" placeholder="图片路径或在线 URL（如 assets/images/avatar.jpg）">
+                      <div class="form-help">可直接上传本地图片（自动保存至 uploads 目录）或填写任意在线图片地址</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" id="field-basic-name" placeholder="如：李晓明">
+                  </div>
+                  <div class="form-group">
+                    <label>期望岗位与城市</label>
+                    <input type="text" class="form-control" id="field-basic-job" placeholder="如：高级前端开发工程师 / 杭州">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>个性签名 / 职业定位语录</label>
+                  <input type="text" class="form-control" id="field-basic-signature" placeholder="如：追求极致的代码艺术与极致的用户体验">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. 档案资料 (Profile) -->
+          <div class="tab-panel" id="profile-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-address-card-o"></i> 个人档案信息</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-profile">
+                  <i class="fa fa-plus"></i> 添加档案项
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="form-help" style="margin-bottom: 14px;">展示在侧边栏“基本信息”区域，如“个人信息”、“英语水平”、“工作经验”、“政治面貌”等。</p>
+                <div class="item-list-container" id="profile-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. 联系方式 (Contact) -->
+          <div class="tab-panel" id="contact-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-phone"></i> 联系方式</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-contact">
+                  <i class="fa fa-plus"></i> 添加联系方式
+                </button>
+              </div>
+              <div class="card-body">
+                <p class="form-help" style="margin-bottom: 14px;">支持配置手机、邮箱、个人网站、GitHub、微信等，支持点击拨号或跳转链接。</p>
+                <div class="item-list-container" id="contact-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. 技能特长 (Skills) -->
+          <div class="tab-panel" id="skills-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-code"></i> 专业技能清单</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-skill">
+                  <i class="fa fa-plus"></i> 添加技能
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="form-group" style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb;">
+                  <label style="font-size: 13.5px;">技能展示样式</label>
+                  <div class="radio-group-horizontal">
+                    <label>
+                      <input type="radio" name="skillDisplayMode" value="tags" id="skill-mode-tags" checked>
+                      <b>现代标签徽章模式</b>（无进度条，清爽专业，推荐）
+                    </label>
+                    <label>
+                      <input type="radio" name="skillDisplayMode" value="bars" id="skill-mode-bars">
+                      <b>百分比进度条模式</b>（显示进度条）
+                    </label>
+                  </div>
+                  <div class="form-help">如果无需进度条，选择标签模式即可将所有技能以现代化徽章标签优雅呈现。</div>
+                </div>
+                <div class="item-list-container" id="skills-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. 教育经历 (Education) -->
+          <div class="tab-panel" id="education-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-graduation-cap"></i> 教育背景经历</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-edu">
+                  <i class="fa fa-plus"></i> 添加教育经历
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="item-list-container" id="edu-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. 工作经历 (Work) -->
+          <div class="tab-panel" id="work-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-briefcase"></i> 工作与实习经历</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-work">
+                  <i class="fa fa-plus"></i> 添加工作经历
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="item-list-container" id="work-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. 项目经验 (Projects) -->
+          <div class="tab-panel" id="projects-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-cubes"></i> 核心项目经验</h3>
+                <button class="btn btn-secondary btn-sm" id="btn-add-project">
+                  <i class="fa fa-plus"></i> 添加项目经历
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="item-list-container" id="projects-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. 自我评价 (Evaluation) -->
+          <div class="tab-panel" id="evaluation-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-pencil-square-o"></i> 自我评价与职业期望</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>评价内容</label>
+                  <textarea class="form-control" id="field-self-eval" rows="8" placeholder="填写您的自我评价、职业素养、技术爱好与期望..."></textarea>
+                  <div class="form-help">支持换行分段，前台将保留段落格式渲染。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. 二维码设置 (QR Code) -->
+          <div class="tab-panel" id="qrcode-tab">
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-qrcode"></i> 二维码展示设置</h3>
+              </div>
+              <div class="card-body">
+                <div class="avatar-uploader">
+                  <div class="avatar-preview" id="qr-preview-box" style="border-radius: 6px; width: 100px; height: 100px;">
+                    <img id="qr-preview-img" src="" alt="二维码预览">
+                  </div>
+                  <div class="uploader-controls">
+                    <div class="upload-btn-wrap">
+                      <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
+                        <i class="fa fa-folder-open-o"></i> 本地选择二维码上传
+                        <input type="file" id="input-qr-file" accept="image/*" style="display: none;">
+                      </label>
+                    </div>
+                    <input type="text" class="form-control" id="field-qr-image" placeholder="二维码图片路径或 URL">
+                    <div class="form-help">展示在侧栏底部的二维码（例如微信联系二维码、在线个人作品集二维码）</div>
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 18px;">
+                  <label>说明文字</label>
+                  <input type="text" class="form-control" id="field-qr-text" placeholder="如：扫码在手机上查看简历或添加微信">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 实时预览抽屉 -->
+  <div class="drawer-backdrop" id="preview-backdrop"></div>
+  <aside class="preview-drawer" id="preview-drawer">
+    <div class="preview-header">
+      <div style="font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <i class="fa fa-desktop"></i> 简历实时预览
+      </div>
+      <div>
+        <button class="btn btn-secondary btn-sm" id="btn-refresh-preview" style="margin-right: 6px;">
+          <i class="fa fa-refresh"></i> 刷新
+        </button>
+        <button class="icon-btn" id="btn-close-preview" style="font-size: 16px;">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="preview-body">
+      <iframe id="preview-frame" class="preview-iframe" src="about:blank"></iframe>
+    </div>
+  </aside>
+
+  <!-- 可视化图标选择器模态窗 -->
+  <div class="icon-modal-backdrop" id="icon-picker-modal">
+    <div class="icon-modal">
+      <div class="icon-modal-header">
+        <h3><i class="fa fa-th-large"></i> 可视化图标选择库（支持直接点击选用）</h3>
+        <button type="button" class="icon-btn" id="btn-close-icon-picker"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="icon-modal-search-row">
+        <input type="text" class="icon-modal-search" id="input-search-icon" placeholder="输入关键词搜索图标（如：电话、微信、邮箱、代码、github）...">
+      </div>      <div class="icon-modal-categories" id="icon-categories-bar">
+        <span class="cat-pill active" data-cat="all">全部字体图标</span>
+        <span class="cat-pill" data-cat="品牌Logo">品牌 Logo</span>
+        <span class="cat-pill" data-cat="通讯社交">通讯社交</span>
+        <span class="cat-pill" data-cat="个人信息">个人信息</span>
+        <span class="cat-pill" data-cat="教育职场">教育职场</span>
+        <span class="cat-pill" data-cat="技术研发">技术研发</span>
+        <span class="cat-pill" data-cat="荣誉成果">荣誉成果</span>
+        <span class="cat-pill" data-cat="上传图片">上传图片</span>
+        <span class="cat-pill" data-cat="自定义">阿里Iconfont/自定义</span>
+      </div>
+      <div class="icon-modal-body">
+        <div class="icon-grid" id="icon-picker-grid">
+          <!-- JS 动态渲染 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 导入已有简历模态窗 -->
+  <div class="icon-modal-backdrop" id="import-resume-modal">
+    <div class="icon-modal" style="max-width: 760px;">
+      <div class="icon-modal-header">
+        <h3><i class="fa fa-file-text"></i> 导入已有简历（自动识别填入）</h3>
+        <button type="button" class="icon-btn" id="btn-close-import-resume"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="import-resume-body" id="import-resume-body">
+        <div class="import-drop-zone" id="import-drop-zone">
+          <i class="fa fa-cloud-upload"></i>
+          <h4>选择或拖入简历文件</h4>
+          <p>支持 <b>PDF / Word (docx) / Markdown (.md) / HTML / 纯文本 (txt)</b><br>系统将自动识别姓名、联系方式、教育经历、工作经历、项目与技能</p>
+          <label class="btn btn-primary" style="cursor: pointer; margin-top: 6px;">
+            <i class="fa fa-folder-open-o"></i> 选择文件
+            <input type="file" id="input-resume-file" accept=".pdf,.docx,.doc,.md,.markdown,.html,.htm,.txt" style="display: none;">
+          </label>
+        </div>
+        <div class="import-parsing" id="import-parsing" style="display: none;">
+          <i class="fa fa-spinner fa-spin"></i> 正在解析文件内容，请稍候...
+        </div>
+        <div class="import-result" id="import-result" style="display: none;">
+          <h4><i class="fa fa-check-circle" style="color: #10b981;"></i> 识别完成，请勾选需要导入的内容</h4>
+          <div class="import-fields" id="import-fields-list">
+            <!-- JS 动态渲染识别到的字段 -->
+          </div>
+          <div class="import-actions">
+            <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; cursor: pointer;">
+              <input type="checkbox" id="import-replace-mode">
+              <b>替换模式</b>（勾选后清空对应模块再导入；不勾选则追加到现有内容后面）
+            </label>
+            <button type="button" class="btn btn-primary" id="btn-apply-import">
+              <i class="fa fa-magic"></i> 应用到简历
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 提示容器 -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="libs/pdf.min.js" defer></script>
+  <script src="libs/mammoth.browser.min.js" defer></script>
+  <script src="static-adapter.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
