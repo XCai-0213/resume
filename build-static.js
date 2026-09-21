@@ -27,6 +27,7 @@ const DIST = path.join(ROOT, 'dist');
 const COPY_TARGETS = [
   { from: 'index.html', to: 'index.html' },
   { from: 'home.html', to: 'home.html' },
+  { from: 'resume.html', to: 'resume.html' },
   { from: 'assets', to: 'assets' },
   { from: 'uploads', to: 'uploads' },
   { from: 'admin', to: 'admin' }

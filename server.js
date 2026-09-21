@@ -473,13 +473,14 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 静态页面路由映射
-  if (pathname === '/' || pathname === '/index.html') {
+  // 根路径访问 -> 赛博马里奥像素个人主页
+  if (pathname === '/' || pathname === '/index.html' || pathname === '/home' || pathname === '/home/' || pathname === '/home.html') {
     return serveStatic(req, res, path.join(ROOT_DIR, 'index.html'));
   }
 
-  // 赛博马里奥像素个人主页
-  if (pathname === '/home' || pathname === '/home/' || pathname === '/home.html') {
-    return serveStatic(req, res, path.join(ROOT_DIR, 'home.html'));
+  // 个人简历展示页面
+  if (pathname === '/resume' || pathname === '/resume/' || pathname === '/resume.html') {
+    return serveStatic(req, res, path.join(ROOT_DIR, 'resume.html'));
   }
 
   if (pathname === '/admin' || pathname === '/admin/' || pathname === '/admin/index.html') {
