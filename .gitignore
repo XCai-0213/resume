@@ -29,3 +29,6 @@ _temp/
 # Sass 编译缓存
 assets/.sass-cache/
 assets/css/*.map
+
+# 保留 README 预览图
+!docs/

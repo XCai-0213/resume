@@ -26,14 +26,25 @@
   let apiAvailable = null;
 
   // ---------- 基础工具 ----------
+  // API 根路径：始终指向站点根目录的 /api/*，避免从 /admin/ 子目录访问时解析成 /admin/api/*
+  function apiUrl(p) {
+    return '/api/' + p;
+  }
+
   async function probeApi() {
     if (apiAvailable !== null) return apiAvailable;
     try {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 2500);
-      const res = await fetch('api/resume?probe=1', { signal: ctrl.signal });
+      const res = await fetch(apiUrl('resume') + '?probe=1', { signal: ctrl.signal, cache: 'no-store' });
       clearTimeout(timer);
-      apiAvailable = res.ok;
+      // 只有返回 JSON 且 success 字段存在，才认定后端可用
+      if (res.ok) {
+        const ct = res.headers.get('content-type') || '';
+        apiAvailable = ct.indexOf('application/json') !== -1;
+      } else {
+        apiAvailable = false;
+      }
     } catch (e) {
       apiAvailable = false;
     }
@@ -73,7 +84,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/resume?t=' + Date.now());
+        const res = await fetch(apiUrl('resume') + '?t=' + Date.now());
         const json = await res.json();
         if (json.success && json.data) return { success: true, data: json.data, source: 'server' };
       } catch (e) { /* 继续降级 */ }
@@ -100,7 +111,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/resume', {
+        const res = await fetch(apiUrl('resume'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
@@ -132,7 +143,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/reset', { method: 'POST' });
+        const res = await fetch(apiUrl('reset'), { method: 'POST' });
         const json = await res.json();
         return json;
       } catch (e) {
@@ -152,7 +163,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/upload', {
+        const res = await fetch(apiUrl('upload'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ fileName: fileName, dataUrl: dataUrl })
@@ -175,7 +186,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/jobs?t=' + Date.now());
+        const res = await fetch(apiUrl('jobs') + '?t=' + Date.now());
         const json = await res.json();
         if (json.success && json.data) return { success: true, data: json.data };
       } catch (e) { /* 降级 */ }
@@ -196,7 +207,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/jobs', {
+        const res = await fetch(apiUrl('jobs'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
@@ -215,7 +226,7 @@
     const useApi = await probeApi();
     if (useApi) {
       try {
-        const res = await fetch('api/jobs/parse', {
+        const res = await fetch(apiUrl('jobs/parse'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: text })

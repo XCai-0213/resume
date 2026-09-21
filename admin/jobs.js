@@ -434,7 +434,7 @@
     document.getElementById('btn-export-csv').addEventListener('click', async function () {
       const useApi = await STATIC_API.probeApi();
       if (useApi) {
-        window.location.href = 'api/jobs/export';
+        window.location.href = '/api/jobs/export';
       } else {
         STATIC_API.exportJobsCsv(state.columns, state.rows);
         showToast('已导出 applications.csv');
