@@ -582,6 +582,9 @@
     // 当前页面标记，用于导航高亮（前台恒为 resume）
     bar.innerHTML = `
       <span class="bar-nav-label">导航</span>
+      <a class="bar-btn" href="/home.html" title="返回赛博像素个人主页">
+        <i class="fa fa-home"></i> 个人主页
+      </a>
       <a class="bar-btn active" href="/" title="简历展示页（当前页）">
         <i class="fa fa-id-card-o"></i> 简历前台
       </a>

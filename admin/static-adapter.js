@@ -21,6 +21,7 @@
 
   const LS_KEY = 'resume_data_v1';
   const LS_JOBS_KEY = 'resume_jobs_v1';
+  const LS_HOMEPAGE_KEY = 'homepage_data_v1';
 
   // 是否检测到后端 API（首次探测后缓存结果）
   let apiAvailable = null;
@@ -309,6 +310,57 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
 
+  // ---------- 个人主页门户数据 ----------
+  async function loadHomepage() {
+    const useApi = await probeApi();
+    if (useApi) {
+      try {
+        const res = await fetch(apiUrl('homepage') + '?t=' + Date.now());
+        const json = await res.json();
+        if (json.success && json.data) return { success: true, data: json.data };
+      } catch (e) { /* 降级 */ }
+    }
+    const local = readLocal(LS_HOMEPAGE_KEY, null);
+    if (local) return { success: true, data: local };
+    try {
+      const res = await fetch(basePrefix() + 'data/homepage.json?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        return { success: true, data };
+      }
+    } catch (e) {}
+    try {
+      const res2 = await fetch(basePrefix() + 'homepage.json?t=' + Date.now());
+      if (res2.ok) {
+        const data = await res2.json();
+        return { success: true, data };
+      }
+    } catch (e) {}
+    return { success: false, error: '未找到主页数据' };
+  }
+
+  async function saveHomepage(data) {
+    const useApi = await probeApi();
+    if (useApi) {
+      try {
+        const res = await fetch(apiUrl('homepage'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (json.success) return { success: true, message: '个人主页配置保存成功！' };
+        return { success: false, error: json.error || '保存失败' };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
+    }
+    const ok = writeLocal(LS_HOMEPAGE_KEY, data);
+    return ok
+      ? { success: true, message: '已保存到本地存储，主页刷新即生效' }
+      : { success: false, error: '本地存储已满' };
+  }
+
   // 给前台页面读取用（静态部署时前台也走这里）
   function getLocalResume() {
     return readLocal(LS_KEY, null);
@@ -327,7 +379,10 @@
     exportJobsCsv: exportJobsCsv,
     downloadJson: downloadJson,
     getLocalResume: getLocalResume,
+    loadHomepage: loadHomepage,
+    saveHomepage: saveHomepage,
     LS_KEY: LS_KEY,
-    LS_JOBS_KEY: LS_JOBS_KEY
+    LS_JOBS_KEY: LS_JOBS_KEY,
+    LS_HOMEPAGE_KEY: LS_HOMEPAGE_KEY
   };
 })(window);

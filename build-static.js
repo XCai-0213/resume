@@ -26,6 +26,7 @@ const DIST = path.join(ROOT, 'dist');
 // 需要复制到 dist 的资源
 const COPY_TARGETS = [
   { from: 'index.html', to: 'index.html' },
+  { from: 'home.html', to: 'home.html' },
   { from: 'assets', to: 'assets' },
   { from: 'uploads', to: 'uploads' },
   { from: 'admin', to: 'admin' }
@@ -136,12 +137,31 @@ function main() {
   fs.writeFileSync(path.join(DIST, 'jobs.json'), JSON.stringify(jobsData, null, 2), 'utf-8');
   log('已生成 dist/jobs.json（投递记录静态数据源）', 'ok');
 
-  // 5. 为 admin 目录也放一份数据副本（相对路径访问）
+  // 5. 生成静态数据文件 homepage.json（个人主页）
+  const homeSrc = path.join(ROOT, 'data', 'homepage.json');
+  const homeDefault = path.join(ROOT, 'data', 'default-homepage.json');
+  let homeData;
+  if (fs.existsSync(homeSrc)) {
+    homeData = JSON.parse(fs.readFileSync(homeSrc, 'utf-8'));
+    log('已读取个人主页数据 data/homepage.json', 'ok');
+  } else if (fs.existsSync(homeDefault)) {
+    homeData = JSON.parse(fs.readFileSync(homeDefault, 'utf-8'));
+    log('使用默认个人主页数据 data/default-homepage.json', 'info');
+  } else {
+    homeData = {};
+  }
+  fs.writeFileSync(path.join(DIST, 'homepage.json'), JSON.stringify(homeData, null, 2), 'utf-8');
+  fs.mkdirSync(path.join(DIST, 'data'), { recursive: true });
+  fs.writeFileSync(path.join(DIST, 'data', 'homepage.json'), JSON.stringify(homeData, null, 2), 'utf-8');
+  log('已生成 dist/homepage.json（个人主页静态数据源）', 'ok');
+
+  // 6. 为 admin 目录也放一份数据副本（相对路径访问）
   fs.writeFileSync(path.join(DIST, 'admin', 'data.json'), JSON.stringify(resumeData, null, 2), 'utf-8');
   fs.writeFileSync(path.join(DIST, 'admin', 'jobs.json'), JSON.stringify(jobsData, null, 2), 'utf-8');
+  fs.writeFileSync(path.join(DIST, 'admin', 'homepage.json'), JSON.stringify(homeData, null, 2), 'utf-8');
   log('已为 admin/ 生成数据副本', 'ok');
 
-  // 6. 生成部署说明文件
+  // 7. 生成部署说明文件
   const readme = generateDeployReadme();
   fs.writeFileSync(path.join(DIST, '_部署说明.md'), readme, 'utf-8');
   log('已生成 _部署说明.md', 'ok');

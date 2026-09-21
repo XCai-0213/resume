@@ -20,6 +20,9 @@
         <li class="active" data-tab="layout-tab">
           <a href="javascript:void(0)"><i class="fa fa-sliders"></i> <span>布局与外观</span></a>
         </li>
+        <li data-tab="homepage-tab">
+          <a href="javascript:void(0)"><i class="fa fa-home"></i> <span>个人主页</span></a>
+        </li>
         <li data-tab="basic-tab">
           <a href="javascript:void(0)"><i class="fa fa-user"></i> <span>基本信息</span></a>
         </li>
@@ -57,6 +60,9 @@
     <main class="admin-main">
       <!-- 站点导航条（与前台/投递记录页保持一致） -->
       <nav class="site-nav">
+        <a class="site-nav-btn" href="/home.html" title="查看赛博像素个人主页">
+          <i class="fa fa-home"></i> 个人主页
+        </a>
         <a class="site-nav-btn" href="/" title="查看简历展示页">
           <i class="fa fa-id-card-o"></i> 简历前台
         </a>
@@ -816,6 +822,135 @@
                 <div class="form-group" style="margin-top: 18px;">
                   <label>说明文字</label>
                   <input type="text" class="form-control" id="field-qr-text" placeholder="如：扫码在手机上查看简历或添加微信">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. 赛博像素个人主页配置 (Homepage & Portal) -->
+          <div class="tab-panel" id="homepage-tab">
+            <!-- 英雄区与背景设置 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-picture-o"></i> 英雄区与背景图（马里奥像素风格）</h3>
+                <span class="header-desc">配置个人主页的全屏像素风背景、主标题与背景音乐</span>
+              </div>
+              <div class="card-body">
+                <div class="form-row">
+                  <div class="form-group" style="flex: 1.5;">
+                    <label>主页大标题 / 姓名</label>
+                    <input type="text" class="form-control" id="home-field-title" placeholder="如：张栋梁">
+                  </div>
+                  <div class="form-group" style="flex: 1.2;">
+                    <label>英文名 / 副标题</label>
+                    <input type="text" class="form-control" id="home-field-subtitle" placeholder="如：Dongliang Zhang">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group" style="flex: 1.5;">
+                    <label>职业定位徽章文字</label>
+                    <input type="text" class="form-control" id="home-field-job" placeholder="如：材料科学与工程 / 研发工艺 / AI Agent 探索者">
+                  </div>
+                  <div class="form-group" style="flex: 1.2;">
+                    <label>座右铭 / 标语 Slogan</label>
+                    <input type="text" class="form-control" id="home-field-slogan" placeholder="如：「多静多思考，反省不张扬」">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>全屏背景动图 (GIF / WebP)</label>
+                  <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                    <input type="text" class="form-control" id="home-field-bg" placeholder="如：assets/images/mario-night.gif" style="flex: 1;">
+                    <label class="btn btn-secondary btn-sm" style="cursor: pointer; margin: 0; white-space: nowrap;">
+                      <i class="fa fa-folder-open-o"></i> 更换背景图上传
+                      <input type="file" id="home-input-bg-file" accept="image/*" style="display: none;">
+                    </label>
+                  </div>
+                  <div class="form-help">默认使用用户上传的赛博马里奥像素工作台夜景动图。可填写任意图片 URL 或上传新图。</div>
+                </div>
+
+                <div class="form-row" style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #e2e8f0;">
+                  <div class="form-group" style="flex: 2;">
+                    <label>背景音乐音频地址 (BGM)</label>
+                    <input type="text" class="form-control" id="home-field-bgm" placeholder="如：assets/audio/bgm.mp3">
+                    <div class="form-help">集成 15387 经典背景音乐，主页右上角带唱片旋转播放胶囊</div>
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label>自动播放开关</label>
+                    <div class="switch-control" style="border: none; padding: 4px 0;">
+                      <span style="font-size: 13px; color: #475569;">打开页面尝试播放</span>
+                      <label class="toggle-switch">
+                        <input type="checkbox" id="home-field-bgm-autoplay">
+                        <span class="toggle-slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 关于我模块配置 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-user-circle-o"></i> 关于我模块配置 (About Me)</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>个性问候语</label>
+                  <input type="text" class="form-control" id="home-field-greeting" placeholder="如：你好，我是张栋梁 👋">
+                </div>
+                <div class="form-group">
+                  <label>个人简介详述 (Bio)</label>
+                  <textarea class="form-control" id="home-field-bio" rows="4" placeholder="介绍您的专业背景、核心优势、科研方向与求职意向..."></textarea>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label style="margin: 0;">核心属性徽章 (Badges)</label>
+                    <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-badge"><i class="fa fa-plus"></i> 添加徽章</button>
+                  </div>
+                  <div class="item-list-container" id="home-badges-list-container">
+                    <!-- JS 动态渲染 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 精选项目与作品配置 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-cubes"></i> 精选项目与代表作 (Featured Projects)</h3>
+                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-project"><i class="fa fa-plus"></i> 添加项目卡片</button>
+              </div>
+              <div class="card-body">
+                <div class="item-list-container" id="home-projects-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 社交网络与联系方式配置 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-share-alt"></i> 社交网络与联系入口 (Social & Contact)</h3>
+                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-social"><i class="fa fa-plus"></i> 添加社交卡片</button>
+              </div>
+              <div class="card-body">
+                <div class="item-list-container" id="home-social-list-container">
+                  <!-- JS 动态渲染 -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 主页页脚版权 -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i class="fa fa-copyright"></i> 主页页脚版权</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>页脚文字</label>
+                  <input type="text" class="form-control" id="home-field-footer" placeholder="如：© 2026 张栋梁 · Personal Homepage & Resume System">
                 </div>
               </div>
             </div>

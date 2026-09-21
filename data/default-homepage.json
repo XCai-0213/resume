@@ -1,0 +1,66 @@
+{
+  "hero": {
+    "title": "张栋梁",
+    "subtitle": "Dongliang Zhang",
+    "jobTitle": "材料科学与工程 / 研发工艺工程师 / AI Agent 探索者",
+    "slogan": "「多静多思考，反省不张扬」",
+    "avatar": "assets/images/avatar.jpg",
+    "background": "assets/images/mario-night.gif",
+    "bgm": "assets/audio/bgm.mp3",
+    "bgmAutoPlay": false
+  },
+  "about": {
+    "greeting": "你好，我是张栋梁 👋",
+    "bio": "材料科学与工程硕士在读，专注于材料计算模拟、催化材料高通量筛选、半导体制造与 AI Agent 科研工作流研发。热爱工程实践、开源技术与前沿跨界探索。\n\n具备扎实的材料物理基础与机械设计功底，善于运用 Python、Shell、VASP、CP2K 等工具解决实际工程研发问题，践行 AI for Science。",
+    "badges": [
+      { "label": "学历层次", "value": "硕士研究生 (2027届)" },
+      { "label": "政治面貌", "value": "中共党员" },
+      { "label": "意向城市", "value": "江西南昌 / 浙江杭州 / 全国" },
+      { "label": "求职状态", "value": "应届求职可实习" }
+    ]
+  },
+  "skills": [
+    {
+      "category": "材料计算与仿真",
+      "items": ["VASP", "CP2K", "第一性原理 (DFT)", "分子动力学 (MD)", "催化高通量筛选", "锂电池界面机理"]
+    },
+    {
+      "category": "编程与 AI 架构",
+      "items": ["Python", "Shell 脚本", "FastAPI", "AI Agent 智能体", "Vue.js", "Linux 集群运维", "Docker"]
+    },
+    {
+      "category": "工业工程与制图",
+      "items": ["AutoCAD", "SolidWorks", "半导体 FAB 工艺", "薄膜沉积机理", "设备管路优化", "SPC/DOE"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CatGO：计算材料与催化开源工作台",
+      "desc": "AI 驱动的计算材料与催化研究开源平台，支持 DFT 计算建模、分子动力学模拟与复杂异质结搭建。",
+      "tag": "开源贡献",
+      "link": "https://github.com/XCai-0213"
+    },
+    {
+      "name": "材料在线实验室与错误分析站",
+      "desc": "基于 AI Agent 打造的一站式实验记录与复盘工作流，自动化文献参数提取与工艺异常归因。",
+      "tag": "独立开发",
+      "link": ""
+    },
+    {
+      "name": "本地超算服务集群与算力追踪看板",
+      "desc": "自主完成软硬件组装、Linux 节点互联配置，并基于 Vue+FastAPI 研发任务队列与算力监控面板。",
+      "tag": "工程运维",
+      "link": ""
+    }
+  ],
+  "social": [
+    { "name": "GitHub", "icon": "fa fa-github", "link": "https://github.com/XCai-0213", "text": "XCai-0213" },
+    { "name": "邮箱", "icon": "fa fa-envelope", "link": "mailto:690857@163.com", "text": "690857@163.com" },
+    { "name": "手机", "icon": "fa fa-phone", "link": "tel:17855900213", "text": "17855900213" },
+    { "name": "微信", "icon": "fa fa-weixin", "link": "", "text": "17855900213" }
+  ],
+  "footer": {
+    "copyright": "© 2026 张栋梁 · Personal Homepage & Resume System",
+    "beian": ""
+  }
+}

@@ -9,6 +9,8 @@ const DATA_FILE = path.join(ROOT_DIR, 'data', 'resume.json');
 const DEFAULT_DATA_FILE = path.join(ROOT_DIR, 'data', 'default-resume.json');
 const UPLOADS_DIR = path.join(ROOT_DIR, 'uploads');
 const JOBS_FILE = path.join(ROOT_DIR, 'data', 'applications.json');
+const HOMEPAGE_FILE = path.join(ROOT_DIR, 'data', 'homepage.json');
+const DEFAULT_HOMEPAGE_FILE = path.join(ROOT_DIR, 'data', 'default-homepage.json');
 
 // 默认投递记录表头字段（对标 givemeoc 校招投递管理表）
 const DEFAULT_JOB_COLUMNS = [
@@ -49,6 +51,10 @@ const MIME_TYPES = {
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
+  '.webp': 'image/webp',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+  '.ogg': 'audio/ogg',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
@@ -103,6 +109,29 @@ function saveJobsData(data) {
   const tempPath = JOBS_FILE + '.tmp';
   fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), 'utf-8');
   fs.renameSync(tempPath, JOBS_FILE);
+}
+
+// ============ 个人主页门户数据存取 ============
+function getHomepageData() {
+  try {
+    if (fs.existsSync(HOMEPAGE_FILE)) {
+      const raw = fs.readFileSync(HOMEPAGE_FILE, 'utf-8');
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('读取 homepage.json 失败:', err.message);
+  }
+  if (fs.existsSync(DEFAULT_HOMEPAGE_FILE)) {
+    const raw = fs.readFileSync(DEFAULT_HOMEPAGE_FILE, 'utf-8');
+    return JSON.parse(raw);
+  }
+  return {};
+}
+
+function saveHomepageData(data) {
+  const tempPath = HOMEPAGE_FILE + '.tmp';
+  fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), 'utf-8');
+  fs.renameSync(tempPath, HOMEPAGE_FILE);
 }
 
 // 注意：此处刻意不实现“爬取 givemeoc 等第三方站点”的功能。
@@ -244,6 +273,37 @@ const server = http.createServer(async (req, res) => {
       saveResumeData(body);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ success: true, message: '保存成功！', updatedAt: new Date().toISOString() }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: err.message }));
+    }
+    return;
+  }
+
+  // ============ 个人主页 API ============
+  if (pathname === '/api/homepage' && req.method === 'GET') {
+    try {
+      const data = getHomepageData();
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: true, data }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: err.message }));
+    }
+    return;
+  }
+
+  if (pathname === '/api/homepage' && req.method === 'POST') {
+    try {
+      const body = await parseRequestBody(req);
+      if (!body || typeof body !== 'object') {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: '无效的数据格式' }));
+        return;
+      }
+      saveHomepageData(body);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: true, message: '个人主页配置保存成功！', updatedAt: new Date().toISOString() }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ success: false, error: err.message }));
@@ -415,6 +475,11 @@ const server = http.createServer(async (req, res) => {
   // 静态页面路由映射
   if (pathname === '/' || pathname === '/index.html') {
     return serveStatic(req, res, path.join(ROOT_DIR, 'index.html'));
+  }
+
+  // 赛博马里奥像素个人主页
+  if (pathname === '/home' || pathname === '/home/' || pathname === '/home.html') {
+    return serveStatic(req, res, path.join(ROOT_DIR, 'home.html'));
   }
 
   if (pathname === '/admin' || pathname === '/admin/' || pathname === '/admin/index.html') {

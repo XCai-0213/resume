@@ -534,7 +534,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initKeyboardShortcuts();
   initIconPicker();
   initImportResume();
+  initHomepageEvents();
   fetchResumeData();
+  fetchHomepageData();
 });
 
 // 初始化标签页切换
@@ -1556,18 +1558,24 @@ function collectCurrentForm() {
   return payload;
 }
 
-// 保存简历（自动兼容本地服务器 / 纯静态托管）
+// 保存简历与个人主页（自动兼容本地服务器 / 纯静态托管）
 async function saveResumeData() {
   const payload = collectCurrentForm();
+  const homePayload = collectHomepageForm();
   try {
     const saveBtn = document.getElementById('btn-save-all');
     saveBtn.disabled = true;
     saveBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 正在保存...';
 
-    const result = await STATIC_API.saveResume(payload);
+    const [result, homeResult] = await Promise.all([
+      STATIC_API.saveResume(payload),
+      STATIC_API.saveHomepage(homePayload)
+    ]);
+
     if (result.success) {
-      showToast(result.message || '🎉 简历内容已成功保存！');
+      showToast('🎉 简历与主页内容已成功保存！前台与主页实时生效。');
       currentData = payload;
+      currentHomepageData = homePayload;
       // 若预览打开，则同步刷新预览窗口
       const previewDrawer = document.getElementById('preview-drawer');
       if (previewDrawer.classList.contains('open')) {
@@ -2097,4 +2105,309 @@ function applyImportToForm(parsed) {
   // 关闭弹窗
   document.getElementById('import-resume-modal').classList.remove('open');
   showToast('成功导入 ' + applied + ' 个模块的内容，请检查后点击"保存所有内容"');
+}
+
+/* =======================================================
+ * 赛博马里奥像素个人主页配置 (Homepage & Portal)
+ * ======================================================= */
+let currentHomepageData = null;
+
+async function fetchHomepageData() {
+  try {
+    const res = await STATIC_API.loadHomepage();
+    if (res.success && res.data) {
+      currentHomepageData = res.data;
+      populateHomepageForm(currentHomepageData);
+    }
+  } catch (err) {
+    console.warn('加载个人主页配置失败:', err);
+  }
+}
+
+function populateHomepageForm(data) {
+  if (!data) return;
+  const hero = data.hero || {};
+  const about = data.about || {};
+  const footer = data.footer || {};
+
+  const fTitle = document.getElementById('home-field-title');
+  if (fTitle) fTitle.value = hero.title || '';
+  const fSub = document.getElementById('home-field-subtitle');
+  if (fSub) fSub.value = hero.subtitle || '';
+  const fJob = document.getElementById('home-field-job');
+  if (fJob) fJob.value = hero.jobTitle || '';
+  const fSlogan = document.getElementById('home-field-slogan');
+  if (fSlogan) fSlogan.value = hero.slogan || '';
+  const fBg = document.getElementById('home-field-bg');
+  if (fBg) fBg.value = hero.background || 'assets/images/mario-night.gif';
+  const fBgm = document.getElementById('home-field-bgm');
+  if (fBgm) fBgm.value = hero.bgm || 'assets/audio/bgm.mp3';
+  const fAuto = document.getElementById('home-field-bgm-autoplay');
+  if (fAuto) fAuto.checked = !!hero.bgmAutoPlay;
+
+  const fGreet = document.getElementById('home-field-greeting');
+  if (fGreet) fGreet.value = about.greeting || '';
+  const fBio = document.getElementById('home-field-bio');
+  if (fBio) fBio.value = about.bio || '';
+  const fFoot = document.getElementById('home-field-footer');
+  if (fFoot) fFoot.value = footer.copyright || '';
+
+  // 渲染徽章列表
+  const badgesBox = document.getElementById('home-badges-list-container');
+  if (badgesBox) {
+    badgesBox.innerHTML = '';
+    (about.badges || []).forEach(addHomeBadgeItem);
+    renumberCards(badgesBox);
+  }
+
+  // 渲染项目列表
+  const projBox = document.getElementById('home-projects-list-container');
+  if (projBox) {
+    projBox.innerHTML = '';
+    (data.projects || []).forEach(addHomeProjectItem);
+    renumberCards(projBox);
+  }
+
+  // 渲染社交网络列表
+  const socialBox = document.getElementById('home-social-list-container');
+  if (socialBox) {
+    socialBox.innerHTML = '';
+    (data.social || []).forEach(addHomeSocialItem);
+    renumberCards(socialBox);
+  }
+}
+
+function collectHomepageForm() {
+  const hero = {
+    title: (document.getElementById('home-field-title')?.value || '').trim(),
+    subtitle: (document.getElementById('home-field-subtitle')?.value || '').trim(),
+    jobTitle: (document.getElementById('home-field-job')?.value || '').trim(),
+    slogan: (document.getElementById('home-field-slogan')?.value || '').trim(),
+    avatar: (document.getElementById('field-basic-avatar')?.value || 'assets/images/avatar.jpg').trim(),
+    background: (document.getElementById('home-field-bg')?.value || 'assets/images/mario-night.gif').trim(),
+    bgm: (document.getElementById('home-field-bgm')?.value || '').trim(),
+    bgmAutoPlay: !!document.getElementById('home-field-bgm-autoplay')?.checked
+  };
+
+  const badges = [];
+  document.querySelectorAll('#home-badges-list-container .item-card').forEach(card => {
+    const label = (card.querySelector('.badge-label')?.value || '').trim();
+    const value = (card.querySelector('.badge-val')?.value || '').trim();
+    if (label || value) badges.push({ label, value });
+  });
+
+  const about = {
+    greeting: (document.getElementById('home-field-greeting')?.value || '').trim(),
+    bio: (document.getElementById('home-field-bio')?.value || '').trim(),
+    badges: badges
+  };
+
+  const projects = [];
+  document.querySelectorAll('#home-projects-list-container .item-card').forEach(card => {
+    const name = (card.querySelector('.proj-name')?.value || '').trim();
+    const tag = (card.querySelector('.proj-tag')?.value || '').trim();
+    const desc = (card.querySelector('.proj-desc')?.value || '').trim();
+    const link = (card.querySelector('.proj-link')?.value || '').trim();
+    if (name) projects.push({ name, tag, desc, link });
+  });
+
+  const social = [];
+  document.querySelectorAll('#home-social-list-container .item-card').forEach(card => {
+    const name = (card.querySelector('.social-name')?.value || '').trim();
+    const text = (card.querySelector('.social-text')?.value || '').trim();
+    const link = (card.querySelector('.social-link')?.value || '').trim();
+    const icon = (card.querySelector('.social-icon')?.value || '').trim();
+    if (name) social.push({ name, text, link, icon });
+  });
+
+  const footer = {
+    copyright: (document.getElementById('home-field-footer')?.value || '').trim()
+  };
+
+  const skills = (currentHomepageData && currentHomepageData.skills) ? currentHomepageData.skills : [];
+
+  return { hero, about, skills, projects, social, footer };
+}
+
+function addHomeBadgeItem(item = { label: '', value: '' }) {
+  const container = document.getElementById('home-badges-list-container');
+  if (!container) return;
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header">
+      <div class="item-card-title"><i class="fa fa-tag"></i> <span>${escapeHtml(item.label || '核心徽章')}</span></div>
+      <div class="item-card-actions">
+        <div class="card-order-box" title="显示顺序号">
+          <button type="button" class="order-step order-step-up"><i class="fa fa-angle-up"></i></button>
+          <input type="number" min="1" class="card-order-num" value="1">
+          <button type="button" class="order-step order-step-down"><i class="fa fa-angle-down"></i></button>
+        </div>
+        <button type="button" class="icon-btn danger btn-remove" title="删除"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1;">
+        <label>标签名称</label>
+        <input type="text" class="form-control badge-label" value="${escapeHtml(item.label)}" placeholder="如：学历层次">
+      </div>
+      <div class="form-group" style="flex: 1.5;">
+        <label>标签内容</label>
+        <input type="text" class="form-control badge-val" value="${escapeHtml(item.value)}" placeholder="如：硕士研究生 (2027届)">
+      </div>
+    </div>
+  `;
+  bindCardControls(card, container);
+  container.appendChild(card);
+}
+
+function addHomeProjectItem(item = { name: '', tag: '', desc: '', link: '' }) {
+  const container = document.getElementById('home-projects-list-container');
+  if (!container) return;
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML = `
+    <div class="item-card-header">
+      <div class="item-card-title"><i class="fa fa-cubes"></i> <span>${escapeHtml(item.name || '代表项目')}</span></div>
+      <div class="item-card-actions">
+        <div class="card-order-box" title="显示顺序号">
+          <button type="button" class="order-step order-step-up"><i class="fa fa-angle-up"></i></button>
+          <input type="number" min="1" class="card-order-num" value="1">
+          <button type="button" class="order-step order-step-down"><i class="fa fa-angle-down"></i></button>
+        </div>
+        <button type="button" class="icon-btn danger btn-remove" title="删除"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex: 2;">
+        <label>项目名称</label>
+        <input type="text" class="form-control proj-name" value="${escapeHtml(item.name)}" placeholder="如：CatGO 开源工作台">
+      </div>
+      <div class="form-group" style="flex: 1;">
+        <label>类型标签</label>
+        <input type="text" class="form-control proj-tag" value="${escapeHtml(item.tag)}" placeholder="如：开源项目 / 独立研发">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>简短介绍与特色亮点</label>
+      <textarea class="form-control proj-desc" rows="2" placeholder="填写项目定位与核心产出...">${escapeHtml(item.desc)}</textarea>
+    </div>
+    <div class="form-group">
+      <label>在线演示链接 / GitHub 仓库地址 (可选)</label>
+      <input type="text" class="form-control proj-link" value="${escapeHtml(item.link || '')}" placeholder="https://github.com/...">
+    </div>
+  `;
+  bindCardControls(card, container);
+  container.appendChild(card);
+}
+
+function addHomeSocialItem(item = { name: '', text: '', link: '', icon: '' }) {
+  const container = document.getElementById('home-social-list-container');
+  if (!container) return;
+  const card = document.createElement('div');
+  card.className = 'item-card';
+  const curIcon = item.icon || 'fa fa-link';
+  card.innerHTML = `
+    <div class="item-card-header">
+      <div class="item-card-title"><i class="${escapeHtml(curIcon)}"></i> <span>${escapeHtml(item.name || '社交网络')}</span></div>
+      <div class="item-card-actions">
+        <div class="card-order-box" title="显示顺序号">
+          <button type="button" class="order-step order-step-up"><i class="fa fa-angle-up"></i></button>
+          <input type="number" min="1" class="card-order-num" value="1">
+          <button type="button" class="order-step order-step-down"><i class="fa fa-angle-down"></i></button>
+        </div>
+        <button type="button" class="icon-btn danger btn-remove" title="删除"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1.2;">
+        <label>平台名称</label>
+        <input type="text" class="form-control social-name" value="${escapeHtml(item.name)}" placeholder="如：GitHub / 邮箱 / 微信">
+      </div>
+      <div class="form-group" style="flex: 1.8;">
+        <label>展示文本</label>
+        <input type="text" class="form-control social-text" value="${escapeHtml(item.text)}" placeholder="如：XCai-0213 或 账号">
+      </div>
+      <div class="form-group" style="flex: 1;">
+        <label>图标</label>
+        <div class="icon-pick-trigger" title="点击选择图标">
+          <span class="preview-badge"><i class="${escapeHtml(curIcon)}"></i></span>
+          <span class="icon-name-text">选图标</span>
+          <input type="hidden" class="social-icon" value="${escapeHtml(curIcon)}">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>跳转链接地址</label>
+      <input type="text" class="form-control social-link" value="${escapeHtml(item.link || '')}" placeholder="如：https://github.com/... 或 mailto:...">
+    </div>
+  `;
+
+  const trigger = card.querySelector('.icon-pick-trigger');
+  const previewBadge = card.querySelector('.preview-badge');
+  const titleIcon = card.querySelector('.item-card-title i');
+  const hiddenInput = card.querySelector('.social-icon');
+
+  trigger.addEventListener('click', () => {
+    openIconPicker((selectedIcon) => {
+      hiddenInput.value = selectedIcon;
+      previewBadge.innerHTML = `<i class="${escapeHtml(selectedIcon)}"></i>`;
+      titleIcon.className = selectedIcon;
+    }, hiddenInput.value);
+  });
+
+  bindCardControls(card, container);
+  container.appendChild(card);
+}
+
+function initHomepageEvents() {
+  const addBadgeBtn = document.getElementById('home-btn-add-badge');
+  if (addBadgeBtn) {
+    addBadgeBtn.addEventListener('click', () => {
+      addHomeBadgeItem({ label: '新属性', value: '说明内容' });
+      renumberCards(document.getElementById('home-badges-list-container'));
+    });
+  }
+
+  const addProjBtn = document.getElementById('home-btn-add-project');
+  if (addProjBtn) {
+    addProjBtn.addEventListener('click', () => {
+      addHomeProjectItem({ name: '新项目', tag: '实践开发', desc: '项目描述...', link: '' });
+      renumberCards(document.getElementById('home-projects-list-container'));
+    });
+  }
+
+  const addSocialBtn = document.getElementById('home-btn-add-social');
+  if (addSocialBtn) {
+    addSocialBtn.addEventListener('click', () => {
+      addHomeSocialItem({ name: '社交平台', text: 'my_account', link: '', icon: 'fa fa-link' });
+      renumberCards(document.getElementById('home-social-list-container'));
+    });
+  }
+
+  // 主页背景更换上传
+  const bgFileInput = document.getElementById('home-input-bg-file');
+  const bgTextInput = document.getElementById('home-field-bg');
+  if (bgFileInput && bgTextInput) {
+    bgFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          showToast('正在上传背景动图...', 'info');
+          const result = await STATIC_API.uploadImage(file.name, reader.result);
+          if (result.success) {
+            bgTextInput.value = result.url;
+            showToast('背景图已成功更新！');
+          } else {
+            showToast('上传失败: ' + result.error, 'error');
+          }
+        } catch (err) {
+          showToast('处理失败: ' + err.message, 'error');
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 }

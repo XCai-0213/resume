@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>张栋梁 · 个人主页 & 作品门户</title>
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+  <!-- 全屏赛博马里奥像素夜景背景 -->
+  <div id="home-bg"></div>
+
+  <!-- 顶部悬浮互通导航胶囊（自由切换主页/简历/投递/后台/音乐） -->
+  <header class="home-quick-bar">
+    <a class="home-nav-btn active" href="/home.html" title="个人主页（当前页）">
+      <i class="fa fa-home"></i> 个人主页
+    </a>
+    <a class="home-nav-btn highlight" href="/" title="切换至完整在线简历">
+      <i class="fa fa-id-card-o"></i> 个人简历
+    </a>
+    <a class="home-nav-btn" href="/admin/jobs.html" title="查看投递进度看板">
+      <i class="fa fa-table"></i> 投递记录
+    </a>
+    <a class="home-nav-btn" href="/admin/" title="进入后台管理系统">
+      <i class="fa fa-cog"></i> 后台管理
+    </a>
+    <span class="bar-divider"></span>
+    <button class="music-toggle-btn" id="btn-toggle-music" title="播放 / 暂停像素背景音乐">
+      <span class="music-disc"><i class="fa fa-music"></i></span>
+      <span id="music-text">背景音乐</span>
+    </button>
+  </header>
+
+  <!-- 音频标签（15387 经典 BGM） -->
+  <audio id="home-bgm-audio" loop preload="none"></audio>
+
+  <!-- 页面主容器（左右悬浮毛玻璃质感双栏） -->
+  <div class="home-container">
+    <!-- 左侧：个人名片卡片 -->
+    <aside class="home-sidebar-card">
+      <div class="home-avatar-wrap">
+        <img id="home-avatar-img" src="assets/images/avatar.jpg" alt="头像">
+      </div>
+      <h1 class="home-name" id="home-name-text">张栋梁</h1>
+      <div class="home-subtitle" id="home-subtitle-text">Dongliang Zhang</div>
+      <div class="home-tagline-badge" id="home-tagline-text">材料科学与工程 / 研发工艺 / AI Agent 探索者</div>
+      <p class="home-slogan" id="home-slogan-text">「多静多思考，反省不张扬」</p>
+
+      <!-- 核心直达按钮组 -->
+      <div class="home-action-buttons">
+        <a class="action-btn primary" href="/" title="点击进入完整个人简历">
+          <i class="fa fa-file-text-o"></i> 浏览个人简历
+        </a>
+        <a class="action-btn secondary" href="/admin/jobs.html" title="查看校招投递追踪表">
+          <i class="fa fa-table"></i> 投递记录看板
+        </a>
+        <a class="action-btn secondary" href="/admin/" title="进入可视化后台配置">
+          <i class="fa fa-sliders"></i> 个人主页与简历后台
+        </a>
+      </div>
+    </aside>
+
+    <!-- 右侧：主要模块内容卡片 -->
+    <main class="home-main-card">
+      <!-- 模块 1：关于我 -->
+      <section class="section-block">
+        <h2 class="section-title"><i class="fa fa-user-circle-o"></i> 关于我 · About Me</h2>
+        <h3 class="about-greeting" id="about-greeting">你好，我是张栋梁 👋</h3>
+        <p class="about-bio" id="about-bio">
+          材料科学与工程硕士在读，专注于材料计算模拟、催化高通量筛选与 AI Agent 科研工作流研发。热爱工程实践、开源技术与前沿跨界探索。
+        </p>
+        <div class="about-badges-grid" id="about-badges-grid">
+          <!-- JS 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块 2：核心战斗力与技术栈 -->
+      <section class="section-block">
+        <h2 class="section-title"><i class="fa fa-bolt"></i> 核心战斗力 · Capabilities & Tech Stack</h2>
+        <div class="skills-matrix" id="skills-matrix">
+          <!-- JS 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块 3：精选作品与项目 -->
+      <section class="section-block">
+        <h2 class="section-title"><i class="fa fa-cubes"></i> 精选项目 · Featured Projects</h2>
+        <div class="projects-grid" id="projects-grid">
+          <!-- JS 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 模块 4：社交网络与联系 -->
+      <section class="section-block">
+        <h2 class="section-title"><i class="fa fa-paper-plane-o"></i> 联系与社交 · Connect</h2>
+        <div class="social-links-grid" id="social-links-grid">
+          <!-- JS 动态渲染 -->
+        </div>
+      </section>
+
+      <!-- 底部版权 -->
+      <footer class="home-footer">
+        <p id="home-footer-text">© 2026 张栋梁 · Personal Homepage & Resume System</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="assets/js/home.js"></script>
+</body>
+</html>
