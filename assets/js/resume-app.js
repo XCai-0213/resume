@@ -573,21 +573,31 @@
     }
   }
 
-  // 顶部快捷控制栏
+  // 顶部快捷控制栏（含跨页面导航）
   function setupQuickBar() {
     if (document.querySelector('.resume-quick-bar')) return;
     const bar = document.createElement('div');
     bar.className = 'resume-quick-bar';
+
+    // 当前页面标记，用于导航高亮（前台恒为 resume）
     bar.innerHTML = `
-      <button class="bar-btn" id="btn-toggle-layout" title="切换一栏 / 两栏布局">
-        <i class="fa fa-columns"></i> 切换版式
-      </button>
-      <button class="bar-btn primary" id="btn-print-resume" title="导出为单页高清 A4 PDF 简历">
-        <i class="fa fa-print"></i> 导出单页PDF
-      </button>
+      <span class="bar-nav-label">导航</span>
+      <a class="bar-btn active" href="/" title="简历展示页（当前页）">
+        <i class="fa fa-id-card-o"></i> 简历前台
+      </a>
       <a class="bar-btn" href="/admin/" title="进入后台管理系统编辑简历">
         <i class="fa fa-cog"></i> 后台管理
       </a>
+      <a class="bar-btn" href="/admin/jobs.html" title="查看与管理简历投递记录">
+        <i class="fa fa-table"></i> 投递记录
+      </a>
+      <span class="bar-divider"></span>
+      <button class="bar-btn" id="btn-print-resume" title="导出为单页高清 A4 PDF 简历">
+        <i class="fa fa-print"></i> 导出PDF
+      </button>
+      <button class="bar-btn" id="btn-toggle-layout" title="切换一栏 / 两栏布局">
+        <i class="fa fa-columns"></i> 切换版式
+      </button>
     `;
     document.body.appendChild(bar);
 

@@ -536,7 +536,7 @@ mark, .mark-txt, .hl-tag {
 }
 
 /* =======================================================
- * 6. 顶部悬浮快捷栏
+ * 6. 顶部悬浮导航栏（前台 / 后台 / 投递记录 互相跳转）
  * ======================================================= */
 .resume-quick-bar {
   position: fixed;
@@ -545,21 +545,39 @@ mark, .mark-txt, .hl-tag {
   z-index: 999;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
-  padding: 5px 12px;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 5px 10px;
   border-radius: 30px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
+  border: 1px solid rgba(0, 0, 0, 0.07);
   font-size: 12.5px;
+}
+
+.resume-quick-bar .bar-nav-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 600;
+  padding: 0 6px 0 4px;
+  letter-spacing: .5px;
+  user-select: none;
+}
+
+.resume-quick-bar .bar-divider {
+  width: 1px;
+  height: 16px;
+  background: #e2e8f0;
+  margin: 0 4px;
+  flex-shrink: 0;
 }
 
 .resume-quick-bar .bar-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 10px;
+  padding: 5px 11px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: 500;
@@ -567,10 +585,10 @@ mark, .mark-txt, .hl-tag {
   border: none;
   background: transparent;
   color: #374151;
-  transition: all 0.2s;
+  transition: all 0.18s;
   font-size: 12px;
   white-space: nowrap;
-}
+  font-family: inherit;
 }
 
 .resume-quick-bar .bar-btn:hover {
@@ -578,13 +596,39 @@ mark, .mark-txt, .hl-tag {
   color: var(--primary-color);
 }
 
-.resume-quick-bar .bar-btn.primary {
+/* 当前所在页高亮 */
+.resume-quick-bar .bar-btn.active {
   background: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.resume-quick-bar .bar-btn.active:hover {
+  background: var(--primary-hover);
   color: #ffffff;
 }
 
-.resume-quick-bar .bar-btn.primary:hover {
-  background: var(--primary-hover);
+/* 小屏适配：隐藏文字只留图标 */
+@media (max-width: 900px) {
+  .resume-quick-bar {
+    top: auto;
+    bottom: 16px;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 5px 8px;
+  }
+  .resume-quick-bar .bar-nav-label,
+  .resume-quick-bar .bar-divider {
+    display: none;
+  }
+  .resume-quick-bar .bar-btn {
+    padding: 6px 9px;
+    font-size: 0;
+    gap: 0;
+  }
+  .resume-quick-bar .bar-btn i {
+    font-size: 14px;
+  }
 }
 
 /* =======================================================

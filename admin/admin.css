@@ -1514,3 +1514,51 @@ input:checked + .toggle-slider:before {
   border: 1px solid #eeeee9;
   border-radius: 4px;
 }
+/* =======================================================
+ * 统一站点导航条（前台 / 后台 / 投递记录 三页互通）
+ * 由 index.html(前台JS) / admin/index.html / admin/jobs.html 共用
+ * ======================================================= */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 22px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--admin-border, #e5e7eb);
+  flex-shrink: 0;
+}
+
+.site-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.site-nav-btn:hover {
+  background: var(--admin-primary-light, #e8f8f5);
+  border-color: var(--admin-primary, #1abc9c);
+  color: var(--admin-primary, #16a085);
+  transform: translateY(-1px);
+}
+
+.site-nav-btn.active {
+  background: var(--admin-primary, #1abc9c);
+  border-color: var(--admin-primary, #1abc9c);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.site-nav-btn.active:hover {
+  background: var(--admin-primary-dark, #16a085);
+  color: #ffffff;
+}

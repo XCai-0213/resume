@@ -401,3 +401,56 @@ textarea.cell-input { min-height: 52px; }
   .search-wrap input { width: 160px; }
   .search-wrap input:focus { width: 180px; }
 }
+
+/* =======================================================
+ * 统一站点导航条（前台 / 后台 / 投递记录 三页互通）
+ * ======================================================= */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 26px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border, #ebeef5);
+  flex-shrink: 0;
+}
+
+.site-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-soft, #5c6b7a);
+  background: #fafbfc;
+  border: 1px solid var(--border, #ebeef5);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.site-nav-btn:hover {
+  background: var(--primary-light, #e8f4fc);
+  border-color: var(--primary, #0e83cd);
+  color: var(--primary, #0e83cd);
+  transform: translateY(-1px);
+}
+
+.site-nav-btn.active {
+  background: var(--primary, #0e83cd);
+  border-color: var(--primary, #0e83cd);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(14, 131, 205, 0.28);
+}
+
+.site-nav-btn.active:hover {
+  background: var(--primary-dark, #0a6aa8);
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .site-nav { padding: 8px 14px; }
+  .site-nav-btn { padding: 5px 11px; font-size: 12.5px; }
+}
