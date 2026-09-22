@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>个人简历后台管理系统</title>
@@ -503,7 +502,7 @@
                       <p>推荐开启！将基本信息与联系方式排布在头像右侧的空白区域，空间利用率极高，大幅减少空白浪费并助益单页A4打印</p>
                     </div>
                     <label class="toggle-switch">
-                      <input type="checkbox" id="field-header-side-by-side" checked>
+                      <input type="checkbox" id="field-header-side-by-side" checked="">
                       <span class="toggle-slider"></span>
                     </label>
                   </div>
@@ -562,7 +561,7 @@
                     <p>是否在简历中展示头像照片</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-avatar" checked>
+                    <input type="checkbox" id="field-show-avatar" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -572,7 +571,7 @@
                     <p>是否在简历底部或侧栏展示二维码</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-qrcode" checked>
+                    <input type="checkbox" id="field-show-qrcode" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -582,7 +581,7 @@
                     <p>是否展示技能进度条与技能列表</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-skills" checked>
+                    <input type="checkbox" id="field-show-skills" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -592,7 +591,7 @@
                     <p>是否展示教育背景</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-edu" checked>
+                    <input type="checkbox" id="field-show-edu" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -602,7 +601,7 @@
                     <p>是否展示过往工作经历</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-work" checked>
+                    <input type="checkbox" id="field-show-work" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -612,7 +611,7 @@
                     <p>是否展示个人/公司项目经验</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-projects" checked>
+                    <input type="checkbox" id="field-show-projects" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -622,7 +621,7 @@
                     <p>是否展示自我评价与职业期望</p>
                   </div>
                   <label class="toggle-switch">
-                    <input type="checkbox" id="field-show-eval" checked>
+                    <input type="checkbox" id="field-show-eval" checked="">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -740,7 +739,7 @@
                   <label style="font-size: 13.5px;">技能展示样式</label>
                   <div class="radio-group-horizontal">
                     <label>
-                      <input type="radio" name="skillDisplayMode" value="tags" id="skill-mode-tags" checked>
+                      <input type="radio" name="skillDisplayMode" value="tags" id="skill-mode-tags" checked="">
                       <b>现代标签徽章模式</b>（无进度条，清爽专业，推荐）
                     </label>
                     <label>
@@ -960,7 +959,7 @@
             <!-- 社交网络与联系方式配置 -->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-share-alt"></i> 社交网络与联系入口 (Social & Contact)</h3>
+                <h3><i class="fa fa-share-alt"></i> 社交网络与联系入口 (Social &amp; Contact)</h3>
                 <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-social"><i class="fa fa-plus"></i> 添加社交卡片</button>
               </div>
               <div class="card-body">
@@ -978,7 +977,7 @@
               <div class="card-body">
                 <div class="form-group">
                   <label>页脚文字</label>
-                  <input type="text" class="form-control" id="home-field-footer" placeholder="如：© 2026 张栋梁 · Personal Homepage & Resume System">
+                  <input type="text" class="form-control" id="home-field-footer" placeholder="如：© 2026 张栋梁 · Personal Homepage &amp; Resume System">
                 </div>
               </div>
             </div>
@@ -1104,9 +1103,20 @@
   <!-- Toast 提示容器 -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="libs/pdf.min.js" defer></script>
-  <script src="libs/mammoth.browser.min.js" defer></script>
+  <script src="libs/pdf.min.js" defer=""></script>
+  <script src="libs/mammoth.browser.min.js" defer=""></script>
   <script src="static-adapter.js"></script>
   <script src="admin.js"></script>
-</body>
-</html>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (typeof openIconPicker === 'function') {
+      openIconPicker((icon) => console.log('picked', icon), '');
+    }
+  }, 800);
+});
+</script>
+
+
+</body></html>

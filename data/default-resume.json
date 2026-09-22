@@ -23,26 +23,82 @@
     "signature": "追求代码艺术与用户体验的完美结合"
   },
   "profile": [
-    { "label": "个人信息", "value": "小刀 / 男 / 24岁" },
-    { "label": "英语水平", "value": "CET-6" },
-    { "label": "计算机水平", "value": "软考中级" },
-    { "label": "工作经验", "value": "3年" },
-    { "label": "求职状态", "value": "随时到岗" }
+    {
+      "label": "个人信息",
+      "value": "小刀 / 男 / 24岁"
+    },
+    {
+      "label": "英语水平",
+      "value": "CET-6"
+    },
+    {
+      "label": "计算机水平",
+      "value": "软考中级"
+    },
+    {
+      "label": "工作经验",
+      "value": "3年"
+    },
+    {
+      "label": "求职状态",
+      "value": "随时到岗"
+    }
   ],
   "contact": [
-    { "label": "手机", "value": "151-6868-5222", "link": "tel:15168685222", "icon": "fa-phone" },
-    { "label": "邮箱", "value": "x6dtousu@gmail.com", "link": "mailto:x6dtousu@gmail.com", "icon": "fa-envelope" },
-    { "label": "个人主页", "value": "www.x6d.com", "link": "http://www.x6d.com/", "icon": "fa-globe" },
-    { "label": "Github", "value": "github.com", "link": "https://github.com/", "icon": "fa-github" }
+    {
+      "label": "手机",
+      "value": "151-6868-5222",
+      "link": "tel:15168685222",
+      "icon": "fa-phone"
+    },
+    {
+      "label": "邮箱",
+      "value": "x6dtousu@gmail.com",
+      "link": "mailto:x6dtousu@gmail.com",
+      "icon": "fa-envelope"
+    },
+    {
+      "label": "个人主页",
+      "value": "www.x6d.com",
+      "link": "http://www.x6d.com/",
+      "icon": "fa-globe"
+    },
+    {
+      "label": "Github",
+      "value": "github.com",
+      "link": "https://github.com/",
+      "icon": "fa-github"
+    }
   ],
   "skills": [
-    { "name": "HTML5 / CSS3", "level": 90 },
-    { "name": "JavaScript (ES6+) / TypeScript", "level": 85 },
-    { "name": "React / React Router / Redux", "level": 85 },
-    { "name": "Vue.js (Vue3 / Pinia)", "level": 80 },
-    { "name": "Node.js / Express / RESTful API", "level": 75 },
-    { "name": "微信小程序 / 跨端开发", "level": 75 },
-    { "name": "前端工程化 (Vite / Webpack / CI-CD)", "level": 70 }
+    {
+      "name": "HTML5 / CSS3",
+      "level": 90
+    },
+    {
+      "name": "JavaScript (ES6+) / TypeScript",
+      "level": 85
+    },
+    {
+      "name": "React / React Router / Redux",
+      "level": 85
+    },
+    {
+      "name": "Vue.js (Vue3 / Pinia)",
+      "level": 80
+    },
+    {
+      "name": "Node.js / Express / RESTful API",
+      "level": 75
+    },
+    {
+      "name": "微信小程序 / 跨端开发",
+      "level": 75
+    },
+    {
+      "name": "前端工程化 (Vite / Webpack / CI-CD)",
+      "level": 70
+    }
   ],
   "qrcode": {
     "image": "assets/images/favicon.ico",

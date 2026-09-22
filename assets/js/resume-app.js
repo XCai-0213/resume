@@ -605,7 +605,13 @@
     document.body.appendChild(bar);
 
     document.getElementById('btn-print-resume').addEventListener('click', () => {
-      window.print();
+      document.body.classList.add('printing-single-page');
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+          document.body.classList.remove('printing-single-page');
+        }, 1000);
+      }, 50);
     });
 
     document.getElementById('btn-toggle-layout').addEventListener('click', () => {

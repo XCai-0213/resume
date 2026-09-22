@@ -96,31 +96,31 @@
       "name": "VASP",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/vasp.svg"
     },
     {
       "name": "CP2K",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/cp2k.svg"
     },
     {
       "name": "Python",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/python.svg"
     },
     {
       "name": "Shell",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/linux.svg"
     },
     {
       "name": "Linux",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/linux.svg"
     },
     {
       "name": "数据分析",
@@ -138,43 +138,43 @@
       "name": "Codex",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/codex.svg"
     },
     {
       "name": "Git/GitHub",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/github.svg"
     },
     {
       "name": "Docker",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/docker.svg"
     },
     {
       "name": "Excel",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/excel.svg"
     },
     {
       "name": "Origin",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/origin.svg"
     },
     {
       "name": "AutoCAD",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/autocad.svg"
     },
     {
       "name": "SolidWorks",
       "level": 80,
       "icon": "",
-      "logo": ""
+      "logo": "/assets/images/icons/solidworks.svg"
     }
   ],
   "qrcode": {

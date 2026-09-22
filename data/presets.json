@@ -69,12 +69,12 @@
         {
           "name": "VASP 计算",
           "level": 92,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/vasp.svg"
         },
         {
           "name": "CP2K 模拟",
           "level": 86,
-          "logo": ""
+          "logo": "/assets/images/icons/cp2k.svg"
         },
         {
           "name": "第一性原理 (DFT)",
@@ -94,7 +94,7 @@
         {
           "name": "Python 数据处理",
           "level": 88,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/python.svg"
         },
         {
           "name": "Shell 批处理",
@@ -104,22 +104,22 @@
         {
           "name": "Linux 集群环境",
           "level": 86,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+          "logo": "/assets/images/icons/linux.svg"
         },
         {
           "name": "OriginLab 绘图",
           "level": 90,
-          "logo": ""
+          "logo": "/assets/images/icons/origin.svg"
         },
         {
           "name": "AutoCAD",
           "level": 80,
-          "logo": ""
+          "logo": "/assets/images/icons/autocad.svg"
         },
         {
           "name": "SolidWorks",
           "level": 78,
-          "logo": ""
+          "logo": "/assets/images/icons/solidworks.svg"
         },
         {
           "name": "金相与压样表征",
@@ -301,12 +301,12 @@
         {
           "name": "AutoCAD 工程制图",
           "level": 88,
-          "logo": ""
+          "logo": "/assets/images/icons/autocad.svg"
         },
         {
           "name": "SolidWorks 结构建模",
           "level": 82,
-          "logo": ""
+          "logo": "/assets/images/icons/solidworks.svg"
         },
         {
           "name": "产线设备点检维护",
@@ -321,12 +321,12 @@
         {
           "name": "Python 数据分析",
           "level": 80,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/python.svg"
         },
         {
           "name": "Excel 高级透视分析",
           "level": 92,
-          "logo": ""
+          "logo": "/assets/images/icons/excel.svg"
         },
         {
           "name": "8D 质量分析法",
@@ -484,12 +484,12 @@
         {
           "name": "AutoCAD 二维制图",
           "level": 90,
-          "logo": ""
+          "logo": "/assets/images/icons/autocad.svg"
         },
         {
           "name": "SolidWorks 三维建模",
           "level": 88,
-          "logo": ""
+          "logo": "/assets/images/icons/solidworks.svg"
         },
         {
           "name": "机械设计与原理",
@@ -514,7 +514,7 @@
         {
           "name": "Linux 系统部署运维",
           "level": 88,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+          "logo": "/assets/images/icons/linux.svg"
         },
         {
           "name": "Shell 自动化运维",
@@ -534,7 +534,7 @@
         {
           "name": "Docker 容器化",
           "level": 78,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+          "logo": "/assets/images/icons/docker.svg"
         },
         {
           "name": "设备故障诊断排查",
@@ -696,7 +696,7 @@
         {
           "name": "Python 后端开发",
           "level": 88,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/python.svg"
         },
         {
           "name": "FastAPI 接口构建",
@@ -706,12 +706,12 @@
         {
           "name": "Vue.js 前端面板",
           "level": 82,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+          "logo": "/assets/images/icons/vuejs.svg"
         },
         {
           "name": "JavaScript / HTML5",
           "level": 85,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+          "logo": "/assets/images/icons/javascript.svg"
         },
         {
           "name": "提示词工程 (Prompting)",
@@ -721,17 +721,17 @@
         {
           "name": "Linux 集群与 Shell",
           "level": 86,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+          "logo": "/assets/images/icons/linux.svg"
         },
         {
           "name": "Docker 容器化",
           "level": 80,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+          "logo": "/assets/images/icons/docker.svg"
         },
         {
           "name": "Git / GitHub 协作",
           "level": 88,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+          "logo": "/assets/images/icons/git.svg"
         },
         {
           "name": "科学计算领域融合",
@@ -889,7 +889,7 @@
         {
           "name": "Excel 高级透视与建模",
           "level": 90,
-          "logo": ""
+          "logo": "/assets/images/icons/excel.svg"
         },
         {
           "name": "物料计划与库存控制",
@@ -919,7 +919,7 @@
         {
           "name": "Python 数据清洗整理",
           "level": 82,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/python.svg"
         },
         {
           "name": "工科技术背景沟通",
@@ -1116,22 +1116,22 @@
         {
           "name": "AutoCAD 工程图样",
           "level": 86,
-          "logo": ""
+          "logo": "/assets/images/icons/autocad.svg"
         },
         {
           "name": "SolidWorks 机械建模",
           "level": 82,
-          "logo": ""
+          "logo": "/assets/images/icons/solidworks.svg"
         },
         {
           "name": "Python 数据分析挖掘",
           "level": 85,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+          "logo": "/assets/images/icons/python.svg"
         },
         {
           "name": "Linux 集群与批处理",
           "level": 86,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+          "logo": "/assets/images/icons/linux.svg"
         },
         {
           "name": "8D 质量改善报告编写",

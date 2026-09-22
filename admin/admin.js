@@ -67,97 +67,74 @@ const ICON_LIBRARY = [
 // 品牌官方 Logo 库（统一单色标志，前台自动染成简历主题色）
 // 数据源均经逐一联网验证可用；simple-icons = 单色轮廓（可随主题染色），dashboard-icons = 品牌缺失时的补充
 const SI_CDN = 'https://cdn.jsdelivr.net/npm/simple-icons@16/icons/';
-const SI11_CDN = 'https://cdn.jsdelivr.net/npm/simple-icons@11/icons/';
-const DASH_CDN = 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/';
-const DEVICON_CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/';
+const ICON_BASE = '/assets/images/icons/';
 
 const BRAND_LOGOS = [
-  // AI 工具（重点补齐 DeepSeek / Claude / Codex 等）
-  { name: 'DeepSeek', url: SI_CDN + 'deepseek.svg', tag: 'deepseek ai 大模型' },
-  { name: 'Claude', url: SI_CDN + 'claude.svg', tag: 'claude anthropic ai 大模型' },
-  { name: 'Anthropic', url: SI_CDN + 'anthropic.svg', tag: 'anthropic ai' },
-  { name: 'OpenAI / ChatGPT', url: SI11_CDN + 'openai.svg', tag: 'openai chatgpt gpt ai' },
-  { name: 'Codex', url: DASH_CDN + 'codex.svg', tag: 'codex openai ai 编程' },
-  { name: 'GitHub Copilot', url: SI_CDN + 'githubcopilot.svg', tag: 'copilot ai 编程' },
-  { name: 'Cursor', url: SI_CDN + 'cursor.svg', tag: 'cursor ai 编辑器' },
-  { name: 'Perplexity', url: SI_CDN + 'perplexity.svg', tag: 'perplexity ai 搜索' },
-  { name: 'Qwen 通义千问', url: SI_CDN + 'qwen.svg', tag: 'qwen 通义千问 阿里 ai' },
-  { name: 'Kimi', url: SI_CDN + 'kimi.svg', tag: 'kimi 月之暗面 ai' },
-  { name: 'Hugging Face', url: SI_CDN + 'huggingface.svg', tag: 'huggingface 模型库 ai' },
-  { name: 'Mistral AI', url: SI_CDN + 'mistralai.svg', tag: 'mistral ai 大模型' },
-  // 前端与编程语言
-  { name: 'JavaScript', url: DEVICON_CDN + 'javascript/javascript-plain.svg', tag: 'js javascript 脚本' },
-  { name: 'TypeScript', url: DEVICON_CDN + 'typescript/typescript-plain.svg', tag: 'ts typescript' },
-  { name: 'Vue.js', url: DEVICON_CDN + 'vuejs/vuejs-plain.svg', tag: 'vue vuejs 前端框架' },
-  { name: 'React', url: SI_CDN + 'react.svg', tag: 'react 前端框架' },
-  { name: 'HTML5', url: SI_CDN + 'html5.svg', tag: 'html 网页' },
-  { name: 'CSS', url: SI_CDN + 'css.svg', tag: 'css 样式' },
-  { name: 'Sass', url: SI_CDN + 'sass.svg', tag: 'scss 样式' },
-  { name: 'Tailwind CSS', url: SI_CDN + 'tailwindcss.svg', tag: 'tailwind 样式' },
-  { name: 'Angular', url: SI_CDN + 'angular.svg', tag: 'angular 前端框架' },
-  { name: 'Svelte', url: SI_CDN + 'svelte.svg', tag: 'svelte 前端框架' },
-  { name: 'jQuery', url: SI_CDN + 'jquery.svg', tag: 'jquery' },
-  { name: 'Bootstrap', url: SI_CDN + 'bootstrap.svg', tag: 'bootstrap 样式' },
-  { name: 'Vite', url: SI_CDN + 'vite.svg', tag: 'vite 构建工具' },
-  { name: 'Webpack', url: SI_CDN + 'webpack.svg', tag: 'webpack 构建工具' },
-  // 后端 / 服务端
-  { name: 'Node.js', url: SI_CDN + 'nodedotjs.svg', tag: 'node nodejs 服务端' },
-  { name: 'Python', url: SI_CDN + 'python.svg', tag: 'python 脚本 爬虫' },
-  { name: 'Java', url: SI_CDN + 'openjdk.svg', tag: 'java jdk 后端' },
-  { name: 'C 语言', url: SI_CDN + 'c.svg', tag: 'c语言' },
-  { name: 'C++', url: SI_CDN + 'cplusplus.svg', tag: 'cpp c++' },
-  { name: 'C#/.NET', url: DEVICON_CDN + 'csharp/csharp-plain.svg', tag: 'csharp dotnet' },
-  { name: 'Go', url: SI_CDN + 'go.svg', tag: 'golang 后端' },
-  { name: 'PHP', url: SI_CDN + 'php.svg', tag: 'php 后端' },
-  { name: 'Rust', url: SI_CDN + 'rust.svg', tag: 'rust 系统编程' },
-  { name: 'Swift', url: SI_CDN + 'swift.svg', tag: 'swift ios' },
-  { name: 'Kotlin', url: SI_CDN + 'kotlin.svg', tag: 'kotlin android' },
-  { name: 'Dart', url: SI_CDN + 'dart.svg', tag: 'dart flutter' },
-  { name: 'Flutter', url: SI_CDN + 'flutter.svg', tag: 'flutter 跨端' },
-  // 数据库 / 运维 / 工具
-  { name: 'MySQL', url: SI_CDN + 'mysql.svg', tag: 'mysql 数据库' },
-  { name: 'PostgreSQL', url: SI_CDN + 'postgresql.svg', tag: 'postgres 数据库' },
-  { name: 'MongoDB', url: SI_CDN + 'mongodb.svg', tag: 'mongo 数据库' },
-  { name: 'Redis', url: SI_CDN + 'redis.svg', tag: 'redis 缓存' },
-  { name: 'SQLite', url: SI_CDN + 'sqlite.svg', tag: 'sqlite 数据库' },
-  { name: 'Docker', url: SI_CDN + 'docker.svg', tag: 'docker 容器' },
-  { name: 'Kubernetes', url: SI_CDN + 'kubernetes.svg', tag: 'k8s 容器编排' },
-  { name: 'Nginx', url: SI_CDN + 'nginx.svg', tag: 'nginx 服务器' },
-  { name: 'Linux', url: SI_CDN + 'linux.svg', tag: 'linux 系统' },
-  { name: 'Ubuntu', url: SI_CDN + 'ubuntu.svg', tag: 'ubuntu 系统' },
-  { name: 'Git', url: SI_CDN + 'git.svg', tag: 'git 版本控制' },
-  { name: 'GitHub', url: SI_CDN + 'github.svg', tag: 'github 代码托管' },
-  { name: 'GitLab', url: SI_CDN + 'gitlab.svg', tag: 'gitlab 代码托管' },
-  { name: 'VS Code', url: DEVICON_CDN + 'vscode/vscode-plain.svg', tag: 'vscode 编辑器 ide' },
-  // 数据科学
-  { name: 'PyTorch', url: SI_CDN + 'pytorch.svg', tag: 'pytorch 深度学习 ai' },
-  { name: 'TensorFlow', url: SI_CDN + 'tensorflow.svg', tag: 'tf 深度学习 ai' },
-  { name: 'OpenCV', url: SI_CDN + 'opencv.svg', tag: 'opencv 视觉 ai' },
-  { name: 'Jupyter', url: SI_CDN + 'jupyter.svg', tag: 'jupyter notebook' },
-  { name: 'NumPy', url: SI_CDN + 'numpy.svg', tag: 'numpy 数值计算' },
-  { name: 'Pandas', url: SI_CDN + 'pandas.svg', tag: 'pandas 数据分析' },
-  { name: 'Anaconda', url: SI_CDN + 'anaconda.svg', tag: 'conda 环境' },
-  { name: 'MATLAB', url: DEVICON_CDN + 'matlab/matlab-plain.svg', tag: 'matlab 仿真 数学' },
-  // 工程 / 设计 / 嵌入式
-  { name: 'AutoCAD', url: SI_CDN + 'autocad.svg', tag: 'autocad cad 制图' },
-  { name: 'ANSYS', url: SI_CDN + 'ansys.svg', tag: 'ansys 有限元 仿真' },
-  { name: 'SolidWorks', url: DASH_CDN + 'solidworks.svg', tag: 'solidworks 三维 建模' },
-  { name: 'KiCad', url: SI_CDN + 'kicad.svg', tag: 'kicad pcb 电路' },
-  { name: 'FreeCAD', url: SI_CDN + 'freecad.svg', tag: 'freecad 三维建模' },
-  { name: 'Arduino', url: SI_CDN + 'arduino.svg', tag: 'arduino 单片机 嵌入式' },
-  { name: '树莓派', url: SI_CDN + 'raspberrypi.svg', tag: 'raspberrypi 嵌入式' },
-  { name: 'Blender', url: SI_CDN + 'blender.svg', tag: 'blender 3d 建模' },
-  { name: 'Unity', url: SI_CDN + 'unity.svg', tag: 'unity 游戏引擎' },
-  { name: 'Figma', url: SI_CDN + 'figma.svg', tag: 'figma 设计 ui' },
-  // Office 办公全家桶
-  { name: 'Microsoft Office', url: DASH_CDN + 'microsoft-office.svg', tag: 'office 微软 办公' },
-  { name: 'Excel', url: DASH_CDN + 'microsoft-excel.svg', tag: 'excel 表格 office' },
-  { name: 'Word', url: DASH_CDN + 'microsoft-word.svg', tag: 'word 文档 office' },
-  { name: 'PowerPoint', url: DASH_CDN + 'microsoft-powerpoint.svg', tag: 'ppt 演示 office' },
-  { name: 'Outlook', url: DASH_CDN + 'microsoft-outlook.svg', tag: 'outlook 邮箱 office' },
-  { name: 'Teams', url: DASH_CDN + 'microsoft-teams.svg', tag: 'teams 会议 office' },
-  { name: 'OneDrive', url: DASH_CDN + 'microsoft-onedrive.svg', tag: 'onedrive 网盘 office' },
-  { name: 'SharePoint', url: DASH_CDN + 'microsoft-sharepoint.svg', tag: 'sharepoint 协作 office' }
+  // 1. 材料仿真与科研计算（重点新增置顶！）
+  { name: 'VASP', url: ICON_BASE + 'vasp.svg', tag: 'vasp 第一性原理 dft 材料计算 维也纳 仿真' },
+  { name: 'CP2K', url: ICON_BASE + 'cp2k.svg', tag: 'cp2k 分子动力学 量子化学 催化模拟 仿真' },
+  { name: 'LAMMPS', url: ICON_BASE + 'lammps.svg', tag: 'lammps 分子动力学 大规模并行 md 模拟' },
+  { name: 'OriginLab', url: ICON_BASE + 'origin.svg', tag: 'origin originlab 科学绘图 数据拟合 谱图' },
+  { name: 'MATLAB', url: ICON_BASE + 'matlab.svg', tag: 'matlab 数学建模 仿真 矩阵 计算' },
+  { name: 'AutoCAD', url: ICON_BASE + 'autocad.svg', tag: 'autocad cad 工程制图 机械设计' },
+  { name: 'SolidWorks', url: ICON_BASE + 'solidworks.svg', tag: 'solidworks 三维建模 机械结构 机构' },
+  { name: 'ANSYS', url: ICON_BASE + 'ansys.svg', tag: 'ansys 有限元 仿真 结构受力' },
+
+  // 2. AI 大模型与智能体开发（全部官方彩色）
+  { name: 'DeepSeek', url: ICON_BASE + 'deepseek.svg', tag: 'deepseek 深度求索 ai 大模型' },
+  { name: 'Claude', url: ICON_BASE + 'claude.svg', tag: 'claude anthropic ai 大模型' },
+  { name: 'Anthropic', url: ICON_BASE + 'anthropic.svg', tag: 'anthropic ai' },
+  { name: 'OpenAI / ChatGPT', url: ICON_BASE + 'openai.svg', tag: 'openai chatgpt gpt-4 ai' },
+  { name: 'Codex', url: ICON_BASE + 'codex.svg', tag: 'codex openai ai 编程' },
+  { name: 'GitHub Copilot', url: ICON_BASE + 'githubcopilot.svg', tag: 'copilot ai 编程' },
+  { name: 'Cursor', url: ICON_BASE + 'cursor.svg', tag: 'cursor ai 编辑器 ide' },
+  { name: 'Perplexity', url: ICON_BASE + 'perplexity.svg', tag: 'perplexity ai 搜索' },
+  { name: 'Qwen 通义千问', url: ICON_BASE + 'qwen.svg', tag: 'qwen 通义千问 阿里 ai' },
+  { name: 'Kimi', url: ICON_BASE + 'kimi.svg', tag: 'kimi 月之暗面 ai' },
+  { name: 'Hugging Face', url: ICON_BASE + 'huggingface.svg', tag: 'huggingface 开源模型 ai' },
+  { name: 'Mistral AI', url: ICON_BASE + 'mistralai.svg', tag: 'mistral ai' },
+
+  // 3. 编程语言与数据科学
+  { name: 'Python', url: ICON_BASE + 'python.svg', tag: 'python 科学计算 爬虫 数据分析 脚本' },
+  { name: 'JavaScript', url: ICON_BASE + 'javascript.svg', tag: 'js javascript 脚本 前端' },
+  { name: 'TypeScript', url: ICON_BASE + 'typescript.svg', tag: 'ts typescript 前端' },
+  { name: 'Vue.js', url: ICON_BASE + 'vuejs.svg', tag: 'vue vuejs 前端框架' },
+  { name: 'React', url: ICON_BASE + 'react.svg', tag: 'react 前端框架' },
+  { name: 'Node.js', url: ICON_BASE + 'nodejs.svg', tag: 'node nodejs 服务端 后端' },
+  { name: 'C 语言', url: ICON_BASE + 'c.svg', tag: 'c 语言 嵌入式' },
+  { name: 'C++', url: ICON_BASE + 'cplusplus.svg', tag: 'cpp c++ 算法' },
+  { name: 'C#/.NET', url: ICON_BASE + 'csharp.svg', tag: 'csharp dotnet c#' },
+  { name: 'Java', url: ICON_BASE + 'java.svg', tag: 'java jdk 后端' },
+  { name: 'Go', url: ICON_BASE + 'go.svg', tag: 'go golang 后端' },
+  { name: 'Rust', url: ICON_BASE + 'rust.svg', tag: 'rust 系统编程' },
+  { name: 'PHP', url: ICON_BASE + 'php.svg', tag: 'php 后端' },
+  { name: 'Swift', url: ICON_BASE + 'swift.svg', tag: 'swift ios' },
+  { name: 'HTML5', url: ICON_BASE + 'html5.svg', tag: 'html 网页' },
+  { name: 'CSS3', url: ICON_BASE + 'css3.svg', tag: 'css 样式' },
+  { name: 'Sass', url: ICON_BASE + 'sass.svg', tag: 'sass scss 样式' },
+  { name: 'Tailwind CSS', url: ICON_BASE + 'tailwindcss.svg', tag: 'tailwind 样式' },
+  { name: 'Vite', url: ICON_BASE + 'vite.svg', tag: 'vite 构建工具' },
+  { name: 'Webpack', url: ICON_BASE + 'webpack.svg', tag: 'webpack 构建工具' },
+  { name: 'PyTorch', url: ICON_BASE + 'pytorch.svg', tag: 'pytorch 深度学习 ai 神经网络' },
+  { name: 'TensorFlow', url: ICON_BASE + 'tensorflow.svg', tag: 'tf 深度学习 ai' },
+  { name: 'NumPy', url: ICON_BASE + 'numpy.svg', tag: 'numpy 数值计算 矩阵' },
+  { name: 'Pandas', url: ICON_BASE + 'pandas.svg', tag: 'pandas 数据分析 数据清洗' },
+  { name: 'Jupyter', url: ICON_BASE + 'jupyter.svg', tag: 'jupyter notebook 数据科学' },
+  { name: 'Linux', url: ICON_BASE + 'linux.svg', tag: 'linux 系统 集群 运维' },
+  { name: 'Ubuntu', url: ICON_BASE + 'ubuntu.svg', tag: 'ubuntu 系统 linux' },
+  { name: 'Docker', url: ICON_BASE + 'docker.svg', tag: 'docker 容器 镜像' },
+  { name: 'Kubernetes', url: ICON_BASE + 'kubernetes.svg', tag: 'k8s 容器编排 集群' },
+  { name: 'Git', url: ICON_BASE + 'git.svg', tag: 'git 版本控制' },
+  { name: 'GitHub', url: ICON_BASE + 'github.svg', tag: 'github 开源托管' },
+  { name: 'GitLab', url: ICON_BASE + 'gitlab.svg', tag: 'gitlab 代码托管' },
+  { name: 'VS Code', url: ICON_BASE + 'vscode.svg', tag: 'vscode 编辑器 ide' },
+  { name: 'MySQL', url: ICON_BASE + 'mysql.svg', tag: 'mysql 关系型数据库' },
+  { name: 'PostgreSQL', url: ICON_BASE + 'postgresql.svg', tag: 'postgres pg 数据库' },
+  { name: 'MongoDB', url: ICON_BASE + 'mongodb.svg', tag: 'mongo 文档数据库' },
+  { name: 'Redis', url: ICON_BASE + 'redis.svg', tag: 'redis 缓存 nosql' },
+  { name: 'Excel', url: ICON_BASE + 'excel.svg', tag: 'excel 表格 office 数据透视 台账' },
+  { name: 'Word', url: ICON_BASE + 'word.svg', tag: 'word 文档 office 报告' },
+  { name: 'PowerPoint', url: ICON_BASE + 'powerpoint.svg', tag: 'ppt 演示 office 汇报' }
 ];
 
 // 生成品牌 Logo 地址（统一单色 SVG，前台自动染主题色）
@@ -169,7 +146,7 @@ function brandLogoUrl(item) {
 function looksLikeLogoUrl(val) {
   if (!val) return false;
   const v = String(val).trim();
-  return /^(https?:)?\/\//i.test(v) || v.startsWith('/uploads/') || v.startsWith('data:') || /\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$/i.test(v);
+  return /^(https?:)?\/\//i.test(v) || v.startsWith('/uploads/') || v.startsWith('/assets/') || v.startsWith('assets/') || v.startsWith('data:') || /\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$/i.test(v);
 }
 
 // 工具函数：弹出提示
@@ -324,9 +301,8 @@ function initIconPicker() {
     if (activeCat === '品牌Logo') {
       const filtered = BRAND_LOGOS.filter(item => {
         return !keyword ||
-          item.name.toLowerCase().includes(keyword) ||
-          item.tag.toLowerCase().includes(keyword) ||
-          item.slug.toLowerCase().includes(keyword);
+          (item.name && item.name.toLowerCase().includes(keyword)) ||
+          (item.tag && item.tag.toLowerCase().includes(keyword));
       });
 
       if (filtered.length === 0) {
@@ -510,7 +486,7 @@ function initIconPicker() {
   window.openIconPickerModal = function (callback, currentIcon) {
     currentIconSelectCallback = callback;
     searchInput.value = '';
-    activeCat = 'all';
+    activeCat = '品牌Logo';
     categoriesBar.querySelectorAll('.cat-pill').forEach((p, idx) => p.classList.toggle('active', idx === 0));
     renderIcons();
     modal.classList.add('open');

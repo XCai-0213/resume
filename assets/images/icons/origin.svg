@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="orgRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="orgCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+  <!-- 洁白卡片底板带微边框 -->
+  <rect width="128" height="128" rx="26" fill="url(#orgCard)" stroke="#cbd5e1" stroke-width="2"/>
+  <!-- 科学坐标系网格与刻度 -->
+  <line x1="26" y1="24" x2="26" y2="98" stroke="#475569" stroke-width="3"/>
+  <line x1="26" y1="98" x2="104" y2="98" stroke="#475569" stroke-width="3"/>
+  <line x1="21" y1="42" x2="26" y2="42" stroke="#475569" stroke-width="2.5"/>
+  <line x1="21" y1="62" x2="26" y2="62" stroke="#475569" stroke-width="2.5"/>
+  <line x1="21" y1="82" x2="26" y2="82" stroke="#475569" stroke-width="2.5"/>
+  <line x1="48" y1="98" x2="48" y2="103" stroke="#475569" stroke-width="2.5"/>
+  <line x1="72" y1="98" x2="72" y2="103" stroke="#475569" stroke-width="2.5"/>
+  <line x1="96" y1="98" x2="96" y2="103" stroke="#475569" stroke-width="2.5"/>
+  <!-- 科学拟合双峰曲线 (XRD / Raman 实验谱图) -->
+  <path d="M26 94 Q 40 94 48 46 Q 56 90 68 94 Q 76 94 84 32 Q 92 90 104 94" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- 散点特征拟合球 -->
+  <circle cx="48" cy="46" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="84" cy="32" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- 右上角 Origin 经典橙红 O 标牌 -->
+  <rect x="74" y="14" width="38" height="34" rx="8" fill="url(#orgRed)" stroke="#ffffff" stroke-width="2"/>
+  <text x="93" y="39" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-weight="900" font-size="24" fill="#ffffff" text-anchor="middle">O</text>
+  <!-- 底部科学软件文字 -->
+  <text x="64" y="118" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-weight="900" font-size="12" fill="#0f172a" text-anchor="middle" letter-spacing="1">OriginLab</text>
+</svg>
