@@ -11,6 +11,7 @@ const UPLOADS_DIR = path.join(ROOT_DIR, 'uploads');
 const JOBS_FILE = path.join(ROOT_DIR, 'data', 'applications.json');
 const HOMEPAGE_FILE = path.join(ROOT_DIR, 'data', 'homepage.json');
 const DEFAULT_HOMEPAGE_FILE = path.join(ROOT_DIR, 'data', 'default-homepage.json');
+const PRESETS_FILE = path.join(ROOT_DIR, 'data', 'presets.json');
 
 // 默认投递记录表头字段（对标 givemeoc 校招投递管理表）
 const DEFAULT_JOB_COLUMNS = [
@@ -132,6 +133,19 @@ function saveHomepageData(data) {
   const tempPath = HOMEPAGE_FILE + '.tmp';
   fs.writeFileSync(tempPath, JSON.stringify(data, null, 2), 'utf-8');
   fs.renameSync(tempPath, HOMEPAGE_FILE);
+}
+
+// ============ 预设职业简历套件存取 ============
+function getPresetsData() {
+  try {
+    if (fs.existsSync(PRESETS_FILE)) {
+      const raw = fs.readFileSync(PRESETS_FILE, 'utf-8');
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('读取 presets.json 失败:', err.message);
+  }
+  return [];
 }
 
 // 注意：此处刻意不实现“爬取 givemeoc 等第三方站点”的功能。
@@ -304,6 +318,19 @@ const server = http.createServer(async (req, res) => {
       saveHomepageData(body);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ success: true, message: '个人主页配置保存成功！', updatedAt: new Date().toISOString() }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: err.message }));
+    }
+    return;
+  }
+
+  // ============ 预设职业简历库 API ============
+  if (pathname === '/api/presets' && req.method === 'GET') {
+    try {
+      const data = getPresetsData();
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: true, data, count: data.length }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ success: false, error: err.message }));

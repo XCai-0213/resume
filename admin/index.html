@@ -80,6 +80,9 @@
           <h1 id="current-tab-title">布局与外观设置</h1>
         </div>
         <div class="topbar-actions">
+          <button class="btn btn-primary" id="btn-quick-presets" title="一键套用内置的 6 套定制职业简历数据" style="background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%); border: none;">
+            <i class="fa fa-briefcase"></i> <b>职业简历库 (6套)</b>
+          </button>
           <button class="btn btn-secondary" id="btn-import-resume" title="上传已有简历文件（PDF/Word/Markdown/HTML/文本），自动识别并填入内容">
             <i class="fa fa-file-text"></i> <b>导入已有简历</b>
           </button>
@@ -111,6 +114,31 @@
 
           <!-- 1. 布局与外观设置 -->
           <div class="tab-panel active" id="layout-tab">
+
+            <!-- 🎯 内置六大职业定制简历专区 -->
+            <div class="card preset-resumes-card" id="preset-resumes-anchor">
+              <div class="card-header" style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border-bottom: 1px solid #bfdbfe;">
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 8px;">
+                  <div>
+                    <h3 style="color: #1e3a8a; font-size: 16px; font-weight: 700;">
+                      <i class="fa fa-briefcase text-primary"></i> 🎯 内置六大职业定制简历套件（一键载入履历内容）
+                    </h3>
+                    <span class="header-desc" style="color: #3b82f6;">
+                      已基于您的工科与材料背景内置 6 套精准求职履历，点击任一职业即可将其基本信息、技能、科研/项目与评价一键填入后台；模板与主题色可在下方自由挑选搭配！
+                    </span>
+                  </div>
+                  <span class="badge-pill" style="background: #2563eb; color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                    内置 6 套完整方案
+                  </span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="preset-cards-grid" id="preset-cards-grid">
+                  <!-- JS 动态渲染 6 套预设卡片 -->
+                </div>
+              </div>
+            </div>
+
             <div class="card">
               <div class="card-header">
                 <h3><i class="fa fa-paint-brush"></i> 30 套单栏结构型排版模板库</h3>
@@ -1044,6 +1072,30 @@
               <i class="fa fa-magic"></i> 应用到简历
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 预设职业简历详情预览与套用模态窗 -->
+  <div class="icon-modal-backdrop" id="preset-modal">
+    <div class="icon-modal" style="max-width: 820px;">
+      <div class="icon-modal-header" style="background: #f8fafc;">
+        <h3 id="preset-modal-title"><i class="fa fa-briefcase text-primary"></i> 职业简历方案详情</h3>
+        <button type="button" class="icon-btn" id="btn-close-preset-modal"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="preset-modal-body" id="preset-modal-body" style="padding: 22px 24px; max-height: 70vh; overflow-y: auto;">
+        <!-- JS 动态渲染预览内容 -->
+      </div>
+      <div class="icon-modal-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; background: #fafafa;">
+        <span style="font-size: 12.5px; color: #64748b;">
+          <i class="fa fa-info-circle"></i> 套用后保留您当前选取的单栏模板与主题色，可随时在后台调整修改
+        </span>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-preset">取消</button>
+          <button type="button" class="btn btn-primary" id="btn-confirm-apply-preset">
+            <i class="fa fa-check"></i> <b>立即载入到简历表单</b>
+          </button>
         </div>
       </div>
     </div>

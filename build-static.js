@@ -157,13 +157,25 @@ function main() {
   fs.writeFileSync(path.join(DIST, 'data', 'homepage.json'), JSON.stringify(homeData, null, 2), 'utf-8');
   log('已生成 dist/homepage.json（个人主页静态数据源）', 'ok');
 
-  // 6. 为 admin 目录也放一份数据副本（相对路径访问）
+  // 6. 生成静态数据文件 presets.json（6套预设职业简历）
+  const presetsSrc = path.join(ROOT, 'data', 'presets.json');
+  let presetsData = [];
+  if (fs.existsSync(presetsSrc)) {
+    presetsData = JSON.parse(fs.readFileSync(presetsSrc, 'utf-8'));
+    log('已读取预设职业简历数据 data/presets.json（' + presetsData.length + ' 套）', 'ok');
+  }
+  fs.writeFileSync(path.join(DIST, 'presets.json'), JSON.stringify(presetsData, null, 2), 'utf-8');
+  fs.writeFileSync(path.join(DIST, 'data', 'presets.json'), JSON.stringify(presetsData, null, 2), 'utf-8');
+  log('已生成 dist/presets.json（6套预设职业简历静态数据源）', 'ok');
+
+  // 7. 为 admin 目录也放一份数据副本（相对路径访问）
   fs.writeFileSync(path.join(DIST, 'admin', 'data.json'), JSON.stringify(resumeData, null, 2), 'utf-8');
   fs.writeFileSync(path.join(DIST, 'admin', 'jobs.json'), JSON.stringify(jobsData, null, 2), 'utf-8');
   fs.writeFileSync(path.join(DIST, 'admin', 'homepage.json'), JSON.stringify(homeData, null, 2), 'utf-8');
+  fs.writeFileSync(path.join(DIST, 'admin', 'presets.json'), JSON.stringify(presetsData, null, 2), 'utf-8');
   log('已为 admin/ 生成数据副本', 'ok');
 
-  // 7. 生成部署说明文件
+  // 8. 生成部署说明文件
   const readme = generateDeployReadme();
   fs.writeFileSync(path.join(DIST, '_部署说明.md'), readme, 'utf-8');
   log('已生成 _部署说明.md', 'ok');

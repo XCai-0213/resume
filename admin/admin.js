@@ -535,6 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initIconPicker();
   initImportResume();
   initHomepageEvents();
+  initPresetResumes();
   fetchResumeData();
   fetchHomepageData();
 });
@@ -2408,6 +2409,255 @@ function initHomepageEvents() {
         }
       };
       reader.readAsDataURL(file);
+    });
+  }
+}
+/* =======================================================
+ * 六大定制职业简历套件 (Preset Resumes) 控制器
+ * ======================================================= */
+let availablePresets = [];
+let activePresetId = null;
+let currentPreviewingPreset = null;
+
+async function initPresetResumes() {
+  const grid = document.getElementById('preset-cards-grid');
+  if (!grid) return;
+
+  try {
+    const res = await STATIC_API.loadPresets();
+    if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
+      availablePresets = res.data;
+    }
+  } catch (e) {
+    console.warn('获取预设简历数据失败:', e);
+  }
+
+  // 兜底：若未能获取，尝试直接读取 presets.json
+  if (availablePresets.length === 0) {
+    try {
+      const res2 = await fetch('../data/presets.json');
+      if (res2.ok) availablePresets = await res2.json();
+    } catch (e) {}
+  }
+
+  renderPresetCards(availablePresets);
+  bindPresetModalEvents();
+
+  // 顶部快捷按钮联动
+  const quickBtn = document.getElementById('btn-quick-presets');
+  if (quickBtn) {
+    quickBtn.addEventListener('click', () => {
+      // 切换到布局与外观选项卡
+      const layoutTabMenu = document.querySelector('.sidebar-menu li[data-tab="layout-tab"]');
+      if (layoutTabMenu) layoutTabMenu.click();
+      // 平滑滚动至锚点
+      const anchor = document.getElementById('preset-resumes-anchor');
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        anchor.style.transition = 'box-shadow 0.4s';
+        anchor.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.4)';
+        setTimeout(() => { anchor.style.boxShadow = ''; }, 1200);
+      }
+    });
+  }
+}
+
+function renderPresetCards(list) {
+  const grid = document.getElementById('preset-cards-grid');
+  if (!grid) return;
+
+  grid.innerHTML = list.map(p => {
+    const isActive = activePresetId === p.id;
+    const activeTag = isActive ? '<span class="preset-active-tag">当前使用中 ✓</span>' : '';
+    const activeCls = isActive ? 'current-active' : '';
+
+    return `
+      <div class="preset-item-card ${activeCls}" data-id="${escapeHtml(p.id)}">
+        ${activeTag}
+        <div class="preset-card-top">
+          <div class="preset-icon-box" style="background: ${p.color || '#2563eb'};">
+            <i class="fa ${p.icon || 'fa-briefcase'}"></i>
+          </div>
+          <div class="preset-meta">
+            <div class="preset-title">
+              <span>${escapeHtml(p.name)}</span>
+            </div>
+            <span class="preset-badge">${escapeHtml(p.badge || '')}</span>
+          </div>
+        </div>
+        <p class="preset-desc">${escapeHtml(p.description || '')}</p>
+        <div class="preset-card-actions">
+          <button type="button" class="btn-view-preset" data-action="view" data-id="${escapeHtml(p.id)}" title="查看这套简历包含的完整经历与技能">
+            <i class="fa fa-eye"></i> 查看详情
+          </button>
+          <button type="button" class="btn-apply-preset" data-action="apply" data-id="${escapeHtml(p.id)}" title="一键填入本岗位定制履历">
+            <i class="fa fa-magic"></i> <b>一键载入履历</b>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // 绑定卡片内按钮事件
+  grid.querySelectorAll('[data-action="apply"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.getAttribute('data-id');
+      applyPresetResume(id);
+    });
+  });
+
+  grid.querySelectorAll('[data-action="view"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.getAttribute('data-id');
+      openPresetPreviewModal(id);
+    });
+  });
+}
+
+// 一键套用某套预设简历（同时保留用户选好的单栏模板和主题颜色）
+function applyPresetResume(presetId) {
+  const target = availablePresets.find(p => p.id === presetId);
+  if (!target || !target.data) {
+    showToast('未找到该预设简历方案', 'error');
+    return;
+  }
+
+  // 收集当前用户挑选的外观设置（模板、颜色、单栏/两栏等），予以保留
+  const currentSettings = (typeof collectCurrentForm === 'function')
+    ? collectCurrentForm().settings
+    : (currentData && currentData.settings ? currentData.settings : {});
+
+  // 深度克隆预设数据并将外观设置合并进去
+  const mergedData = JSON.parse(JSON.stringify(target.data));
+  mergedData.settings = Object.assign({}, mergedData.settings || {}, currentSettings || {});
+
+  // 填充表单
+  populateForm(mergedData);
+  activePresetId = presetId;
+
+  // 刷新卡片高亮状态
+  renderPresetCards(availablePresets);
+
+  // 提示反馈
+  showToast(`🎉 已成功载入【${target.name}】全套定制履历！模板与颜色保持当前选择，您可继续微调后点右上角“保存所有内容”。`);
+
+  // 若实时预览窗口已开启，即刻同步刷新
+  const previewDrawer = document.getElementById('preview-drawer');
+  if (previewDrawer && previewDrawer.classList.contains('open')) {
+    const frame = document.getElementById('preview-frame');
+    if (frame) frame.src = (typeof STATIC_API !== 'undefined' && STATIC_API.previewUrl)
+      ? STATIC_API.previewUrl()
+      : ('/?preview=' + Date.now());
+  }
+}
+
+// 打开预设详情预览模态框
+function openPresetPreviewModal(presetId) {
+  const target = availablePresets.find(p => p.id === presetId);
+  if (!target || !target.data) return;
+  currentPreviewingPreset = target;
+
+  const modal = document.getElementById('preset-modal');
+  const title = document.getElementById('preset-modal-title');
+  const body = document.getElementById('preset-modal-body');
+  if (!modal || !body) return;
+
+  title.innerHTML = `<i class="fa ${target.icon || 'fa-briefcase'}" style="color:${target.color || '#2563eb'};"></i> ${escapeHtml(target.name)} · 履历方案详情`;
+
+  const d = target.data;
+  const basic = d.basic || {};
+  const skills = d.skills || [];
+  const edu = d.education || [];
+  const work = d.work || [];
+  const projects = d.projects || [];
+  const evalText = d.selfEvaluation || '';
+
+  body.innerHTML = `
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-user"></i> 求职意向与职业定位</h4>
+      <div style="font-size: 14px; font-weight: 700; color: #1e40af; margin-bottom: 4px;">
+        ${escapeHtml(basic.jobTitle || '')}
+      </div>
+      <div style="font-size: 12.5px; color: #64748b;">${escapeHtml(basic.signature || '')}</div>
+    </div>
+
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-code"></i> 专业技能清单 (${skills.length} 项)</h4>
+      <div class="preset-detail-tags">
+        ${skills.map(s => `<span class="preset-detail-pill">${escapeHtml(s.name)} (熟练度 ${s.level || 85}%)</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-graduation-cap"></i> 教育背景</h4>
+      ${edu.map(e => `
+        <div class="preset-detail-item">
+          <b>${escapeHtml(e.school)} · ${escapeHtml(e.college || '')} · ${escapeHtml(e.major)}</b>
+          <span style="float: right; color: #64748b; font-size: 12px;">${escapeHtml(e.time)}</span>
+          <div style="font-size: 12px; color: #475569; margin-top: 4px; white-space: pre-line;">${escapeHtml(e.description || '')}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-briefcase"></i> 工作与产线实习经历 (${work.length} 段)</h4>
+      ${work.map(w => `
+        <div class="preset-detail-item">
+          <b>${escapeHtml(w.company)} — ${escapeHtml(w.role)}</b>
+          <span style="float: right; color: #64748b; font-size: 12px;">${escapeHtml(w.time)}</span>
+          <ul style="margin: 4px 0 0 18px; padding: 0; font-size: 12.5px; color: #334155;">
+            ${(w.points || []).map(pt => `<li>${escapeHtml(pt)}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-cubes"></i> 重点课题与项目经验 (${projects.length} 项)</h4>
+      ${projects.map(pj => `
+        <div class="preset-detail-item">
+          <b>${escapeHtml(pj.name)}</b>
+          <div style="font-size: 12px; color: #0284c7; margin: 2px 0;">技术栈: ${escapeHtml(pj.stack || '')}</div>
+          <div style="font-size: 12.5px; color: #334155; white-space: pre-line;">${escapeHtml(pj.contribution || pj.target || '')}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="preset-detail-section">
+      <h4><i class="fa fa-pencil-square-o"></i> 自我评价亮点</h4>
+      <div style="background: #f8fafc; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #334155; white-space: pre-line;">
+        ${escapeHtml(evalText)}
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('open');
+}
+
+function bindPresetModalEvents() {
+  const modal = document.getElementById('preset-modal');
+  const closeBtn = document.getElementById('btn-close-preset-modal');
+  const cancelBtn = document.getElementById('btn-cancel-preset');
+  const confirmBtn = document.getElementById('btn-confirm-apply-preset');
+
+  function closeModal() {
+    if (modal) modal.classList.remove('open');
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      if (currentPreviewingPreset) {
+        applyPresetResume(currentPreviewingPreset.id);
+        closeModal();
+      }
     });
   }
 }

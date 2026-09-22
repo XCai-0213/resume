@@ -361,6 +361,34 @@
       : { success: false, error: '本地存储已满' };
   }
 
+  // ---------- 预设职业简历套件 ----------
+  async function loadPresets() {
+    const useApi = await probeApi();
+    if (useApi) {
+      try {
+        const res = await fetch(apiUrl('presets') + '?t=' + Date.now());
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) return { success: true, data: json.data };
+      } catch (e) { /* 降级 */ }
+    }
+    // 静态降级：读取静态 presets.json
+    try {
+      const res = await fetch(basePrefix() + 'data/presets.json?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        return { success: true, data };
+      }
+    } catch (e) {}
+    try {
+      const res2 = await fetch(basePrefix() + 'presets.json?t=' + Date.now());
+      if (res2.ok) {
+        const data = await res2.json();
+        return { success: true, data };
+      }
+    } catch (e) {}
+    return { success: false, error: '未找到预设简历数据' };
+  }
+
   // 给前台页面读取用（静态部署时前台也走这里）
   function getLocalResume() {
     return readLocal(LS_KEY, null);
@@ -381,6 +409,7 @@
     getLocalResume: getLocalResume,
     loadHomepage: loadHomepage,
     saveHomepage: saveHomepage,
+    loadPresets: loadPresets,
     LS_KEY: LS_KEY,
     LS_JOBS_KEY: LS_JOBS_KEY,
     LS_HOMEPAGE_KEY: LS_HOMEPAGE_KEY
