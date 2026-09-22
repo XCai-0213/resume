@@ -69,12 +69,12 @@
         {
           "name": "VASP 计算",
           "level": 92,
-          "logo": "/assets/images/icons/vasp.svg"
+          "logo": "/assets/images/icons/vasp.png"
         },
         {
           "name": "CP2K 模拟",
           "level": 86,
-          "logo": "/assets/images/icons/cp2k.svg"
+          "logo": "/assets/images/icons/cp2k.png"
         },
         {
           "name": "第一性原理 (DFT)",
@@ -99,7 +99,7 @@
         {
           "name": "Shell 批处理",
           "level": 85,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+          "logo": "/assets/images/icons/linux.png"
         },
         {
           "name": "Linux 集群环境",
@@ -109,7 +109,7 @@
         {
           "name": "OriginLab 绘图",
           "level": 90,
-          "logo": "/assets/images/icons/origin.svg"
+          "logo": "/assets/images/icons/originlab.png"
         },
         {
           "name": "AutoCAD",
@@ -119,7 +119,7 @@
         {
           "name": "SolidWorks",
           "level": 78,
-          "logo": "/assets/images/icons/solidworks.svg"
+          "logo": "/assets/images/icons/solidworks.png"
         },
         {
           "name": "金相与压样表征",
@@ -306,7 +306,7 @@
         {
           "name": "SolidWorks 结构建模",
           "level": 82,
-          "logo": "/assets/images/icons/solidworks.svg"
+          "logo": "/assets/images/icons/solidworks.png"
         },
         {
           "name": "产线设备点检维护",
@@ -489,7 +489,7 @@
         {
           "name": "SolidWorks 三维建模",
           "level": 88,
-          "logo": "/assets/images/icons/solidworks.svg"
+          "logo": "/assets/images/icons/solidworks.png"
         },
         {
           "name": "机械设计与原理",
@@ -519,7 +519,7 @@
         {
           "name": "Shell 自动化运维",
           "level": 85,
-          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+          "logo": "/assets/images/icons/linux.png"
         },
         {
           "name": "产线机台点检保养",
@@ -1121,7 +1121,7 @@
         {
           "name": "SolidWorks 机械建模",
           "level": 82,
-          "logo": "/assets/images/icons/solidworks.svg"
+          "logo": "/assets/images/icons/solidworks.png"
         },
         {
           "name": "Python 数据分析挖掘",

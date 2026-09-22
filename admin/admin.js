@@ -71,13 +71,13 @@ const ICON_BASE = '/assets/images/icons/';
 
 const BRAND_LOGOS = [
   // 1. 材料仿真与科研计算（重点新增置顶！）
-  { name: 'VASP', url: ICON_BASE + 'vasp.svg', tag: 'vasp 第一性原理 dft 材料计算 维也纳 仿真' },
-  { name: 'CP2K', url: ICON_BASE + 'cp2k.svg', tag: 'cp2k 分子动力学 量子化学 催化模拟 仿真' },
-  { name: 'LAMMPS', url: ICON_BASE + 'lammps.svg', tag: 'lammps 分子动力学 大规模并行 md 模拟' },
-  { name: 'OriginLab', url: ICON_BASE + 'origin.svg', tag: 'origin originlab 科学绘图 数据拟合 谱图' },
-  { name: 'MATLAB', url: ICON_BASE + 'matlab.svg', tag: 'matlab 数学建模 仿真 矩阵 计算' },
+  { name: 'VASP', url: ICON_BASE + 'vasp.png', tag: 'vasp 第一性原理 dft 材料计算 维也纳 仿真' },
+  { name: 'CP2K', url: ICON_BASE + 'cp2k.png', tag: 'cp2k 分子动力学 量子化学 催化模拟 仿真' },
+  { name: 'LAMMPS', url: ICON_BASE + 'lammps.png', tag: 'lammps 分子动力学 大规模并行 md 模拟' },
+  { name: 'OriginLab', url: ICON_BASE + 'originlab.png', tag: 'origin originlab 科学绘图 数据拟合 谱图' },
+  { name: 'MATLAB', url: ICON_BASE + 'matlab.png', tag: 'matlab 数学建模 仿真 矩阵 计算' },
   { name: 'AutoCAD', url: ICON_BASE + 'autocad.svg', tag: 'autocad cad 工程制图 机械设计' },
-  { name: 'SolidWorks', url: ICON_BASE + 'solidworks.svg', tag: 'solidworks 三维建模 机械结构 机构' },
+  { name: 'SolidWorks', url: ICON_BASE + 'solidworks.png', tag: 'solidworks 三维建模 机械结构 机构' },
   { name: 'ANSYS', url: ICON_BASE + 'ansys.svg', tag: 'ansys 有限元 仿真 结构受力' },
 
   // 2. AI 大模型与智能体开发（全部官方彩色）
