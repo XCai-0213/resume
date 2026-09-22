@@ -619,14 +619,86 @@
     `;
     document.body.appendChild(bar);
 
-    document.getElementById('btn-print-resume').addEventListener('click', () => {
+    // 行距自适应：打印前测量内容高度，选择合适档位（auto/compact/tiny）
+    function autoFitForPrint() {
+      const container = document.getElementById('resume-container');
+      if (!container) return;
+      // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
+      const a4ContentHeight = 285 * 3.7795;
+
+      // 先移除旧档位再测量
+      document.body.removeAttribute('data-fit');
+
+      const measure = () => container.scrollHeight;
+
+      // 依次尝试三档：默认 → compact → tiny
+      if (measure() <= a4ContentHeight) {
+        document.body.setAttribute('data-fit', 'auto');
+      } else {
+        document.body.setAttribute('data-fit', 'compact');
+        if (measure() > a4ContentHeight) {
+          document.body.setAttribute('data-fit', 'tiny');
+          if (measure() > a4ContentHeight) {
+            // 极端情况：tiny 也装不下，保持 tiny（CSS 已最小化）
+          }
+        }
+      }
+    }
+
+    // 轻量 toast（仅导出反馈用）
+    function quickToast(msg, type) {
+      let box = document.querySelector('.resume-toast-box');
+      if (!box) {
+        box = document.createElement('div');
+        box.className = 'resume-toast-box';
+        document.body.appendChild(box);
+      }
+      const el = document.createElement('div');
+      el.className = 'resume-toast-item ' + (type || 'info');
+      el.textContent = msg;
+      box.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 400);
+      }, 3200);
+    }
+
+    document.getElementById('btn-print-resume').addEventListener('click', async () => {
+      // 优先走服务端 PDF（Edge/Chrome headless 生成，无浏览器打印按钮残留）
+      try {
+        quickToast('正在生成单页 A4 PDF，请稍候...', 'info');
+        const res = await fetch('/api/export/pdf?ts=' + Date.now());
+        const ct = res.headers.get('content-type') || '';
+        if (ct.includes('application/pdf')) {
+          const blob = await res.blob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = '简历-A4单页.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 2000);
+          quickToast('✅ PDF 已生成并开始下载（服务端渲染）', 'success');
+          return;
+        }
+        // 服务器返回 JSON（无浏览器环境）→ 回退浏览器打印
+        quickToast('服务器未配置浏览器，改用浏览器打印模式', 'info');
+      } catch (e) {
+        // 网络失败（静态部署环境）→ 回退浏览器打印
+        quickToast('服务端不可用，改用浏览器打印模式', 'info');
+      }
+
+      // 回退：浏览器打印（先自适应行距，再加类名隐藏快捷栏）
+      autoFitForPrint();
       document.body.classList.add('printing-single-page');
       setTimeout(() => {
         window.print();
         setTimeout(() => {
           document.body.classList.remove('printing-single-page');
+          document.body.removeAttribute('data-fit');
         }, 1000);
-      }, 50);
+      }, 150);
     });
 
     document.getElementById('btn-toggle-layout').addEventListener('click', () => {

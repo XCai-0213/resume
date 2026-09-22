@@ -421,6 +421,95 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // ============ 服务端 PDF 导出（调用本机 Edge/Chrome headless，单页 A4） ============
+  if (pathname === '/api/export/pdf' && req.method === 'GET') {
+    const { spawn } = require('child_process');
+    const os = require('os');
+
+    // 探测可用的浏览器
+    const candidates = [
+      'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+      'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      '/usr/bin/google-chrome',
+      '/usr/bin/chromium-browser',
+      '/usr/bin/chromium'
+    ];
+    const browser = candidates.find(c => { try { return fs.existsSync(c); } catch { return false; } });
+
+    if (!browser) {
+      // 无浏览器时回退：提示用户改用浏览器打印
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, fallback: true, error: '服务器上未找到 Edge/Chrome，请使用浏览器打印（Ctrl+P）' }));
+      return;
+    }
+
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'resume-pdf-'));
+    const outPdf = path.join(tmpDir, 'resume.pdf');
+    const targetUrl = 'http://127.0.0.1:' + PORT + '/resume.html?print=1&ts=' + Date.now();
+    const profileDir = path.join(tmpDir, 'profile');
+
+    // A4: 210mm x 297mm，边距 6mm/8mm（与 @page 保持一致）
+    const args = [
+      '--headless=new',
+      '--disable-gpu',
+      '--no-sandbox',
+      '--disable-dev-shm-usage',
+      '--run-all-compositor-stages-before-draw',
+      '--virtual-time-budget=10000',
+      `--user-data-dir=${profileDir}`,
+      `--print-to-pdf=${outPdf}`,
+      '--no-pdf-header-footer',
+      '--print-to-pdf-no-header'
+    ];
+
+    const child = spawn(browser, args.concat([targetUrl]), { stdio: 'ignore' });
+    let settled = false;
+
+    const finishOk = () => {
+      if (settled) return;
+      settled = true;
+      try {
+        const pdf = fs.readFileSync(outPdf);
+        res.writeHead(200, {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': 'attachment; filename="resume.pdf"',
+          'Content-Length': pdf.length
+        });
+        res.end(pdf);
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: 'PDF 生成失败: ' + err.message }));
+      } finally {
+        // 延迟清理临时目录
+        setTimeout(() => { try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {} }, 5000);
+      }
+    };
+
+    const finishErr = (msg) => {
+      if (settled) return;
+      settled = true;
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: msg }));
+      setTimeout(() => { try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch {} }, 5000);
+    };
+
+    child.on('error', (err) => finishErr('浏览器启动失败: ' + err.message));
+    child.on('exit', (code) => {
+      if (settled) return;
+      if (fs.existsSync(outPdf) && fs.statSync(outPdf).size > 1000) {
+        finishOk();
+      } else {
+        finishErr('浏览器退出码 ' + code + '，未生成有效 PDF');
+      }
+    });
+
+    // 兜底超时（60s）
+    setTimeout(() => finishErr('PDF 生成超时（60s）'), 60000);
+    return;
+  }
+
   // ============ 投递记录 API ============
   // 获取投递记录（表头 + 全部行）
   if (pathname === '/api/jobs' && req.method === 'GET') {

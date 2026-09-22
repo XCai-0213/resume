@@ -888,5 +888,120 @@ mark, .mark-txt, .hl-tag {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
+
+  /* =======================================================
+   * 行距自适应：根据 body 上的 data-fit 等级收紧/放松行距
+   * JS 会在打印前测量内容高度并自动选择合适档位
+   * ======================================================= */
+  body[data-fit="auto"] .info-unit ul li,
+  body[data-fit="auto"] .container .main .info-unit ul li .info-content li {
+    line-height: 1.24 !important;
+    margin-bottom: 1.5px !important;
+  }
+  body[data-fit="compact"] .info-unit ul li,
+  body[data-fit="compact"] .container .main .info-unit ul li .info-content li {
+    line-height: 1.18 !important;
+    margin-bottom: 1px !important;
+    font-size: 7.8pt !important;
+  }
+  body[data-fit="compact"] .info-unit {
+    margin-bottom: 2px !important;
+  }
+  body[data-fit="compact"] .info-unit h2 {
+    font-size: 9.5pt !important;
+    margin-bottom: 0.5px !important;
+  }
+  body[data-fit="compact"] .header-side-by-side-card .header-avatar-box img {
+    width: 70px !important;
+    height: 92px !important;
+  }
+  body[data-fit="compact"] .header-side-by-side-card .header-name {
+    font-size: 15px !important;
+  }
+  body[data-fit="compact"] .skill-badge-tag {
+    padding: 0 4px !important;
+    font-size: 7pt !important;
+  }
+  body[data-fit="compact"] .edu-line,
+  body[data-fit="compact"] #section-evaluation p {
+    font-size: 7.8pt !important;
+    line-height: 1.16 !important;
+  }
+  body[data-fit="tiny"] .info-unit ul li,
+  body[data-fit="tiny"] .container .main .info-unit ul li .info-content li {
+    line-height: 1.12 !important;
+    margin-bottom: 0.5px !important;
+    font-size: 7.2pt !important;
+  }
+  body[data-fit="tiny"] .info-unit {
+    margin-bottom: 1px !important;
+  }
+  body[data-fit="tiny"] .info-unit h2 {
+    font-size: 9pt !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 1px !important;
+  }
+  body[data-fit="tiny"] .header-side-by-side-card .header-avatar-box img {
+    width: 62px !important;
+    height: 82px !important;
+  }
+  body[data-fit="tiny"] .header-side-by-side-card .header-name {
+    font-size: 14px !important;
+  }
+  body[data-fit="tiny"] .skill-badge-tag {
+    padding: 0 3px !important;
+    font-size: 6.5pt !important;
+  }
+  body[data-fit="tiny"] .skill-badge-tag img {
+    width: 9px !important;
+    height: 9px !important;
+  }
+  body[data-fit="tiny"] .edu-line,
+  body[data-fit="tiny"] #section-evaluation p {
+    font-size: 7.2pt !important;
+    line-height: 1.1 !important;
+  }
+  body[data-fit="tiny"] .container .main .info-unit ul li h3 {
+    font-size: 8.2pt !important;
+  }
+  body[data-fit="tiny"] .header-profile-tag {
+    font-size: 7pt !important;
+    padding: 0 3px !important;
+  }
+  body[data-fit="tiny"] .header-contact-list {
+    font-size: 7.2pt !important;
+    gap: 1px 6px !important;
+  }
 }
+
+/* =======================================================
+ * 导出反馈 toast（前台右上角轻提示）
+ * ======================================================= */
+.resume-toast-box {
+  position: fixed;
+  top: 64px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.resume-toast-item {
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: toastSlide 0.25s ease;
+  max-width: 380px;
+  line-height: 1.5;
+  transition: opacity 0.4s;
+}
+.resume-toast-item.success { background: rgba(5, 150, 105, 0.95); }
+.resume-toast-item.info { background: rgba(15, 23, 42, 0.92); }
+@keyframes toastSlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: none; }
 }
