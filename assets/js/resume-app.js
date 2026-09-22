@@ -72,7 +72,13 @@
   function looksLikeUrl(val) {
     if (!val) return false;
     const v = String(val).trim();
-    return /^(https?:)?\/\//i.test(v) || v.startsWith('/uploads/') || v.startsWith('data:');
+    // 支持外链 / 本地上传 / 站内静态图标 / dataURI / 带图片扩展名的相对路径
+    return /^(https?:)?\/\//i.test(v)
+      || v.startsWith('/uploads/')
+      || v.startsWith('/assets/')
+      || v.startsWith('assets/')
+      || v.startsWith('data:')
+      || /\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$/i.test(v);
   }
 
   async function loadResume() {
