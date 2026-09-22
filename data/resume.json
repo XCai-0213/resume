@@ -166,14 +166,14 @@
   ],
   "projects": [
     {
-      "name": "智慧课堂 AI 教学平台（全栈 · 已上线运营）",
+      "name": "智慧课堂 AI 教学平台（全栈 · 已上线 smart.jyue.cn）",
       "link": "https://smart.jyue.cn",
       "time": "2025.09 - 至今",
       "stack": "Vue 3 / Node.js 原生服务 / uni-app 微信小程序 / Claude & DeepSeek API / JSON Schema",
       "target": "面向高校课堂的 AI 原生教学闭环：智能出题 → 课堂练习 → AI 批改 → 知识点画像",
       "team": "独立设计与开发（后端 / 前端 / 小程序 / AI 编排全链路）",
-      "contribution": "1. AI 智能出题引擎：设计\"purpose × questionType\"双维路由矩阵，出题/解析/组卷/判分四类任务分别路由到不同模型；支持按课件（DOCX/PDF/PPTX/MD）自动生成带知识点标注的六种题型，内存队列调度并支持断线重连与幂等重试；\n2. 多模型 Provider 编排层：统一兼容 OpenAI 兼容协议（DeepSeek/通义/Kimi/智谱）、Anthropic Messages 与 Gemini 三种协议，API Key AES 加密落库、接口只回显掩码；\n3. AI 智能批改：规则 + LLM 双通道评分，严格 JSON Schema 结构化输出（score/rubricHits/feedback/confidence），支持教师复核闭环；\n4. 服务端唯一计算知识点掌握度画像（防前端篡改）；三端交付（Web 教师/学生端 + 微信小程序 22 个页面），生产环境 Nginx + Node + JWT 部署于 smart.jyue.cn，后端 102 个模块、2.87 万行代码，配套五套自动化测试",
-      "effect": "已在真实课堂投入运营，实现从课件上传到自动批改的完整教学闭环，AI 出题从逐题手写变为一键成卷"
+      "contribution": "1. AI 智能出题引擎：设计\"purpose × questionType\"双维路由矩阵，出题、解析、组卷、判分四类任务分别路由到不同模型；支持按课件（DOCX/PDF/PPTX/MD，≤15MB）自动生成带知识点标注的六种题型，内存队列（15 分钟 TTL）串行调度并支持断线重连与幂等重试；\n2. 多模型 Provider 编排层：自研协议适配器注册表，统一兼容 OpenAI 兼容协议（DeepSeek/通义/Kimi/智谱等中转站）、Anthropic Messages 与 Google Gemini 协议；API Key 经 AES 加密落库（SMART_CLASSROOM_ENC_KEY），接口层只返回掩码永不回显明文；\n3. AI 智能批改：双通道评分架构（规则评分器 + LLM 评分器），输出严格符合 JSON Schema 的结构化结果（score/maxScore/rubricHits/feedback/confidence），支持教师复核闭环；\n4. 知识点掌握度画像：出于防作弊考虑将掌握度计算从前端迁移至服务端唯一计算并落库（mastery = scoreSum/total），前端只负责渲染；\n5. 三端交付：Web 教师端 + Web 学生端 + 微信小程序端（22 个 .vue 页面/组件，含学生答题、成绩单、教师批改、通知订阅消息），后端 102 个模块文件、2.87 万行代码，配套五套自动化测试",
+      "effect": "已在真实课堂投入运营（Nginx + Node + JWT 生产环境持续运行），AI 出题从逐题手写变为一键成卷"
     },
     {
       "name": "电催化材料高通量筛选与微观反应动力学研究",
