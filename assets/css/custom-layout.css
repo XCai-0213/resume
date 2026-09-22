@@ -871,6 +871,22 @@ mark, .mark-txt, .hl-tag {
     font-size: 8pt !important;
   }
 
+  /* 项目详情多行块：打印时与普通条目保持一致行距，消除忽大忽小 */
+  .project-detail-block,
+  .project-detail-block .detail-label,
+  .project-detail-block .detail-lines,
+  .project-detail-block .detail-line {
+    line-height: 1.2 !important;
+    font-size: 8pt !important;
+    gap: 1px !important;
+  }
+  .project-detail-block .detail-line {
+    margin-bottom: 1px !important;
+  }
+  .project-detail-block .detail-label {
+    font-weight: 600 !important;
+  }
+
   .edu-line {
     margin: 0 !important;
     line-height: 1.2 !important;
@@ -971,6 +987,20 @@ mark, .mark-txt, .hl-tag {
   body[data-fit="tiny"] .header-contact-list {
     font-size: 7.2pt !important;
     gap: 1px 6px !important;
+  }
+  body[data-fit="compact"] .project-detail-block,
+  body[data-fit="compact"] .project-detail-block .detail-label,
+  body[data-fit="compact"] .project-detail-block .detail-lines,
+  body[data-fit="compact"] .project-detail-block .detail-line {
+    line-height: 1.14 !important;
+    font-size: 7.8pt !important;
+  }
+  body[data-fit="tiny"] .project-detail-block,
+  body[data-fit="tiny"] .project-detail-block .detail-label,
+  body[data-fit="tiny"] .project-detail-block .detail-lines,
+  body[data-fit="tiny"] .project-detail-block .detail-line {
+    line-height: 1.08 !important;
+    font-size: 7.2pt !important;
   }
 }
 
