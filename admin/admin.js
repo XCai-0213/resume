@@ -2575,6 +2575,7 @@ function openPresetPreviewModal(presetId) {
       `).join('')}
     </div>
 
+    ${(work.length > 0 ? `
     <div class="preset-detail-section">
       <h4><i class="fa fa-briefcase"></i> 工作与产线实习经历 (${work.length} 段)</h4>
       ${work.map(w => `
@@ -2587,6 +2588,7 @@ function openPresetPreviewModal(presetId) {
         </div>
       `).join('')}
     </div>
+    ` : '')}
 
     <div class="preset-detail-section">
       <h4><i class="fa fa-cubes"></i> 重点课题与项目经验 (${projects.length} 项)</h4>
