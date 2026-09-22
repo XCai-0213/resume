@@ -518,22 +518,31 @@
               </span>
             ` : '';
 
+            function renderProjectField(iconCls, label, text) {
+              if (!text) return '';
+              const lines = String(text).split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+              if (lines.length === 0) return '';
+              if (lines.length === 1) {
+                return `<li><i class="fa ${iconCls}" aria-hidden="true"></i> [${label}] ${formatRichText(lines[0])}</li>`;
+              }
+              return `
+                <li class="project-detail-block">
+                  <span class="detail-label"><i class="fa ${iconCls}" aria-hidden="true"></i> [${label}]</span>
+                  <div class="detail-lines">
+                    ${lines.map(l => `<div class="detail-line">${formatRichText(l)}</div>`).join('')}
+                  </div>
+                </li>
+              `;
+            }
+
             let contentHtml = '';
             if (pj.stack) {
               contentHtml += `<li>技术栈：${escapeHtml(pj.stack)}</li>`;
             }
-            if (pj.target) {
-              contentHtml += `<li><i class="fa fa-paper-plane-o" aria-hidden="true"></i> [目标] ${formatRichText(pj.target)}</li>`;
-            }
-            if (pj.team) {
-              contentHtml += `<li><i class="fa fa-users" aria-hidden="true"></i> [团队] ${formatRichText(pj.team)}</li>`;
-            }
-            if (pj.contribution) {
-              contentHtml += `<li><i class="fa fa-bars" aria-hidden="true"></i> [贡献] ${formatRichText(pj.contribution)}</li>`;
-            }
-            if (pj.effect) {
-              contentHtml += `<li><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> [效果] ${formatRichText(pj.effect)}</li>`;
-            }
+            contentHtml += renderProjectField('fa-paper-plane-o', '目标', pj.target);
+            contentHtml += renderProjectField('fa-users', '团队', pj.team);
+            contentHtml += renderProjectField('fa-bars', '贡献', pj.contribution);
+            contentHtml += renderProjectField('fa-thumbs-o-up', '效果', pj.effect);
 
             return `
               <li>

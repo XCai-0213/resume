@@ -1,4 +1,206 @@
 {
+  "basic": {
+    "name": "张栋梁",
+    "jobTitle": "材料研发工程师（电催化 / 计算材料 / 新能源）",
+    "avatar": "/uploads/____1789937723958.jpg",
+    "signature": "具备材料机理计算、高通量筛选与数据建模全流程研发能力，践行 AI for Science"
+  },
+  "profile": [
+    {
+      "label": "政治面貌",
+      "value": "中共党员"
+    },
+    {
+      "label": "学历层次",
+      "value": "硕士研究生（2027届）"
+    },
+    {
+      "label": "籍贯",
+      "value": "安徽宿州"
+    },
+    {
+      "label": "现居地",
+      "value": "江西南昌"
+    },
+    {
+      "label": "求职意向",
+      "value": "材料研发 / 算法开发 / 模拟仿真"
+    },
+    {
+      "label": "期望城市",
+      "value": "南昌 / 杭州 / 上海 / 全国"
+    }
+  ],
+  "contact": [
+    {
+      "label": "手机",
+      "value": "17855900213",
+      "link": "tel:17855900213",
+      "icon": "fa fa-phone"
+    },
+    {
+      "label": "邮箱",
+      "value": "690857@163.com",
+      "link": "mailto:690857@163.com",
+      "icon": "fa fa-envelope"
+    },
+    {
+      "label": "GitHub",
+      "value": "XCai-0213",
+      "link": "https://github.com/XCai-0213",
+      "icon": "fa fa-github"
+    },
+    {
+      "label": "微信",
+      "value": "17855900213",
+      "link": "",
+      "icon": "fa fa-weixin"
+    }
+  ],
+  "skills": [
+    {
+      "name": "VASP 计算",
+      "level": 92,
+      "logo": "/assets/images/icons/vasp.svg"
+    },
+    {
+      "name": "CP2K 模拟",
+      "level": 86,
+      "logo": "/assets/images/icons/cp2k.svg"
+    },
+    {
+      "name": "第一性原理 (DFT)",
+      "level": 90,
+      "logo": ""
+    },
+    {
+      "name": "分子动力学 (MD)",
+      "level": 85,
+      "logo": ""
+    },
+    {
+      "name": "高通量筛选",
+      "level": 92,
+      "logo": ""
+    },
+    {
+      "name": "Python 数据处理",
+      "level": 88,
+      "logo": "/assets/images/icons/python.svg"
+    },
+    {
+      "name": "Shell 批处理",
+      "level": 85,
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+    },
+    {
+      "name": "Linux 集群环境",
+      "level": 86,
+      "logo": "/assets/images/icons/linux.svg"
+    },
+    {
+      "name": "OriginLab 绘图",
+      "level": 90,
+      "logo": "/assets/images/icons/origin.svg"
+    },
+    {
+      "name": "AutoCAD",
+      "level": 80,
+      "logo": "/assets/images/icons/autocad.svg"
+    },
+    {
+      "name": "SolidWorks",
+      "level": 78,
+      "logo": "/assets/images/icons/solidworks.svg"
+    },
+    {
+      "name": "金相与压样表征",
+      "level": 82,
+      "logo": ""
+    }
+  ],
+  "education": [
+    {
+      "school": "江西师范大学",
+      "college": "化学与材料学院",
+      "major": "材料科学与工程（硕士研究生）",
+      "time": "2024.09 - 2027.07",
+      "description": "研究方向：电化学与新能源材料计算模拟、机器学习辅助材料研发。\n系统掌握材料表面与界面工程、密度泛函理论(DFT)、分子动力学与功能材料学。负责实验室计算集群搭建与批处理脚本编写。"
+    },
+    {
+      "school": "黄山学院",
+      "college": "机电工程学院",
+      "major": "材料成型及控制工程（工学学士）",
+      "time": "2020.09 - 2024.07",
+      "description": "主修材料科学基础、材料力学、理论力学、机械设计、机械原理、液压与气压传动、工程制图。\n本科期间担任校学生会主席；荣获国家奖学金、省级双创二等奖、校优秀党员。"
+    }
+  ],
+  "work": [
+    {
+      "company": "湖南华灿电力建设有限公司",
+      "role": "现场技术员（实习）",
+      "time": "2023.06 - 2023.08",
+      "points": [
+        "对接甲方工程需求，对大型机电设备复杂管路方案进行力学核算与重新设计。",
+        "消除管路折弯阻流点与死体积，优化现场安装动线，有效提高工质流转效率25%。"
+      ]
+    },
+    {
+      "company": "安徽兴喆有限公司",
+      "role": "工艺操作员（实习）",
+      "time": "2024.04 - 2024.05",
+      "points": [
+        "跟踪现场生产线机台运转状态与工艺参数，针对进料结构易卡滞问题进行力学改型。",
+        "优化料仓导向结构，显著减少人工进料干预频次，节约单班次人工成本。"
+      ]
+    },
+    {
+      "company": "安徽锦圣新材料有限公司",
+      "role": "材料技术员（实习）",
+      "time": "2024.05 - 2024.06",
+      "points": [
+        "负责工程塑料改性制品挤出成型产线运行监控，跟踪配比、温区与压力曲线。",
+        "协助高级工程师排查挤出批次气孔与表面瑕疵问题，确保连续生产批量批次良品率达98.5%以上。"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "电催化材料高通量筛选与微观反应动力学研究",
+      "link": "",
+      "time": "2024.09 - 至今",
+      "stack": "VASP / Python / Shell / Linux / OriginLab",
+      "target": "针对催化反应过电位高、开发周期长瓶颈，构建理论高通量模拟筛选平台",
+      "team": "课题组核心研究骨干（独立承担计算筛选模块）",
+      "contribution": "1. 基于 VASP 搭建== 180+ ==种候选过渡金属催化剂超晶格异质结模型，批量计算表面吸附自由能与反应能垒；\n2. 编写 Python/Shell 自动化批处理流水线，实现“结构建模→几何优化→自洽计算→结果抽取”一键化，效率提升== 5-6 ==倍；\n3. 结合形成能、溶剂化效应多维指标综合打分，最终锁定== 1-2 ==种高活性、高稳定性优质候选材料，为实验合成提供直接指导。\n4. Engineering N/O Coordination in Graphene-Supported Single-Atom Sites for Thermodynamically Preferred NO Electrooxidation to Nitrate ==SCI一区在投==",
+      "effect": "大幅压缩新材料盲目试错周期，形成完整的计算模拟数据库与评估技术规范。"
+    },
+    {
+      "name": "CatGO：AI 驱动的计算材料与催化研究开源工作台",
+      "link": "https://github.com/XCai-0213",
+      "time": "2024.09 - 至今",
+      "stack": "Python / DFT / Molecular Dynamics / Git",
+      "target": "打造面向计算化学与材料模拟研究者的开源工具链平台",
+      "team": "开源核心参与贡献者",
+      "contribution": "1. 负责 DFT 计算输入文件校验、分子动力学模拟模块调优及催化反应路径搜索脚本开发；\n2. 协助攻关异质结界面晶格失配拟合算法，并在 GitHub 开源社区提交代码与技术文档，解答开发者使用问题。",
+      "effect": "项目获得多所高校科研团队采用，代码质量与工程规范获得开源社区认可。"
+    },
+    {
+      "name": "锂电池界面锂枝晶生长机理与固态电解质计算",
+      "link": "",
+      "time": "2024.09 - 至今",
+      "stack": "第一性原理 / 分子动力学 (MD) / 机器学习能垒预测",
+      "target": "从微观原子尺度解析锂枝晶形核与生长动力学，探究抑制枝晶生长的材料方案",
+      "team": "课题组科研攻关成员",
+      "contribution": "1. 模拟锂离子在不同固态电解质界面处电荷转移过程与扩散能垒；\n2. 结合机器学习算法预测低迁移能垒电解质候选体系，阐明晶界缺陷对枝晶萌生的诱发机理。",
+      "effect": "为高安全性固态电池界面改性设计提供了关键理论机理支撑与配方优化建议。"
+    }
+  ],
+  "selfEvaluation": "==材料科学与工程硕士==背景，掌握第一性原理（DFT）、分子动力学模拟与高通量材料筛选核心方法。\n熟练使用 **VASP、CP2K、Python、Shell** 进行批量数据计算、特征提取与科研绘图。\n本科具备坚实工程机械底蕴，曾任校学生会主席，荣获**国家奖学金**、省级竞赛二等奖与校优秀党员，组织协同与抗压攻坚能力出众。",
+  "qrcode": {
+    "image": "",
+    "text": "微信同手机号：17855900213"
+  },
   "settings": {
     "title": "张栋梁-个人简历",
     "layout": "one-column",
@@ -16,228 +218,5 @@
     "showProjects": true,
     "showEvaluation": true,
     "copyright": "© 2025 个人简历 | 后台管理系统驱动"
-  },
-  "basic": {
-    "name": "张栋梁",
-    "jobTitle": "研发、工艺工程师 / 杭州",
-    "avatar": "/uploads/____1789937723958.jpg",
-    "signature": ""
-  },
-  "profile": [
-    {
-      "label": "籍贯",
-      "value": "安徽宿州"
-    }
-  ],
-  "contact": [
-    {
-      "label": "手机",
-      "value": "17855900213",
-      "link": "tel:17855900213",
-      "icon": "fa fa-phone"
-    },
-    {
-      "label": "邮箱",
-      "value": "690857@163.com",
-      "link": "mailto:690857@163.com",
-      "icon": "fa fa-envelope"
-    }
-  ],
-  "skills": [
-    {
-      "name": "锂枝晶机理",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "电解质计算",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "锂离子迁移",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "界面行为",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "电催化材料筛选",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "机器学习辅助材料研发",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "分子动力学",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "高通量计算",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "VASP",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/vasp.svg"
-    },
-    {
-      "name": "CP2K",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/cp2k.svg"
-    },
-    {
-      "name": "Python",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/python.svg"
-    },
-    {
-      "name": "Shell",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/linux.svg"
-    },
-    {
-      "name": "Linux",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/linux.svg"
-    },
-    {
-      "name": "数据分析",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "AI Agent",
-      "level": 80,
-      "icon": "",
-      "logo": ""
-    },
-    {
-      "name": "Codex",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/codex.svg"
-    },
-    {
-      "name": "Git/GitHub",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/github.svg"
-    },
-    {
-      "name": "Docker",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/docker.svg"
-    },
-    {
-      "name": "Excel",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/excel.svg"
-    },
-    {
-      "name": "Origin",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/origin.svg"
-    },
-    {
-      "name": "AutoCAD",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/autocad.svg"
-    },
-    {
-      "name": "SolidWorks",
-      "level": 80,
-      "icon": "",
-      "logo": "/assets/images/icons/solidworks.svg"
-    }
-  ],
-  "qrcode": {
-    "image": "/uploads/___1789935676665.png",
-    "text": "扫码在手机上查看在线简历"
-  },
-  "education": [
-    {
-      "school": "黄山学院",
-      "college": "",
-      "major": "材料成型及控制工程",
-      "time": "2020.09 - 2024.07",
-      "description": ""
-    },
-    {
-      "school": "江西师范大学",
-      "college": "",
-      "major": "材料科学与工程",
-      "time": "2024.09 - 2027.07",
-      "description": ""
-    }
-  ],
-  "work": [
-    {
-      "company": "湖南华灿电力建设有限公司",
-      "role": "技术员",
-      "time": "2023.06 - 2023.08",
-      "points": []
-    },
-    {
-      "company": "安徽兴喆有限公司",
-      "role": "操作员",
-      "time": "2024.04 - 2024.05",
-      "points": []
-    },
-    {
-      "company": "安徽锦圣新材料有限公司",
-      "role": "技术员",
-      "time": "2024.05 - 2024.06",
-      "points": []
-    }
-  ],
-  "projects": [
-    {
-      "name": "CatGO：AI 驱动的计算材料与催化研究开源工作台   项目参与贡献者",
-      "link": "",
-      "time": "",
-      "stack": "",
-      "target": "",
-      "team": "",
-      "contribution": "",
-      "effect": ""
-    },
-    {
-      "name": "材料在线实验室：一站式实验记录错误分析站   项目开发者",
-      "link": "",
-      "time": "",
-      "stack": "",
-      "target": "",
-      "team": "",
-      "contribution": "",
-      "effect": ""
-    }
-  ],
-  "selfEvaluation": "热爱前端与计算机交互技术，注重代码整洁与可维护性，推崇 DRY 与敏捷开发理念。“多静多思考，反省不张扬”是我恪守的做事箴言。具备出色的自驱力、快速技术学习能力与跨团队沟通协作素养，能从容应对复杂业务攻坚。"
+  }
 }

@@ -69,6 +69,35 @@ h1, h2, h3, h4 {
   margin-bottom: 5px !important;
 }
 
+/* 项目经历多行详情对齐排版 (解决换行后一行一条且左对齐问题) */
+.project-detail-block {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+  margin-bottom: 5px !important;
+}
+
+.project-detail-block .detail-label {
+  flex-shrink: 0 !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  line-height: 1.65 !important;
+  color: #334155;
+}
+
+.project-detail-block .detail-lines {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+.project-detail-block .detail-line {
+  line-height: 1.65 !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
 .header-side-by-side-card .header-name {
   font-size: 28px !important;
   font-weight: 700 !important;

@@ -180,7 +180,7 @@
           "stack": "VASP / Python / Shell / Linux / OriginLab",
           "target": "针对催化反应过电位高、开发周期长瓶颈，构建理论高通量模拟筛选平台",
           "team": "课题组核心研究骨干（独立承担计算筛选模块）",
-          "contribution": "1. 基于 VASP 搭建 180+ 种候选过渡金属催化剂超晶格异质结模型，批量计算表面吸附自由能与反应能垒；\n2. 编写 Python/Shell 自动化批处理流水线，实现“结构建模→几何优化→自洽计算→结果抽取”一键化，效率提升 4 倍；\n3. 结合形成能、溶剂化效应多维指标综合打分，最终锁定 1-2 种高活性、高稳定性优质候选材料，为实验合成提供直接指导。",
+          "contribution": "1. 基于 VASP 搭建== 180+ ==种候选过渡金属催化剂超晶格异质结模型，批量计算表面吸附自由能与反应能垒；\n2. 编写 Python/Shell 自动化批处理流水线，实现“结构建模→几何优化→自洽计算→结果抽取”一键化，效率提升== 5-6 ==倍；\n3. 结合形成能、溶剂化效应多维指标综合打分，最终锁定== 1-2 ==种高活性、高稳定性优质候选材料，为实验合成提供直接指导。\n4. Engineering N/O Coordination in Graphene-Supported Single-Atom Sites for Thermodynamically Preferred NO Electrooxidation to Nitrate ==SCI一区在投==",
           "effect": "大幅压缩新材料盲目试错周期，形成完整的计算模拟数据库与评估技术规范。"
         },
         {
