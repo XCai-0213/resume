@@ -680,8 +680,19 @@ mark, .mark-txt, .hl-tag {
 body.pdf-mode {
   padding: var(--page-pad-y, 8mm) var(--page-pad-x, 10mm) !important;
   box-sizing: border-box !important;
+  background: #ffffff !important;
+  background-image: none !important;
 }
 @media print {
+
+  /* 覆盖 index.css 的灰色纹理背景，确保白色页面 */
+  html, body {
+    background: #ffffff !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
 
   /* 褰诲簳娓呴櫎涓€鍒囨偓娴悆銆佸鑸寚绀哄櫒銆佽緟鍔╀晶鏍忋€佸渾鐐广€佸脊绐楅伄缃?*/
   .resume-quick-bar,
@@ -830,93 +841,12 @@ body.pdf-mode .resume-quick-bar,
   body.pdf-mode .preview-drawer,
   body.pdf-mode .toast-container,
   body.pdf-mode .icon-modal-backdrop,
-  body.pdf-mode #preview-backdrop {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    position: static !important;
-    overflow: hidden !important;
-  }
-body.pdf-mode .container .side {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    position: static !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-body.pdf-mode .container {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important;
-  }
-body.pdf-mode .container .main {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-body.pdf-mode .header-side-by-side-card {
-    box-shadow: none !important;
-    border: none !important;
-    border-bottom: 1.5px solid #0f172a !important;
-    padding: 0 0 3px 0 !important;
-    margin: 0 0 3px 0 !important;
-  }
-body.pdf-mode .header-side-by-side-card .header-avatar-box {
-    width: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin-right: 12px !important;
-    align-self: flex-start !important;
-  }
-body.pdf-mode .header-side-by-side-card .header-avatar-box img {
-    width: 78px !important;
-    height: 102px !important;
-    max-width: 78px !important;
-    max-height: 102px !important;
-    object-fit: cover !important;
-    border-radius: 3px !important;
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
-    display: block !important;
-  }
-body.pdf-mode .header-skills-row {
-    margin-top: 2px !important;
-    padding-top: 2px !important;
-  }
-body.pdf-mode .skill-badge-tag img {
-    width: 10px !important;
-    height: 10px !important;
-  }
 body.pdf-mode .info-unit hr {
     margin: 1px 0 1.5px 0 !important;
   }
 body.pdf-mode .project-detail-block,
   body.pdf-mode .project-detail-block .detail-label,
   body.pdf-mode .project-detail-block .detail-lines,
-body.pdf-mode .project-detail-block .detail-label {
-    font-weight: 600 !important;
-  }
-body.pdf-mode * {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
 
 
 /* 鍓嶇 html2canvas 鎴浘瀵煎嚭 + 灞忓箷棰勮瀵煎嚭鏁堟灉锛?pdf-mode 绫荤敓鏁堬級
@@ -1148,10 +1078,6 @@ body.pdf-mode .header-contact-list {
 }
 
 /* 瀵煎嚭鏃跺交搴曠姝㈠垎椤垫媶鏂?*/
-body.pdf-mode * {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
-}
 
 body.pdf-mode .project-detail-block,
   body.pdf-mode .project-detail-block .detail-label,
@@ -1200,3 +1126,20 @@ body.pdf-mode * {
   to { opacity: 1; transform: none; }
 }
 
+
+
+/* ---- 导出时项目之间加分隔间距，让每个项目有清晰的视觉边界 ---- */
+body.pdf-mode .info-unit ul > li {
+  padding-bottom: 6px !important;
+  margin-bottom: 8px !important;
+}
+
+body.pdf-mode .info-unit ul > li:last-child {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 项目 h3（标题行）与下方内容的间距 */
+body.pdf-mode .container .main .info-unit ul > li h3 {
+  margin-bottom: 4px !important;
+}
