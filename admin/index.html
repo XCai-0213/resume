@@ -50,6 +50,9 @@
         <li data-tab="qrcode-tab">
           <a href="javascript:void(0)"><i class="fa fa-qrcode"></i> <span>二维码设置</span></a>
         </li>
+        <li data-tab="sync-tab">
+          <a href="javascript:void(0)"><i class="fa fa-cloud"></i> <span>云同步</span></a>
+        </li>
       </ul>
       <div class="sidebar-footer">
         简历管理后台 v1.0
@@ -979,6 +982,88 @@
                 <div class="form-group">
                   <label>页脚文字</label>
                   <input type="text" class="form-control" id="home-field-footer" placeholder="如：© 2026 张栋梁 · Personal Homepage & Resume System">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. GitHub 云同步设置（跨设备数据源） -->
+          <div class="tab-panel" id="sync-tab">
+            <div class="card">
+              <div class="card-header" style="background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);">
+                <h3><i class="fa fa-cloud"></i> GitHub 云同步（多设备 / 多浏览器数据一致）</h3>
+                <span class="header-desc">配置后所有设备打开都会拉取云端最新数据，保存即全网同步</span>
+              </div>
+              <div class="card-body">
+                <div class="modal-tip" style="margin-bottom: 16px;">
+                  <i class="fa fa-info-circle"></i>
+                  <b>原理</b>：本系统把您的 GitHub 仓库（<b>XCai-0213/resume</b>）当数据库用。后台保存时直接通过 GitHub API 写入仓库里的 <code>data/resume.json</code> 等文件；
+                  任何设备打开网站时优先从云端拉取最新数据。同时保存会触发 EdgeOne 自动重新部署，线上内容同步更新。
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group" style="flex: 1;">
+                    <label>GitHub 用户名</label>
+                    <input type="text" class="form-control" id="sync-field-owner" placeholder="XCai-0213">
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label>仓库名</label>
+                    <input type="text" class="form-control" id="sync-field-repo" placeholder="resume">
+                  </div>
+                  <div class="form-group" style="flex: 0.6;">
+                    <label>分支</label>
+                    <input type="text" class="form-control" id="sync-field-branch" placeholder="main" value="main">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>GitHub Personal Access Token（需要 repo 权限）</label>
+                  <input type="password" class="form-control" id="sync-field-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+                  <div class="form-help">
+                    获取方式：<a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener" style="color: #2563eb;">github.com/settings/tokens</a>
+                    → Generate new token → 勾选 <b>Contents</b> 读写权限 → 生成后粘贴到这里。Token 只存在您的浏览器里，不会上传到任何第三方。
+                  </div>
+                </div>
+
+                <div class="form-row" style="align-items: flex-end;">
+                  <div class="form-group" style="flex: 1;">
+                    <label>简历数据文件路径</label>
+                    <input type="text" class="form-control" id="sync-field-path" value="data/resume.json">
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label>投递记录文件路径</label>
+                    <input type="text" class="form-control" id="sync-field-jobs-path" value="data/applications.json">
+                  </div>
+                  <div class="form-group" style="flex: 1;">
+                    <label>主页配置文件路径</label>
+                    <input type="text" class="form-control" id="sync-field-home-path" value="data/homepage.json">
+                  </div>
+                </div>
+
+                <div class="form-actions" style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
+                  <button type="button" class="btn btn-primary" id="btn-sync-save">
+                    <i class="fa fa-save"></i> 保存同步配置
+                  </button>
+                  <button type="button" class="btn btn-secondary" id="btn-sync-test">
+                    <i class="fa fa-plug"></i> 测试连接
+                  </button>
+                  <button type="button" class="btn btn-danger" id="btn-sync-clear">
+                    <i class="fa fa-times"></i> 清除配置（回到仅本地模式）
+                  </button>
+                </div>
+
+                <div id="sync-status" style="margin-top: 14px; padding: 10px 14px; border-radius: 8px; font-size: 13px; display: none;"></div>
+
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed #e2e8f0;">
+                  <h4 style="font-size: 13.5px; font-weight: 600; margin-bottom: 8px; color: #0f172a;">
+                    <i class="fa fa-question-circle"></i> 常见问题
+                  </h4>
+                  <ul style="font-size: 12.5px; color: #475569; line-height: 1.8; padding-left: 18px; margin: 0;">
+                    <li><b>配好后换设备/浏览器怎么办？</b> 新设备只需在浏览器打开本页，填入同样的 Token 保存一次配置即可（配置存在各自浏览器里，数据在云端）。</li>
+                    <li><b>保存后线上多久更新？</b> GitHub 提交后 EdgeOne 自动构建，约 30~60 秒全网生效。</li>
+                    <li><b>Token 安全吗？</b> Token 仅存于您自己浏览器的 localStorage，随请求发往 GitHub 官方 API，不经过任何第三方。</li>
+                    <li><b>两个人同时编辑会冲突吗？</b> GitHub API 以 sha 校验保护，后保存的一方需先拉取最新数据再保存（刷新页面即拉取）。</li>
+                  </ul>
                 </div>
               </div>
             </div>

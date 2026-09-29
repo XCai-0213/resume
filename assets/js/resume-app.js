@@ -682,14 +682,19 @@
           quickToast('✅ PDF 已生成并开始下载（服务端渲染）', 'success');
           return;
         }
-        // 服务器返回 JSON（无浏览器环境）→ 回退浏览器打印
-        quickToast('服务器未配置浏览器，改用浏览器打印模式', 'info');
+        // 服务器返回 JSON（无浏览器环境）→ 走无弹窗导出
       } catch (e) {
-        // 网络失败（静态部署环境）→ 回退浏览器打印
-        quickToast('服务端不可用，改用浏览器打印模式', 'info');
+        // 网络失败（静态部署环境）→ 走无弹窗导出
       }
 
-      // 回退：浏览器打印（先自适应行距，再加类名隐藏快捷栏）
+      // 无弹窗高质量导出：html2canvas 截图整页 → jsPDF 生成单页 PDF
+      // 动态加载库（CDN + 本地双保险），失败才降级 window.print
+      quickToast('正在以无弹窗模式生成 PDF（首次需加载渲染库）...', 'info');
+      const ok = await exportViaCanvas();
+      if (ok) return;
+
+      // 最终兜底：浏览器打印
+      quickToast('降级为浏览器打印模式', 'info');
       autoFitForPrint();
       document.body.classList.add('printing-single-page');
       setTimeout(() => {
@@ -700,6 +705,81 @@
         }, 1000);
       }, 150);
     });
+
+    // 无弹窗导出：html2canvas + jsPDF（把整页渲染为图片再打包成单页 PDF）
+    async function exportViaCanvas() {
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = src;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      }
+      const cdnBase = 'https://cdn.jsdelivr.net/npm/';
+      try {
+        if (!window.html2canvas) await loadScript(cdnBase + 'html2canvas@1.4.1/dist/html2canvas.min.js');
+        if (!window.jspdf) await loadScript(cdnBase + 'jspdf@2.5.1/dist/jspdf.umd.min.js');
+      } catch (e) {
+        // CDN 失败 → 尝试本地（无本地库则放弃）
+        try {
+          if (!window.html2canvas) await loadScript('assets/libs/html2canvas.min.js');
+          if (!window.jspdf) await loadScript('assets/libs/jspdf.umd.min.js');
+        } catch (e2) {
+          return false;
+        }
+      }
+      if (!window.html2canvas || !window.jspdf) return false;
+
+      // 打印前自适应行距
+      autoFitForPrint();
+      document.body.classList.add('printing-single-page');
+
+      try {
+        // 等待字体/图片就绪
+        await new Promise(r => setTimeout(r, 300));
+        const container = document.getElementById('resume-container');
+        const canvas = await window.html2canvas(container, {
+          scale: 2.5,                          // 高清
+          useCORS: true,                       // 允许跨域图片（头像/图标）
+          backgroundColor: '#ffffff',
+          logging: false,
+          windowWidth: 794,                    // A4 宽 210mm ≈ 794px @96dpi
+          windowHeight: 1123                   // A4 高 297mm ≈ 1123px
+        });
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+        const pageW = 210, pageH = 297;
+        const margin = 5;
+        const contentW = pageW - margin * 2;
+        const imgH = canvas.height * (contentW / canvas.width);
+
+        // 自适应：若内容高 > 页面高则压缩到一页内
+        let drawH = imgH, drawY = margin;
+        if (imgH > pageH - margin * 2) {
+          drawH = pageH - margin * 2;
+          // 等比缩放宽度使其符合高度（保持比例，宽度会小于 contentW，居中）
+          const ratio = drawH / imgH;
+          const drawW = contentW * ratio;
+          const drawX = (pageW - drawW) / 2;
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', drawX, drawY, drawW, drawH);
+        } else {
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', margin, drawY, contentW, imgH);
+        }
+
+        pdf.save('简历-A4单页.pdf');
+        quickToast('✅ PDF 已生成（无弹窗模式，单页 A4 高清）', 'success');
+        return true;
+      } catch (err) {
+        console.warn('html2canvas 导出失败:', err);
+        return false;
+      } finally {
+        document.body.classList.remove('printing-single-page');
+        document.body.removeAttribute('data-fit');
+      }
+    }
 
     document.getElementById('btn-toggle-layout').addEventListener('click', () => {
       const container = document.getElementById('resume-container');

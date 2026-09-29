@@ -512,6 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initImportResume();
   initHomepageEvents();
   initPresetResumes();
+  initSyncSettings();
   fetchResumeData();
   fetchHomepageData();
 });
@@ -2636,6 +2637,95 @@ function bindPresetModalEvents() {
         applyPresetResume(currentPreviewingPreset.id);
         closeModal();
       }
+    });
+  }
+}
+
+/* =======================================================
+ * GitHub 云同步设置（跨设备/多浏览器数据一致）
+ * ======================================================= */
+function initSyncSettings() {
+  const ownerEl = document.getElementById('sync-field-owner');
+  if (!ownerEl) return;
+  const repoEl = document.getElementById('sync-field-repo');
+  const branchEl = document.getElementById('sync-field-branch');
+  const tokenEl = document.getElementById('sync-field-token');
+  const pathEl = document.getElementById('sync-field-path');
+  const jobsPathEl = document.getElementById('sync-field-jobs-path');
+  const homePathEl = document.getElementById('sync-field-home-path');
+  const statusEl = document.getElementById('sync-status');
+
+  // 载入已有配置
+  const cfg = STATIC_API.getGhConfig();
+  if (cfg) {
+    ownerEl.value = cfg.owner || '';
+    repoEl.value = cfg.repo || '';
+    branchEl.value = cfg.branch || 'main';
+    pathEl.value = cfg.path || 'data/resume.json';
+    jobsPathEl.value = cfg.jobsPath || 'data/applications.json';
+    homePathEl.value = cfg.homepagePath || 'data/homepage.json';
+    tokenEl.placeholder = cfg.token ? '已配置（留空保持不变）' : 'ghp_xxx';
+  }
+
+  function showStatus(msg, type) {
+    if (!statusEl) return;
+    statusEl.style.display = 'block';
+    statusEl.style.background = type === 'error' ? '#fef2f2' : (type === 'success' ? '#f0fdf4' : '#eff6ff');
+    statusEl.style.border = '1px solid ' + (type === 'error' ? '#fecaca' : (type === 'success' ? '#bbf7d0' : '#bfdbfe'));
+    statusEl.style.color = type === 'error' ? '#b91c1c' : (type === 'success' ? '#15803d' : '#1d4ed8');
+    statusEl.innerHTML = '<i class="fa ' + (type === 'error' ? 'fa-exclamation-circle' : (type === 'success' ? 'fa-check-circle' : 'fa-info-circle')) + '"></i> ' + msg;
+  }
+
+  function collectCfg() {
+    const old = STATIC_API.getGhConfig() || {};
+    const token = tokenEl.value.trim() || old.token || '';
+    return {
+      owner: ownerEl.value.trim(),
+      repo: repoEl.value.trim(),
+      branch: branchEl.value.trim() || 'main',
+      token: token,
+      path: pathEl.value.trim() || 'data/resume.json',
+      jobsPath: jobsPathEl.value.trim() || 'data/applications.json',
+      homepagePath: homePathEl.value.trim() || 'data/homepage.json'
+    };
+  }
+
+  const saveBtn = document.getElementById('btn-sync-save');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const c = collectCfg();
+      if (!c.owner || !c.repo || !c.token) {
+        showStatus('请填写完整的用户名、仓库名和 Token', 'error');
+        return;
+      }
+      STATIC_API.setGhConfig(c);
+      showStatus('✅ 同步配置已保存到本浏览器！此后保存简历/主页/投递记录都会直接写入 GitHub 云端，所有设备自动同步。', 'success');
+    });
+  }
+
+  const testBtn = document.getElementById('btn-sync-test');
+  if (testBtn) {
+    testBtn.addEventListener('click', async () => {
+      // 测试前先用表单里的值临时测试（未保存也可测）
+      const c = collectCfg();
+      if (!c.owner || !c.repo || !c.token) {
+        showStatus('请先填写完整的用户名、仓库名和 Token 再测试', 'error');
+        return;
+      }
+      STATIC_API.setGhConfig(c); // 临时保存以供 ghTestConnection 读取
+      showStatus('正在测试连接...', 'info');
+      const r = await STATIC_API.ghTestConnection();
+      showStatus(r.success ? r.message : r.error, r.success ? 'success' : 'error');
+    });
+  }
+
+  const clearBtn = document.getElementById('btn-sync-clear');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (!confirm('确定清除云同步配置吗？清除后回到「仅本浏览器保存」模式（数据不会丢失）。')) return;
+      STATIC_API.setGhConfig(null);
+      localStorage.removeItem(STATIC_API.GH_CFG_KEY);
+      showStatus('已清除云同步配置，回到仅本地模式', 'info');
     });
   }
 }

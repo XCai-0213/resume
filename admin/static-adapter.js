@@ -80,6 +80,75 @@
     return './';
   }
 
+  // ============================================================
+  // GitHub 云同步（跨设备/跨浏览器数据源）
+  // 配置保存在 localStorage：GH_SYNC_CONFIG = { owner, repo, branch, token, path }
+  // 数据流：保存 → 写 GitHub（Contents API）→ 全局生效
+  //         读取 → 优先云端 → 本地缓存兜底
+  // ============================================================
+  const GH_CFG_KEY = 'gh_sync_config_v1';
+  const GH_CACHE_KEY = 'gh_sync_cache_v1';
+
+  function getGhConfig() {
+    return readLocal(GH_CFG_KEY, null);
+  }
+
+  function setGhConfig(cfg) {
+    return writeLocal(GH_CFG_KEY, cfg);
+  }
+
+  function ghApiBase(cfg) {
+    return 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + '/contents/';
+  }
+
+  function ghHeaders(cfg) {
+    return {
+      'Authorization': 'Bearer ' + cfg.token,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    };
+  }
+
+  // 读取 GitHub 上的 JSON 文件（带 sha，供更新用）
+  async function ghReadJson(cfg, filePath) {
+    const url = ghApiBase(cfg) + filePath + '?ref=' + (cfg.branch || 'main') + '&t=' + Date.now();
+    const res = await fetch(url, { headers: ghHeaders(cfg), cache: 'no-store' });
+    if (res.status === 404) return { sha: null, data: null };
+    if (!res.ok) throw new Error('GitHub 读取失败 HTTP ' + res.status);
+    const json = await res.json();
+    const content = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
+    return { sha: json.sha, data: content };
+  }
+
+  // 写 JSON 到 GitHub
+  async function ghWriteJson(cfg, filePath, data, sha) {
+    const url = ghApiBase(cfg) + filePath;
+    const body = {
+      message: 'update ' + filePath + ' (via resume admin)',
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+      branch: cfg.branch || 'main'
+    };
+    if (sha) body.sha = sha;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: ghHeaders(cfg),
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      throw new Error('GitHub 写入失败 HTTP ' + res.status + ' ' + errText.substring(0, 120));
+    }
+    return true;
+  }
+
+  // 判断当前是否处于静态模式（即需要走 GitHub 同步）
+  let staticModeCache = null;
+  async function isStaticMode() {
+    if (staticModeCache !== null) return staticModeCache;
+    staticModeCache = !(await probeApi());
+    return staticModeCache;
+  }
+
   // ---------- 简历数据 ----------
   async function loadResume() {
     const useApi = await probeApi();
@@ -92,11 +161,29 @@
     }
 
     // ---- 静态模式 ----
-    // 1) 优先用浏览器本地已保存的修改
-    const local = readLocal(LS_KEY, null);
+    // 1) GitHub 云端数据（跨设备同步的主数据源）
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        const remote = await ghReadJson(cfg, cfg.path || 'data/resume.json');
+        if (remote.data) {
+          // 云端命中：写入本地缓存（供离线/下次快速加载），返回云端数据
+          writeLocal(GH_CACHE_KEY, remote.data);
+          return { success: true, data: remote.data, source: 'github' };
+        }
+      } catch (e) {
+        console.warn('GitHub 读取失败，降级到本地缓存:', e);
+        // 云端失败时兜底本地缓存
+        const cached = readLocal(GH_CACHE_KEY, null);
+        if (cached) return { success: true, data: cached, source: 'github-cache' };
+      }
+    }
+
+    // 2) 本地缓存（上次 GitHub 同步的副本或旧版手动保存）
+    const local = readLocal(LS_KEY, null) || readLocal(GH_CACHE_KEY, null);
     if (local) return { success: true, data: local, source: 'local' };
 
-    // 2) 其次读取打包好的静态默认数据
+    // 3) 打包好的静态默认数据
     try {
       const res = await fetch(basePrefix() + 'data.json?t=' + Date.now());
       if (res.ok) {
@@ -105,7 +192,7 @@
       }
     } catch (e) { /* ignore */ }
 
-    return { success: false, error: '未找到简历数据（本地服务器未运行，且无静态 data.json）' };
+    return { success: false, error: '未找到简历数据（本地服务器未运行，且无云端/静态数据）' };
   }
 
   async function saveResume(data) {
@@ -125,8 +212,29 @@
       }
     }
 
-    // ---- 静态模式：写入 localStorage ----
-    // 同时也更新内存中的静态 data.json 缓存，前台同源页面即可读到
+    // ---- 静态模式：优先 GitHub 云同步 ----
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        // 读取当前 sha（GitHub 要求更新必须带 sha）
+        const remote = await ghReadJson(cfg, cfg.path || 'data/resume.json');
+        await ghWriteJson(cfg, cfg.path || 'data/resume.json', data, remote.sha);
+        // 同步更新本地缓存
+        writeLocal(GH_CACHE_KEY, data);
+        writeLocal(LS_KEY, data);
+        return {
+          success: true,
+          message: '🎉 已同步到 GitHub 云端！所有设备打开都会拉取这份最新数据（EdgeOne 约 30 秒后自动重新部署）。'
+        };
+      } catch (e) {
+        // GitHub 失败：降级本地并报错
+        writeLocal(LS_KEY, data);
+        writeLocal(GH_CACHE_KEY, data);
+        return { success: false, error: '云端同步失败：' + e.message + '（数据已暂存本地，可稍后重试保存）' };
+      }
+    }
+
+    // ---- 无 GitHub 配置：纯本地 ----
     const ok = writeLocal(LS_KEY, data);
     if (!ok) {
       return {
@@ -136,7 +244,7 @@
     }
     return {
       success: true,
-      message: '✅ 已保存到浏览器本地！如需永久发布，请点「导出」下载 data.json 后重新上传到静态托管。'
+      message: '✅ 已保存到本浏览器！注意：其他设备/浏览器看不到此修改。配置 GitHub 云同步后可全端同步（后台 → 云同步设置）。'
     };
   }
 
@@ -192,6 +300,14 @@
         if (json.success && json.data) return { success: true, data: json.data };
       } catch (e) { /* 降级 */ }
     }
+    // GitHub 云端优先
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        const remote = await ghReadJson(cfg, cfg.jobsPath || 'data/applications.json');
+        if (remote.data) return { success: true, data: remote.data };
+      } catch (e) { /* 降级 */ }
+    }
     const local = readLocal(LS_JOBS_KEY, null);
     if (local) return { success: true, data: local };
     try {
@@ -216,6 +332,20 @@
         const json = await res.json();
         if (json.success) return { success: true, count: json.count };
       } catch (e) { /* 降级 */ }
+    }
+    // GitHub 云同步
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        const filePath = cfg.jobsPath || 'data/applications.json';
+        const remote = await ghReadJson(cfg, filePath);
+        await ghWriteJson(cfg, filePath, data, remote.sha);
+        writeLocal(LS_JOBS_KEY, data);
+        return { success: true, count: (data.rows || []).length, static: true };
+      } catch (e) {
+        writeLocal(LS_JOBS_KEY, data);
+        return { success: false, error: '云端同步失败：' + e.message };
+      }
     }
     const ok = writeLocal(LS_JOBS_KEY, data);
     return ok
@@ -320,6 +450,14 @@
         if (json.success && json.data) return { success: true, data: json.data };
       } catch (e) { /* 降级 */ }
     }
+    // GitHub 云端优先
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        const remote = await ghReadJson(cfg, cfg.homepagePath || 'data/homepage.json');
+        if (remote.data) return { success: true, data: remote.data };
+      } catch (e) { /* 降级 */ }
+    }
     const local = readLocal(LS_HOMEPAGE_KEY, null);
     if (local) return { success: true, data: local };
     try {
@@ -353,6 +491,19 @@
         return { success: false, error: json.error || '保存失败' };
       } catch (e) {
         return { success: false, error: e.message };
+      }
+    }
+    // GitHub 云同步
+    const cfg = getGhConfig();
+    if (cfg && cfg.token) {
+      try {
+        const filePath = cfg.homepagePath || 'data/homepage.json';
+        const remote = await ghReadJson(cfg, filePath);
+        await ghWriteJson(cfg, filePath, data, remote.sha);
+        return { success: true, message: '🎉 个人主页配置已同步到 GitHub 云端！' };
+      } catch (e) {
+        writeLocal(LS_HOMEPAGE_KEY, data);
+        return { success: false, error: '云端同步失败：' + e.message };
       }
     }
     const ok = writeLocal(LS_HOMEPAGE_KEY, data);
@@ -410,8 +561,27 @@
     loadHomepage: loadHomepage,
     saveHomepage: saveHomepage,
     loadPresets: loadPresets,
+    // GitHub 云同步配置
+    getGhConfig: getGhConfig,
+    setGhConfig: setGhConfig,
+    ghTestConnection: async function () {
+      const cfg = getGhConfig();
+      if (!cfg || !cfg.token) return { success: false, error: '未配置' };
+      try {
+        const res = await fetch('https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo, {
+          headers: ghHeaders(cfg), cache: 'no-store'
+        });
+        if (res.ok) return { success: true, message: '连接成功：' + cfg.owner + '/' + cfg.repo };
+        if (res.status === 401) return { success: false, error: 'Token 无效或已过期（401）' };
+        if (res.status === 404) return { success: false, error: '仓库不存在或 Token 无权限（404）' };
+        return { success: false, error: 'HTTP ' + res.status };
+      } catch (e) {
+        return { success: false, error: e.message };
+      }
+    },
     LS_KEY: LS_KEY,
     LS_JOBS_KEY: LS_JOBS_KEY,
-    LS_HOMEPAGE_KEY: LS_HOMEPAGE_KEY
+    LS_HOMEPAGE_KEY: LS_HOMEPAGE_KEY,
+    GH_CFG_KEY: GH_CFG_KEY
   };
 })(window);
