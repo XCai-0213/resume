@@ -136,7 +136,13 @@
     });
     if (!res.ok) {
       const errText = await res.text().catch(() => '');
-      throw new Error('GitHub 写入失败 HTTP ' + res.status + ' ' + errText.substring(0, 120));
+      if (res.status === 403) {
+      throw new Error('Token 权限不足（403）。Fine-grained Token 需要：① Repository access 选中 XCai-0213/resume；② Permissions → Contents → 设为 Read and write。请到 github.com/settings/personal-access-tokens 重新配置。');
+    }
+    if (res.status === 404) {
+      throw new Error('仓库或文件不存在（404）。请确认仓库名与分支正确，且 Token 的 Repository access 包含该仓库。');
+    }
+throw new Error('GitHub 写入失败 HTTP ' + res.status + ' ' + errText.substring(0, 120));
     }
     return true;
   }

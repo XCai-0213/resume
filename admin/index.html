@@ -1017,11 +1017,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label>GitHub Personal Access Token（需要 repo 权限）</label>
-                  <input type="password" class="form-control" id="sync-field-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+                  <label>GitHub Personal Access Token（Fine-grained，需 Contents 读写权限）</label>
+                  <input type="password" class="form-control" id="sync-field-token" placeholder="github_pat_xxxxxxxxxxxxxxxx">
                   <div class="form-help">
-                    获取方式：<a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener" style="color: #2563eb;">github.com/settings/tokens</a>
-                    → Generate new token → 勾选 <b>Contents</b> 读写权限 → 生成后粘贴到这里。Token 只存在您的浏览器里，不会上传到任何第三方。
+                    <b>获取步骤</b>：打开
+                    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color: #2563eb;">github.com/settings/personal-access-tokens/new</a>
+                    → ① Token name 随意填（如 resume-sync）→ ② <b>Repository access</b> 选 <b>Only select repositories</b> 并勾选 <b>XCai-0213/resume</b> → ③ 展开 <b>Permissions → Repository permissions → Contents</b> 设为 <b>Read and write</b>（Metadata 自动变 Read-only 属正常）→ ④ Generate → 复制 <b>github_pat_</b> 开头的 Token 粘贴到这里。Token 只存在您的浏览器里，不会上传到任何第三方。
+                    <br>⚠️ 出现 403 "Resource not accessible" 几乎都是漏了上面 ② 或 ③ —— Contents 必须是 <b>Read and write</b> 而不是 Read-only。
                   </div>
                 </div>
 
