@@ -588,29 +588,30 @@
     }
   }
 
-  // 行距自适应：导出/打印前测量内容高度，选择合适档位（auto/compact/tiny）
-  // 在 .pdf-mode（紧凑排版）作用域下测量，与 html2canvas / 浏览器打印 / 服务端截图的实际效果一致
+  // 行距自适应：导出/打印前测量内容高度，选择合适档位
+  // 档位：comfort（内容偏少，放大填满版面）→ auto → compact → tiny
+  // 全部在 .pdf-mode 紧凑排版作用域下测量，与服务端打印 / html2canvas 截图结果一致
   function autoFitForPrint() {
     const container = document.getElementById('resume-container');
-    if (!container) return;
+    if (!container) return null;
     // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
     const a4ContentHeight = 285 * 3.7795;
 
-    // 进入紧凑排版作用域（pdf-mode + 移除旧档位）
     document.body.classList.add('pdf-mode');
-    document.body.removeAttribute('data-fit');
+    const measure = (fit) => {
+      document.body.setAttribute('data-fit', fit);
+      return container.scrollHeight;
+    };
 
-    const measure = () => container.scrollHeight;
+    // 先量最宽松档：明显不足一页时用 comfort 放大，避免底部大片留白
+    const hComfort = measure('comfort');
+    if (hComfort <= a4ContentHeight * 0.98) return 'comfort';
 
-    // 依次尝试三档：auto → compact → tiny
-    document.body.setAttribute('data-fit', 'auto');
-    if (measure() <= a4ContentHeight) return;
-
-    document.body.setAttribute('data-fit', 'compact');
-    if (measure() <= a4ContentHeight) return;
-
-    document.body.setAttribute('data-fit', 'tiny');
-    // tiny 已是最小，无论是否超出都保持（CSS 已极限压缩）
+    // 依次收紧：auto → compact → tiny
+    if (measure('auto') <= a4ContentHeight) return 'auto';
+    if (measure('compact') <= a4ContentHeight) return 'compact';
+    measure('tiny');
+    return 'tiny';
   }
 
   // 退出导出排版态，恢复正常屏幕显示
@@ -799,15 +800,21 @@
   }
 
   // 页面加载就绪
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     setupQuickBar();
-    loadResume();
-    // URL 带 ?pdf=1 时自动进入导出排版（用于无弹窗导出与效果预览）
-    if (new URLSearchParams(location.search).get('pdf') === '1') {
-      setTimeout(() => {
-        autoFitForPrint();
-        // 保持导出态供观察/截图（不会自动移除）
-      }, 600);
+    await loadResume();   // 必须等数据渲染完再测量，否则量到的是空容器
+
+    // ?pdf=1 或 ?print=1 → 自动进入导出排版
+    // （两者都支持：前端导出用 pdf=1，服务端 headless 打印用 print=1）
+    const q = new URLSearchParams(location.search);
+    if (q.get('pdf') === '1' || q.get('print') === '1') {
+      // 等图片/字体就绪再测量，保证高度准确
+      const settle = () => new Promise(r => {
+        if (document.readyState === 'complete') return setTimeout(r, 350);
+        window.addEventListener('load', () => setTimeout(r, 350), { once: true });
+      });
+      await settle();
+      autoFitForPrint();
     }
   });
 })();
