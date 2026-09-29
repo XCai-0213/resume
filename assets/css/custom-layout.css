@@ -1130,8 +1130,8 @@ body.pdf-mode * {
 
 /* ---- 导出时项目之间加分隔间距，让每个项目有清晰的视觉边界 ---- */
 body.pdf-mode .info-unit ul > li {
-  padding-bottom: 6px !important;
-  margin-bottom: 8px !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 14px !important;
 }
 
 body.pdf-mode .info-unit ul > li:last-child {
