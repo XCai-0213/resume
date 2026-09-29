@@ -1,5 +1,5 @@
 /* =======================================================
- * 鍏ㄥ眬瀛椾綋璁剧疆锛氫腑鏂囦紭鍏堣嫻鏋滆嫻鏂?(PingFang SC)锛岃嫳鏂囦笌鏁板瓧娌跨敤绯荤粺鏃犺‖绾? * ======================================================= */
+ * 閸忋劌鐪€涙ぞ缍嬬拋鍓х枂閿涙矮鑵戦弬鍥︾喘閸忓牐瀚婚弸婊嗗閺?(PingFang SC)閿涘矁瀚抽弬鍥︾瑢閺佹澘鐡у▽璺ㄦ暏缁崵绮洪弮鐘衡€栫痪? * ======================================================= */
 html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, p, span, a, label, mark, time, li {
   font-family: "PingFang SC", "PingFang SC Medium", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
   -webkit-font-smoothing: antialiased !important;
@@ -9,12 +9,12 @@ html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, p, span, a,
 
 body {
   font-weight: 500 !important;
-  color: #0f172a !important; /* 娣卞害鐭虫澘榛戯紝楂樺姣旀竻鏅板害 */
+  color: #0f172a !important; /* 濞ｅ崬瀹抽惌铏緲姒涙埊绱濇妯侯嚠濮ｆ梹绔婚弲鏉垮 */
   font-size: 13.8px !important;
   line-height: 1.65 !important;
 }
 
-/* 鑻规灉 iOS 绮椾綋妯″紡璐ㄦ劅寮哄寲锛氭爣棰樸€佺粡鍘嗐€佹椂闂翠笌瑕佺偣寮哄寲鍔犵矖 */
+/* 閼昏鐏?iOS 缁ぞ缍嬪Ο鈥崇础鐠愩劍鍔呭鍝勫閿涙碍鐖ｆ０妯糕偓浣虹病閸樺棎鈧焦妞傞梻缈犵瑢鐟曚胶鍋ｅ鍝勫閸旂姷鐭?*/
 h1, h2, h3, h4 {
   color: #0f172a !important;
   font-weight: 600 !important;
@@ -47,7 +47,7 @@ h1, h2, h3, h4 {
   font-size: 13.5px !important;
 }
 
-/* 鏁欒偛缁忓巻澶氳鎻忚堪锛氭瘡琛岀嫭绔嬫垚娈碉紝瀹屾暣淇濈暀鍦ㄥ悗鍙拌緭鍏ョ殑鎹㈣ */
+/* 閺佹瑨鍋涚紒蹇撳坊婢舵俺顢戦幓蹇氬牚閿涙碍鐦＄悰宀€瀚粩瀣灇濞堢绱濈€瑰本鏆ｆ穱婵堟殌閸︺劌鎮楅崣鎷岀翻閸忋儳娈戦幑銏ｎ攽 */
 .container .main .info-unit ul li p.edu-line {
   margin: 0 0 1px 0 !important;
   padding: 0 !important;
@@ -68,7 +68,7 @@ h1, h2, h3, h4 {
   margin-bottom: 5px !important;
 }
 
-/* 椤圭洰缁忓巻澶氳璇︽儏瀵归綈鎺掔増 (瑙ｅ喅鎹㈣鍚庝竴琛屼竴鏉′笖宸﹀榻愰棶棰? */
+/* 妞ゅ湱娲扮紒蹇撳坊婢舵俺顢戠拠锔藉剰鐎靛綊缍堥幒鎺斿 (鐟欙絽鍠呴幑銏ｎ攽閸氬簼绔寸悰灞肩閺夆€茬瑬瀹革箑顕鎰版６妫? */
 .project-detail-block {
   display: flex !important;
   align-items: flex-start !important;
@@ -140,7 +140,7 @@ h1, h2, h3, h4 {
   color: #0f172a !important;
 }
 
-/* 鎶€鑳藉窘绔犲唴鐨勫搧鐗?Logo 鍥剧墖锛堝畼鏂瑰僵鑹插師鑹插睍绀猴級 */
+/* 閹垛偓閼宠棄绐樼粩鐘插敶閻ㄥ嫬鎼ч悧?Logo 閸ュ墽澧栭敍鍫濈暭閺傜懓鍍甸懝鎻掑斧閼规彃鐫嶇粈鐚寸礆 */
 .skill-badge-tag .skill-logo-img {
   width: 20px;
   height: 20px;
@@ -150,7 +150,7 @@ h1, h2, h3, h4 {
   display: inline-block;
 }
 
-/* 杩涘害鏉℃ā寮忎笅鐨勬妧鑳?Logo 鍥剧墖 */
+/* 鏉╂稑瀹抽弶鈩兡佸蹇庣瑓閻ㄥ嫭濡ч懗?Logo 閸ュ墽澧?*/
 .container .main .info-unit ul li label .skill-logo-img {
   width: 20px;
   height: 20px;
@@ -160,12 +160,12 @@ h1, h2, h3, h4 {
   display: inline-block;
 }
 
-/* 寰界珷鍐呯殑瀛椾綋鍥炬爣闂磋窛 */
+/* 瀵扮晫鐝烽崘鍛畱鐎涙ぞ缍嬮崶鐐垼闂傜绐?*/
 .skill-badge-tag i {
   margin-right: 6px;
 }
 
-/* 澶撮儴鍗＄墖鍐呯殑涓撲笟鎶€鑳借 (鎻愬崌鍒伴《閮ㄤ笌澶村儚骞跺垪锛岄珮搴﹁嚜閫傚簲鑷劧鎹㈣) */
+/* 婢舵挳鍎撮崡锛勫閸愬懐娈戞稉鎾茬瑹閹垛偓閼冲€燁攽 (閹绘劕宕岄崚浼淬€婇柈銊ょ瑢婢舵潙鍎氶獮璺哄灙閿涘矂鐝惔锕佸殰闁倸绨查懛顏嗗姧閹广垼顢? */
 .header-side-by-side-card .header-skills-row {
   display: flex;
   align-items: flex-start;
@@ -200,7 +200,7 @@ h1, h2, h3, h4 {
   min-width: 0;
 }
 
-/* 澶撮儴鎶€鑳藉窘绔犻噰鐢ㄤ笌涓诲唴瀹瑰尯涓€鑷寸殑浼橀泤鑸掗€傚昂瀵?*/
+/* 婢舵挳鍎撮幎鈧懗钘夌獦缁旂娀鍣伴悽銊ょ瑢娑撹鍞寸€圭懓灏稉鈧懛瀵告畱娴兼﹢娉ら懜鎺椻偓鍌氭槀鐎?*/
 .header-side-by-side-card .header-skills-row .skill-badge-tag {
   font-size: 12.5px !important;
   padding: 3px 12px !important;
@@ -214,13 +214,13 @@ h1, h2, h3, h4 {
   --primary-light: rgba(26, 188, 156, 0.12);
   --primary-hover: #16a085;
 
-  /* 瀵煎嚭鑷€傚簲杈硅窛锛圝S autoFitForPrint 鍔ㄦ€佹洿鏂帮級 */
+  /* 鐎电厧鍤懛顏堚偓鍌氱安鏉堢绐涢敍鍦漇 autoFitForPrint 閸斻劍鈧焦娲块弬甯礆 */
   --page-pad-x: 10mm;
   --page-pad-y: 8mm;
 }
 
 /* =======================================================
- * 1. 澶村儚鏍峰紡锛氫繚鐣欏師鍥炬瘮渚嬩笌褰㈢姸锛屽交搴曠Щ闄ゅ渾褰㈣鍓? * ======================================================= */
+ * 1. 婢舵潙鍎氶弽宄扮础閿涙矮绻氶悾娆忓斧閸ョ偓鐦笟瀣╃瑢瑜般垻濮搁敍灞戒氦鎼存洜些闂勩倕娓捐ぐ銏ｎ梿閸? * ======================================================= */
 .container .side .me .portrait {
   width: auto !important;
   height: auto !important;
@@ -246,7 +246,7 @@ h1, h2, h3, h4 {
   display: block !important;
 }
 
-/* 澶撮儴鍗＄墖澶村儚妗嗭細绱у瘑璐村悎鍥剧墖鏈韩锛屽浘鐗囦繚鎸佸師濮嬫瘮渚嬪眳涓紝缁濅笉鎷変几鐣欑櫧 */
+/* 婢舵挳鍎撮崡锛勫婢舵潙鍎氬鍡窗缁毖冪槕鐠愭潙鎮庨崶鍓у閺堫剝闊╅敍灞芥禈閻楀洣绻氶幐浣稿斧婵鐦笟瀣湷娑擃叏绱濈紒婵呯瑝閹峰鍑犻悾娆戞 */
 .header-side-by-side-card .header-avatar-box {
   flex-shrink: 0;
   align-self: flex-start !important;
@@ -279,12 +279,11 @@ h1, h2, h3, h4 {
 }
 
 /* =======================================================
- * 2. 鍩烘湰淇℃伅鍜岃仈绯绘柟寮忔斁鍦ㄥご鍍忓彸渚х殑绌虹櫧锛堟í鍚戝ご閮ㄥ悕鐗囷級
- * ======================================================= */
+ * 2. 閸╃儤婀版穱鈩冧紖閸滃矁浠堢化缁樻煙瀵繑鏂侀崷銊ャ仈閸嶅繐褰告笟褏娈戠粚铏规閿涘牊铆閸氭垵銇旈柈銊ユ倳閻楀浄绱? * ======================================================= */
 .header-side-by-side-card {
   display: flex;
   gap: 22px;
-  align-items: stretch; /* 宸﹀彸绛夐珮瀵归綈锛岄珮搴︾敱瀹為檯鍐呭鑷€傚簲鍐冲畾 */
+  align-items: stretch; /* 瀹革箑褰哥粵澶愮彯鐎靛綊缍堥敍宀勭彯鎼达妇鏁辩€圭偤妾崘鍛啇閼奉亪鈧倸绨查崘鍐茬暰 */
   background: #ffffff;
   border-radius: 6px;
   padding: 16px 22px;
@@ -295,17 +294,17 @@ h1, h2, h3, h4 {
   min-height: 150px;
 }
 
-/* 鍐呭鍖洪珮搴﹀畬鍏ㄧ敱瀹為檯鍐呭鑷€傚簲锛屼紭闆呭懠鍚告帓鐗堬紝涓嶅己琛屽帇缂?*/
+/* 閸愬懎顔愰崠娲彯鎼达箑鐣崗銊ф暠鐎圭偤妾崘鍛啇閼奉亪鈧倸绨查敍灞肩喘闂嗗懎鎳犻崥鍛婂笓閻楀牞绱濇稉宥呭繁鐞涘苯甯囩紓?*/
 .header-side-by-side-card .header-content-box {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 鏂囧瓧鏁翠綋鍦ㄥご鍍忛珮搴﹀唴鍨傜洿灞呬腑锛岃瑙夋渶浼?*/
+  justify-content: center; /* 閺傚洤鐡ч弫缈犵秼閸︺劌銇旈崓蹇涚彯鎼达箑鍞撮崹鍌滄纯鐏炲懍鑵戦敍宀冾潒鐟欏娓舵导?*/
   gap: 0;
   min-width: 0;
 }
 
-/* 鍙充晶浜岀淮鐮佺洅瀛愬悓鏍风瓑楂樿嚜閫傚簲 */
+/* 閸欏厖鏅舵禍宀€娣惍浣烘磪鐎涙劕鎮撻弽椋庣搼妤傛鍤滈柅鍌氱安 */
 .header-side-by-side-card .header-qrcode-box {
   align-self: stretch;
   justify-content: center;
@@ -342,7 +341,7 @@ h1, h2, h3, h4 {
   flex-shrink: 0;
 }
 
-/* 澶村儚鍙充晶鐨勬。妗堜俊鎭嵂涓告爣绛惧垪琛?*/
+/* 婢舵潙鍎氶崣鍏呮櫠閻ㄥ嫭銆傚鍫滀繆閹垵宓傛稉鍛婄垼缁涙儳鍨悰?*/
 .header-profile-tags {
   display: flex;
   flex-wrap: wrap;
@@ -373,7 +372,7 @@ h1, h2, h3, h4 {
   color: #0f172a;
 }
 
-/* 澶村儚鍙充晶鐨勮仈绯绘柟寮忔í鍚戞帓甯?*/
+/* 婢舵潙鍎氶崣鍏呮櫠閻ㄥ嫯浠堢化缁樻煙瀵繑铆閸氭垶甯撶敮?*/
 .header-contact-list {
   display: flex;
   flex-wrap: wrap;
@@ -408,7 +407,7 @@ h1, h2, h3, h4 {
   color: var(--primary-color);
 }
 
-/* 澶撮儴鏈€鍙充晶浜岀淮鐮佺洅瀛?*/
+/* 婢舵挳鍎撮張鈧崣鍏呮櫠娴滃瞼娣惍浣烘磪鐎?*/
 .header-side-by-side-card .header-qrcode-box {
   flex-shrink: 0;
   display: flex;
@@ -439,7 +438,7 @@ h1, h2, h3, h4 {
 }
 
 /* =======================================================
- * 3. 鎶€鑳藉睍绀猴細鏀寔绉婚櫎杩涘害鏉★紙鐜颁唬鏍囩寰界珷妯″紡锛? * ======================================================= */
+ * 3. 閹垛偓閼宠棄鐫嶇粈鐚寸窗閺€顖涘瘮缁夊娅庢潻娑樺閺夆槄绱欓悳棰佸敩閺嶅洨顒峰鐣岀彿濡€崇础閿? * ======================================================= */
 .skills-tags-container {
   display: flex;
   flex-wrap: wrap;
@@ -467,8 +466,7 @@ h1, h2, h3, h4 {
 }
 
 /* =======================================================
- * 4. 鏍峰紡缁嗚妭涓庝富棰樿壊缁戝畾
- * ======================================================= */
+ * 4. 閺嶅嘲绱＄紒鍡氬Ν娑撳簼瀵屾０妯垮缂佹垵鐣? * ======================================================= */
 .container .info-unit h2 i {
   color: var(--primary-color) !important;
 }
@@ -503,7 +501,7 @@ mark, .mark-txt, .hl-tag {
 }
 
 /* =======================================================
- * 5. 涓€鏍忓崟鍒楁帓鐗?(One-Column Layout) - 绾鍗曢〉鏃犵紳杩炶疮鎺掔増
+ * 5. 娑撯偓閺嶅繐宕熼崚妤佸笓閻?(One-Column Layout) - 缁绢垱顒滈崡鏇€夐弮鐘电闯鏉╃偠鐤幒鎺斿
  * ======================================================= */
 .container.layout-one-column {
   max-width: 900px;
@@ -570,7 +568,7 @@ mark, .mark-txt, .hl-tag {
 }
 
 /* =======================================================
- * 6. 椤堕儴鎮诞瀵艰埅鏍忥紙鍓嶅彴 / 鍚庡彴 / 鎶曢€掕褰?浜掔浉璺宠浆锛? * ======================================================= */
+ * 6. 妞ゅ爼鍎撮幃顒佽癁鐎佃壈鍩呴弽蹇ョ礄閸撳秴褰?/ 閸氬骸褰?/ 閹舵洟鈧帟顔囪ぐ?娴滄帞娴夌捄瀹犳祮閿? * ======================================================= */
 .resume-quick-bar {
   position: fixed;
   top: 14px;
@@ -629,7 +627,7 @@ mark, .mark-txt, .hl-tag {
   color: var(--primary-color);
 }
 
-/* 褰撳墠鎵€鍦ㄩ〉楂樹寒 */
+/* 瑜版挸澧犻幍鈧崷銊┿€夋妯瑰瘨 */
 .resume-quick-bar .bar-btn.active {
   background: var(--primary-color);
   color: #ffffff;
@@ -641,7 +639,7 @@ mark, .mark-txt, .hl-tag {
   color: #ffffff;
 }
 
-/* 灏忓睆閫傞厤锛氶殣钘忔枃瀛楀彧鐣欏浘鏍?*/
+/* 鐏忓繐鐫嗛柅鍌炲帳閿涙岸娈ｉ挊蹇旀瀮鐎涙褰ч悾娆忔禈閺?*/
 @media (max-width: 900px) {
   .resume-quick-bar {
     top: auto;
@@ -665,313 +663,115 @@ mark, .mark-txt, .hl-tag {
 }
 
 /* =======================================================
- * 7. 鎵撳嵃涓庡鍑?PDF 涓ユ牸鍗曢〉 (One Single A4 Page) 缁堟瀬淇濋殰
- * 鍙屼綔鐢ㄥ煙锛欯media print锛堟祻瑙堝櫒鎵撳嵃锛? .pdf-mode锛坔tml2canvas 鎴浘瀵煎嚭锛? * JS 瀵煎嚭鏃剁粰 body 鎸?.pdf-mode锛宧tml2canvas 鍏嬮殕鏂囨。鍗冲彲濂楃敤鍏ㄩ儴绱у噾瑙勫垯
- * ======================================================= */
+ * 7. 閹垫挸宓冩稉搴☆嚤閸?PDF 娑撱儲鐗搁崡鏇€?(One Single A4 Page) 缂佸牊鐎穱婵嬫
+ * 閸欏奔缍旈悽銊ョ厵閿涙media print閿涘牊绁荤憴鍫濇珤閹垫挸宓冮敍? .pdf-mode閿涘潝tml2canvas 閹搭亜娴樼€电厧鍤敍? * JS 鐎电厧鍤弮鍓佺舶 body 閹?.pdf-mode閿涘tml2canvas 閸忓娈曢弬鍥ㄣ€傞崡鍐插讲婵傛鏁ら崗銊╁劥缁毖冨櫨鐟欏嫬鍨? * ======================================================= */
+
 @page {
   size: A4 portrait;
-  /* 鑷€傚簲杈硅窛锛氶殢 data-fit 妗ｄ綅鍙樺寲锛堣鏂囦欢鏈熬鐨勫彉閲忓畾涔夛級 */
-  margin: var(--page-pad-y) var(--page-pad-x);  /* JS 鑷€傚簲杈硅窛 */
+  margin: 8mm 10mm;
 }
 
-/* 娴忚鍣ㄦ墦鍗?+ 鏈嶅姟绔?headless --print-to-pdf锛堝獟浣撴煡璇?print 鐢熸晥锛?*/
-/* 屏幕导出（html2canvas）：body.pdf-mode 加自适应边距
-   打印时被 @media print 内的 padding:0 覆盖（边距由 @page margin 承担） */
+/* ==========================================================
+ * 导出排版（.pdf-mode 屏幕预览 / html2canvas 截图）
+ * 页面盒、隐藏元素、排版紧凑基线 —— 全部规则在此定义
+ * zoom 由 JS autoFitForPrint 动态计算填满页面
+ * ========================================================== */
 body.pdf-mode {
-  padding: var(--page-pad-y, 8mm) var(--page-pad-x, 10mm) !important;
+  width: 210mm !important;
+  min-height: 297mm !important;
+  margin: 0 !important;
+  padding: 10mm 10mm !important;
   box-sizing: border-box !important;
   background: #ffffff !important;
   background-image: none !important;
-}
-@media print {
-
-  /* 覆盖 index.css 的灰色纹理背景，确保白色页面 */
-  html, body {
-    background: #ffffff !important;
-    background-image: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-
-  /* 褰诲簳娓呴櫎涓€鍒囨偓娴悆銆佸鑸寚绀哄櫒銆佽緟鍔╀晶鏍忋€佸渾鐐广€佸脊绐楅伄缃?*/
-  .resume-quick-bar,
-  .resume-toast-box,
-  .site-nav,
-  .seirin-quick-nav,
-  footer.footer,
-  aside,
-  #nav-m,
-  .switch,
-  .loading,
-  .drawer-backdrop,
-  .preview-drawer,
-  .toast-container,
-  .icon-modal-backdrop,
-  #preview-backdrop {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    position: static !important;
-    overflow: hidden !important;
-  }
-
-
-  .container .side {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    position: static !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .container {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important;
-  }
-
-  .container .main {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  /* 澶撮儴鍗＄墖绱у噾鎺掔増 */
-  .header-side-by-side-card {
-    box-shadow: none !important;
-    border: none !important;
-    border-bottom: 1.5px solid #0f172a !important;
-    padding: 0 0 3px 0 !important;
-    margin: 0 0 3px 0 !important;
-  }
-
-  /* 澶村儚妗嗙揣璐寸収鐗囷紝缁濆鍘婚櫎浠讳綍鑳屾櫙鑹层€侀槾褰变笌澶氫綑鐣欑櫧 */
-  .header-side-by-side-card .header-avatar-box {
-    width: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin-right: 12px !important;
-    align-self: flex-start !important;
-  }
-
-  .header-side-by-side-card .header-avatar-box img {
-    width: 78px !important;
-    height: 102px !important;
-    max-width: 78px !important;
-    max-height: 102px !important;
-    object-fit: cover !important;
-    border-radius: 3px !important;
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
-    display: block !important;
-  }
-
-  .header-skills-row {
-    margin-top: 2px !important;
-    padding-top: 2px !important;
-  }
-
-  .skill-badge-tag img {
-    width: 10px !important;
-    height: 10px !important;
-  }
-
-  .info-unit hr {
-    margin: 1px 0 1.5px 0 !important;
-  }
-
-  .info-unit ul {
-    padding-left: 12px !important;
-    margin: 0 !important;
-  }
-
-  .project-detail-block .detail-label {
-    font-weight: 600 !important;
-  }
-
-  /* 褰诲簳绂佹鍒嗛〉鎷嗘柇 */
-  * {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-
-
-
-  /* 鎵撳嵃鏃惰竟璺濈敱 @page margin 澶勭悊锛圝S 鍔ㄦ€佽缃?--page-pad-* 鍙橀噺锛?*/
-  body.pdf-mode {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-}
-
-/* ==========================================================================
- * 瀵煎嚭鎺掔増 鈥斺€?鍩虹缁撴瀯瑙勫垯锛?pdf-mode锛? * 琛岃窛/瀛楀彿/杈硅窛涓嶅啀鍐欐锛岀敱 JS 渚濇嵁鍐呭楂樺害鍔ㄦ€佹敞鍏?CSS 鍙橀噺锛? *   --export-scale       鏁翠綋缂╂斁锛坺oom锛? *   --export-line-height 鍏ㄥ眬琛岃窛鍊嶇巼
- *   --export-font-scale  瀛楀彿鍊嶇巼
- * ========================================================================== */
-body.pdf-mode .resume-quick-bar,
-  body.pdf-mode .resume-toast-box,
-  body.pdf-mode .site-nav,
-  body.pdf-mode .seirin-quick-nav,
-  body.pdf-mode footer.footer,
-  body.pdf-mode aside,
-  body.pdf-mode #nav-m,
-  body.pdf-mode .switch,
-  body.pdf-mode .loading,
-  body.pdf-mode .drawer-backdrop,
-  body.pdf-mode .preview-drawer,
-  body.pdf-mode .toast-container,
-  body.pdf-mode .icon-modal-backdrop,
-body.pdf-mode .info-unit hr {
-    margin: 1px 0 1.5px 0 !important;
-  }
-body.pdf-mode .project-detail-block,
-  body.pdf-mode .project-detail-block .detail-label,
-  body.pdf-mode .project-detail-block .detail-lines,
-
-
-/* 鍓嶇 html2canvas 鎴浘瀵煎嚭 + 灞忓箷棰勮瀵煎嚭鏁堟灉锛?pdf-mode 绫荤敓鏁堬級
-   娉ㄦ剰锛氬繀椤荤敤鐙珛瑙勫垯鍧楋紝涓嶈兘鍐欐垚 @media print, .pdf-mode 鈥斺€?   濯掍綋鏌ヨ鍙帴鍙楀獟浣撶被鍨?鐗规€э紝娣峰叆绫婚€夋嫨鍣ㄤ細璁╂暣涓?@media 鍧楄瑙ｆ瀽鍣ㄤ涪寮冦€?*/
-
-body.pdf-mode .resume-quick-bar,
-  body.pdf-mode .resume-toast-box,
-  body.pdf-mode .site-nav,
-  body.pdf-mode .seirin-quick-nav,
-  body.pdf-mode footer.footer,
-  body.pdf-mode aside,
-  body.pdf-mode #nav-m,
-  body.pdf-mode .switch,
-  body.pdf-mode .loading,
-  body.pdf-mode .drawer-backdrop,
-  body.pdf-mode .preview-drawer,
-  body.pdf-mode .toast-container,
-  body.pdf-mode .icon-modal-backdrop,
-  body.pdf-mode #preview-backdrop {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    position: static !important;
-    overflow: hidden !important;
-  }
-
-body.pdf-mode .container .side {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    position: static !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-body.pdf-mode .container {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important;
-  }
-
-body.pdf-mode .container .main {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-body.pdf-mode .header-side-by-side-card {
-    box-shadow: none !important;
-    border: none !important;
-    border-bottom: 1.5px solid #0f172a !important;
-    padding: 0 0 3px 0 !important;
-    margin: 0 0 3px 0 !important;
-  }
-
-body.pdf-mode .header-side-by-side-card .header-avatar-box {
-    width: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin-right: 12px !important;
-    align-self: flex-start !important;
-  }
-
-body.pdf-mode .header-side-by-side-card .header-avatar-box img {
-    width: 78px !important;
-    height: 102px !important;
-    max-width: 78px !important;
-    max-height: 102px !important;
-    object-fit: cover !important;
-    border-radius: 3px !important;
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
-    display: block !important;
-  }
-
-
-
-
-
-
-
-body.pdf-mode .header-skills-row {
-    margin-top: 2px !important;
-    padding-top: 2px !important;
-  }
-
-
-body.pdf-mode .skill-badge-tag img {
-    width: 10px !important;
-    height: 10px !important;
-  }
-
-
-
-/* ==========================================================================
- * 瀵煎嚭鎺掔増绱у噾鍩虹嚎锛?pdf-mode锛? *
- * autoFitForPrint 鐨?zoom 璐熻矗銆屾暣浣撶缉鏀惧埌濉弧涓€椤点€嶏紱
- * 杩欓噷鐨勭揣鍑戝熀绾胯礋璐ｃ€岃鍐呭鑷劧楂樺害鎺ヨ繎涓€椤点€嶏紝涓よ€呴厤鍚堬細
- *   鍩虹嚎澶澗 鈫?zoom 琚揩缂╁緱寰堝皬锛屽瓧鍙樺緱涓嶅彲璇? *   鍩虹嚎鍒氬ソ 鈫?zoom 鎺ヨ繎 1锛屽瓧浣撴竻鏅颁笖濉弧椤甸潰
- *
- * 杩欎簺鍊兼槸銆屽鍑烘椂鐨勫悎鐞嗘帓鐗堝熀绾裤€嶏紝涓嶆槸鍐欐鐨勬。浣?鈥斺€? * zoom 浠嶄細鍦ㄦ鍩虹嚎涓婂仛鏈€缁堢殑杩炵画寰皟銆? * ========================================================================== */
-
-/* 瀵煎嚭鏃跺叏灞€琛岃窛涓庡瓧鍙峰熀绾匡細姣斿睆骞曟樉绀虹揣鍑戜絾涓嶆嫢鎸?*/
-/* 椤甸潰鐩掑唴杈硅窛锛氱敱 JS autoFitForPrint 鍔ㄦ€佽绠楀苟娉ㄥ叆 --page-pad-* 鍙橀噺 */
-
-
-body.pdf-mode {
   font-size: 12.5px !important;
   line-height: 1.5 !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* 隐藏导出时不需要的浮动元素 */
+body.pdf-mode .resume-quick-bar,
+body.pdf-mode .resume-toast-box,
+body.pdf-mode .site-nav,
+body.pdf-mode .seirin-quick-nav,
+body.pdf-mode footer.footer,
+body.pdf-mode aside,
+body.pdf-mode #nav-m,
+body.pdf-mode .switch,
+body.pdf-mode .loading,
+body.pdf-mode .drawer-backdrop,
+body.pdf-mode .preview-drawer,
+body.pdf-mode .toast-container,
+body.pdf-mode .icon-modal-backdrop,
+body.pdf-mode #preview-backdrop {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.pdf-mode .container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+body.pdf-mode .container .side {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.pdf-mode .container .main {
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+body.pdf-mode .header-side-by-side-card {
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1.5px solid #0f172a !important;
+  padding: 0 0 4px 0 !important;
+  margin: 0 0 4px 0 !important;
+}
+
+body.pdf-mode .header-side-by-side-card .header-avatar-box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-right: 12px !important;
+  align-self: flex-start !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+body.pdf-mode .header-side-by-side-card .header-avatar-box img {
+  width: 78px !important;
+  height: 102px !important;
+  object-fit: cover !important;
+  border-radius: 3px !important;
+  border: 1px solid #cbd5e1 !important;
+  display: block !important;
+}
+
+body.pdf-mode .skill-badge-tag {
+  font-size: 11px !important;
+  padding: 2px 9px !important;
+}
+
+body.pdf-mode .skill-badge-tag .skill-logo-img,
+body.pdf-mode .skill-badge-tag img {
+  width: 16px !important;
+  height: 16px !important;
 }
 
 body.pdf-mode .info-unit {
@@ -982,7 +782,6 @@ body.pdf-mode .info-unit h2 {
   font-size: 14px !important;
   margin-bottom: 4px !important;
   padding-left: 6px !important;
-  border-left-width: 3px !important;
 }
 
 body.pdf-mode .info-unit hr {
@@ -994,15 +793,20 @@ body.pdf-mode .info-unit ul {
   margin: 0 !important;
 }
 
-body.pdf-mode .info-unit ul li {
-  margin-bottom: 3px !important;
-  line-height: 1.48 !important;
-  font-size: 12.5px !important;
+/* 项目之间加间距 */
+body.pdf-mode .info-unit ul > li {
+  padding-bottom: 8px !important;
+  margin-bottom: 10px !important;
+}
+
+body.pdf-mode .info-unit ul > li:last-child {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 body.pdf-mode .container .main .info-unit ul li h3 {
   font-size: 13.5px !important;
-  margin-bottom: 2px !important;
+  margin-bottom: 3px !important;
   line-height: 1.4 !important;
 }
 
@@ -1013,7 +817,7 @@ body.pdf-mode .container .main .info-unit ul li .info-content li {
 }
 
 body.pdf-mode .project-detail-block {
-  margin-bottom: 3px !important;
+  margin-bottom: 4px !important;
   gap: 4px !important;
 }
 
@@ -1032,7 +836,7 @@ body.pdf-mode .project-detail-block .detail-line {
 }
 
 body.pdf-mode .edu-line {
-  margin: 0 0 2px 0 !important;
+  margin: 0 0 3px 0 !important;
   line-height: 1.48 !important;
   font-size: 12.5px !important;
 }
@@ -1041,30 +845,6 @@ body.pdf-mode #section-evaluation p {
   font-size: 12.5px !important;
   line-height: 1.5 !important;
   margin: 2px 0 !important;
-}
-
-body.pdf-mode .skill-badge-tag {
-  font-size: 11px !important;
-  padding: 2px 9px !important;
-}
-
-body.pdf-mode .skill-badge-tag .skill-logo-img,
-body.pdf-mode .skill-badge-tag img {
-  width: 16px !important;
-  height: 16px !important;
-}
-
-body.pdf-mode .header-side-by-side-card .header-name {
-  font-size: 22px !important;
-}
-
-body.pdf-mode .header-side-by-side-card .header-job {
-  font-size: 14px !important;
-}
-
-body.pdf-mode .header-side-by-side-card .header-avatar-box img {
-  width: 84px !important;
-  height: 110px !important;
 }
 
 body.pdf-mode .header-profile-tag {
@@ -1077,25 +857,43 @@ body.pdf-mode .header-contact-list {
   gap: 3px 12px !important;
 }
 
-/* 瀵煎嚭鏃跺交搴曠姝㈠垎椤垫媶鏂?*/
-
-body.pdf-mode .project-detail-block,
-  body.pdf-mode .project-detail-block .detail-label,
-  body.pdf-mode .project-detail-block .detail-lines,
-
-
-body.pdf-mode .project-detail-block .detail-label {
-    font-weight: 600 !important;
-  }
-
-
-
 body.pdf-mode * {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
 
- * 瀵煎嚭鍙嶉 toast锛堝墠鍙板彸涓婅杞绘彁绀猴級
+/* 导出时全局字体改为苹方 */
+body.pdf-mode,
+body.pdf-mode * {
+  font-family: "PingFang SC", "PingFang SC Medium", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+
+/* 浏览器打印时的覆盖（@page 承担边距，body padding 归零）*/
+@media print {
+  body.pdf-mode {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+
+/* ==========================================================================
+ * 鐎电厧鍤幒鎺斿 閳ユ柡鈧?閸╄櫣顢呯紒鎾寸€憴鍕灟閿?pdf-mode閿? * 鐞涘矁绐?鐎涙褰?鏉堢绐涙稉宥呭晙閸愭瑦顒撮敍宀€鏁?JS 娓氭繃宓侀崘鍛啇妤傛ê瀹抽崝銊︹偓浣规暈閸?CSS 閸欐﹢鍣洪敍? *   --export-scale       閺佺繝缍嬬紓鈺傛杹閿涘澓oom閿? *   --export-line-height 閸忋劌鐪悰宀冪獩閸婂秶宸? *   --export-font-scale  鐎涙褰块崐宥囧芳
+ * ========================================================================== */
+
+/* ==========================================================================
+ * 鐎电厧鍤幒鎺斿缁毖冨櫨閸╄櫣鍤庨敍?pdf-mode閿? *
+ * autoFitForPrint 閻?zoom 鐠愮喕鐭楅妴灞炬殻娴ｆ挾缂夐弨鎯у煂婵夘偅寮ф稉鈧い鐐光偓宥忕幢
+ * 鏉╂瑩鍣烽惃鍕彛閸戞垵鐔€缁捐儻绀嬬拹锝冣偓宀冾唨閸愬懎顔愰懛顏嗗姧妤傛ê瀹抽幒銉ㄧ箮娑撯偓妞ょ偣鈧稄绱濇稉銈堚偓鍛村帳閸氬牞绱? *   閸╄櫣鍤庢径顏呮緱 閳?zoom 鐞氼偉鎻╃紓鈺佺繁瀵板牆鐨敍灞界摟閸欐ê绶辨稉宥呭讲鐠? *   閸╄櫣鍤庨崚姘偨 閳?zoom 閹恒儴绻?1閿涘苯鐡ф担鎾寸閺呴绗栨繅顐ｅ姬妞ょ敻娼? *
+ * 鏉╂瑤绨洪崐鍏兼Ц閵嗗苯顕遍崙鐑樻閻ㄥ嫬鎮庨悶鍡樺笓閻楀牆鐔€缁捐￥鈧稄绱濇稉宥嗘Ц閸愭瑦顒撮惃鍕€傛担?閳ユ柡鈧? * zoom 娴犲秳绱伴崷銊︻劃閸╄櫣鍤庢稉濠備粵閺堚偓缂佸牏娈戞潻鐐电敾瀵邦喛鐨熼妴? * ========================================================================== */
+
+/* 鐎电厧鍤弮璺哄弿鐏炩偓鐞涘矁绐涙稉搴＄摟閸欏嘲鐔€缁惧尅绱板В鏂跨潌楠炴洘妯夌粈铏规彛閸戞垳绲炬稉宥嗗閹?*/
+/* 妞ょ敻娼伴惄鎺戝敶鏉堢绐涢敍姘辨暠 JS autoFitForPrint 閸斻劍鈧浇顓哥粻妤€鑻熷▔銊ュ弳 --page-pad-* 閸欐﹢鍣?*/
+
+/* 鐎电厧鍤弮璺轰氦鎼存洜顩﹀銏犲瀻妞ゅ灚濯堕弬?*/
+
+ * 鐎电厧鍤崣宥夘洯 toast閿涘牆澧犻崣鏉垮礁娑撳﹨顫楁潪缁樺絹缁€鐚寸礆
  * ======================================================= */
 .resume-toast-box {
   position: fixed;
@@ -1126,20 +924,7 @@ body.pdf-mode * {
   to { opacity: 1; transform: none; }
 }
 
+/* ---- 瀵煎嚭鏃堕」鐩箣闂村姞鍒嗛殧闂磋窛锛岃姣忎釜椤圭洰鏈夋竻鏅扮殑瑙嗚杈圭晫 ---- */
 
+/* 椤圭洰 h3锛堟爣棰樿锛変笌涓嬫柟鍐呭鐨勯棿璺?*/
 
-/* ---- 导出时项目之间加分隔间距，让每个项目有清晰的视觉边界 ---- */
-body.pdf-mode .info-unit ul > li {
-  padding-bottom: 10px !important;
-  margin-bottom: 14px !important;
-}
-
-body.pdf-mode .info-unit ul > li:last-child {
-  padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-/* 项目 h3（标题行）与下方内容的间距 */
-body.pdf-mode .container .main .info-unit ul > li h3 {
-  margin-bottom: 4px !important;
-}
