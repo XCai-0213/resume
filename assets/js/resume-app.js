@@ -620,29 +620,28 @@
     document.body.appendChild(bar);
 
     // 行距自适应：打印前测量内容高度，选择合适档位（auto/compact/tiny）
+    // 在 .pdf-mode（紧凑排版）作用域下测量，与 html2canvas/浏览器打印实际效果一致
     function autoFitForPrint() {
       const container = document.getElementById('resume-container');
       if (!container) return;
       // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
       const a4ContentHeight = 285 * 3.7795;
 
-      // 先移除旧档位再测量
+      // 进入紧凑排版作用域（pdf-mode + 移除旧档位）
+      document.body.classList.add('pdf-mode');
       document.body.removeAttribute('data-fit');
 
       const measure = () => container.scrollHeight;
 
-      // 依次尝试三档：默认 → compact → tiny
-      if (measure() <= a4ContentHeight) {
-        document.body.setAttribute('data-fit', 'auto');
-      } else {
-        document.body.setAttribute('data-fit', 'compact');
-        if (measure() > a4ContentHeight) {
-          document.body.setAttribute('data-fit', 'tiny');
-          if (measure() > a4ContentHeight) {
-            // 极端情况：tiny 也装不下，保持 tiny（CSS 已最小化）
-          }
-        }
-      }
+      // 依次尝试三档：auto → compact → tiny
+      document.body.setAttribute('data-fit', 'auto');
+      if (measure() <= a4ContentHeight) return;
+
+      document.body.setAttribute('data-fit', 'compact');
+      if (measure() <= a4ContentHeight) return;
+
+      document.body.setAttribute('data-fit', 'tiny');
+      // tiny 已是最小，无论是否超出都保持（CSS 已极限压缩）
     }
 
     // 轻量 toast（仅导出反馈用）
@@ -693,20 +692,21 @@
       const ok = await exportViaCanvas();
       if (ok) return;
 
-      // 最终兜底：浏览器打印
+      // 最终兜底：浏览器打印（autoFitForPrint 已挂 .pdf-mode，@media print 与 .pdf-mode 双作用域生效）
       quickToast('降级为浏览器打印模式', 'info');
       autoFitForPrint();
       document.body.classList.add('printing-single-page');
       setTimeout(() => {
         window.print();
         setTimeout(() => {
-          document.body.classList.remove('printing-single-page');
+          document.body.classList.remove('pdf-mode', 'printing-single-page');
           document.body.removeAttribute('data-fit');
         }, 1000);
       }, 150);
     });
 
     // 无弹窗导出：html2canvas + jsPDF（把整页渲染为图片再打包成单页 PDF）
+    // 关键：给 body 挂 .pdf-mode，让打印紧凑 CSS 在屏幕上生效，html2canvas 截到的就是打印效果
     async function exportViaCanvas() {
       function loadScript(src) {
         return new Promise((resolve, reject) => {
@@ -732,13 +732,12 @@
       }
       if (!window.html2canvas || !window.jspdf) return false;
 
-      // 打印前自适应行距
+      // 挂 .pdf-mode（激活全部打印紧凑样式）+ 自适应行距
       autoFitForPrint();
-      document.body.classList.add('printing-single-page');
 
       try {
-        // 等待字体/图片就绪
-        await new Promise(r => setTimeout(r, 300));
+        // 等待样式重排与字体就绪
+        await new Promise(r => setTimeout(r, 400));
         const container = document.getElementById('resume-container');
         const canvas = await window.html2canvas(container, {
           scale: 2.5,                          // 高清
@@ -752,21 +751,20 @@
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
         const pageW = 210, pageH = 297;
-        const margin = 5;
-        const contentW = pageW - margin * 2;
-        const imgH = canvas.height * (contentW / canvas.width);
+        const margin = 6;
+        const availW = pageW - margin * 2;
+        const availH = pageH - margin * 2;
+        const imgH = canvas.height * (availW / canvas.width);
 
-        // 自适应：若内容高 > 页面高则压缩到一页内
-        let drawH = imgH, drawY = margin;
-        if (imgH > pageH - margin * 2) {
-          drawH = pageH - margin * 2;
-          // 等比缩放宽度使其符合高度（保持比例，宽度会小于 contentW，居中）
-          const ratio = drawH / imgH;
-          const drawW = contentW * ratio;
-          const drawX = (pageW - drawW) / 2;
-          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', drawX, drawY, drawW, drawH);
+        if (imgH <= availH) {
+          // 内容不足一页：按宽度铺满（可接受留白在底部）
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', margin, margin, availW, imgH);
         } else {
-          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', margin, drawY, contentW, imgH);
+          // 内容超一页：等比缩放整页塞入（宽度居中，两侧留白极小）
+          const ratio = availH / imgH;
+          const drawW = availW * ratio;
+          const drawX = (pageW - drawW) / 2;
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', drawX, margin, drawW, availH);
         }
 
         pdf.save('简历-A4单页.pdf');
@@ -776,7 +774,7 @@
         console.warn('html2canvas 导出失败:', err);
         return false;
       } finally {
-        document.body.classList.remove('printing-single-page');
+        document.body.classList.remove('pdf-mode', 'printing-single-page');
         document.body.removeAttribute('data-fit');
       }
     }
@@ -798,5 +796,12 @@
   document.addEventListener('DOMContentLoaded', () => {
     setupQuickBar();
     loadResume();
+    // URL 带 ?pdf=1 时自动进入导出排版（用于无弹窗导出与效果预览）
+    if (new URLSearchParams(location.search).get('pdf') === '1') {
+      setTimeout(() => {
+        autoFitForPrint();
+        // 保持导出态供观察/截图（不会自动移除）
+      }, 600);
+    }
   });
 })();

@@ -666,13 +666,15 @@ mark, .mark-txt, .hl-tag {
 
 /* =======================================================
  * 7. 打印与导出 PDF 严格单页 (One Single A4 Page) 终极保障
+ * 双作用域：@media print（浏览器打印）+ .pdf-mode（html2canvas 截图导出）
+ * JS 导出时给 body 挂 .pdf-mode，html2canvas 克隆文档即可套用全部紧凑规则
  * ======================================================= */
 @page {
   size: A4 portrait;
   margin: 6mm 8mm 6mm 8mm; /* 严格单页安全边距 */
 }
 
-@media print {
+@media print, .pdf-mode {
   html, body {
     width: 210mm !important;
     height: 297mm !important;
