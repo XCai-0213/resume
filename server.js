@@ -426,16 +426,32 @@ const server = http.createServer(async (req, res) => {
     const { spawn } = require('child_process');
     const os = require('os');
 
-    // 探测可用的浏览器
+    // 探测可用的浏览器（含 Linux 上常见的静态 headless-shell 部署）
     const candidates = [
+      // Windows 本机
       'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
       'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
       'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
       'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      // Linux 常规路径
       '/usr/bin/google-chrome',
+      '/usr/bin/google-chrome-stable',
       '/usr/bin/chromium-browser',
-      '/usr/bin/chromium'
-    ];
+      '/usr/bin/chromium',
+      // 静态部署的 Chromium / headless-shell（本项目服务器用的就是这种）
+      '/opt/chromium/cft/chrome-headless-shell-linux64/chrome-headless-shell',
+      '/opt/chromium/headless-shell/headless_shell',
+      '/opt/chromium/chrome-linux/chrome',
+      '/opt/chrome/chrome',
+      // 环境变量可覆盖（方便换路径而不改代码）
+      process.env.CHROME_BIN || '',
+      process.env.PUPPETEER_EXECUTABLE_PATH || ''
+    ].filter(Boolean);
+    // 也读取部署时写入的路径记录文件（优先级最高）
+    try {
+      const hint = fs.readFileSync('/opt/chromium/.headless_shell_path', 'utf-8').trim();
+      if (hint && fs.existsSync(hint)) candidates.unshift(hint);
+    } catch (e) { /* 无记录文件，忽略 */ }
     const browser = candidates.find(c => { try { return fs.existsSync(c); } catch { return false; } });
 
     if (!browser) {
@@ -450,21 +466,32 @@ const server = http.createServer(async (req, res) => {
     const targetUrl = 'http://127.0.0.1:' + PORT + '/resume.html?print=1&ts=' + Date.now();
     const profileDir = path.join(tmpDir, 'profile');
 
-    // A4: 210mm x 297mm，边距 6mm/8mm（与 @page 保持一致）
-    const args = [
-      '--headless=new',
+    // headless_shell 本身已是无头运行时，不接受 --headless=* 参数；
+    // 完整版 Chrome/Edge 则必须显式开启无头模式。
+    const isHeadlessShell = /headless[_-]?shell|headless_shell/i.test(browser);
+
+    const args = [];
+    if (!isHeadlessShell) {
+      args.push('--headless=new');
+    }
+    args.push(
       '--disable-gpu',
       '--no-sandbox',
       '--disable-dev-shm-usage',
+      '--disable-software-rasterizer',
+      '--hide-scrollbars',
       '--run-all-compositor-stages-before-draw',
-      '--virtual-time-budget=10000',
+      '--virtual-time-budget=12000',
       `--user-data-dir=${profileDir}`,
       `--print-to-pdf=${outPdf}`,
-      '--no-pdf-header-footer',
-      '--print-to-pdf-no-header'
-    ];
+      '--no-pdf-header-footer'
+    );
 
-    const child = spawn(browser, args.concat([targetUrl]), { stdio: 'ignore' });
+    const child = spawn(browser, args.concat([targetUrl]), {
+      stdio: 'ignore',
+      // headless-shell 需要在其自身目录下运行，才能找到同级的 icudtl.dat 与 *.pak
+      cwd: path.dirname(browser)
+    });
     let settled = false;
 
     const finishOk = () => {
@@ -505,8 +532,8 @@ const server = http.createServer(async (req, res) => {
       }
     });
 
-    // 兜底超时（60s）
-    setTimeout(() => finishErr('PDF 生成超时（60s）'), 60000);
+    // 兜底超时（90s，覆盖无头浏览器冷启动）
+    setTimeout(() => finishErr('PDF 生成超时（90s）'), 90000);
     return;
   }
 

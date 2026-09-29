@@ -96,6 +96,22 @@ cd "$DEPLOY_ROOT/releases"
 ls -1t | tail -n +6 | xargs -r rm -rf
 echo "Releases left: $(ls -1 | wc -l)"
 
+step "PDF export dependencies check"
+# 服务端 PDF 依赖：无头浏览器 + 中日韩字体（否则中文显示为方框）
+CHROME=$(cat /opt/chromium/.headless_shell_path 2>/dev/null || true)
+if [ -n "$CHROME" ] && [ -x "$CHROME" ]; then
+  echo "Headless browser: OK ($CHROME)"
+else
+  echo "Headless browser: MISSING — PDF 将回退到浏览器打印"
+  echo "  安装方式：见 README 的「服务端 PDF 依赖」章节"
+fi
+CJK_COUNT=$(fc-list :lang=zh 2>/dev/null | wc -l)
+if [ "$CJK_COUNT" -gt 0 ]; then
+  echo "CJK fonts: OK ($CJK_COUNT entries)"
+else
+  echo "CJK fonts: MISSING — 中文会显示为方框！执行：apt-get install -y fonts-noto-cjk"
+fi
+
 rm -f /tmp/resume-deploy.tar.gz
 echo ""
 echo "========== DEPLOY DONE =========="

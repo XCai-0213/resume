@@ -588,6 +588,37 @@
     }
   }
 
+  // 行距自适应：导出/打印前测量内容高度，选择合适档位（auto/compact/tiny）
+  // 在 .pdf-mode（紧凑排版）作用域下测量，与 html2canvas / 浏览器打印 / 服务端截图的实际效果一致
+  function autoFitForPrint() {
+    const container = document.getElementById('resume-container');
+    if (!container) return;
+    // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
+    const a4ContentHeight = 285 * 3.7795;
+
+    // 进入紧凑排版作用域（pdf-mode + 移除旧档位）
+    document.body.classList.add('pdf-mode');
+    document.body.removeAttribute('data-fit');
+
+    const measure = () => container.scrollHeight;
+
+    // 依次尝试三档：auto → compact → tiny
+    document.body.setAttribute('data-fit', 'auto');
+    if (measure() <= a4ContentHeight) return;
+
+    document.body.setAttribute('data-fit', 'compact');
+    if (measure() <= a4ContentHeight) return;
+
+    document.body.setAttribute('data-fit', 'tiny');
+    // tiny 已是最小，无论是否超出都保持（CSS 已极限压缩）
+  }
+
+  // 退出导出排版态，恢复正常屏幕显示
+  function exitPrintMode() {
+    document.body.classList.remove('pdf-mode', 'printing-single-page');
+    document.body.removeAttribute('data-fit');
+  }
+
   // 顶部快捷控制栏（含跨页面导航）
   function setupQuickBar() {
     if (document.querySelector('.resume-quick-bar')) return;
@@ -618,31 +649,6 @@
       </button>
     `;
     document.body.appendChild(bar);
-
-    // 行距自适应：打印前测量内容高度，选择合适档位（auto/compact/tiny）
-    // 在 .pdf-mode（紧凑排版）作用域下测量，与 html2canvas/浏览器打印实际效果一致
-    function autoFitForPrint() {
-      const container = document.getElementById('resume-container');
-      if (!container) return;
-      // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
-      const a4ContentHeight = 285 * 3.7795;
-
-      // 进入紧凑排版作用域（pdf-mode + 移除旧档位）
-      document.body.classList.add('pdf-mode');
-      document.body.removeAttribute('data-fit');
-
-      const measure = () => container.scrollHeight;
-
-      // 依次尝试三档：auto → compact → tiny
-      document.body.setAttribute('data-fit', 'auto');
-      if (measure() <= a4ContentHeight) return;
-
-      document.body.setAttribute('data-fit', 'compact');
-      if (measure() <= a4ContentHeight) return;
-
-      document.body.setAttribute('data-fit', 'tiny');
-      // tiny 已是最小，无论是否超出都保持（CSS 已极限压缩）
-    }
 
     // 轻量 toast（仅导出反馈用）
     function quickToast(msg, type) {
@@ -698,10 +704,7 @@
       document.body.classList.add('printing-single-page');
       setTimeout(() => {
         window.print();
-        setTimeout(() => {
-          document.body.classList.remove('pdf-mode', 'printing-single-page');
-          document.body.removeAttribute('data-fit');
-        }, 1000);
+        setTimeout(exitPrintMode, 1000);
       }, 150);
     });
 
@@ -717,20 +720,24 @@
           document.head.appendChild(s);
         });
       }
+      // 本地库优先：服务器部署环境下 jsDelivr 常被墙/超时，
+      // 本地 assets/libs 是随包发布的，加载最快最稳；CDN 仅作兜底。
       const cdnBase = 'https://cdn.jsdelivr.net/npm/';
-      try {
-        if (!window.html2canvas) await loadScript(cdnBase + 'html2canvas@1.4.1/dist/html2canvas.min.js');
-        if (!window.jspdf) await loadScript(cdnBase + 'jspdf@2.5.1/dist/jspdf.umd.min.js');
-      } catch (e) {
-        // CDN 失败 → 尝试本地（无本地库则放弃）
+      const tryLoad = async function (globalName, localFile, cdnFile) {
+        if (window[globalName]) return true;
         try {
-          if (!window.html2canvas) await loadScript('assets/libs/html2canvas.min.js');
-          if (!window.jspdf) await loadScript('assets/libs/jspdf.umd.min.js');
-        } catch (e2) {
-          return false;
-        }
-      }
-      if (!window.html2canvas || !window.jspdf) return false;
+          await loadScript('assets/libs/' + localFile);
+          if (window[globalName]) return true;
+        } catch (e) { /* 本地失败，继续试 CDN */ }
+        try {
+          await loadScript(cdnBase + cdnFile);
+          if (window[globalName]) return true;
+        } catch (e) { /* CDN 也失败 */ }
+        return false;
+      };
+      const okCanvas = await tryLoad('html2canvas', 'html2canvas.min.js', 'html2canvas@1.4.1/dist/html2canvas.min.js');
+      const okJsPDF = await tryLoad('jspdf', 'jspdf.umd.min.js', 'jspdf@2.5.1/dist/jspdf.umd.min.js');
+      if (!okCanvas || !okJsPDF) return false;
 
       // 挂 .pdf-mode（激活全部打印紧凑样式）+ 自适应行距
       autoFitForPrint();
@@ -774,8 +781,7 @@
         console.warn('html2canvas 导出失败:', err);
         return false;
       } finally {
-        document.body.classList.remove('pdf-mode', 'printing-single-page');
-        document.body.removeAttribute('data-fit');
+        exitPrintMode();
       }
     }
 
