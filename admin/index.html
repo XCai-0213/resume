@@ -991,80 +991,61 @@
           <div class="tab-panel" id="sync-tab">
             <div class="card">
               <div class="card-header" style="background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);">
-                <h3><i class="fa fa-cloud"></i> GitHub 云同步（多设备 / 多浏览器数据一致）</h3>
-                <span class="header-desc">配置后所有设备打开都会拉取云端最新数据，保存即全网同步</span>
+                <h3><i class="fa fa-server"></i> 服务器数据同步</h3>
+                <span class="header-desc">数据集中存储在云端服务器，任何设备/浏览器打开都自动一致</span>
               </div>
               <div class="card-body">
-                <div class="modal-tip" style="margin-bottom: 16px;">
-                  <i class="fa fa-info-circle"></i>
-                  <b>原理</b>：本系统把您的 GitHub 仓库（<b>XCai-0213/resume</b>）当数据库用。后台保存时直接通过 GitHub API 写入仓库里的 <code>data/resume.json</code> 等文件；
-                  任何设备打开网站时优先从云端拉取最新数据。同时保存会触发 EdgeOne 自动重新部署，线上内容同步更新。
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group" style="flex: 1;">
-                    <label>GitHub 用户名</label>
-                    <input type="text" class="form-control" id="sync-field-owner" placeholder="XCai-0213">
-                  </div>
-                  <div class="form-group" style="flex: 1;">
-                    <label>仓库名</label>
-                    <input type="text" class="form-control" id="sync-field-repo" placeholder="resume">
-                  </div>
-                  <div class="form-group" style="flex: 0.6;">
-                    <label>分支</label>
-                    <input type="text" class="form-control" id="sync-field-branch" placeholder="main" value="main">
+                <div id="sync-server-status" style="padding: 14px 16px; border-radius: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; margin-bottom: 18px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                      <div style="font-size: 14px; font-weight: 700; color: #15803d; margin-bottom: 4px;">
+                        <i class="fa fa-check-circle"></i> 已连接服务器（classroom.jyue.cn）
+                      </div>
+                      <div style="font-size: 12.5px; color: #166534; line-height: 1.7;">
+                        数据存储位置：<code>/opt/resume/shared/data/</code><br>
+                        所有设备访问同一份数据 —— <b>保存即同步，无需任何 Token 或配置</b>
+                      </div>
+                    </div>
+                    <span style="font-size: 12px; padding: 4px 12px; border-radius: 20px; background: #15803d; color: #fff; font-weight: 600;">
+                      服务运行中
+                    </span>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label>GitHub Personal Access Token（Fine-grained，需 Contents 读写权限）</label>
-                  <input type="password" class="form-control" id="sync-field-token" placeholder="github_pat_xxxxxxxxxxxxxxxx">
-                  <div class="form-help">
-                    <b>获取步骤</b>：打开
-                    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color: #2563eb;">github.com/settings/personal-access-tokens/new</a>
-                    → ① Token name 随意填（如 resume-sync）→ ② <b>Repository access</b> 选 <b>Only select repositories</b> 并勾选 <b>XCai-0213/resume</b> → ③ 展开 <b>Permissions → Repository permissions → Contents</b> 设为 <b>Read and write</b>（Metadata 自动变 Read-only 属正常）→ ④ Generate → 复制 <b>github_pat_</b> 开头的 Token 粘贴到这里。Token 只存在您的浏览器里，不会上传到任何第三方。
-                    <br>⚠️ 出现 403 "Resource not accessible" 几乎都是漏了上面 ② 或 ③ —— Contents 必须是 <b>Read and write</b> 而不是 Read-only。
+                  <label>数据文件清单</label>
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 12.5px; line-height: 2; color: #475569;">
+                    <div><code>resume.json</code> — 简历内容（教育/工作/项目/技能等）</div>
+                    <div><code>homepage.json</code> — 个人主页配置</div>
+                    <div><code>applications.json</code> — 投递记录</div>
+                    <div><code>presets.json</code> — 内置六套职业简历模板</div>
                   </div>
                 </div>
 
-                <div class="form-row" style="align-items: flex-end;">
-                  <div class="form-group" style="flex: 1;">
-                    <label>简历数据文件路径</label>
-                    <input type="text" class="form-control" id="sync-field-path" value="data/resume.json">
-                  </div>
-                  <div class="form-group" style="flex: 1;">
-                    <label>投递记录文件路径</label>
-                    <input type="text" class="form-control" id="sync-field-jobs-path" value="data/applications.json">
-                  </div>
-                  <div class="form-group" style="flex: 1;">
-                    <label>主页配置文件路径</label>
-                    <input type="text" class="form-control" id="sync-field-home-path" value="data/homepage.json">
-                  </div>
+                <div style="margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
+                  <h4 style="font-size: 13.5px; font-weight: 600; margin-bottom: 6px; color: #0f172a;">
+                    <i class="fa fa-upload"></i> 数据迁移（从浏览器搬到服务器）
+                  </h4>
+                  <p style="font-size: 12.5px; color: #64748b; line-height: 1.8; margin-bottom: 12px;">
+                    如果之前在某些浏览器里保存过内容（存在浏览器本地），点下面的按钮可以把这些数据<b>一次性推送到服务器</b>，
+                    之后所有设备就都能看到。已经在服务器上的数据不受影响（同名字段以推送内容为准）。
+                  </p>
+                  <button type="button" class="btn btn-primary" id="btn-migrate-local">
+                    <i class="fa fa-cloud-upload"></i> 把本浏览器数据上传到服务器
+                  </button>
+                  <div id="migrate-result" style="margin-top: 12px; font-size: 12.5px; line-height: 1.8; display: none;"></div>
                 </div>
 
-                <div class="form-actions" style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
-                  <button type="button" class="btn btn-primary" id="btn-sync-save">
-                    <i class="fa fa-save"></i> 保存同步配置
-                  </button>
-                  <button type="button" class="btn btn-secondary" id="btn-sync-test">
-                    <i class="fa fa-plug"></i> 测试连接
-                  </button>
-                  <button type="button" class="btn btn-danger" id="btn-sync-clear">
-                    <i class="fa fa-times"></i> 清除配置（回到仅本地模式）
-                  </button>
-                </div>
-
-                <div id="sync-status" style="margin-top: 14px; padding: 10px 14px; border-radius: 8px; font-size: 13px; display: none;"></div>
-
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed #e2e8f0;">
+                <div style="margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
                   <h4 style="font-size: 13.5px; font-weight: 600; margin-bottom: 8px; color: #0f172a;">
                     <i class="fa fa-question-circle"></i> 常见问题
                   </h4>
-                  <ul style="font-size: 12.5px; color: #475569; line-height: 1.8; padding-left: 18px; margin: 0;">
-                    <li><b>配好后换设备/浏览器怎么办？</b> 新设备只需在浏览器打开本页，填入同样的 Token 保存一次配置即可（配置存在各自浏览器里，数据在云端）。</li>
-                    <li><b>保存后线上多久更新？</b> GitHub 提交后 EdgeOne 自动构建，约 30~60 秒全网生效。</li>
-                    <li><b>Token 安全吗？</b> Token 仅存于您自己浏览器的 localStorage，随请求发往 GitHub 官方 API，不经过任何第三方。</li>
-                    <li><b>两个人同时编辑会冲突吗？</b> GitHub API 以 sha 校验保护，后保存的一方需先拉取最新数据再保存（刷新页面即拉取）。</li>
+                  <ul style="font-size: 12.5px; color: #475569; line-height: 1.9; padding-left: 18px; margin: 0;">
+                    <li><b>换设备/换浏览器要重新配置吗？</b> 不用。数据在服务器上，任何设备打开 <code>classroom.jyue.cn</code> 自动就是最新的。</li>
+                    <li><b>保存后多久生效？</b> 立即生效，前台刷新即可看到（无需等待构建）。</li>
+                    <li><b>手机上能看到吗？</b> 能。手机浏览器访问同一域名，数据完全一致。</li>
+                    <li><b>数据会丢吗？</b> 数据存在服务器 <code>/opt/resume/shared/data/</code>，升级发布不会覆盖；建议定期用「导出」功能备份。</li>
+                    <li><b>如何备份？</b> 用右上角「导出」下载 JSON，或联系管理员备份服务器数据目录。</li>
                   </ul>
                 </div>
               </div>
@@ -1194,6 +1175,7 @@
   <script src="libs/pdf.min.js" defer></script>
   <script src="libs/mammoth.browser.min.js" defer></script>
   <script src="static-adapter.js"></script>
+  <script src="server-sync.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>

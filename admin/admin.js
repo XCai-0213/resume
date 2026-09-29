@@ -2640,92 +2640,83 @@ function bindPresetModalEvents() {
     });
   }
 }
-
 /* =======================================================
- * GitHub 云同步设置（跨设备/多浏览器数据一致）
+ * 服务器数据同步（跨设备/多浏览器数据一致）
+ * 部署在 classroom.jyue.cn 的 Node 后端作为唯一数据源
  * ======================================================= */
 function initSyncSettings() {
-  const ownerEl = document.getElementById('sync-field-owner');
-  if (!ownerEl) return;
-  const repoEl = document.getElementById('sync-field-repo');
-  const branchEl = document.getElementById('sync-field-branch');
-  const tokenEl = document.getElementById('sync-field-token');
-  const pathEl = document.getElementById('sync-field-path');
-  const jobsPathEl = document.getElementById('sync-field-jobs-path');
-  const homePathEl = document.getElementById('sync-field-home-path');
-  const statusEl = document.getElementById('sync-status');
+  const migrateBtn = document.getElementById('btn-migrate-local');
+  const resultEl = document.getElementById('migrate-result');
+  if (!migrateBtn) return;
 
-  // 载入已有配置
-  const cfg = STATIC_API.getGhConfig();
-  if (cfg) {
-    ownerEl.value = cfg.owner || '';
-    repoEl.value = cfg.repo || '';
-    branchEl.value = cfg.branch || 'main';
-    pathEl.value = cfg.path || 'data/resume.json';
-    jobsPathEl.value = cfg.jobsPath || 'data/applications.json';
-    homePathEl.value = cfg.homepagePath || 'data/homepage.json';
-    tokenEl.placeholder = cfg.token ? '已配置（留空保持不变）' : 'ghp_xxx';
+  function showResult(html) {
+    if (!resultEl) return;
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = html;
   }
 
-  function showStatus(msg, type) {
+  // 检测服务器可用性并更新状态条
+  (async function checkServer() {
+    const statusEl = document.getElementById('sync-server-status');
     if (!statusEl) return;
-    statusEl.style.display = 'block';
-    statusEl.style.background = type === 'error' ? '#fef2f2' : (type === 'success' ? '#f0fdf4' : '#eff6ff');
-    statusEl.style.border = '1px solid ' + (type === 'error' ? '#fecaca' : (type === 'success' ? '#bbf7d0' : '#bfdbfe'));
-    statusEl.style.color = type === 'error' ? '#b91c1c' : (type === 'success' ? '#15803d' : '#1d4ed8');
-    statusEl.innerHTML = '<i class="fa ' + (type === 'error' ? 'fa-exclamation-circle' : (type === 'success' ? 'fa-check-circle' : 'fa-info-circle')) + '"></i> ' + msg;
-  }
-
-  function collectCfg() {
-    const old = STATIC_API.getGhConfig() || {};
-    const token = tokenEl.value.trim() || old.token || '';
-    return {
-      owner: ownerEl.value.trim(),
-      repo: repoEl.value.trim(),
-      branch: branchEl.value.trim() || 'main',
-      token: token,
-      path: pathEl.value.trim() || 'data/resume.json',
-      jobsPath: jobsPathEl.value.trim() || 'data/applications.json',
-      homepagePath: homePathEl.value.trim() || 'data/homepage.json'
-    };
-  }
-
-  const saveBtn = document.getElementById('btn-sync-save');
-  if (saveBtn) {
-    saveBtn.addEventListener('click', () => {
-      const c = collectCfg();
-      if (!c.owner || !c.repo || !c.token) {
-        showStatus('请填写完整的用户名、仓库名和 Token', 'error');
-        return;
+    let ok = false;
+    try {
+      const res = await fetch('/api/resume?probe=' + Date.now(), { cache: 'no-store' });
+      const ct = res.headers.get('content-type') || '';
+      if (res.ok && ct.indexOf('application/json') !== -1) {
+        const json = await res.json();
+        ok = !!(json && json.success);
       }
-      STATIC_API.setGhConfig(c);
-      showStatus('✅ 同步配置已保存到本浏览器！此后保存简历/主页/投递记录都会直接写入 GitHub 云端，所有设备自动同步。', 'success');
-    });
-  }
+    } catch (e) { ok = false; }
 
-  const testBtn = document.getElementById('btn-sync-test');
-  if (testBtn) {
-    testBtn.addEventListener('click', async () => {
-      // 测试前先用表单里的值临时测试（未保存也可测）
-      const c = collectCfg();
-      if (!c.owner || !c.repo || !c.token) {
-        showStatus('请先填写完整的用户名、仓库名和 Token 再测试', 'error');
-        return;
+    if (!ok) {
+      statusEl.style.background = '#fef2f2';
+      statusEl.style.borderColor = '#fecaca';
+      statusEl.innerHTML =
+        '<div>' +
+          '<div style="font-size:14px;font-weight:700;color:#b91c1c;margin-bottom:4px;">' +
+            '<i class="fa fa-exclamation-triangle"></i> 未连接服务器（当前为静态托管模式）' +
+          '</div>' +
+          '<div style="font-size:12.5px;color:#991b1b;line-height:1.7;">' +
+            '当前页面没有后端服务，保存只会存在本浏览器。请访问 <b>classroom.jyue.cn</b> 使用带服务器同步的版本。' +
+          '</div>' +
+        '</div>';
+    }
+  })();
+
+  // 一键把本浏览器 localStorage 数据推送到服务器
+  migrateBtn.addEventListener('click', async function () {
+    if (!window.SERVER_SYNC) {
+      showResult('<span style="color:#b91c1c;"><i class="fa fa-times-circle"></i> 迁移组件未加载，请刷新页面重试</span>');
+      return;
+    }
+    if (!confirm('将把本浏览器保存的简历/主页/投递记录推送到服务器（覆盖服务器上的同名数据），确定继续吗？')) return;
+
+    migrateBtn.disabled = true;
+    migrateBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 正在上传...';
+    showResult('<span style="color:#1d4ed8;"><i class="fa fa-info-circle"></i> 正在检测服务器并上传数据...</span>');
+
+    try {
+      const r = await window.SERVER_SYNC.migrateLocalToServer();
+      const lines = [];
+      if (r.resume) lines.push('简历内容已上传');
+      if (r.jobs) lines.push('投递记录已上传');
+      if (r.homepage) lines.push('个人主页配置已上传');
+      if (r.skipped && r.skipped.length) lines.push('本浏览器无本地数据的模块：' + r.skipped.join('、'));
+
+      if (!r.resume && !r.jobs && !r.homepage) {
+        showResult('<span style="color:#92400e;"><i class="fa fa-info-circle"></i> 本浏览器没有找到可迁移的本地数据（可能您从未在此浏览器保存过，或数据已在服务器上）。</span>');
+      } else {
+        showResult('<div style="color:#15803d;font-weight:600;margin-bottom:4px;"><i class="fa fa-check-circle"></i> 迁移完成！</div>' +
+          '<div style="color:#166534;">' + lines.join('<br>') + '</div>' +
+          '<div style="color:#475569;margin-top:6px;">现在所有设备/浏览器打开本站都能看到这些内容了。建议刷新页面确认。</div>');
+        setTimeout(function () { if (typeof fetchResumeData === 'function') fetchResumeData(); }, 800);
       }
-      STATIC_API.setGhConfig(c); // 临时保存以供 ghTestConnection 读取
-      showStatus('正在测试连接...', 'info');
-      const r = await STATIC_API.ghTestConnection();
-      showStatus(r.success ? r.message : r.error, r.success ? 'success' : 'error');
-    });
-  }
-
-  const clearBtn = document.getElementById('btn-sync-clear');
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      if (!confirm('确定清除云同步配置吗？清除后回到「仅本浏览器保存」模式（数据不会丢失）。')) return;
-      STATIC_API.setGhConfig(null);
-      localStorage.removeItem(STATIC_API.GH_CFG_KEY);
-      showStatus('已清除云同步配置，回到仅本地模式', 'info');
-    });
-  }
+    } catch (e) {
+      showResult('<span style="color:#b91c1c;"><i class="fa fa-times-circle"></i> 迁移失败：' + (e.message || e) + '</span>');
+    } finally {
+      migrateBtn.disabled = false;
+      migrateBtn.innerHTML = '<i class="fa fa-cloud-upload"></i> 把本浏览器数据上传到服务器';
+    }
+  });
 }
