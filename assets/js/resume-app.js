@@ -588,29 +588,47 @@
     }
   }
 
-  // 行距自适应：导出/打印前测量内容高度，选择合适档位
-  // 档位：comfort（内容偏少，放大填满版面）→ auto → compact → tiny
-  // 全部在 .pdf-mode 紧凑排版作用域下测量，与服务端打印 / html2canvas 截图结果一致
+  // 自适应导出排版：边距（左右/上下）与行距一起随内容量调节
+  //
+  // 档位（由松到紧）：
+  //   comfort —— 内容偏少：边距最大（13mm/11mm）+ 行距最松，版面舒展不空洞
+  //   auto    —— 内容适中：标准边距（10mm/8mm）+ 标准行距
+  //   compact —— 略超一页：收紧边距（7mm/5mm）+ 压缩行距
+  //   tiny    —— 明显超出：边距压到印刷安全下限（5mm/4mm）+ 极限压缩
+  //
+  // 策略：从最松的 comfort 开始逐个试，选「第一个能装进 A4 的最松档位」。
+  // 这样内容少时自动摊开、内容多时自动收紧，无需预设阈值。
+  const FIT_TIERS = ['comfort', 'auto', 'compact', 'tiny'];
+  // 各档位的页面内边距（mm），必须与 CSS 中的 --page-pad-* 定义保持一致
+  const TIER_PADDING = {
+    comfort: { x: 13, y: 11 },
+    auto:    { x: 10, y: 8 },
+    compact: { x: 7,  y: 5 },
+    tiny:    { x: 5,  y: 4 }
+  };
+  const MM_PER_PX = 1 / 3.7795;   // 96dpi 下 1px ≈ 0.2646mm
+
   function autoFitForPrint() {
     const container = document.getElementById('resume-container');
     if (!container) return null;
-    // A4 可用内容高度（297mm - 上下 6mm 边距 = 285mm），按 96dpi 折算 px（1mm ≈ 3.7795px）
-    const a4ContentHeight = 285 * 3.7795;
 
     document.body.classList.add('pdf-mode');
-    const measure = (fit) => {
+
+    // A4 内容区高度随档位边距变化：297mm - 上下边距
+    const fits = (fit) => {
       document.body.setAttribute('data-fit', fit);
-      return container.scrollHeight;
+      const pad = TIER_PADDING[fit] || TIER_PADDING.auto;
+      const usablePx = (297 - pad.y * 2) / MM_PER_PX;
+      return container.scrollHeight <= usablePx;
     };
 
-    // 先量最宽松档：明显不足一页时用 comfort 放大，避免底部大片留白
-    const hComfort = measure('comfort');
-    if (hComfort <= a4ContentHeight * 0.98) return 'comfort';
-
-    // 依次收紧：auto → compact → tiny
-    if (measure('auto') <= a4ContentHeight) return 'auto';
-    if (measure('compact') <= a4ContentHeight) return 'compact';
-    measure('tiny');
+    // 从最松到最紧，取第一个装得下的档位
+    for (const tier of FIT_TIERS) {
+      if (fits(tier)) return tier;
+    }
+    // 极端情况：最紧的 tiny 仍装不下，保持 tiny（CSS 已极限压缩，溢出内容由
+    // @page 的单页约束兜底裁切；此时建议精简简历内容）
+    document.body.setAttribute('data-fit', 'tiny');
     return 'tiny';
   }
 

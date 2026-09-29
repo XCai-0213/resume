@@ -671,7 +671,8 @@ mark, .mark-txt, .hl-tag {
  * ======================================================= */
 @page {
   size: A4 portrait;
-  margin: 6mm 8mm 6mm 8mm; /* 严格单页安全边距 */
+  /* 自适应边距：随 data-fit 档位变化（见文件末尾的变量定义） */
+  margin: var(--page-pad-y) var(--page-pad-x);
 }
 
 /* 浏览器打印 + 服务端 headless --print-to-pdf（媒体查询 print 生效） */
@@ -682,6 +683,7 @@ mark, .mark-txt, .hl-tag {
     max-height: 297mm !important;
     overflow: hidden !important;
     margin: 0 !important;
+    /* 打印边距交给 @page 处理，避免双重留白 */
     padding: 0 !important;
     background: #ffffff !important;
     font-size: 8.5pt !important;
@@ -1039,7 +1041,9 @@ body.pdf-mode {
     max-height: 297mm !important;
     overflow: hidden !important;
     margin: 0 !important;
-    padding: 0 !important;
+    /* 自适应内边距：与 @page 边距保持一致，保证屏幕导出 == 打印结果 */
+    padding: var(--page-pad-y) var(--page-pad-x) !important;
+    box-sizing: border-box !important;
     background: #ffffff !important;
     font-size: 8.5pt !important;
     line-height: 1.24 !important;
@@ -1261,121 +1265,6 @@ body.pdf-mode * {
     break-inside: avoid !important;
   }
 
-body.pdf-mode body[data-fit="auto"] .info-unit ul li,
-  body.pdf-mode body[data-fit="auto"] .container .main .info-unit ul li .info-content li {
-    line-height: 1.24 !important;
-    margin-bottom: 1.5px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .info-unit ul li,
-  body.pdf-mode body[data-fit="compact"] .container .main .info-unit ul li .info-content li {
-    line-height: 1.18 !important;
-    margin-bottom: 1px !important;
-    font-size: 7.8pt !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .info-unit {
-    margin-bottom: 2px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .info-unit h2 {
-    font-size: 9.5pt !important;
-    margin-bottom: 0.5px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .header-side-by-side-card .header-avatar-box img {
-    width: 70px !important;
-    height: 92px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .header-side-by-side-card .header-name {
-    font-size: 15px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .skill-badge-tag {
-    padding: 0 4px !important;
-    font-size: 7pt !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .edu-line,
-  body.pdf-mode body[data-fit="compact"] #section-evaluation p {
-    font-size: 7.8pt !important;
-    line-height: 1.16 !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .info-unit ul li,
-  body.pdf-mode body[data-fit="tiny"] .container .main .info-unit ul li .info-content li {
-    line-height: 1.12 !important;
-    margin-bottom: 0.5px !important;
-    font-size: 7.2pt !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .info-unit {
-    margin-bottom: 1px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .info-unit h2 {
-    font-size: 9pt !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 1px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .header-side-by-side-card .header-avatar-box img {
-    width: 62px !important;
-    height: 82px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .header-side-by-side-card .header-name {
-    font-size: 14px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .skill-badge-tag {
-    padding: 0 3px !important;
-    font-size: 6.5pt !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .skill-badge-tag img {
-    width: 9px !important;
-    height: 9px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .edu-line,
-  body.pdf-mode body[data-fit="tiny"] #section-evaluation p {
-    font-size: 7.2pt !important;
-    line-height: 1.1 !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .container .main .info-unit ul li h3 {
-    font-size: 8.2pt !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .header-profile-tag {
-    font-size: 7pt !important;
-    padding: 0 3px !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .header-contact-list {
-    font-size: 7.2pt !important;
-    gap: 1px 6px !important;
-  }
-
-body.pdf-mode body[data-fit="compact"] .project-detail-block,
-  body.pdf-mode body[data-fit="compact"] .project-detail-block .detail-label,
-  body.pdf-mode body[data-fit="compact"] .project-detail-block .detail-lines,
-  body.pdf-mode body[data-fit="compact"] .project-detail-block .detail-line {
-    line-height: 1.14 !important;
-    font-size: 7.8pt !important;
-  }
-
-body.pdf-mode body[data-fit="tiny"] .project-detail-block,
-  body.pdf-mode body[data-fit="tiny"] .project-detail-block .detail-label,
-  body.pdf-mode body[data-fit="tiny"] .project-detail-block .detail-lines,
-  body.pdf-mode body[data-fit="tiny"] .project-detail-block .detail-line {
-    line-height: 1.08 !important;
-    font-size: 7.2pt !important;
-  }
-
-
 /* =======================================================
  * 导出反馈 toast（前台右上角轻提示）
  * ======================================================= */
@@ -1546,3 +1435,21 @@ body.pdf-mode[data-fit="tiny"] .header-contact-list {
   font-size: 7.2pt !important;
   gap: 1px 6px !important;
 }
+
+/* ==========================================================================
+ * 自适应页面边距与行距（导出专用）
+ * 由 data-fit 档位驱动：内容少 → 边距大、行距松；内容多 → 边距小、行距紧
+ * print 与 pdf-mode 共用同一套变量，保证屏幕导出与打印结果一致
+ * ========================================================================== */
+:root {
+  --page-pad-x: 8mm;    /* 左右内边距 */
+  --page-pad-y: 6mm;    /* 上下内边距 */
+}
+/* comfort：内容偏少 —— 加大边距让版心更聚焦，行距放宽 */
+body[data-fit="comfort"] { --page-pad-x: 13mm; --page-pad-y: 11mm; }
+/* auto：内容适中 —— 标准边距 */
+body[data-fit="auto"]    { --page-pad-x: 10mm; --page-pad-y: 8mm; }
+/* compact：略超一页 —— 收紧边距换取空间 */
+body[data-fit="compact"] { --page-pad-x: 7mm;  --page-pad-y: 5mm; }
+/* tiny：明显超出 —— 边距压到印刷安全下限（5mm）确保单页 */
+body[data-fit="tiny"]    { --page-pad-x: 5mm;  --page-pad-y: 4mm; }
