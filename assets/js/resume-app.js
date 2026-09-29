@@ -604,7 +604,7 @@
   const PX_PER_MM = 3.7795;           // 96dpi
   const TARGET_FILL = 0.97;           // 目标填充率 97%（留 3% 呼吸空间）
   const ZOOM_MIN = 0.55;              // 缩放下限（再小字不可读）
-  const ZOOM_MAX = 1.8;               // 缩放上限（再大显得空洞）
+  const ZOOM_MAX = 1.25;
   // 边距范围（mm）：内容多时收紧到印刷安全下限，内容少时放宽使版面协调
   const PAD_X_MIN = 5,  PAD_X_MAX = 16;
   const PAD_Y_MIN = 4,  PAD_Y_MAX = 14;
@@ -618,54 +618,62 @@
     document.body.classList.add('pdf-mode');
     container.style.zoom = '';
 
-    // 视觉高度：CSS zoom 会等比影响 getBoundingClientRect()
-    const visualH = () => container.getBoundingClientRect().height;
+    const contentBottom = () => {
+      let maxB = 0;
+      container.querySelectorAll('*').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.width > 2 && r.height > 2) maxB = Math.max(maxB, r.bottom);
+      });
+      return maxB;
+    };
 
-    // 自然高度（zoom=1）
     void container.offsetHeight;
-    const naturalH = visualH();
-    if (naturalH <= 0) return null;
+    const naturalBottom = contentBottom();
+    if (naturalBottom <= 0) return null;
 
-    // ---------- 1. 边距：按内容量在 [max, min] 间线性插值 ----------
     const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-    const density = clamp((naturalH - H_REF_LO) / (H_REF_HI - H_REF_LO), 0, 1);  // 0=稀 1=密
+    const density = clamp((naturalBottom - 500) / (1100 - 500), 0, 1);
     const padX = Math.round(clamp(PAD_X_MAX - density * (PAD_X_MAX - PAD_X_MIN), PAD_X_MIN, PAD_X_MAX) * 10) / 10;
     const padY = Math.round(clamp(PAD_Y_MAX - density * (PAD_Y_MAX - PAD_Y_MIN), PAD_Y_MIN, PAD_Y_MAX) * 10) / 10;
 
     document.documentElement.style.setProperty('--page-pad-x', padX + 'mm');
     document.documentElement.style.setProperty('--page-pad-y', padY + 'mm');
 
-    // 边距变化后重排，再量准确高度
     void container.offsetHeight;
-    const h1 = visualH();
-    if (h1 <= 0) return null;
+    const bottom1 = contentBottom();
+    if (bottom1 <= 0) return null;
 
-    // ---------- 2. 连续缩放：填满页面到目标填充率 ----------
-    const usableH = (A4_H_MM - padY * 2) * PX_PER_MM;
-    const target = usableH * TARGET_FILL;
+    const targetBottomPx = (A4_H_MM - padY) * PX_PER_MM;
+    const fillGap = targetBottomPx - bottom1;
 
-    let zoom = clamp(target / h1, ZOOM_MIN, ZOOM_MAX);
+    // 放大填满时空上限 1.0（不能溢出到第二页）
+    let zoom;
+    if (fillGap > 0) {
+      zoom = clamp(1 + fillGap / bottom1, ZOOM_MIN, 1.0);
+    } else {
+      zoom = clamp(1 + fillGap / bottom1, ZOOM_MIN, ZOOM_MAX);
+    }
     container.style.zoom = zoom;
 
-    // ---------- 3. 迭代收敛（zoom 与高度轻微非线性）----------
-    for (let i = 0; i < 4; i++) {
-      const h = visualH();
-      if (h <= 0) break;
-      const diff = target - h;
-      if (Math.abs(diff) < 6) break;
-      zoom = clamp(zoom * (target / h), ZOOM_MIN, ZOOM_MAX);
+    for (let i = 0; i < 5; i++) {
+      const b = contentBottom();
+      if (b <= 0) break;
+      const gap = targetBottomPx - b;
+      if (Math.abs(gap) < 4) break;
+      if (gap > 0 && zoom >= 1.0) break;
+      zoom = clamp(zoom * (targetBottomPx / b), ZOOM_MIN, ZOOM_MAX);
+      if (fillGap > 0 && zoom > 1.0) { zoom = 1.0; container.style.zoom = zoom; break; }
       container.style.zoom = zoom;
     }
 
-    // ---------- 4. 横向校验：缩放后不能超出页宽 ----------
     const w = container.getBoundingClientRect().width;
     const availW = (A4_W_MM - padX * 2) * PX_PER_MM;
     if (w > availW * 1.01) {
-      zoom = clamp(zoom * (availW / w), ZOOM_MIN, ZOOM_MAX);
+      zoom = clamp(zoom * (availW / w), ZOOM_MIN, 1.0);
       container.style.zoom = zoom;
     }
 
-    return { padX, padY, zoom: Math.round(zoom * 1000) / 1000, fill: Math.round(visualH() / usableH * 100) };
+    return { padX, padY, zoom: Math.round(zoom * 1000) / 1000 };
   }
 
   // 退出导出排版态，恢复正常屏幕显示
