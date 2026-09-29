@@ -3,163 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>个人简历后台管理系统</title>
+  <title>涓汉绠€鍘嗗悗鍙扮鐞嗙郴缁?/title>
   <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=202609300022">
 </head>
 <body>
   <div class="admin-wrapper">
-    <!-- 左侧菜单 -->
+    <!-- 宸︿晶鑿滃崟 -->
     <aside class="admin-sidebar">
       <div class="sidebar-brand">
         <i class="fa fa-id-card-o"></i>
-        <h2>简历内容管理后台</h2>
+        <h2>绠€鍘嗗唴瀹圭鐞嗗悗鍙?/h2>
       </div>
       <ul class="sidebar-menu">
         <li class="active" data-tab="layout-tab">
-          <a href="javascript:void(0)"><i class="fa fa-sliders"></i> <span>布局与外观</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-sliders"></i> <span>甯冨眬涓庡瑙?/span></a>
         </li>
         <li data-tab="homepage-tab">
-          <a href="javascript:void(0)"><i class="fa fa-home"></i> <span>个人主页</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-home"></i> <span>涓汉涓婚〉</span></a>
         </li>
         <li data-tab="basic-tab">
-          <a href="javascript:void(0)"><i class="fa fa-user"></i> <span>基本信息</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-user"></i> <span>鍩烘湰淇℃伅</span></a>
         </li>
         <li data-tab="profile-tab">
-          <a href="javascript:void(0)"><i class="fa fa-address-book-o"></i> <span>档案资料</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-address-book-o"></i> <span>妗ｆ璧勬枡</span></a>
         </li>
         <li data-tab="contact-tab">
-          <a href="javascript:void(0)"><i class="fa fa-phone"></i> <span>联系方式</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-phone"></i> <span>鑱旂郴鏂瑰紡</span></a>
         </li>
         <li data-tab="skills-tab">
-          <a href="javascript:void(0)"><i class="fa fa-code"></i> <span>技能特长</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-code"></i> <span>鎶€鑳界壒闀?/span></a>
         </li>
         <li data-tab="education-tab">
-          <a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> <span>教育经历</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-graduation-cap"></i> <span>鏁欒偛缁忓巻</span></a>
         </li>
         <li data-tab="work-tab">
-          <a href="javascript:void(0)"><i class="fa fa-briefcase"></i> <span>工作经历</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-briefcase"></i> <span>宸ヤ綔缁忓巻</span></a>
         </li>
         <li data-tab="projects-tab">
-          <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span>项目经验</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-cubes"></i> <span>椤圭洰缁忛獙</span></a>
         </li>
         <li data-tab="evaluation-tab">
-          <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span>自我评价</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> <span>鑷垜璇勪环</span></a>
         </li>
         <li data-tab="qrcode-tab">
-          <a href="javascript:void(0)"><i class="fa fa-qrcode"></i> <span>二维码设置</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-qrcode"></i> <span>浜岀淮鐮佽缃?/span></a>
         </li>
         <li data-tab="sync-tab">
-          <a href="javascript:void(0)"><i class="fa fa-cloud"></i> <span>云同步</span></a>
+          <a href="javascript:void(0)"><i class="fa fa-cloud"></i> <span>浜戝悓姝?/span></a>
         </li>
       </ul>
       <div class="sidebar-footer">
-        简历管理后台 v1.0
+        绠€鍘嗙鐞嗗悗鍙?v1.0
       </div>
     </aside>
 
-    <!-- 右侧主区域 -->
+    <!-- 鍙充晶涓诲尯鍩?-->
     <main class="admin-main">
-      <!-- 站点导航条（与前台/投递记录页保持一致） -->
+      <!-- 绔欑偣瀵艰埅鏉★紙涓庡墠鍙?鎶曢€掕褰曢〉淇濇寔涓€鑷达級 -->
       <nav class="site-nav">
-        <a class="site-nav-btn" href="/" title="查看赛博马里奥像素个人主页">
-          <i class="fa fa-home"></i> 个人主页
+        <a class="site-nav-btn" href="/" title="鏌ョ湅璧涘崥椹噷濂ュ儚绱犱釜浜轰富椤?>
+          <i class="fa fa-home"></i> 涓汉涓婚〉
         </a>
-        <a class="site-nav-btn" href="/resume.html" title="查看个人简历展示页">
-          <i class="fa fa-id-card-o"></i> 个人简历
+        <a class="site-nav-btn" href="/resume.html" title="鏌ョ湅涓汉绠€鍘嗗睍绀洪〉">
+          <i class="fa fa-id-card-o"></i> 涓汉绠€鍘?        </a>
+        <a class="site-nav-btn active" href="/admin/" title="缂栬緫绠€鍘嗗唴瀹癸紙褰撳墠椤碉級">
+          <i class="fa fa-cog"></i> 鍚庡彴绠＄悊
         </a>
-        <a class="site-nav-btn active" href="/admin/" title="编辑简历内容（当前页）">
-          <i class="fa fa-cog"></i> 后台管理
-        </a>
-        <a class="site-nav-btn" href="/admin/jobs.html" title="管理简历投递记录">
-          <i class="fa fa-table"></i> 投递记录
-        </a>
+        <a class="site-nav-btn" href="/admin/jobs.html" title="绠＄悊绠€鍘嗘姇閫掕褰?>
+          <i class="fa fa-table"></i> 鎶曢€掕褰?        </a>
       </nav>
 
-      <!-- 顶部操作栏 -->
+      <!-- 椤堕儴鎿嶄綔鏍?-->
       <header class="admin-topbar">
         <div class="topbar-title">
-          <h1 id="current-tab-title">布局与外观设置</h1>
+          <h1 id="current-tab-title">甯冨眬涓庡瑙傝缃?/h1>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-primary" id="btn-quick-presets" title="一键套用内置的 6 套定制职业简历数据" style="background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%); border: none;">
-            <i class="fa fa-briefcase"></i> <b>职业简历库 (6套)</b>
+          <button class="btn btn-primary" id="btn-quick-presets" title="涓€閿鐢ㄥ唴缃殑 6 濂楀畾鍒惰亴涓氱畝鍘嗘暟鎹? style="background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%); border: none;">
+            <i class="fa fa-briefcase"></i> <b>鑱屼笟绠€鍘嗗簱 (6濂?</b>
           </button>
-          <button class="btn btn-secondary" id="btn-import-resume" title="上传已有简历文件（PDF/Word/Markdown/HTML/文本），自动识别并填入内容">
-            <i class="fa fa-file-text"></i> <b>导入已有简历</b>
+          <button class="btn btn-secondary" id="btn-import-resume" title="涓婁紶宸叉湁绠€鍘嗘枃浠讹紙PDF/Word/Markdown/HTML/鏂囨湰锛夛紝鑷姩璇嗗埆骞跺～鍏ュ唴瀹?>
+            <i class="fa fa-file-text"></i> <b>瀵煎叆宸叉湁绠€鍘?/b>
           </button>
           <button class="btn btn-secondary" id="btn-open-preview">
-            <i class="fa fa-eye"></i> 实时预览
+            <i class="fa fa-eye"></i> 瀹炴椂棰勮
           </button>
           <a class="btn btn-secondary" href="/" target="_blank">
-            <i class="fa fa-external-link"></i> 打开前台
+            <i class="fa fa-external-link"></i> 鎵撳紑鍓嶅彴
           </a>
-          <button class="btn btn-secondary" id="btn-export-json" title="导出当前配置备份">
-            <i class="fa fa-download"></i> 导出
+          <button class="btn btn-secondary" id="btn-export-json" title="瀵煎嚭褰撳墠閰嶇疆澶囦唤">
+            <i class="fa fa-download"></i> 瀵煎嚭
           </button>
-          <label class="btn btn-secondary" style="margin: 0; cursor: pointer;" title="导入 JSON 配置">
-            <i class="fa fa-upload"></i> 导入
+          <label class="btn btn-secondary" style="margin: 0; cursor: pointer;" title="瀵煎叆 JSON 閰嶇疆">
+            <i class="fa fa-upload"></i> 瀵煎叆
             <input type="file" id="input-import-json" accept=".json" style="display: none;">
           </label>
-          <button class="btn btn-danger btn-sm" id="btn-reset-data" title="重置回初始数据">
-            <i class="fa fa-refresh"></i> 重置默认
+          <button class="btn btn-danger btn-sm" id="btn-reset-data" title="閲嶇疆鍥炲垵濮嬫暟鎹?>
+            <i class="fa fa-refresh"></i> 閲嶇疆榛樿
           </button>
           <button class="btn btn-primary" id="btn-save-all">
-            <i class="fa fa-save"></i> <b>保存所有内容</b>
+            <i class="fa fa-save"></i> <b>淇濆瓨鎵€鏈夊唴瀹?/b>
           </button>
         </div>
       </header>
 
-      <!-- 表单内容主体 -->
+      <!-- 琛ㄥ崟鍐呭涓讳綋 -->
       <div class="admin-body">
         <div class="admin-content">
 
-          <!-- 1. 布局与外观设置 -->
+          <!-- 1. 甯冨眬涓庡瑙傝缃?-->
           <div class="tab-panel active" id="layout-tab">
 
-            <!-- 🎯 内置六大职业定制简历专区 -->
+            <!-- 馃幆 鍐呯疆鍏ぇ鑱屼笟瀹氬埗绠€鍘嗕笓鍖?-->
             <div class="card preset-resumes-card" id="preset-resumes-anchor">
               <div class="card-header" style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border-bottom: 1px solid #bfdbfe;">
                 <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 8px;">
                   <div>
                     <h3 style="color: #1e3a8a; font-size: 16px; font-weight: 700;">
-                      <i class="fa fa-briefcase text-primary"></i> 🎯 内置六大职业定制简历套件（一键载入履历内容）
+                      <i class="fa fa-briefcase text-primary"></i> 馃幆 鍐呯疆鍏ぇ鑱屼笟瀹氬埗绠€鍘嗗浠讹紙涓€閿浇鍏ュ饱鍘嗗唴瀹癸級
                     </h3>
                     <span class="header-desc" style="color: #3b82f6;">
-                      已基于您的工科与材料背景内置 6 套精准求职履历，点击任一职业即可将其基本信息、技能、科研/项目与评价一键填入后台；模板与主题色可在下方自由挑选搭配！
+                      宸插熀浜庢偍鐨勫伐绉戜笌鏉愭枡鑳屾櫙鍐呯疆 6 濂楃簿鍑嗘眰鑱屽饱鍘嗭紝鐐瑰嚮浠讳竴鑱屼笟鍗冲彲灏嗗叾鍩烘湰淇℃伅銆佹妧鑳姐€佺鐮?椤圭洰涓庤瘎浠蜂竴閿～鍏ュ悗鍙帮紱妯℃澘涓庝富棰樿壊鍙湪涓嬫柟鑷敱鎸戦€夋惌閰嶏紒
                     </span>
                   </div>
                   <span class="badge-pill" style="background: #2563eb; color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
-                    内置 6 套完整方案
-                  </span>
+                    鍐呯疆 6 濂楀畬鏁存柟妗?                  </span>
                 </div>
               </div>
               <div class="card-body">
                 <div class="preset-cards-grid" id="preset-cards-grid">
-                  <!-- JS 动态渲染 6 套预设卡片 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?6 濂楅璁惧崱鐗?-->
                 </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-paint-brush"></i> 30 套单栏结构型排版模板库</h3>
-                <span class="header-desc">颜色随主题色联动，版式骨架与排字节奏全方位重构，点击即换</span>
+                <h3><i class="fa fa-paint-brush"></i> 30 濂楀崟鏍忕粨鏋勫瀷鎺掔増妯℃澘搴?/h3>
+                <span class="header-desc">棰滆壊闅忎富棰樿壊鑱斿姩锛岀増寮忛鏋朵笌鎺掑瓧鑺傚鍏ㄦ柟浣嶉噸鏋勶紝鐐瑰嚮鍗虫崲</span>
               </div>
               <div class="card-body">
-                <!-- 模板结构分类筛选 -->
+                <!-- 妯℃澘缁撴瀯鍒嗙被绛涢€?-->
                 <div class="template-filter-pills" id="template-filter-pills" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-                  <span class="cat-pill active" data-filter="all">全部结构 (30)</span>
-                  <span class="cat-pill" data-filter="header">页头架构流 (6)</span>
-                  <span class="cat-pill" data-filter="timeline">经历时间排版流 (5)</span>
-                  <span class="cat-pill" data-filter="heading">章节标题形态流 (7)</span>
-                  <span class="cat-pill" data-filter="bullet">职责要点结构流 (5)</span>
-                  <span class="cat-pill" data-filter="layout">技能与容器版式流 (7)</span>
+                  <span class="cat-pill active" data-filter="all">鍏ㄩ儴缁撴瀯 (30)</span>
+                  <span class="cat-pill" data-filter="header">椤靛ご鏋舵瀯娴?(6)</span>
+                  <span class="cat-pill" data-filter="timeline">缁忓巻鏃堕棿鎺掔増娴?(5)</span>
+                  <span class="cat-pill" data-filter="heading">绔犺妭鏍囬褰㈡€佹祦 (7)</span>
+                  <span class="cat-pill" data-filter="bullet">鑱岃矗瑕佺偣缁撴瀯娴?(5)</span>
+                  <span class="cat-pill" data-filter="layout">鎶€鑳戒笌瀹瑰櫒鐗堝紡娴?(7)</span>
                 </div>
 
                 <div class="template-selector" id="template-selector">
-                  <!-- 1. 页头架构流 (header) -->
+                  <!-- 1. 椤靛ご鏋舵瀯娴?(header) -->
                   <div class="template-card selected" data-template="classic" data-group="header">
                     <div class="template-thumb thumb-classic">
                       <span class="tt-line w60 accent-l"></span>
@@ -167,8 +164,8 @@
                       <span class="tt-line w75"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">经典名片版 <small>classic</small></div>
-                    <div class="template-desc">经典左右头像名片，品牌竖标章节标题，流式胶囊技能标签</div>
+                    <div class="template-name">缁忓吀鍚嶇墖鐗?<small>classic</small></div>
+                    <div class="template-desc">缁忓吀宸﹀彸澶村儚鍚嶇墖锛屽搧鐗岀珫鏍囩珷鑺傛爣棰橈紝娴佸紡鑳跺泭鎶€鑳芥爣绛?/div>
                   </div>
 
                   <div class="template-card" data-template="center-hero" data-group="header">
@@ -177,8 +174,8 @@
                       <span class="tt-line w40 centered"></span>
                       <span class="tt-line w75" style="margin:2px auto;"></span>
                     </div>
-                    <div class="template-name">中轴居中大气版 <small>center-hero</small></div>
-                    <div class="template-desc">头像正中置顶，大姓名与意向居中，联系方式单行圆点对齐</div>
+                    <div class="template-name">涓酱灞呬腑澶ф皵鐗?<small>center-hero</small></div>
+                    <div class="template-desc">澶村儚姝ｄ腑缃《锛屽ぇ濮撳悕涓庢剰鍚戝眳涓紝鑱旂郴鏂瑰紡鍗曡鍦嗙偣瀵归綈</div>
                   </div>
 
                   <div class="template-card" data-template="split-header" data-group="header">
@@ -188,8 +185,8 @@
                       <span class="tt-line w60"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">对称双列页头版 <small>split-header</small></div>
-                    <div class="template-desc">左半区姓名意向顶格，右半区联系方式双列网格，严谨高效</div>
+                    <div class="template-name">瀵圭О鍙屽垪椤靛ご鐗?<small>split-header</small></div>
+                    <div class="template-desc">宸﹀崐鍖哄鍚嶆剰鍚戦《鏍硷紝鍙冲崐鍖鸿仈绯绘柟寮忓弻鍒楃綉鏍硷紝涓ヨ皑楂樻晥</div>
                   </div>
 
                   <div class="template-card" data-template="editorial" data-group="header">
@@ -198,8 +195,8 @@
                       <span class="tt-rule" style="background:#0f172a;height:2px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">杂志报刊刊头版 <small>editorial</small></div>
-                    <div class="template-desc">32px 粗体黑标顶格，意向如主刊副标，下带贯穿加粗分割带</div>
+                    <div class="template-name">鏉傚織鎶ュ垔鍒婂ご鐗?<small>editorial</small></div>
+                    <div class="template-desc">32px 绮椾綋榛戞爣椤舵牸锛屾剰鍚戝涓诲垔鍓爣锛屼笅甯﹁疮绌垮姞绮楀垎鍓插甫</div>
                   </div>
 
                   <div class="template-card" data-template="text-pure" data-group="header">
@@ -208,8 +205,8 @@
                       <span class="tt-line w90"></span>
                       <span class="tt-line w80"></span>
                     </div>
-                    <div class="template-name">纯粹文本流版 <small>text-pure</small></div>
-                    <div class="template-desc">彻底隐藏头像占位，全幅信息无缝展开，超高信息密度与外企范</div>
+                    <div class="template-name">绾补鏂囨湰娴佺増 <small>text-pure</small></div>
+                    <div class="template-desc">褰诲簳闅愯棌澶村儚鍗犱綅锛屽叏骞呬俊鎭棤缂濆睍寮€锛岃秴楂樹俊鎭瘑搴︿笌澶栦紒鑼?/div>
                   </div>
 
                   <div class="template-card" data-template="badge-card" data-group="header">
@@ -217,11 +214,11 @@
                       <span class="tt-line w50"></span>
                       <span class="tt-line w80"></span>
                     </div>
-                    <div class="template-name">工牌内嵌卡片版 <small>badge-card</small></div>
-                    <div class="template-desc">页头带工作证般的内嵌浅底圆角微边框，精致立体仪式感</div>
+                    <div class="template-name">宸ョ墝鍐呭祵鍗＄墖鐗?<small>badge-card</small></div>
+                    <div class="template-desc">椤靛ご甯﹀伐浣滆瘉鑸殑鍐呭祵娴呭簳鍦嗚寰竟妗嗭紝绮捐嚧绔嬩綋浠紡鎰?/div>
                   </div>
 
-                  <!-- 2. 经历时间排版流 (timeline) -->
+                  <!-- 2. 缁忓巻鏃堕棿鎺掔増娴?(timeline) -->
                   <div class="template-card" data-template="left-date" data-group="timeline">
                     <div class="template-thumb thumb-left-date" style="background:#fff; display:grid; grid-template-columns:25px 1fr; gap:6px;">
                       <span class="tt-line w90" style="background:var(--admin-primary,#1abc9c);"></span>
@@ -229,8 +226,8 @@
                       <span class="tt-line w90" style="background:var(--admin-primary,#1abc9c);"></span>
                       <span class="tt-line w75"></span>
                     </div>
-                    <div class="template-name">左侧独立时间轨版 <small>left-date</small></div>
-                    <div class="template-desc">时间抽离至左侧独立列，右侧公司职位展开，视线对齐极度舒适</div>
+                    <div class="template-name">宸︿晶鐙珛鏃堕棿杞ㄧ増 <small>left-date</small></div>
+                    <div class="template-desc">鏃堕棿鎶界鑷冲乏渚х嫭绔嬪垪锛屽彸渚у叕鍙歌亴浣嶅睍寮€锛岃绾垮榻愭瀬搴﹁垝閫?/div>
                   </div>
 
                   <div class="template-card" data-template="two-row-grid" data-group="timeline">
@@ -238,8 +235,8 @@
                       <span style="display:flex; justify-content:space-between; margin-bottom:4px;"><span class="tt-line w50"></span><span class="tt-line w30"></span></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">两行表格对齐版 <small>two-row-grid</small></div>
-                    <div class="template-desc">首行左公司右时间，次行职位学院，如财务报表般整洁</div>
+                    <div class="template-name">涓よ琛ㄦ牸瀵归綈鐗?<small>two-row-grid</small></div>
+                    <div class="template-desc">棣栬宸﹀叕鍙稿彸鏃堕棿锛屾琛岃亴浣嶅闄紝濡傝储鍔℃姤琛ㄨ埇鏁存磥</div>
                   </div>
 
                   <div class="template-card" data-template="stream-axis" data-group="timeline">
@@ -249,8 +246,8 @@
                       <span class="tt-dot" style="margin-left:-18px; margin-top:6px;"></span>
                       <span class="tt-line w70"></span>
                     </div>
-                    <div class="template-name">连续时间轴流版 <small>stream-axis</small></div>
-                    <div class="template-desc">左侧 2px 细轴贯穿，条目圆圈挂点，履历脉络如溪流清晰</div>
+                    <div class="template-name">杩炵画鏃堕棿杞存祦鐗?<small>stream-axis</small></div>
+                    <div class="template-desc">宸︿晶 2px 缁嗚酱璐┛锛屾潯鐩渾鍦堟寕鐐癸紝灞ュ巻鑴夌粶濡傛邯娴佹竻鏅?/div>
                   </div>
 
                   <div class="template-card" data-template="compact-line" data-group="timeline">
@@ -259,8 +256,8 @@
                       <span class="tt-line w85" style="margin-bottom:3px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">紧凑一行流版 <small>compact-line</small></div>
-                    <div class="template-desc">公司与职位、时间全部压缩在一行，最大化利用首行空间</div>
+                    <div class="template-name">绱у噾涓€琛屾祦鐗?<small>compact-line</small></div>
+                    <div class="template-desc">鍏徃涓庤亴浣嶃€佹椂闂村叏閮ㄥ帇缂╁湪涓€琛岋紝鏈€澶у寲鍒╃敤棣栬绌洪棿</div>
                   </div>
 
                   <div class="template-card" data-template="tag-prefix" data-group="timeline">
@@ -268,19 +265,19 @@
                       <span style="display:inline-block;width:24px;height:7px;background:#0f172a;border-radius:2px;margin-bottom:3px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">年份徽章前缀版 <small>tag-prefix</small></div>
-                    <div class="template-desc">时间转化为深色微型年份勋章胶囊，一眼定位职业阶段</div>
+                    <div class="template-name">骞翠唤寰界珷鍓嶇紑鐗?<small>tag-prefix</small></div>
+                    <div class="template-desc">鏃堕棿杞寲涓烘繁鑹插井鍨嬪勾浠藉媼绔犺兌鍥婏紝涓€鐪煎畾浣嶈亴涓氶樁娈?/div>
                   </div>
 
-                  <!-- 3. 章节标题形态流 (heading) -->
+                  <!-- 3. 绔犺妭鏍囬褰㈡€佹祦 (heading) -->
                   <div class="template-card" data-template="full-rule" data-group="heading">
                     <div class="template-thumb thumb-full-rule" style="background:#fff;">
                       <span class="tt-line w40" style="background:#0f172a;"></span>
                       <span class="tt-rule" style="background:#0f172a; height:1.5px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">贯穿细横线版 <small>full-rule</small></div>
-                    <div class="template-desc">超级简历 WonderCV 经典标杆，大字标题后 1px 细线贯通全宽</div>
+                    <div class="template-name">璐┛缁嗘í绾跨増 <small>full-rule</small></div>
+                    <div class="template-desc">瓒呯骇绠€鍘?WonderCV 缁忓吀鏍囨潌锛屽ぇ瀛楁爣棰樺悗 1px 缁嗙嚎璐€氬叏瀹?/div>
                   </div>
 
                   <div class="template-card" data-template="bracket-tag" data-group="heading">
@@ -288,8 +285,8 @@
                       <span class="tt-code-box">// EDUCATION</span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">代码注释前缀版 <small>bracket-tag</small></div>
-                    <div class="template-desc">章节带 // 技术代码前缀，等宽字体，程序员与技术极客首选</div>
+                    <div class="template-name">浠ｇ爜娉ㄩ噴鍓嶇紑鐗?<small>bracket-tag</small></div>
+                    <div class="template-desc">绔犺妭甯?// 鎶€鏈唬鐮佸墠缂€锛岀瓑瀹藉瓧浣擄紝绋嬪簭鍛樹笌鎶€鏈瀬瀹㈤閫?/div>
                   </div>
 
                   <div class="template-card" data-template="band-strip" data-group="heading">
@@ -297,8 +294,8 @@
                       <span class="tt-band" style="background:#f1f5f9; border-left:4px solid var(--admin-primary,#1abc9c);"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">整行浅底衬带版 <small>band-strip</small></div>
-                    <div class="template-desc">整行浅色衬带包裹标题，左侧色标，政府公文与商务报告稳重感</div>
+                    <div class="template-name">鏁磋娴呭簳琛甫鐗?<small>band-strip</small></div>
+                    <div class="template-desc">鏁磋娴呰壊琛甫鍖呰９鏍囬锛屽乏渚ц壊鏍囷紝鏀垮簻鍏枃涓庡晢鍔℃姤鍛婄ǔ閲嶆劅</div>
                   </div>
 
                   <div class="template-card" data-template="center-caps" data-group="heading">
@@ -307,8 +304,8 @@
                       <span class="tt-double"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">学术双横线版 <small>center-caps</small></div>
-                    <div class="template-desc">Overleaf LaTeX 论文简历版式，全衬线字体，居中大写双横线</div>
+                    <div class="template-name">瀛︽湳鍙屾í绾跨増 <small>center-caps</small></div>
+                    <div class="template-desc">Overleaf LaTeX 璁烘枃绠€鍘嗙増寮忥紝鍏ㄨ‖绾垮瓧浣擄紝灞呬腑澶у啓鍙屾í绾?/div>
                   </div>
 
                   <div class="template-card" data-template="bottom-accent" data-group="heading">
@@ -316,8 +313,8 @@
                       <span class="tt-line w30" style="background:var(--admin-primary,#1abc9c); height:4px; margin-bottom:4px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">底边短实线版 <small>bottom-accent</small></div>
-                    <div class="template-desc">日系 MUJI 风格，标题下方一条与文字等宽短加粗实线，其余留白</div>
+                    <div class="template-name">搴曡竟鐭疄绾跨増 <small>bottom-accent</small></div>
+                    <div class="template-desc">鏃ョ郴 MUJI 椋庢牸锛屾爣棰樹笅鏂逛竴鏉′笌鏂囧瓧绛夊鐭姞绮楀疄绾匡紝鍏朵綑鐣欑櫧</div>
                   </div>
 
                   <div class="template-card" data-template="outline-pill" data-group="heading">
@@ -325,8 +322,8 @@
                       <span style="display:inline-block;width:40px;height:12px;border:1.5px solid var(--admin-primary,#1abc9c);border-radius:10px;margin-bottom:4px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">胶囊边框标题版 <small>outline-pill</small></div>
-                    <div class="template-desc">标题做成轻巧圆角胶囊线框，柔和现代，文创与运营首选</div>
+                    <div class="template-name">鑳跺泭杈规鏍囬鐗?<small>outline-pill</small></div>
+                    <div class="template-desc">鏍囬鍋氭垚杞诲阀鍦嗚鑳跺泭绾挎锛屾煍鍜岀幇浠ｏ紝鏂囧垱涓庤繍钀ラ閫?/div>
                   </div>
 
                   <div class="template-card" data-template="corner-ribbon" data-group="heading">
@@ -334,18 +331,18 @@
                       <span class="tt-node-row"><span style="width:6px;height:12px;background:var(--admin-primary,#1abc9c);clip-path:polygon(0 0, 100% 25%, 100% 75%, 0 100%);"></span><span class="tt-line w50"></span></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">立体折角工科版 <small>corner-ribbon</small></div>
-                    <div class="template-desc">工科机械般的立体倒角几何标识，严谨精密，机械与制造</div>
+                    <div class="template-name">绔嬩綋鎶樿宸ョ鐗?<small>corner-ribbon</small></div>
+                    <div class="template-desc">宸ョ鏈烘鑸殑绔嬩綋鍊掕鍑犱綍鏍囪瘑锛屼弗璋ㄧ簿瀵嗭紝鏈烘涓庡埗閫?/div>
                   </div>
 
-                  <!-- 4. 职责要点结构流 (bullet) -->
+                  <!-- 4. 鑱岃矗瑕佺偣缁撴瀯娴?(bullet) -->
                   <div class="template-card" data-template="dash-bullet" data-group="bullet">
                     <div class="template-thumb thumb-dash-bullet" style="background:#fff;">
                       <span class="tt-line w90" style="border-left:4px solid var(--admin-primary,#1abc9c); padding-left:4px;"></span>
                       <span class="tt-line w80" style="border-left:4px solid var(--admin-primary,#1abc9c); padding-left:4px; margin-top:4px;"></span>
                     </div>
-                    <div class="template-name">长破折号清单版 <small>dash-bullet</small></div>
-                    <div class="template-desc">摒弃普通圆点，改用优雅的西文长破折号 — 领衔要点，欧美范</div>
+                    <div class="template-name">闀跨牬鎶樺彿娓呭崟鐗?<small>dash-bullet</small></div>
+                    <div class="template-desc">鎽掑純鏅€氬渾鐐癸紝鏀圭敤浼橀泤鐨勮タ鏂囬暱鐮存姌鍙?鈥?棰嗚瑕佺偣锛屾缇庤寖</div>
                   </div>
 
                   <div class="template-card" data-template="hollow-square" data-group="bullet">
@@ -353,17 +350,17 @@
                       <span class="tt-node-row"><span style="width:5px;height:5px;background:#0f172a;flex-shrink:0;"></span><span class="tt-line w85"></span></span>
                       <span class="tt-node-row" style="margin-top:4px;"><span style="width:5px;height:5px;background:#0f172a;flex-shrink:0;"></span><span class="tt-line w75"></span></span>
                     </div>
-                    <div class="template-name">实心工整方块版 <small>hollow-square</small></div>
-                    <div class="template-desc">要点前缀为规整黑色小方块 ▪，如卡尺量出一般整齐严密</div>
+                    <div class="template-name">瀹炲績宸ユ暣鏂瑰潡鐗?<small>hollow-square</small></div>
+                    <div class="template-desc">瑕佺偣鍓嶇紑涓鸿鏁撮粦鑹插皬鏂瑰潡 鈻紝濡傚崱灏洪噺鍑轰竴鑸暣榻愪弗瀵?/div>
                   </div>
 
                   <div class="template-card" data-template="arrow-lead" data-group="bullet">
                     <div class="template-thumb thumb-arrow-lead" style="background:#fff;">
-                      <span class="tt-node-row"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">›</span><span class="tt-line w85"></span></span>
-                      <span class="tt-node-row" style="margin-top:4px;"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">›</span><span class="tt-line w75"></span></span>
+                      <span class="tt-node-row"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">鈥?/span><span class="tt-line w85"></span></span>
+                      <span class="tt-node-row" style="margin-top:4px;"><span style="color:var(--admin-primary,#1abc9c);font-weight:bold;font-size:10px;">鈥?/span><span class="tt-line w75"></span></span>
                     </div>
-                    <div class="template-name">行动导向箭头版 <small>arrow-lead</small></div>
-                    <div class="template-desc">以推进箭头 › 领衔要点，突出主动作为、结果突破与执行力</div>
+                    <div class="template-name">琛屽姩瀵煎悜绠ご鐗?<small>arrow-lead</small></div>
+                    <div class="template-desc">浠ユ帹杩涚澶?鈥?棰嗚瑕佺偣锛岀獊鍑轰富鍔ㄤ綔涓恒€佺粨鏋滅獊鐮翠笌鎵ц鍔?/div>
                   </div>
 
                   <div class="template-card" data-template="hanging-indent" data-group="bullet">
@@ -371,8 +368,8 @@
                       <span class="tt-line w90"></span>
                       <span class="tt-line w80" style="margin-left:8px; margin-top:3px;"></span>
                     </div>
-                    <div class="template-name">悬挂缩进排版版 <small>hanging-indent</small></div>
-                    <div class="template-desc">出版级悬挂缩进对齐，行首字对齐极整齐，长文段落阅读感佳</div>
+                    <div class="template-name">鎮寕缂╄繘鎺掔増鐗?<small>hanging-indent</small></div>
+                    <div class="template-desc">鍑虹増绾ф偓鎸傜缉杩涘榻愶紝琛岄瀛楀榻愭瀬鏁撮綈锛岄暱鏂囨钀介槄璇绘劅浣?/div>
                   </div>
 
                   <div class="template-card" data-template="dense-paragraph" data-group="bullet">
@@ -381,18 +378,18 @@
                       <span class="tt-line w90" style="height:3px; margin-bottom:2px;"></span>
                       <span class="tt-line w92" style="height:3px;"></span>
                     </div>
-                    <div class="template-name">紧密连贯段落版 <small>dense-paragraph</small></div>
-                    <div class="template-desc">行距紧致连贯，适合产出描述详实、项目复杂度高的高级研发</div>
+                    <div class="template-name">绱у瘑杩炶疮娈佃惤鐗?<small>dense-paragraph</small></div>
+                    <div class="template-desc">琛岃窛绱ц嚧杩炶疮锛岄€傚悎浜у嚭鎻忚堪璇﹀疄銆侀」鐩鏉傚害楂樼殑楂樼骇鐮斿彂</div>
                   </div>
 
-                  <!-- 5. 技能与容器版式流 (layout) -->
+                  <!-- 5. 鎶€鑳戒笌瀹瑰櫒鐗堝紡娴?(layout) -->
                   <div class="template-card" data-template="skill-matrix" data-group="layout">
                     <div class="template-thumb thumb-skill-matrix" style="background:#fff; display:grid; grid-template-columns:1fr 1fr; gap:4px;">
                       <span class="tt-line w90"></span><span class="tt-line w80"></span>
                       <span class="tt-line w70"></span><span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">技能双列网格版 <small>skill-matrix</small></div>
-                    <div class="template-desc">技能徽章规整为双列矩阵对称排列，整齐治愈强迫症</div>
+                    <div class="template-name">鎶€鑳藉弻鍒楃綉鏍肩増 <small>skill-matrix</small></div>
+                    <div class="template-desc">鎶€鑳藉窘绔犺鏁翠负鍙屽垪鐭╅樀瀵圭О鎺掑垪锛屾暣榻愭不鎰堝己杩棁</div>
                   </div>
 
                   <div class="template-card" data-template="skill-plain-list" data-group="layout">
@@ -400,8 +397,8 @@
                       <span class="tt-line w80" style="background:transparent; border-bottom:1px dotted #94a3b8;"></span>
                       <span class="tt-line w90" style="margin-top:4px;"></span>
                     </div>
-                    <div class="template-name">极简无框平铺版 <small>skill-plain-list</small></div>
-                    <div class="template-desc">技能彻底去除背景与线框，纯粹文字与 Logo 平铺，极致通透</div>
+                    <div class="template-name">鏋佺畝鏃犳骞抽摵鐗?<small>skill-plain-list</small></div>
+                    <div class="template-desc">鎶€鑳藉交搴曞幓闄よ儗鏅笌绾挎锛岀函绮规枃瀛椾笌 Logo 骞抽摵锛屾瀬鑷撮€氶€?/div>
                   </div>
 
                   <div class="template-card" data-template="skill-grouped" data-group="layout">
@@ -409,8 +406,8 @@
                       <span style="display:inline-block;width:30px;height:8px;background:#0f172a;border-radius:2px;margin-bottom:3px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">高反差深底徽章版 <small>skill-grouped</small></div>
-                    <div class="template-desc">技能采用深石板黑色底 + 白字反白，视觉反差极高，高档精致</div>
+                    <div class="template-name">楂樺弽宸繁搴曞窘绔犵増 <small>skill-grouped</small></div>
+                    <div class="template-desc">鎶€鑳介噰鐢ㄦ繁鐭虫澘榛戣壊搴?+ 鐧藉瓧鍙嶇櫧锛岃瑙夊弽宸瀬楂橈紝楂樻。绮捐嚧</div>
                   </div>
 
                   <div class="template-card" data-template="borderless-pure" data-group="layout">
@@ -418,8 +415,8 @@
                       <span class="tt-line w80"></span>
                       <span class="tt-line w90" style="margin-top:4px;"></span>
                     </div>
-                    <div class="template-name">纯白无界通透版 <small>borderless-pure</small></div>
-                    <div class="template-desc">移除所有容器阴影和多余边框，纯白通透，纸张感最强</div>
+                    <div class="template-name">绾櫧鏃犵晫閫氶€忕増 <small>borderless-pure</small></div>
+                    <div class="template-desc">绉婚櫎鎵€鏈夊鍣ㄩ槾褰卞拰澶氫綑杈规锛岀函鐧介€氶€忥紝绾稿紶鎰熸渶寮?/div>
                   </div>
 
                   <div class="template-card" data-template="framed-border" data-group="layout">
@@ -427,8 +424,8 @@
                       <span class="tt-line w80"></span>
                       <span class="tt-line w90" style="margin-top:4px;"></span>
                     </div>
-                    <div class="template-name">全封闭细线画框版 <small>framed-border</small></div>
-                    <div class="template-desc">页面四周环绕 1px 精细外线框，像证书或公文般庄重</div>
+                    <div class="template-name">鍏ㄥ皝闂粏绾跨敾妗嗙増 <small>framed-border</small></div>
+                    <div class="template-desc">椤甸潰鍥涘懆鐜粫 1px 绮剧粏澶栫嚎妗嗭紝鍍忚瘉涔︽垨鍏枃鑸簞閲?/div>
                   </div>
 
                   <div class="template-card" data-template="executive-spacious" data-group="layout">
@@ -436,8 +433,8 @@
                       <span class="tt-line w60" style="height:6px; margin-bottom:6px;"></span>
                       <span class="tt-line w90"></span>
                     </div>
-                    <div class="template-name">从容大格局版 <small>executive-spacious</small></div>
-                    <div class="template-desc">大行距 1.75，呼吸感与空间感充裕，资深专家/总监/VP 专属</div>
+                    <div class="template-name">浠庡澶ф牸灞€鐗?<small>executive-spacious</small></div>
+                    <div class="template-desc">澶ц璺?1.75锛屽懠鍚告劅涓庣┖闂存劅鍏呰锛岃祫娣变笓瀹?鎬荤洃/VP 涓撳睘</div>
                   </div>
 
                   <div class="template-card" data-template="compact-ultra" data-group="layout">
@@ -447,8 +444,8 @@
                       <span class="tt-line w95" style="height:2px; margin-bottom:2px;"></span>
                       <span class="tt-line w95" style="height:2px;"></span>
                     </div>
-                    <div class="template-name">极致高密单页版 <small>compact-ultra</small></div>
-                    <div class="template-desc">极限压榨边距与行高，经历再长也能百分百安全塞进一张 A4 纸</div>
+                    <div class="template-name">鏋佽嚧楂樺瘑鍗曢〉鐗?<small>compact-ultra</small></div>
+                    <div class="template-desc">鏋侀檺鍘嬫Θ杈硅窛涓庤楂橈紝缁忓巻鍐嶉暱涔熻兘鐧惧垎鐧惧畨鍏ㄥ杩涗竴寮?A4 绾?/div>
                   </div>
                 </div>
               </div>
@@ -456,31 +453,30 @@
 
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-columns"></i> 简历版式布局（核心设置）</h3>
-                <span class="header-desc">可自由在一栏与两栏布局之间一键切换</span>
+                <h3><i class="fa fa-columns"></i> 绠€鍘嗙増寮忓竷灞€锛堟牳蹇冭缃級</h3>
+                <span class="header-desc">鍙嚜鐢卞湪涓€鏍忎笌涓ゆ爮甯冨眬涔嬮棿涓€閿垏鎹?/span>
               </div>
               <div class="card-body">
                 <div class="layout-selector">
-                  <!-- 两栏布局 -->
+                  <!-- 涓ゆ爮甯冨眬 -->
                   <div class="layout-card" id="card-layout-two">
                     <input type="radio" name="layoutRadio" value="two-column" id="radio-two-column">
                     <div class="layout-card-header">
-                      <i class="fa fa-columns text-primary"></i> 两栏经典布局（双列左右式）
-                    </div>
-                    <p class="layout-card-desc">左侧固定/自适应个人侧边栏（名片、档案、联系方式、技能条），右侧主区域展示教育、工作与项目，信息密度高，排版经典丰富。</p>
+                      <i class="fa fa-columns text-primary"></i> 涓ゆ爮缁忓吀甯冨眬锛堝弻鍒楀乏鍙冲紡锛?                    </div>
+                    <p class="layout-card-desc">宸︿晶鍥哄畾/鑷€傚簲涓汉渚ц竟鏍忥紙鍚嶇墖銆佹。妗堛€佽仈绯绘柟寮忋€佹妧鑳芥潯锛夛紝鍙充晶涓诲尯鍩熷睍绀烘暀鑲层€佸伐浣滀笌椤圭洰锛屼俊鎭瘑搴﹂珮锛屾帓鐗堢粡鍏镐赴瀵屻€?/p>
                     <div class="layout-preview-sketch sketch-two-col">
                       <div class="sketch-side"></div>
                       <div class="sketch-main"></div>
                     </div>
                   </div>
 
-                  <!-- 一栏布局 -->
+                  <!-- 涓€鏍忓竷灞€ -->
                   <div class="layout-card" id="card-layout-one">
                     <input type="radio" name="layoutRadio" value="one-column" id="radio-one-column">
                     <div class="layout-card-header">
-                      <i class="fa fa-bars text-primary"></i> 一栏单列布局（自上而下居中式）
+                      <i class="fa fa-bars text-primary"></i> 涓€鏍忓崟鍒楀竷灞€锛堣嚜涓婅€屼笅灞呬腑寮忥級
                     </div>
-                    <p class="layout-card-desc">居中自上而下单列通栏排版，顶部大头像与个人名片，下方依次展示基本资料、技能标签、教育、经历与项目，视线聚焦，现代简约大气，打印效果极佳。</p>
+                    <p class="layout-card-desc">灞呬腑鑷笂鑰屼笅鍗曞垪閫氭爮鎺掔増锛岄《閮ㄥぇ澶村儚涓庝釜浜哄悕鐗囷紝涓嬫柟渚濇灞曠ず鍩烘湰璧勬枡銆佹妧鑳芥爣绛俱€佹暀鑲层€佺粡鍘嗕笌椤圭洰锛岃绾胯仛鐒︼紝鐜颁唬绠€绾﹀ぇ姘旓紝鎵撳嵃鏁堟灉鏋佷匠銆?/p>
                     <div class="layout-preview-sketch sketch-one-col">
                       <div class="sketch-header"></div>
                       <div class="sketch-body"></div>
@@ -491,8 +487,8 @@
                 <div style="margin-top: 20px;">
                   <div class="switch-control" id="side-fixed-control">
                     <div class="switch-label">
-                      <h4>左侧侧边栏悬浮固定 (仅双栏模式有效)</h4>
-                      <p>开启后左侧栏在页面向下滚动时固定悬浮在视口左侧，方便随时查看个人资料</p>
+                      <h4>宸︿晶渚ц竟鏍忔偓娴浐瀹?(浠呭弻鏍忔ā寮忔湁鏁?</h4>
+                      <p>寮€鍚悗宸︿晶鏍忓湪椤甸潰鍚戜笅婊氬姩鏃跺浐瀹氭偓娴湪瑙嗗彛宸︿晶锛屾柟渚块殢鏃舵煡鐪嬩釜浜鸿祫鏂?/p>
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" id="field-side-fixed">
@@ -502,8 +498,8 @@
 
                   <div class="switch-control" id="header-side-by-side-control" style="margin-top: 10px;">
                     <div class="switch-label">
-                      <h4>基本信息与联系方式排在头像右侧空白处（横向名片）</h4>
-                      <p>推荐开启！将基本信息与联系方式排布在头像右侧的空白区域，空间利用率极高，大幅减少空白浪费并助益单页A4打印</p>
+                      <h4>鍩烘湰淇℃伅涓庤仈绯绘柟寮忔帓鍦ㄥご鍍忓彸渚х┖鐧藉锛堟í鍚戝悕鐗囷級</h4>
+                      <p>鎺ㄨ崘寮€鍚紒灏嗗熀鏈俊鎭笌鑱旂郴鏂瑰紡鎺掑竷鍦ㄥご鍍忓彸渚х殑绌虹櫧鍖哄煙锛岀┖闂村埄鐢ㄧ巼鏋侀珮锛屽ぇ骞呭噺灏戠┖鐧芥氮璐瑰苟鍔╃泭鍗曢〉A4鎵撳嵃</p>
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" id="field-header-side-by-side" checked>
@@ -514,26 +510,26 @@
               </div>
             </div>
 
-            <!-- 主题风格与颜色 -->
+            <!-- 涓婚椋庢牸涓庨鑹?-->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-paint-brush"></i> 主题风格与色彩</h3>
-                <span class="header-desc">自定义前台简历的高亮主色调</span>
+                <h3><i class="fa fa-paint-brush"></i> 涓婚椋庢牸涓庤壊褰?/h3>
+                <span class="header-desc">鑷畾涔夊墠鍙扮畝鍘嗙殑楂樹寒涓昏壊璋?/span>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>主题色彩</label>
+                  <label>涓婚鑹插僵</label>
                   <div class="theme-colors-list" id="theme-color-presets">
-                    <div class="color-dot" data-color="#1abc9c" style="background: #1abc9c;" title="经典翡翠绿"></div>
-                    <div class="color-dot" data-color="#2563eb" style="background: #2563eb;" title="科技商务蓝"></div>
-                    <div class="color-dot" data-color="#06b6d4" style="background: #06b6d4;" title="极光青"></div>
-                    <div class="color-dot" data-color="#8b5cf6" style="background: #8b5cf6;" title="雅致罗兰紫"></div>
-                    <div class="color-dot" data-color="#ea580c" style="background: #ea580c;" title="活力珊瑚橙"></div>
-                    <div class="color-dot" data-color="#e11d48" style="background: #e11d48;" title="玫瑰艳红"></div>
-                    <div class="color-dot" data-color="#1f2937" style="background: #1f2937;" title="极客玄石黑"></div>
-                    <div class="color-dot" data-color="#4b5563" style="background: #4b5563;" title="沉稳高级灰"></div>
+                    <div class="color-dot" data-color="#1abc9c" style="background: #1abc9c;" title="缁忓吀缈＄繝缁?></div>
+                    <div class="color-dot" data-color="#2563eb" style="background: #2563eb;" title="绉戞妧鍟嗗姟钃?></div>
+                    <div class="color-dot" data-color="#06b6d4" style="background: #06b6d4;" title="鏋佸厜闈?></div>
+                    <div class="color-dot" data-color="#8b5cf6" style="background: #8b5cf6;" title="闆呰嚧缃楀叞绱?></div>
+                    <div class="color-dot" data-color="#ea580c" style="background: #ea580c;" title="娲诲姏鐝婄憵姗?></div>
+                    <div class="color-dot" data-color="#e11d48" style="background: #e11d48;" title="鐜懓鑹崇孩"></div>
+                    <div class="color-dot" data-color="#1f2937" style="background: #1f2937;" title="鏋佸鐜勭煶榛?></div>
+                    <div class="color-dot" data-color="#4b5563" style="background: #4b5563;" title="娌夌ǔ楂樼骇鐏?></div>
                     <div class="custom-color-wrap">
-                      <input type="color" id="field-theme-color-picker" class="custom-color-input" title="自定义任意颜色">
+                      <input type="color" id="field-theme-color-picker" class="custom-color-input" title="鑷畾涔変换鎰忛鑹?>
                       <span id="custom-color-hex" style="font-family: monospace; font-size: 13px; color: #6b7280;">#1abc9c</span>
                     </div>
                   </div>
@@ -541,28 +537,28 @@
 
                 <div class="form-row" style="margin-top: 20px;">
                   <div class="form-group">
-                    <label>浏览器网页标题 (Title)</label>
-                    <input type="text" class="form-control" id="field-page-title" placeholder="如：张三 - 资深前端开发工程师个人简历">
+                    <label>娴忚鍣ㄧ綉椤垫爣棰?(Title)</label>
+                    <input type="text" class="form-control" id="field-page-title" placeholder="濡傦細寮犱笁 - 璧勬繁鍓嶇寮€鍙戝伐绋嬪笀涓汉绠€鍘?>
                   </div>
                   <div class="form-group">
-                    <label>页脚版权信息</label>
-                    <input type="text" class="form-control" id="field-page-copyright" placeholder="如：© 2025 个人简历 | 后台管理驱动">
+                    <label>椤佃剼鐗堟潈淇℃伅</label>
+                    <input type="text" class="form-control" id="field-page-copyright" placeholder="濡傦細漏 2025 涓汉绠€鍘?| 鍚庡彴绠＄悊椹卞姩">
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- 模块显示开关 -->
+            <!-- 妯″潡鏄剧ず寮€鍏?-->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-toggle-on"></i> 内容模块可见性控制</h3>
-                <span class="header-desc">可按需隐藏不需要的简历板块</span>
+                <h3><i class="fa fa-toggle-on"></i> 鍐呭妯″潡鍙鎬ф帶鍒?/h3>
+                <span class="header-desc">鍙寜闇€闅愯棌涓嶉渶瑕佺殑绠€鍘嗘澘鍧?/span>
               </div>
               <div class="card-body">
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>个人头像照片</h4>
-                    <p>是否在简历中展示头像照片</p>
+                    <h4>涓汉澶村儚鐓х墖</h4>
+                    <p>鏄惁鍦ㄧ畝鍘嗕腑灞曠ず澶村儚鐓х墖</p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-avatar" checked>
@@ -571,8 +567,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>二维码模块</h4>
-                    <p>是否在简历底部或侧栏展示二维码</p>
+                    <h4>浜岀淮鐮佹ā鍧?/h4>
+                    <p>鏄惁鍦ㄧ畝鍘嗗簳閮ㄦ垨渚ф爮灞曠ず浜岀淮鐮?/p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-qrcode" checked>
@@ -581,8 +577,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>技能特长模块</h4>
-                    <p>是否展示技能进度条与技能列表</p>
+                    <h4>鎶€鑳界壒闀挎ā鍧?/h4>
+                    <p>鏄惁灞曠ず鎶€鑳借繘搴︽潯涓庢妧鑳藉垪琛?/p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-skills" checked>
@@ -591,8 +587,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>教育经历模块</h4>
-                    <p>是否展示教育背景</p>
+                    <h4>鏁欒偛缁忓巻妯″潡</h4>
+                    <p>鏄惁灞曠ず鏁欒偛鑳屾櫙</p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-edu" checked>
@@ -601,8 +597,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>工作经历模块</h4>
-                    <p>是否展示过往工作经历</p>
+                    <h4>宸ヤ綔缁忓巻妯″潡</h4>
+                    <p>鏄惁灞曠ず杩囧線宸ヤ綔缁忓巻</p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-work" checked>
@@ -611,8 +607,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>项目经验模块</h4>
-                    <p>是否展示个人/公司项目经验</p>
+                    <h4>椤圭洰缁忛獙妯″潡</h4>
+                    <p>鏄惁灞曠ず涓汉/鍏徃椤圭洰缁忛獙</p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-projects" checked>
@@ -621,8 +617,8 @@
                 </div>
                 <div class="switch-control">
                   <div class="switch-label">
-                    <h4>自我评价模块</h4>
-                    <p>是否展示自我评价与职业期望</p>
+                    <h4>鑷垜璇勪环妯″潡</h4>
+                    <p>鏄惁灞曠ず鑷垜璇勪环涓庤亴涓氭湡鏈?/p>
                   </div>
                   <label class="toggle-switch">
                     <input type="checkbox" id="field-show-eval" checked>
@@ -632,285 +628,279 @@
               </div>
             </div>
 
-            <!-- 图标库设置 (阿里巴巴 Iconfont 支持) -->
+            <!-- 鍥炬爣搴撹缃?(闃块噷宸村反 Iconfont 鏀寔) -->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-flag"></i> 阿里 Iconfont 图标库支持</h3>
-                <span class="header-desc">可引入阿里巴巴矢量图标库 (iconfont.cn)</span>
+                <h3><i class="fa fa-flag"></i> 闃块噷 Iconfont 鍥炬爣搴撴敮鎸?/h3>
+                <span class="header-desc">鍙紩鍏ラ樋閲屽反宸寸煝閲忓浘鏍囧簱 (iconfont.cn)</span>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>阿里巴巴 Iconfont 在线 CSS 链接 (可选)</label>
-                  <input type="text" class="form-control" id="field-iconfont-url" placeholder="如：//at.alicdn.com/t/c/font_4413158_t26sz96m1x.css">
-                  <div class="form-help">可直接填入在阿里巴巴矢量图标库（iconfont.cn）创建的项目在线链接，系统自动引入，后台提供可视化直接点选！默认已内置常用通讯、社交与职场图标。</div>
+                  <label>闃块噷宸村反 Iconfont 鍦ㄧ嚎 CSS 閾炬帴 (鍙€?</label>
+                  <input type="text" class="form-control" id="field-iconfont-url" placeholder="濡傦細//at.alicdn.com/t/c/font_4413158_t26sz96m1x.css">
+                  <div class="form-help">鍙洿鎺ュ～鍏ュ湪闃块噷宸村反鐭㈤噺鍥炬爣搴擄紙iconfont.cn锛夊垱寤虹殑椤圭洰鍦ㄧ嚎閾炬帴锛岀郴缁熻嚜鍔ㄥ紩鍏ワ紝鍚庡彴鎻愪緵鍙鍖栫洿鎺ョ偣閫夛紒榛樿宸插唴缃父鐢ㄩ€氳銆佺ぞ浜や笌鑱屽満鍥炬爣銆?/div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 2. 基本信息设置 -->
+          <!-- 2. 鍩烘湰淇℃伅璁剧疆 -->
           <div class="tab-panel" id="basic-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-user"></i> 核心个人信息</h3>
+                <h3><i class="fa fa-user"></i> 鏍稿績涓汉淇℃伅</h3>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>个人头像照片</label>
+                  <label>涓汉澶村儚鐓х墖</label>
                   <div class="avatar-uploader">
                     <div class="avatar-preview" id="avatar-preview-box">
-                      <img id="avatar-preview-img" src="" alt="头像预览">
+                      <img id="avatar-preview-img" src="" alt="澶村儚棰勮">
                     </div>
                     <div class="uploader-controls">
                       <div class="upload-btn-wrap">
                         <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
-                          <i class="fa fa-folder-open-o"></i> 本地选择新图片上传
-                          <input type="file" id="input-avatar-file" accept="image/*" style="display: none;">
+                          <i class="fa fa-folder-open-o"></i> 鏈湴閫夋嫨鏂板浘鐗囦笂浼?                          <input type="file" id="input-avatar-file" accept="image/*" style="display: none;">
                         </label>
                       </div>
-                      <input type="text" class="form-control" id="field-basic-avatar" placeholder="图片路径或在线 URL（如 assets/images/avatar.jpg）">
-                      <div class="form-help">可直接上传本地图片（自动保存至 uploads 目录）或填写任意在线图片地址</div>
+                      <input type="text" class="form-control" id="field-basic-avatar" placeholder="鍥剧墖璺緞鎴栧湪绾?URL锛堝 assets/images/avatar.jpg锛?>
+                      <div class="form-help">鍙洿鎺ヤ笂浼犳湰鍦板浘鐗囷紙鑷姩淇濆瓨鑷?uploads 鐩綍锛夋垨濉啓浠绘剰鍦ㄧ嚎鍥剧墖鍦板潃</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group">
-                    <label>姓名</label>
-                    <input type="text" class="form-control" id="field-basic-name" placeholder="如：李晓明">
+                    <label>濮撳悕</label>
+                    <input type="text" class="form-control" id="field-basic-name" placeholder="濡傦細鏉庢檽鏄?>
                   </div>
                   <div class="form-group">
-                    <label>期望岗位与城市</label>
-                    <input type="text" class="form-control" id="field-basic-job" placeholder="如：高级前端开发工程师 / 杭州">
+                    <label>鏈熸湜宀椾綅涓庡煄甯?/label>
+                    <input type="text" class="form-control" id="field-basic-job" placeholder="濡傦細楂樼骇鍓嶇寮€鍙戝伐绋嬪笀 / 鏉窞">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label>个性签名 / 职业定位语录</label>
-                  <input type="text" class="form-control" id="field-basic-signature" placeholder="如：追求极致的代码艺术与极致的用户体验">
+                  <label>涓€х鍚?/ 鑱屼笟瀹氫綅璇綍</label>
+                  <input type="text" class="form-control" id="field-basic-signature" placeholder="濡傦細杩芥眰鏋佽嚧鐨勪唬鐮佽壓鏈笌鏋佽嚧鐨勭敤鎴蜂綋楠?>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 3. 档案资料 (Profile) -->
+          <!-- 3. 妗ｆ璧勬枡 (Profile) -->
           <div class="tab-panel" id="profile-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-address-card-o"></i> 个人档案信息</h3>
+                <h3><i class="fa fa-address-card-o"></i> 涓汉妗ｆ淇℃伅</h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-profile">
-                  <i class="fa fa-plus"></i> 添加档案项
-                </button>
+                  <i class="fa fa-plus"></i> 娣诲姞妗ｆ椤?                </button>
               </div>
               <div class="card-body">
-                <p class="form-help" style="margin-bottom: 14px;">展示在侧边栏“基本信息”区域，如“个人信息”、“英语水平”、“工作经验”、“政治面貌”等。</p>
+                <p class="form-help" style="margin-bottom: 14px;">灞曠ず鍦ㄤ晶杈规爮鈥滃熀鏈俊鎭€濆尯鍩燂紝濡傗€滀釜浜轰俊鎭€濄€佲€滆嫳璇按骞斥€濄€佲€滃伐浣滅粡楠屸€濄€佲€滄斂娌婚潰璨屸€濈瓑銆?/p>
                 <div class="item-list-container" id="profile-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 4. 联系方式 (Contact) -->
+          <!-- 4. 鑱旂郴鏂瑰紡 (Contact) -->
           <div class="tab-panel" id="contact-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-phone"></i> 联系方式</h3>
+                <h3><i class="fa fa-phone"></i> 鑱旂郴鏂瑰紡</h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-contact">
-                  <i class="fa fa-plus"></i> 添加联系方式
+                  <i class="fa fa-plus"></i> 娣诲姞鑱旂郴鏂瑰紡
                 </button>
               </div>
               <div class="card-body">
-                <p class="form-help" style="margin-bottom: 14px;">支持配置手机、邮箱、个人网站、GitHub、微信等，支持点击拨号或跳转链接。</p>
+                <p class="form-help" style="margin-bottom: 14px;">鏀寔閰嶇疆鎵嬫満銆侀偖绠便€佷釜浜虹綉绔欍€丟itHub銆佸井淇＄瓑锛屾敮鎸佺偣鍑绘嫧鍙锋垨璺宠浆閾炬帴銆?/p>
                 <div class="item-list-container" id="contact-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 5. 技能特长 (Skills) -->
+          <!-- 5. 鎶€鑳界壒闀?(Skills) -->
           <div class="tab-panel" id="skills-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-code"></i> 专业技能清单</h3>
+                <h3><i class="fa fa-code"></i> 涓撲笟鎶€鑳芥竻鍗?/h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-skill">
-                  <i class="fa fa-plus"></i> 添加技能
-                </button>
+                  <i class="fa fa-plus"></i> 娣诲姞鎶€鑳?                </button>
               </div>
               <div class="card-body">
                 <div class="form-group" style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb;">
-                  <label style="font-size: 13.5px;">技能展示样式</label>
+                  <label style="font-size: 13.5px;">鎶€鑳藉睍绀烘牱寮?/label>
                   <div class="radio-group-horizontal">
                     <label>
                       <input type="radio" name="skillDisplayMode" value="tags" id="skill-mode-tags" checked>
-                      <b>现代标签徽章模式</b>（无进度条，清爽专业，推荐）
+                      <b>鐜颁唬鏍囩寰界珷妯″紡</b>锛堟棤杩涘害鏉★紝娓呯埥涓撲笟锛屾帹鑽愶級
                     </label>
                     <label>
                       <input type="radio" name="skillDisplayMode" value="bars" id="skill-mode-bars">
-                      <b>百分比进度条模式</b>（显示进度条）
-                    </label>
+                      <b>鐧惧垎姣旇繘搴︽潯妯″紡</b>锛堟樉绀鸿繘搴︽潯锛?                    </label>
                   </div>
-                  <div class="form-help">如果无需进度条，选择标签模式即可将所有技能以现代化徽章标签优雅呈现。</div>
+                  <div class="form-help">濡傛灉鏃犻渶杩涘害鏉★紝閫夋嫨鏍囩妯″紡鍗冲彲灏嗘墍鏈夋妧鑳戒互鐜颁唬鍖栧窘绔犳爣绛句紭闆呭憟鐜般€?/div>
                 </div>
                 <div class="item-list-container" id="skills-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 6. 教育经历 (Education) -->
+          <!-- 6. 鏁欒偛缁忓巻 (Education) -->
           <div class="tab-panel" id="education-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-graduation-cap"></i> 教育背景经历</h3>
+                <h3><i class="fa fa-graduation-cap"></i> 鏁欒偛鑳屾櫙缁忓巻</h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-edu">
-                  <i class="fa fa-plus"></i> 添加教育经历
+                  <i class="fa fa-plus"></i> 娣诲姞鏁欒偛缁忓巻
                 </button>
               </div>
               <div class="card-body">
                 <div class="item-list-container" id="edu-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 7. 工作经历 (Work) -->
+          <!-- 7. 宸ヤ綔缁忓巻 (Work) -->
           <div class="tab-panel" id="work-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-briefcase"></i> 工作与实习经历</h3>
+                <h3><i class="fa fa-briefcase"></i> 宸ヤ綔涓庡疄涔犵粡鍘?/h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-work">
-                  <i class="fa fa-plus"></i> 添加工作经历
+                  <i class="fa fa-plus"></i> 娣诲姞宸ヤ綔缁忓巻
                 </button>
               </div>
               <div class="card-body">
                 <div class="item-list-container" id="work-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 8. 项目经验 (Projects) -->
+          <!-- 8. 椤圭洰缁忛獙 (Projects) -->
           <div class="tab-panel" id="projects-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-cubes"></i> 核心项目经验</h3>
+                <h3><i class="fa fa-cubes"></i> 鏍稿績椤圭洰缁忛獙</h3>
                 <button class="btn btn-secondary btn-sm" id="btn-add-project">
-                  <i class="fa fa-plus"></i> 添加项目经历
+                  <i class="fa fa-plus"></i> 娣诲姞椤圭洰缁忓巻
                 </button>
               </div>
               <div class="card-body">
                 <div class="item-list-container" id="projects-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 9. 自我评价 (Evaluation) -->
+          <!-- 9. 鑷垜璇勪环 (Evaluation) -->
           <div class="tab-panel" id="evaluation-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-pencil-square-o"></i> 自我评价与职业期望</h3>
+                <h3><i class="fa fa-pencil-square-o"></i> 鑷垜璇勪环涓庤亴涓氭湡鏈?/h3>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>评价内容</label>
-                  <textarea class="form-control" id="field-self-eval" rows="8" placeholder="填写您的自我评价、职业素养、技术爱好与期望..."></textarea>
-                  <div class="form-help">支持换行分段，前台将保留段落格式渲染。</div>
+                  <label>璇勪环鍐呭</label>
+                  <textarea class="form-control" id="field-self-eval" rows="8" placeholder="濉啓鎮ㄧ殑鑷垜璇勪环銆佽亴涓氱礌鍏汇€佹妧鏈埍濂戒笌鏈熸湜..."></textarea>
+                  <div class="form-help">鏀寔鎹㈣鍒嗘锛屽墠鍙板皢淇濈暀娈佃惤鏍煎紡娓叉煋銆?/div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 10. 二维码设置 (QR Code) -->
+          <!-- 10. 浜岀淮鐮佽缃?(QR Code) -->
           <div class="tab-panel" id="qrcode-tab">
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-qrcode"></i> 二维码展示设置</h3>
+                <h3><i class="fa fa-qrcode"></i> 浜岀淮鐮佸睍绀鸿缃?/h3>
               </div>
               <div class="card-body">
                 <div class="avatar-uploader">
                   <div class="avatar-preview" id="qr-preview-box" style="border-radius: 6px; width: 100px; height: 100px;">
-                    <img id="qr-preview-img" src="" alt="二维码预览">
+                    <img id="qr-preview-img" src="" alt="浜岀淮鐮侀瑙?>
                   </div>
                   <div class="uploader-controls">
                     <div class="upload-btn-wrap">
                       <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
-                        <i class="fa fa-folder-open-o"></i> 本地选择二维码上传
-                        <input type="file" id="input-qr-file" accept="image/*" style="display: none;">
+                        <i class="fa fa-folder-open-o"></i> 鏈湴閫夋嫨浜岀淮鐮佷笂浼?                        <input type="file" id="input-qr-file" accept="image/*" style="display: none;">
                       </label>
                     </div>
-                    <input type="text" class="form-control" id="field-qr-image" placeholder="二维码图片路径或 URL">
-                    <div class="form-help">展示在侧栏底部的二维码（例如微信联系二维码、在线个人作品集二维码）</div>
+                    <input type="text" class="form-control" id="field-qr-image" placeholder="浜岀淮鐮佸浘鐗囪矾寰勬垨 URL">
+                    <div class="form-help">灞曠ず鍦ㄤ晶鏍忓簳閮ㄧ殑浜岀淮鐮侊紙渚嬪寰俊鑱旂郴浜岀淮鐮併€佸湪绾夸釜浜轰綔鍝侀泦浜岀淮鐮侊級</div>
                   </div>
                 </div>
 
                 <div class="form-group" style="margin-top: 18px;">
-                  <label>说明文字</label>
-                  <input type="text" class="form-control" id="field-qr-text" placeholder="如：扫码在手机上查看简历或添加微信">
+                  <label>璇存槑鏂囧瓧</label>
+                  <input type="text" class="form-control" id="field-qr-text" placeholder="濡傦細鎵爜鍦ㄦ墜鏈轰笂鏌ョ湅绠€鍘嗘垨娣诲姞寰俊">
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 11. 赛博像素个人主页配置 (Homepage & Portal) -->
+          <!-- 11. 璧涘崥鍍忕礌涓汉涓婚〉閰嶇疆 (Homepage & Portal) -->
           <div class="tab-panel" id="homepage-tab">
-            <!-- 英雄区与背景设置 -->
+            <!-- 鑻遍泟鍖轰笌鑳屾櫙璁剧疆 -->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-picture-o"></i> 英雄区与背景图（马里奥像素风格）</h3>
-                <span class="header-desc">配置个人主页的全屏像素风背景、主标题与背景音乐</span>
+                <h3><i class="fa fa-picture-o"></i> 鑻遍泟鍖轰笌鑳屾櫙鍥撅紙椹噷濂ュ儚绱犻鏍硷級</h3>
+                <span class="header-desc">閰嶇疆涓汉涓婚〉鐨勫叏灞忓儚绱犻鑳屾櫙銆佷富鏍囬涓庤儗鏅煶涔?/span>
               </div>
               <div class="card-body">
                 <div class="form-row">
                   <div class="form-group" style="flex: 1.5;">
-                    <label>主页大标题 / 姓名</label>
-                    <input type="text" class="form-control" id="home-field-title" placeholder="如：张栋梁">
+                    <label>涓婚〉澶ф爣棰?/ 濮撳悕</label>
+                    <input type="text" class="form-control" id="home-field-title" placeholder="濡傦細寮犳爧姊?>
                   </div>
                   <div class="form-group" style="flex: 1.2;">
-                    <label>英文名 / 副标题</label>
-                    <input type="text" class="form-control" id="home-field-subtitle" placeholder="如：Dongliang Zhang">
+                    <label>鑻辨枃鍚?/ 鍓爣棰?/label>
+                    <input type="text" class="form-control" id="home-field-subtitle" placeholder="濡傦細Dongliang Zhang">
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group" style="flex: 1.5;">
-                    <label>职业定位徽章文字</label>
-                    <input type="text" class="form-control" id="home-field-job" placeholder="如：材料科学与工程 / 研发工艺 / AI Agent 探索者">
+                    <label>鑱屼笟瀹氫綅寰界珷鏂囧瓧</label>
+                    <input type="text" class="form-control" id="home-field-job" placeholder="濡傦細鏉愭枡绉戝涓庡伐绋?/ 鐮斿彂宸ヨ壓 / AI Agent 鎺㈢储鑰?>
                   </div>
                   <div class="form-group" style="flex: 1.2;">
-                    <label>座右铭 / 标语 Slogan</label>
-                    <input type="text" class="form-control" id="home-field-slogan" placeholder="如：「多静多思考，反省不张扬」">
+                    <label>搴у彸閾?/ 鏍囪 Slogan</label>
+                    <input type="text" class="form-control" id="home-field-slogan" placeholder="濡傦細銆屽闈欏鎬濊€冿紝鍙嶇渷涓嶅紶鎵€?>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label>全屏背景动图 (GIF / WebP)</label>
+                  <label>鍏ㄥ睆鑳屾櫙鍔ㄥ浘 (GIF / WebP)</label>
                   <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
-                    <input type="text" class="form-control" id="home-field-bg" placeholder="如：assets/images/mario-night.gif" style="flex: 1;">
+                    <input type="text" class="form-control" id="home-field-bg" placeholder="濡傦細assets/images/mario-night.gif" style="flex: 1;">
                     <label class="btn btn-secondary btn-sm" style="cursor: pointer; margin: 0; white-space: nowrap;">
-                      <i class="fa fa-folder-open-o"></i> 更换背景图上传
-                      <input type="file" id="home-input-bg-file" accept="image/*" style="display: none;">
+                      <i class="fa fa-folder-open-o"></i> 鏇存崲鑳屾櫙鍥句笂浼?                      <input type="file" id="home-input-bg-file" accept="image/*" style="display: none;">
                     </label>
                   </div>
-                  <div class="form-help">默认使用用户上传的赛博马里奥像素工作台夜景动图。可填写任意图片 URL 或上传新图。</div>
+                  <div class="form-help">榛樿浣跨敤鐢ㄦ埛涓婁紶鐨勮禌鍗氶┈閲屽ゥ鍍忕礌宸ヤ綔鍙板鏅姩鍥俱€傚彲濉啓浠绘剰鍥剧墖 URL 鎴栦笂浼犳柊鍥俱€?/div>
                 </div>
 
                 <div class="form-row" style="margin-top: 14px; padding-top: 12px; border-top: 1px dashed #e2e8f0;">
                   <div class="form-group" style="flex: 2;">
-                    <label>背景音乐音频地址 (BGM)</label>
-                    <input type="text" class="form-control" id="home-field-bgm" placeholder="如：assets/audio/bgm.mp3">
-                    <div class="form-help">集成 15387 经典背景音乐，主页右上角带唱片旋转播放胶囊</div>
+                    <label>鑳屾櫙闊充箰闊抽鍦板潃 (BGM)</label>
+                    <input type="text" class="form-control" id="home-field-bgm" placeholder="濡傦細assets/audio/bgm.mp3">
+                    <div class="form-help">闆嗘垚 15387 缁忓吀鑳屾櫙闊充箰锛屼富椤靛彸涓婅甯﹀敱鐗囨棆杞挱鏀捐兌鍥?/div>
                   </div>
                   <div class="form-group" style="flex: 1;">
-                    <label>自动播放开关</label>
+                    <label>鑷姩鎾斁寮€鍏?/label>
                     <div class="switch-control" style="border: none; padding: 4px 0;">
-                      <span style="font-size: 13px; color: #475569;">打开页面尝试播放</span>
+                      <span style="font-size: 13px; color: #475569;">鎵撳紑椤甸潰灏濊瘯鎾斁</span>
                       <label class="toggle-switch">
                         <input type="checkbox" id="home-field-bgm-autoplay">
                         <span class="toggle-slider"></span>
@@ -921,131 +911,125 @@
               </div>
             </div>
 
-            <!-- 关于我模块配置 -->
+            <!-- 鍏充簬鎴戞ā鍧楅厤缃?-->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-user-circle-o"></i> 关于我模块配置 (About Me)</h3>
+                <h3><i class="fa fa-user-circle-o"></i> 鍏充簬鎴戞ā鍧楅厤缃?(About Me)</h3>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>个性问候语</label>
-                  <input type="text" class="form-control" id="home-field-greeting" placeholder="如：你好，我是张栋梁 👋">
+                  <label>涓€ч棶鍊欒</label>
+                  <input type="text" class="form-control" id="home-field-greeting" placeholder="濡傦細浣犲ソ锛屾垜鏄紶鏍嬫 馃憢">
                 </div>
                 <div class="form-group">
-                  <label>个人简介详述 (Bio)</label>
-                  <textarea class="form-control" id="home-field-bio" rows="4" placeholder="介绍您的专业背景、核心优势、科研方向与求职意向..."></textarea>
+                  <label>涓汉绠€浠嬭杩?(Bio)</label>
+                  <textarea class="form-control" id="home-field-bio" rows="4" placeholder="浠嬬粛鎮ㄧ殑涓撲笟鑳屾櫙銆佹牳蹇冧紭鍔裤€佺鐮旀柟鍚戜笌姹傝亴鎰忓悜..."></textarea>
                 </div>
                 <div class="form-group" style="margin-top: 16px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <label style="margin: 0;">核心属性徽章 (Badges)</label>
-                    <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-badge"><i class="fa fa-plus"></i> 添加徽章</button>
+                    <label style="margin: 0;">鏍稿績灞炴€у窘绔?(Badges)</label>
+                    <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-badge"><i class="fa fa-plus"></i> 娣诲姞寰界珷</button>
                   </div>
                   <div class="item-list-container" id="home-badges-list-container">
-                    <!-- JS 动态渲染 -->
+                    <!-- JS 鍔ㄦ€佹覆鏌?-->
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- 精选项目与作品配置 -->
+            <!-- 绮鹃€夐」鐩笌浣滃搧閰嶇疆 -->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-cubes"></i> 精选项目与代表作 (Featured Projects)</h3>
-                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-project"><i class="fa fa-plus"></i> 添加项目卡片</button>
+                <h3><i class="fa fa-cubes"></i> 绮鹃€夐」鐩笌浠ｈ〃浣?(Featured Projects)</h3>
+                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-project"><i class="fa fa-plus"></i> 娣诲姞椤圭洰鍗＄墖</button>
               </div>
               <div class="card-body">
                 <div class="item-list-container" id="home-projects-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
 
-            <!-- 社交网络与联系方式配置 -->
+            <!-- 绀句氦缃戠粶涓庤仈绯绘柟寮忛厤缃?-->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-share-alt"></i> 社交网络与联系入口 (Social & Contact)</h3>
-                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-social"><i class="fa fa-plus"></i> 添加社交卡片</button>
+                <h3><i class="fa fa-share-alt"></i> 绀句氦缃戠粶涓庤仈绯诲叆鍙?(Social & Contact)</h3>
+                <button type="button" class="btn btn-secondary btn-sm" id="home-btn-add-social"><i class="fa fa-plus"></i> 娣诲姞绀句氦鍗＄墖</button>
               </div>
               <div class="card-body">
                 <div class="item-list-container" id="home-social-list-container">
-                  <!-- JS 动态渲染 -->
+                  <!-- JS 鍔ㄦ€佹覆鏌?-->
                 </div>
               </div>
             </div>
 
-            <!-- 主页页脚版权 -->
+            <!-- 涓婚〉椤佃剼鐗堟潈 -->
             <div class="card">
               <div class="card-header">
-                <h3><i class="fa fa-copyright"></i> 主页页脚版权</h3>
+                <h3><i class="fa fa-copyright"></i> 涓婚〉椤佃剼鐗堟潈</h3>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label>页脚文字</label>
-                  <input type="text" class="form-control" id="home-field-footer" placeholder="如：© 2026 张栋梁 · Personal Homepage & Resume System">
+                  <label>椤佃剼鏂囧瓧</label>
+                  <input type="text" class="form-control" id="home-field-footer" placeholder="濡傦細漏 2026 寮犳爧姊?路 Personal Homepage & Resume System">
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 12. GitHub 云同步设置（跨设备数据源） -->
+          <!-- 12. GitHub 浜戝悓姝ヨ缃紙璺ㄨ澶囨暟鎹簮锛?-->
           <div class="tab-panel" id="sync-tab">
             <div class="card">
               <div class="card-header" style="background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);">
-                <h3><i class="fa fa-server"></i> 服务器数据同步</h3>
-                <span class="header-desc">数据集中存储在云端服务器，任何设备/浏览器打开都自动一致</span>
+                <h3><i class="fa fa-server"></i> 鏈嶅姟鍣ㄦ暟鎹悓姝?/h3>
+                <span class="header-desc">鏁版嵁闆嗕腑瀛樺偍鍦ㄤ簯绔湇鍔″櫒锛屼换浣曡澶?娴忚鍣ㄦ墦寮€閮借嚜鍔ㄤ竴鑷?/span>
               </div>
               <div class="card-body">
                 <div id="sync-server-status" style="padding: 14px 16px; border-radius: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; margin-bottom: 18px;">
                   <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
                     <div>
                       <div style="font-size: 14px; font-weight: 700; color: #15803d; margin-bottom: 4px;">
-                        <i class="fa fa-check-circle"></i> 已连接服务器（classroom.jyue.cn）
-                      </div>
+                        <i class="fa fa-check-circle"></i> 宸茶繛鎺ユ湇鍔″櫒锛坈lassroom.jyue.cn锛?                      </div>
                       <div style="font-size: 12.5px; color: #166534; line-height: 1.7;">
-                        数据存储位置：<code>/opt/resume/shared/data/</code><br>
-                        所有设备访问同一份数据 —— <b>保存即同步，无需任何 Token 或配置</b>
+                        鏁版嵁瀛樺偍浣嶇疆锛?code>/opt/resume/shared/data/</code><br>
+                        鎵€鏈夎澶囪闂悓涓€浠芥暟鎹?鈥斺€?<b>淇濆瓨鍗冲悓姝ワ紝鏃犻渶浠讳綍 Token 鎴栭厤缃?/b>
                       </div>
                     </div>
                     <span style="font-size: 12px; padding: 4px 12px; border-radius: 20px; background: #15803d; color: #fff; font-weight: 600;">
-                      服务运行中
-                    </span>
+                      鏈嶅姟杩愯涓?                    </span>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label>数据文件清单</label>
+                  <label>鏁版嵁鏂囦欢娓呭崟</label>
                   <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; font-size: 12.5px; line-height: 2; color: #475569;">
-                    <div><code>resume.json</code> — 简历内容（教育/工作/项目/技能等）</div>
-                    <div><code>homepage.json</code> — 个人主页配置</div>
-                    <div><code>applications.json</code> — 投递记录</div>
-                    <div><code>presets.json</code> — 内置六套职业简历模板</div>
+                    <div><code>resume.json</code> 鈥?绠€鍘嗗唴瀹癸紙鏁欒偛/宸ヤ綔/椤圭洰/鎶€鑳界瓑锛?/div>
+                    <div><code>homepage.json</code> 鈥?涓汉涓婚〉閰嶇疆</div>
+                    <div><code>applications.json</code> 鈥?鎶曢€掕褰?/div>
+                    <div><code>presets.json</code> 鈥?鍐呯疆鍏鑱屼笟绠€鍘嗘ā鏉?/div>
                   </div>
                 </div>
 
                 <div style="margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
                   <h4 style="font-size: 13.5px; font-weight: 600; margin-bottom: 6px; color: #0f172a;">
-                    <i class="fa fa-upload"></i> 数据迁移（从浏览器搬到服务器）
-                  </h4>
+                    <i class="fa fa-upload"></i> 鏁版嵁杩佺Щ锛堜粠娴忚鍣ㄦ惉鍒版湇鍔″櫒锛?                  </h4>
                   <p style="font-size: 12.5px; color: #64748b; line-height: 1.8; margin-bottom: 12px;">
-                    如果之前在某些浏览器里保存过内容（存在浏览器本地），点下面的按钮可以把这些数据<b>一次性推送到服务器</b>，
-                    之后所有设备就都能看到。已经在服务器上的数据不受影响（同名字段以推送内容为准）。
-                  </p>
+                    濡傛灉涔嬪墠鍦ㄦ煇浜涙祻瑙堝櫒閲屼繚瀛樿繃鍐呭锛堝瓨鍦ㄦ祻瑙堝櫒鏈湴锛夛紝鐐逛笅闈㈢殑鎸夐挳鍙互鎶婅繖浜涙暟鎹?b>涓€娆℃€ф帹閫佸埌鏈嶅姟鍣?/b>锛?                    涔嬪悗鎵€鏈夎澶囧氨閮借兘鐪嬪埌銆傚凡缁忓湪鏈嶅姟鍣ㄤ笂鐨勬暟鎹笉鍙楀奖鍝嶏紙鍚屽悕瀛楁浠ユ帹閫佸唴瀹逛负鍑嗭級銆?                  </p>
                   <button type="button" class="btn btn-primary" id="btn-migrate-local">
-                    <i class="fa fa-cloud-upload"></i> 把本浏览器数据上传到服务器
-                  </button>
+                    <i class="fa fa-cloud-upload"></i> 鎶婃湰娴忚鍣ㄦ暟鎹笂浼犲埌鏈嶅姟鍣?                  </button>
                   <div id="migrate-result" style="margin-top: 12px; font-size: 12.5px; line-height: 1.8; display: none;"></div>
                 </div>
 
                 <div style="margin-top: 18px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
                   <h4 style="font-size: 13.5px; font-weight: 600; margin-bottom: 8px; color: #0f172a;">
-                    <i class="fa fa-question-circle"></i> 常见问题
+                    <i class="fa fa-question-circle"></i> 甯歌闂
                   </h4>
                   <ul style="font-size: 12.5px; color: #475569; line-height: 1.9; padding-left: 18px; margin: 0;">
-                    <li><b>换设备/换浏览器要重新配置吗？</b> 不用。数据在服务器上，任何设备打开 <code>classroom.jyue.cn</code> 自动就是最新的。</li>
-                    <li><b>保存后多久生效？</b> 立即生效，前台刷新即可看到（无需等待构建）。</li>
-                    <li><b>手机上能看到吗？</b> 能。手机浏览器访问同一域名，数据完全一致。</li>
-                    <li><b>数据会丢吗？</b> 数据存在服务器 <code>/opt/resume/shared/data/</code>，升级发布不会覆盖；建议定期用「导出」功能备份。</li>
-                    <li><b>如何备份？</b> 用右上角「导出」下载 JSON，或联系管理员备份服务器数据目录。</li>
+                    <li><b>鎹㈣澶?鎹㈡祻瑙堝櫒瑕侀噸鏂伴厤缃悧锛?/b> 涓嶇敤銆傛暟鎹湪鏈嶅姟鍣ㄤ笂锛屼换浣曡澶囨墦寮€ <code>classroom.jyue.cn</code> 鑷姩灏辨槸鏈€鏂扮殑銆?/li>
+                    <li><b>淇濆瓨鍚庡涔呯敓鏁堬紵</b> 绔嬪嵆鐢熸晥锛屽墠鍙板埛鏂板嵆鍙湅鍒帮紙鏃犻渶绛夊緟鏋勫缓锛夈€?/li>
+                    <li><b>鎵嬫満涓婅兘鐪嬪埌鍚楋紵</b> 鑳姐€傛墜鏈烘祻瑙堝櫒璁块棶鍚屼竴鍩熷悕锛屾暟鎹畬鍏ㄤ竴鑷淬€?/li>
+                    <li><b>鏁版嵁浼氫涪鍚楋紵</b> 鏁版嵁瀛樺湪鏈嶅姟鍣?<code>/opt/resume/shared/data/</code>锛屽崌绾у彂甯冧笉浼氳鐩栵紱寤鸿瀹氭湡鐢ㄣ€屽鍑恒€嶅姛鑳藉浠姐€?/li>
+                    <li><b>濡備綍澶囦唤锛?/b> 鐢ㄥ彸涓婅銆屽鍑恒€嶄笅杞?JSON锛屾垨鑱旂郴绠＄悊鍛樺浠芥湇鍔″櫒鏁版嵁鐩綍銆?/li>
                   </ul>
                 </div>
               </div>
@@ -1057,16 +1041,15 @@
     </main>
   </div>
 
-  <!-- 实时预览抽屉 -->
+  <!-- 瀹炴椂棰勮鎶藉眽 -->
   <div class="drawer-backdrop" id="preview-backdrop"></div>
   <aside class="preview-drawer" id="preview-drawer">
     <div class="preview-header">
       <div style="font-weight: 600; display: flex; align-items: center; gap: 8px;">
-        <i class="fa fa-desktop"></i> 简历实时预览
-      </div>
+        <i class="fa fa-desktop"></i> 绠€鍘嗗疄鏃堕瑙?      </div>
       <div>
         <button class="btn btn-secondary btn-sm" id="btn-refresh-preview" style="margin-right: 6px;">
-          <i class="fa fa-refresh"></i> 刷新
+          <i class="fa fa-refresh"></i> 鍒锋柊
         </button>
         <button class="icon-btn" id="btn-close-preview" style="font-size: 16px;">
           <i class="fa fa-times"></i>
@@ -1078,104 +1061,103 @@
     </div>
   </aside>
 
-  <!-- 可视化图标选择器模态窗 -->
+  <!-- 鍙鍖栧浘鏍囬€夋嫨鍣ㄦā鎬佺獥 -->
   <div class="icon-modal-backdrop" id="icon-picker-modal">
     <div class="icon-modal">
       <div class="icon-modal-header">
-        <h3><i class="fa fa-th-large"></i> 可视化图标选择库（支持直接点击选用）</h3>
+        <h3><i class="fa fa-th-large"></i> 鍙鍖栧浘鏍囬€夋嫨搴擄紙鏀寔鐩存帴鐐瑰嚮閫夌敤锛?/h3>
         <button type="button" class="icon-btn" id="btn-close-icon-picker"><i class="fa fa-times"></i></button>
       </div>
       <div class="icon-modal-search-row">
-        <input type="text" class="icon-modal-search" id="input-search-icon" placeholder="输入关键词搜索图标（如：电话、微信、邮箱、代码、github）...">
+        <input type="text" class="icon-modal-search" id="input-search-icon" placeholder="杈撳叆鍏抽敭璇嶆悳绱㈠浘鏍囷紙濡傦細鐢佃瘽銆佸井淇°€侀偖绠便€佷唬鐮併€乬ithub锛?..">
       </div>      <div class="icon-modal-categories" id="icon-categories-bar">
-        <span class="cat-pill active" data-cat="品牌Logo"><i class="fa fa-paint-brush"></i> 官方彩色品牌与科研Logo (含 VASP / CP2K / LAMMPS / Origin)</span>
-        <span class="cat-pill" data-cat="all">全部字体图标</span>
-        <span class="cat-pill" data-cat="通讯社交">通讯社交</span>
-        <span class="cat-pill" data-cat="个人信息">个人信息</span>
-        <span class="cat-pill" data-cat="教育职场">教育职场</span>
-        <span class="cat-pill" data-cat="技术研发">技术研发</span>
-        <span class="cat-pill" data-cat="荣誉成果">荣誉成果</span>
-        <span class="cat-pill" data-cat="上传图片">上传图片</span>
-        <span class="cat-pill" data-cat="自定义">阿里Iconfont/自定义</span>
+        <span class="cat-pill active" data-cat="鍝佺墝Logo"><i class="fa fa-paint-brush"></i> 瀹樻柟褰╄壊鍝佺墝涓庣鐮擫ogo (鍚?VASP / CP2K / LAMMPS / Origin)</span>
+        <span class="cat-pill" data-cat="all">鍏ㄩ儴瀛椾綋鍥炬爣</span>
+        <span class="cat-pill" data-cat="閫氳绀句氦">閫氳绀句氦</span>
+        <span class="cat-pill" data-cat="涓汉淇℃伅">涓汉淇℃伅</span>
+        <span class="cat-pill" data-cat="鏁欒偛鑱屽満">鏁欒偛鑱屽満</span>
+        <span class="cat-pill" data-cat="鎶€鏈爺鍙?>鎶€鏈爺鍙?/span>
+        <span class="cat-pill" data-cat="鑽ｈ獕鎴愭灉">鑽ｈ獕鎴愭灉</span>
+        <span class="cat-pill" data-cat="涓婁紶鍥剧墖">涓婁紶鍥剧墖</span>
+        <span class="cat-pill" data-cat="鑷畾涔?>闃块噷Iconfont/鑷畾涔?/span>
       </div>
       <div class="icon-modal-body">
         <div class="icon-grid" id="icon-picker-grid">
-          <!-- JS 动态渲染 -->
+          <!-- JS 鍔ㄦ€佹覆鏌?-->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 导入已有简历模态窗 -->
+  <!-- 瀵煎叆宸叉湁绠€鍘嗘ā鎬佺獥 -->
   <div class="icon-modal-backdrop" id="import-resume-modal">
     <div class="icon-modal" style="max-width: 760px;">
       <div class="icon-modal-header">
-        <h3><i class="fa fa-file-text"></i> 导入已有简历（自动识别填入）</h3>
+        <h3><i class="fa fa-file-text"></i> 瀵煎叆宸叉湁绠€鍘嗭紙鑷姩璇嗗埆濉叆锛?/h3>
         <button type="button" class="icon-btn" id="btn-close-import-resume"><i class="fa fa-times"></i></button>
       </div>
       <div class="import-resume-body" id="import-resume-body">
         <div class="import-drop-zone" id="import-drop-zone">
           <i class="fa fa-cloud-upload"></i>
-          <h4>选择或拖入简历文件</h4>
-          <p>支持 <b>PDF / Word (docx) / Markdown (.md) / HTML / 纯文本 (txt)</b><br>系统将自动识别姓名、联系方式、教育经历、工作经历、项目与技能</p>
+          <h4>閫夋嫨鎴栨嫋鍏ョ畝鍘嗘枃浠?/h4>
+          <p>鏀寔 <b>PDF / Word (docx) / Markdown (.md) / HTML / 绾枃鏈?(txt)</b><br>绯荤粺灏嗚嚜鍔ㄨ瘑鍒鍚嶃€佽仈绯绘柟寮忋€佹暀鑲茬粡鍘嗐€佸伐浣滅粡鍘嗐€侀」鐩笌鎶€鑳?/p>
           <label class="btn btn-primary" style="cursor: pointer; margin-top: 6px;">
-            <i class="fa fa-folder-open-o"></i> 选择文件
+            <i class="fa fa-folder-open-o"></i> 閫夋嫨鏂囦欢
             <input type="file" id="input-resume-file" accept=".pdf,.docx,.doc,.md,.markdown,.html,.htm,.txt" style="display: none;">
           </label>
         </div>
         <div class="import-parsing" id="import-parsing" style="display: none;">
-          <i class="fa fa-spinner fa-spin"></i> 正在解析文件内容，请稍候...
+          <i class="fa fa-spinner fa-spin"></i> 姝ｅ湪瑙ｆ瀽鏂囦欢鍐呭锛岃绋嶅€?..
         </div>
         <div class="import-result" id="import-result" style="display: none;">
-          <h4><i class="fa fa-check-circle" style="color: #10b981;"></i> 识别完成，请勾选需要导入的内容</h4>
+          <h4><i class="fa fa-check-circle" style="color: #10b981;"></i> 璇嗗埆瀹屾垚锛岃鍕鹃€夐渶瑕佸鍏ョ殑鍐呭</h4>
           <div class="import-fields" id="import-fields-list">
-            <!-- JS 动态渲染识别到的字段 -->
+            <!-- JS 鍔ㄦ€佹覆鏌撹瘑鍒埌鐨勫瓧娈?-->
           </div>
           <div class="import-actions">
             <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; cursor: pointer;">
               <input type="checkbox" id="import-replace-mode">
-              <b>替换模式</b>（勾选后清空对应模块再导入；不勾选则追加到现有内容后面）
+              <b>鏇挎崲妯″紡</b>锛堝嬀閫夊悗娓呯┖瀵瑰簲妯″潡鍐嶅鍏ワ紱涓嶅嬀閫夊垯杩藉姞鍒扮幇鏈夊唴瀹瑰悗闈級
             </label>
             <button type="button" class="btn btn-primary" id="btn-apply-import">
-              <i class="fa fa-magic"></i> 应用到简历
-            </button>
+              <i class="fa fa-magic"></i> 搴旂敤鍒扮畝鍘?            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 预设职业简历详情预览与套用模态窗 -->
+  <!-- 棰勮鑱屼笟绠€鍘嗚鎯呴瑙堜笌濂楃敤妯℃€佺獥 -->
   <div class="icon-modal-backdrop" id="preset-modal">
     <div class="icon-modal" style="max-width: 820px;">
       <div class="icon-modal-header" style="background: #f8fafc;">
-        <h3 id="preset-modal-title"><i class="fa fa-briefcase text-primary"></i> 职业简历方案详情</h3>
+        <h3 id="preset-modal-title"><i class="fa fa-briefcase text-primary"></i> 鑱屼笟绠€鍘嗘柟妗堣鎯?/h3>
         <button type="button" class="icon-btn" id="btn-close-preset-modal"><i class="fa fa-times"></i></button>
       </div>
       <div class="preset-modal-body" id="preset-modal-body" style="padding: 22px 24px; max-height: 70vh; overflow-y: auto;">
-        <!-- JS 动态渲染预览内容 -->
+        <!-- JS 鍔ㄦ€佹覆鏌撻瑙堝唴瀹?-->
       </div>
       <div class="icon-modal-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; background: #fafafa;">
         <span style="font-size: 12.5px; color: #64748b;">
-          <i class="fa fa-info-circle"></i> 套用后保留您当前选取的单栏模板与主题色，可随时在后台调整修改
+          <i class="fa fa-info-circle"></i> 濂楃敤鍚庝繚鐣欐偍褰撳墠閫夊彇鐨勫崟鏍忔ā鏉夸笌涓婚鑹诧紝鍙殢鏃跺湪鍚庡彴璋冩暣淇敼
         </span>
         <div style="display: flex; gap: 10px;">
-          <button type="button" class="btn btn-secondary" id="btn-cancel-preset">取消</button>
+          <button type="button" class="btn btn-secondary" id="btn-cancel-preset">鍙栨秷</button>
           <button type="button" class="btn btn-primary" id="btn-confirm-apply-preset">
-            <i class="fa fa-check"></i> <b>立即载入到简历表单</b>
+            <i class="fa fa-check"></i> <b>绔嬪嵆杞藉叆鍒扮畝鍘嗚〃鍗?/b>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Toast 提示容器 -->
+  <!-- Toast 鎻愮ず瀹瑰櫒 -->
   <div class="toast-container" id="toast-container"></div>
 
   <script src="libs/pdf.min.js" defer></script>
   <script src="libs/mammoth.browser.min.js" defer></script>
-  <script src="static-adapter.js"></script>
+  <script src="static-adapter.js?v=202609300022"></script>
   <script src="server-sync.js"></script>
-  <script src="admin.js"></script>
+  <script src="admin.js?v=202609300022"></script>
 </body>
 </html>

@@ -3,82 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>简历投递记录管理</title>
+  <title>绠€鍘嗘姇閫掕褰曠鐞?/title>
   <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="jobs.css">
 </head>
 <body>
   <div class="jobs-app">
-    <!-- 站点导航条（与前台/后台保持一致） -->
+    <!-- 绔欑偣瀵艰埅鏉★紙涓庡墠鍙?鍚庡彴淇濇寔涓€鑷达級 -->
     <nav class="site-nav">
-      <a class="site-nav-btn" href="/" title="查看赛博马里奥像素个人主页">
-        <i class="fa fa-home"></i> 个人主页
+      <a class="site-nav-btn" href="/" title="鏌ョ湅璧涘崥椹噷濂ュ儚绱犱釜浜轰富椤?>
+        <i class="fa fa-home"></i> 涓汉涓婚〉
       </a>
-      <a class="site-nav-btn" href="/resume.html" title="查看个人简历展示页">
-        <i class="fa fa-id-card-o"></i> 个人简历
+      <a class="site-nav-btn" href="/resume.html" title="鏌ョ湅涓汉绠€鍘嗗睍绀洪〉">
+        <i class="fa fa-id-card-o"></i> 涓汉绠€鍘?      </a>
+      <a class="site-nav-btn" href="/admin/" title="缂栬緫绠€鍘嗗唴瀹?>
+        <i class="fa fa-cog"></i> 鍚庡彴绠＄悊
       </a>
-      <a class="site-nav-btn" href="/admin/" title="编辑简历内容">
-        <i class="fa fa-cog"></i> 后台管理
-      </a>
-      <a class="site-nav-btn active" href="/admin/jobs.html" title="管理简历投递记录（当前页）">
-        <i class="fa fa-table"></i> 投递记录
-      </a>
+      <a class="site-nav-btn active" href="/admin/jobs.html" title="绠＄悊绠€鍘嗘姇閫掕褰曪紙褰撳墠椤碉級">
+        <i class="fa fa-table"></i> 鎶曢€掕褰?      </a>
     </nav>
 
-    <!-- 顶部工具栏 -->
+    <!-- 椤堕儴宸ュ叿鏍?-->
     <header class="jobs-topbar">
       <div class="topbar-left">
-        <a class="back-btn" href="/admin/" title="返回简历后台">
+        <a class="back-btn" href="/admin/" title="杩斿洖绠€鍘嗗悗鍙?>
           <i class="fa fa-arrow-left"></i>
         </a>
-        <h1><i class="fa fa-table"></i> 简历投递记录管理</h1>
-        <span class="stat-badge" id="stat-total">共 0 条</span>
-        <span class="stat-badge stat-pending" id="stat-pending">未投递 0</span>
-        <span class="stat-badge stat-sent" id="stat-sent">已投递 0</span>
+        <h1><i class="fa fa-table"></i> 绠€鍘嗘姇閫掕褰曠鐞?/h1>
+        <span class="stat-badge" id="stat-total">鍏?0 鏉?/span>
+        <span class="stat-badge stat-pending" id="stat-pending">鏈姇閫?0</span>
+        <span class="stat-badge stat-sent" id="stat-sent">宸叉姇閫?0</span>
       </div>
       <div class="topbar-actions">
         <div class="search-wrap">
           <i class="fa fa-search"></i>
-          <input type="text" id="input-search" placeholder="搜索公司 / 岗位 / 地点 / 备注...">
+          <input type="text" id="input-search" placeholder="鎼滅储鍏徃 / 宀椾綅 / 鍦扮偣 / 澶囨敞...">
         </div>
         <button class="btn btn-secondary" id="btn-toggle-columns">
-          <i class="fa fa-columns"></i> 列显示
-        </button>
+          <i class="fa fa-columns"></i> 鍒楁樉绀?        </button>
         <button class="btn btn-secondary" id="btn-import-text">
-          <i class="fa fa-paste"></i> 粘贴导入
+          <i class="fa fa-paste"></i> 绮樿创瀵煎叆
         </button>
         <label class="btn btn-secondary" style="cursor:pointer;margin:0;">
-          <i class="fa fa-file-excel-o"></i> 导入 CSV
+          <i class="fa fa-file-excel-o"></i> 瀵煎叆 CSV
           <input type="file" id="input-csv-file" accept=".csv,.tsv,.txt" style="display:none;">
         </label>
         <button class="btn btn-secondary" id="btn-export-csv">
-          <i class="fa fa-download"></i> 导出 Excel
+          <i class="fa fa-download"></i> 瀵煎嚭 Excel
         </button>
         <button class="btn btn-primary" id="btn-add-row">
-          <i class="fa fa-plus"></i> 新增记录
+          <i class="fa fa-plus"></i> 鏂板璁板綍
         </button>
         <button class="btn btn-primary" id="btn-save-all">
-          <i class="fa fa-save"></i> <b>保存</b>
+          <i class="fa fa-save"></i> <b>淇濆瓨</b>
         </button>
       </div>
     </header>
 
-    <!-- 列显示控制面板 -->
+    <!-- 鍒楁樉绀烘帶鍒堕潰鏉?-->
     <section class="columns-panel" id="columns-panel" style="display:none;">
       <div class="columns-panel-header">
-        <h3>列显示</h3>
+        <h3>鍒楁樉绀?/h3>
         <div>
-          <button class="btn btn-primary btn-sm" id="btn-close-columns">收起</button>
-          <button class="btn btn-secondary btn-sm" id="btn-reset-columns">恢复全部列</button>
+          <button class="btn btn-primary btn-sm" id="btn-close-columns">鏀惰捣</button>
+          <button class="btn btn-secondary btn-sm" id="btn-reset-columns">鎭㈠鍏ㄩ儴鍒?/button>
         </div>
       </div>
       <div class="columns-checkboxes" id="columns-checkboxes">
-        <!-- JS 动态渲染 -->
+        <!-- JS 鍔ㄦ€佹覆鏌?-->
       </div>
     </section>
 
-    <!-- 表格主体 -->
+    <!-- 琛ㄦ牸涓讳綋 -->
     <main class="jobs-main">
       <div class="table-scroll" id="table-scroll">
         <table class="jobs-table" id="jobs-table">
@@ -87,43 +84,41 @@
         </table>
         <div class="empty-state" id="empty-state" style="display:none;">
           <i class="fa fa-inbox"></i>
-          <h3>暂无投递记录</h3>
-          <p>点击右上角「新增记录」手动添加，或用「粘贴导入」把招聘网站复制来的表格一键转成记录</p>
+          <h3>鏆傛棤鎶曢€掕褰?/h3>
+          <p>鐐瑰嚮鍙充笂瑙掋€屾柊澧炶褰曘€嶆墜鍔ㄦ坊鍔狅紝鎴栫敤銆岀矘璐村鍏ャ€嶆妸鎷涜仒缃戠珯澶嶅埗鏉ョ殑琛ㄦ牸涓€閿浆鎴愯褰?/p>
         </div>
       </div>
     </main>
 
-    <!-- 粘贴导入弹窗 -->
+    <!-- 绮樿创瀵煎叆寮圭獥 -->
     <div class="modal-backdrop" id="import-modal">
       <div class="modal">
         <div class="modal-header">
-          <h3><i class="fa fa-paste"></i> 粘贴导入投递信息</h3>
+          <h3><i class="fa fa-paste"></i> 绮樿创瀵煎叆鎶曢€掍俊鎭?/h3>
           <button class="icon-btn" id="btn-close-import"><i class="fa fa-times"></i></button>
         </div>
         <div class="modal-body">
           <p class="modal-tip">
             <i class="fa fa-lightbulb-o"></i>
-            在招聘网站（如 givemeoc 等投递管理表）中<b>框选表格内容并复制</b>，然后粘贴到下方文本框。
-            系统会自动识别制表符 / 多空格 / 竖线 / 逗号分隔，按「公司名称、公司类型、所属行业、招聘类型、招聘对象、工作地点、岗位、投递进度、更新时间、投递截止、相关链接、招聘公告、笔试情况、公司规模、备注」的顺序解析。
-          </p>
+            鍦ㄦ嫑鑱樼綉绔欙紙濡?givemeoc 绛夋姇閫掔鐞嗚〃锛変腑<b>妗嗛€夎〃鏍煎唴瀹瑰苟澶嶅埗</b>锛岀劧鍚庣矘璐村埌涓嬫柟鏂囨湰妗嗐€?            绯荤粺浼氳嚜鍔ㄨ瘑鍒埗琛ㄧ / 澶氱┖鏍?/ 绔栫嚎 / 閫楀彿鍒嗛殧锛屾寜銆屽叕鍙稿悕绉般€佸叕鍙哥被鍨嬨€佹墍灞炶涓氥€佹嫑鑱樼被鍨嬨€佹嫑鑱樺璞°€佸伐浣滃湴鐐广€佸矖浣嶃€佹姇閫掕繘搴︺€佹洿鏂版椂闂淬€佹姇閫掓埅姝€佺浉鍏抽摼鎺ャ€佹嫑鑱樺叕鍛娿€佺瑪璇曟儏鍐点€佸叕鍙歌妯°€佸娉ㄣ€嶇殑椤哄簭瑙ｆ瀽銆?          </p>
           <textarea id="import-textarea" class="modal-textarea" rows="10"
-            placeholder="在此粘贴（Ctrl+V）从网页复制的表格内容..."></textarea>
+            placeholder="鍦ㄦ绮樿创锛圕trl+V锛変粠缃戦〉澶嶅埗鐨勮〃鏍煎唴瀹?.."></textarea>
           <div class="modal-actions">
-            <label class="chk"><input type="checkbox" id="import-append" checked> 追加到现有记录（取消勾选则替换全部）</label>
+            <label class="chk"><input type="checkbox" id="import-append" checked> 杩藉姞鍒扮幇鏈夎褰曪紙鍙栨秷鍕鹃€夊垯鏇挎崲鍏ㄩ儴锛?/label>
             <div>
-              <button class="btn btn-secondary" id="btn-cancel-import">取消</button>
-              <button class="btn btn-primary" id="btn-do-import"><i class="fa fa-magic"></i> 解析并导入</button>
+              <button class="btn btn-secondary" id="btn-cancel-import">鍙栨秷</button>
+              <button class="btn btn-primary" id="btn-do-import"><i class="fa fa-magic"></i> 瑙ｆ瀽骞跺鍏?/button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 编辑单元格弹窗（长文本编辑） -->
+    <!-- 缂栬緫鍗曞厓鏍煎脊绐楋紙闀挎枃鏈紪杈戯級 -->
     <div class="modal-backdrop" id="edit-modal">
       <div class="modal modal-sm">
         <div class="modal-header">
-          <h3 id="edit-modal-title">编辑</h3>
+          <h3 id="edit-modal-title">缂栬緫</h3>
           <button class="icon-btn" id="btn-close-edit"><i class="fa fa-times"></i></button>
         </div>
         <div class="modal-body">
@@ -131,8 +126,8 @@
           <div class="modal-actions">
             <span></span>
             <div>
-              <button class="btn btn-secondary" id="btn-cancel-edit">取消</button>
-              <button class="btn btn-primary" id="btn-confirm-edit">确定</button>
+              <button class="btn btn-secondary" id="btn-cancel-edit">鍙栨秷</button>
+              <button class="btn btn-primary" id="btn-confirm-edit">纭畾</button>
             </div>
           </div>
         </div>
@@ -143,7 +138,7 @@
     <div class="toast-container" id="toast-container"></div>
   </div>
 
-  <script src="static-adapter.js"></script>
-  <script src="jobs.js"></script>
+  <script src="static-adapter.js?v=202609300022"></script>
+  <script src="jobs.js?v=202609300022"></script>
 </body>
 </html>
