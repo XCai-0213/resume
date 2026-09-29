@@ -588,54 +588,92 @@
     }
   }
 
-  // 自适应导出排版：边距（左右/上下）与行距一起随内容量调节
+  // ====== 导出排版：真自适应（无写死档位/行距/字号） ======
   //
-  // 档位（由松到紧）：
-  //   comfort —— 内容偏少：边距最大（13mm/11mm）+ 行距最松，版面舒展不空洞
-  //   auto    —— 内容适中：标准边距（10mm/8mm）+ 标准行距
-  //   compact —— 略超一页：收紧边距（7mm/5mm）+ 压缩行距
-  //   tiny    —— 明显超出：边距压到印刷安全下限（5mm/4mm）+ 极限压缩
+  // 核心思路：以浏览器「屏幕渲染」的自然排版为基准（行距、字号、间距全是
+  // 浏览器引擎算出来的），量出内容自然高度 vs A4 可用高度，然后用 CSS zoom
+  // 连续缩放到刚好填满一页（精度 ±6px）。
   //
-  // 策略：从最松的 comfort 开始逐个试，选「第一个能装进 A4 的最松档位」。
-  // 这样内容少时自动摊开、内容多时自动收紧，无需预设阈值。
-  const FIT_TIERS = ['comfort', 'auto', 'compact', 'tiny'];
-  // 各档位的页面内边距（mm），必须与 CSS 中的 --page-pad-* 定义保持一致
-  const TIER_PADDING = {
-    comfort: { x: 13, y: 11 },
-    auto:    { x: 10, y: 8 },
-    compact: { x: 7,  y: 5 },
-    tiny:    { x: 5,  y: 4 }
-  };
-  const MM_PER_PX = 1 / 3.7795;   // 96dpi 下 1px ≈ 0.2646mm
+  // 不存在任何写死的档位、行距或字号 —— 换内容、换模板、换主题、改简历
+  // 都自动适配，不需要调任何参数。
+  //
+  // 边距同理：按内容量在 [min, max] 区间线性插值，通过 CSS 变量注入，
+  // @page 与 .pdf-mode 页面盒共用。
+
+  const A4_W_MM = 210, A4_H_MM = 297;
+  const PX_PER_MM = 3.7795;           // 96dpi
+  const TARGET_FILL = 0.97;           // 目标填充率 97%（留 3% 呼吸空间）
+  const ZOOM_MIN = 0.55;              // 缩放下限（再小字不可读）
+  const ZOOM_MAX = 1.8;               // 缩放上限（再大显得空洞）
+  // 边距范围（mm）：内容多时收紧到印刷安全下限，内容少时放宽使版面协调
+  const PAD_X_MIN = 5,  PAD_X_MAX = 16;
+  const PAD_Y_MIN = 4,  PAD_Y_MAX = 14;
+  // 边距插值的参考区间（内容自然高度 px）
+  const H_REF_LO = 700, H_REF_HI = 1500;
 
   function autoFitForPrint() {
     const container = document.getElementById('resume-container');
     if (!container) return null;
 
     document.body.classList.add('pdf-mode');
+    container.style.zoom = '';
 
-    // A4 内容区高度随档位边距变化：297mm - 上下边距
-    const fits = (fit) => {
-      document.body.setAttribute('data-fit', fit);
-      const pad = TIER_PADDING[fit] || TIER_PADDING.auto;
-      const usablePx = (297 - pad.y * 2) / MM_PER_PX;
-      return container.scrollHeight <= usablePx;
-    };
+    // 视觉高度：CSS zoom 会等比影响 getBoundingClientRect()
+    const visualH = () => container.getBoundingClientRect().height;
 
-    // 从最松到最紧，取第一个装得下的档位
-    for (const tier of FIT_TIERS) {
-      if (fits(tier)) return tier;
+    // 自然高度（zoom=1）
+    void container.offsetHeight;
+    const naturalH = visualH();
+    if (naturalH <= 0) return null;
+
+    // ---------- 1. 边距：按内容量在 [max, min] 间线性插值 ----------
+    const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+    const density = clamp((naturalH - H_REF_LO) / (H_REF_HI - H_REF_LO), 0, 1);  // 0=稀 1=密
+    const padX = Math.round(clamp(PAD_X_MAX - density * (PAD_X_MAX - PAD_X_MIN), PAD_X_MIN, PAD_X_MAX) * 10) / 10;
+    const padY = Math.round(clamp(PAD_Y_MAX - density * (PAD_Y_MAX - PAD_Y_MIN), PAD_Y_MIN, PAD_Y_MAX) * 10) / 10;
+
+    document.documentElement.style.setProperty('--page-pad-x', padX + 'mm');
+    document.documentElement.style.setProperty('--page-pad-y', padY + 'mm');
+
+    // 边距变化后重排，再量准确高度
+    void container.offsetHeight;
+    const h1 = visualH();
+    if (h1 <= 0) return null;
+
+    // ---------- 2. 连续缩放：填满页面到目标填充率 ----------
+    const usableH = (A4_H_MM - padY * 2) * PX_PER_MM;
+    const target = usableH * TARGET_FILL;
+
+    let zoom = clamp(target / h1, ZOOM_MIN, ZOOM_MAX);
+    container.style.zoom = zoom;
+
+    // ---------- 3. 迭代收敛（zoom 与高度轻微非线性）----------
+    for (let i = 0; i < 4; i++) {
+      const h = visualH();
+      if (h <= 0) break;
+      const diff = target - h;
+      if (Math.abs(diff) < 6) break;
+      zoom = clamp(zoom * (target / h), ZOOM_MIN, ZOOM_MAX);
+      container.style.zoom = zoom;
     }
-    // 极端情况：最紧的 tiny 仍装不下，保持 tiny（CSS 已极限压缩，溢出内容由
-    // @page 的单页约束兜底裁切；此时建议精简简历内容）
-    document.body.setAttribute('data-fit', 'tiny');
-    return 'tiny';
+
+    // ---------- 4. 横向校验：缩放后不能超出页宽 ----------
+    const w = container.getBoundingClientRect().width;
+    const availW = (A4_W_MM - padX * 2) * PX_PER_MM;
+    if (w > availW * 1.01) {
+      zoom = clamp(zoom * (availW / w), ZOOM_MIN, ZOOM_MAX);
+      container.style.zoom = zoom;
+    }
+
+    return { padX, padY, zoom: Math.round(zoom * 1000) / 1000, fill: Math.round(visualH() / usableH * 100) };
   }
 
   // 退出导出排版态，恢复正常屏幕显示
   function exitPrintMode() {
     document.body.classList.remove('pdf-mode', 'printing-single-page');
     document.body.removeAttribute('data-fit');
+    const c = document.getElementById('resume-container');
+    if (c) c.style.zoom = '';
   }
 
   // 顶部快捷控制栏（含跨页面导航）
