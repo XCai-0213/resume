@@ -617,12 +617,6 @@
 
     document.body.classList.add('pdf-mode');
 
-    // 1. 隐藏所有图标字体元素（导出环境字体加载不可靠，缺字形会显示为方框 □。
-    //    联系信息本身有"手机:""邮箱:"等文字标签，图标冗余；章节标题纯文字更干净）
-    container.querySelectorAll('i.fa, i.fas, i.far, span.fa, em.fa').forEach(el => {
-      el.style.display = 'none';
-    });
-
     container.style.zoom = '';
     container.style.width = '';
 
