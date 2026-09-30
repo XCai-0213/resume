@@ -820,26 +820,39 @@
           windowHeight: 1123                   // A4 高 297mm ≈ 1123px
         });
 
-        const { jsPDF } = window.jspdf;
+                const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
         const pageW = 210, pageH = 297;
-        const margin = 6;
+        const margin = 10;                       // 四边统一 10mm，与服务端导出一致
         const availW = pageW - margin * 2;
         const availH = pageH - margin * 2;
         const imgH = canvas.height * (availW / canvas.width);
 
         if (imgH <= availH) {
-          // 内容不足一页：按宽度铺满（可接受留白在底部）
+          // 内容不足一页：按可用宽铺满
           pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', margin, margin, availW, imgH);
-        } else {
-          // 内容超一页：等比缩放整页塞入（宽度居中，两侧留白极小）
-          const ratio = availH / imgH;
-          const drawW = availW * ratio;
-          const drawX = (pageW - drawW) / 2;
-          pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', drawX, margin, drawW, availH);
+          pdf.save('resume.pdf');
+          quickToast('PDF OK (single page)', 'success');
+          return true;
         }
 
-        pdf.save('简历-A4单页.pdf');
+        // 内容超一页：按页高切片分页 —— 字号保持原大，可读性优先
+        const pageCount = Math.ceil(imgH / availH);
+        for (let pg = 0; pg < pageCount; pg++) {
+          if (pg > 0) pdf.addPage();
+          const sliceH = canvas.width * (availH / availW);
+          const sy = pg * sliceH;
+          const sh = Math.min(sliceH, canvas.height - sy);
+          const tmp = document.createElement('canvas');
+          tmp.width = canvas.width;
+          tmp.height = sh;
+          tmp.getContext('2d').drawImage(canvas, 0, sy, canvas.width, sh, 0, 0, canvas.width, sh);
+          const drawH = sh * (availW / canvas.width);
+          pdf.addImage(tmp.toDataURL('image/jpeg', 0.95), 'JPEG', margin, margin, availW, drawH);
+        }
+        pdf.save('resume-' + pageCount + 'pages.pdf');
+        quickToast('PDF OK (' + pageCount + ' pages, readable font)', 'success');
+        return true;
         quickToast('✅ PDF 已生成（无弹窗模式，单页 A4 高清）', 'success');
         return true;
       } catch (err) {
