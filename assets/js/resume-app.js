@@ -809,7 +809,20 @@
 
       try {
         // 等待样式重排与字体就绪
-        await new Promise(r => setTimeout(r, 400));
+                // Wait for ALL resources to be truly ready before capture:
+        // on slow mobile networks a fixed 400ms delay captures the page
+        // before CSS/fonts/images finish loading -> unstyled text skeleton.
+        const waitReady = async () => {
+          try { await document.fonts.ready; } catch (e) {}
+          const imgs = Array.from(container.querySelectorAll('img'));
+          await Promise.all(imgs.map(img =>
+            img.complete ? Promise.resolve() :
+            new Promise(r => { img.onload = img.onerror = r; })
+          ));
+          await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+          await new Promise(r => setTimeout(r, 300));
+        };
+        await waitReady();
         const container = document.getElementById('resume-container');
         const canvas = await window.html2canvas(container, {
           scale: 2.5,                          // 高清
