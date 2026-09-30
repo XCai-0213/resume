@@ -32,3 +32,5 @@ assets/css/*.map
 
 # 保留 README 预览图
 !docs/
+
+_deploy_stage/
