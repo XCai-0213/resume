@@ -1,0 +1,618 @@
+/* ==========================================================================
+ * 30 套单栏结构型简历排版模板 (30 One-Column Structural Resume Templates)
+ * 核心：重在【版式骨架、页头架构、时间轴布局、标题形态与排字节奏】的真正重构！
+ * 颜色完全继承自用户的【主题色彩】变量 var(--primary-color) / var(--primary-light)，
+ * 无论选蓝色、翡翠绿、红色、深黑等任何色彩，30 套版式全部完美适配！
+ * ========================================================================== */
+
+/* --------------------------------------------------------------------------
+ * 01. classic 经典名片版 (默认基准)
+ * 经典左右头像名片，左侧品牌竖条标头，流式胶囊技能标签
+ * -------------------------------------------------------------------------- */
+body[data-template="classic"] {
+  /* 继承 custom-layout.css 默认排版 */
+}
+
+/* --------------------------------------------------------------------------
+ * 02. center-hero 中轴居中大气版 (大厂总监 / 专家通用)
+ * 头像在居中正上方，姓名与职位大字居中，联系方式单行横向圆点对齐
+ * -------------------------------------------------------------------------- */
+body[data-template="center-hero"] .header-side-by-side-card {
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 10px 0 20px 0 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-avatar-box {
+  margin: 0 auto 12px auto !important;
+  width: 95px !important;
+  height: 120px !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-title-row {
+  justify-content: center !important;
+  margin-bottom: 6px !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-name {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-profile-tags,
+body[data-template="center-hero"] .header-side-by-side-card .header-contact-list {
+  justify-content: center !important;
+  border-top: none !important;
+  padding-top: 2px !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-skills-row {
+  justify-content: center !important;
+  border-top: 1px dashed #e2e8f0 !important;
+  margin-top: 12px !important;
+}
+body[data-template="center-hero"] .header-side-by-side-card .header-qrcode-box {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 03. split-header 双列对称页头版 (信息高度密集 / 严谨商务)
+ * 左半区：姓名+意向顶格大字；右半区：联系方式做成 2 列紧凑网格
+ * -------------------------------------------------------------------------- */
+body[data-template="split-header"] .header-side-by-side-card {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto !important;
+  gap: 20px !important;
+  align-items: center !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  padding-bottom: 18px !important;
+}
+body[data-template="split-header"] .header-content-box {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px 16px !important;
+}
+body[data-template="split-header"] .header-title-row {
+  grid-column: 1 / -1 !important;
+  margin-bottom: 2px !important;
+}
+body[data-template="split-header"] .header-profile-tags {
+  grid-column: 1 / -1 !important;
+}
+body[data-template="split-header"] .header-contact-list {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  border-top: 1px solid #f1f5f9 !important;
+}
+body[data-template="split-header"] .header-skills-row {
+  grid-column: 1 / -1 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 04. editorial 杂志报刊刊头版 (设计师 / 高级产品 / 文创策划)
+ * 姓名超大号无衬线顶格，求职意向如副标，下方带贯穿加粗分割带
+ * -------------------------------------------------------------------------- */
+body[data-template="editorial"] .container.layout-one-column {
+  padding: 40px 50px !important;
+}
+body[data-template="editorial"] .header-side-by-side-card {
+  border: none !important;
+  box-shadow: none !important;
+  border-bottom: 3px solid #0f172a !important;
+  padding-bottom: 20px !important;
+}
+body[data-template="editorial"] .header-side-by-side-card .header-name {
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.5px !important;
+}
+body[data-template="editorial"] .header-side-by-side-card .header-job {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: var(--primary-color) !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 05. text-pure 纯粹文本流版 (外企/投行无需相片标准规范)
+ * 彻底隐藏头像占位，全幅信息无缝展开，超高信息密度
+ * -------------------------------------------------------------------------- */
+body[data-template="text-pure"] .header-avatar-box {
+  display: none !important;
+}
+body[data-template="text-pure"] .header-side-by-side-card {
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+body[data-template="text-pure"] .header-side-by-side-card .header-name {
+  font-size: 28px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 06. badge-card 工牌内嵌版 (带微立体内凹卡片边框)
+ * 头部整体像工作证一样带有内嵌浅底圆角微边框
+ * -------------------------------------------------------------------------- */
+body[data-template="badge-card"] .header-side-by-side-card {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  padding: 20px 24px !important;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.03) !important;
+}
+body[data-template="badge-card"] .header-avatar-box {
+  background: #ffffff !important;
+  border: 2px solid #cbd5e1 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 07. left-date 左侧独立时间轨版 (咨询顾问 / 资深工程师核心推荐)
+ * 时间统一抽离到左侧 120px 独立列，右侧放公司/职位/要点，视线对齐极度舒适
+ * -------------------------------------------------------------------------- */
+body[data-template="left-date"] .container .main .info-unit ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+body[data-template="left-date"] .container .main .info-unit ul > li {
+  display: grid !important;
+  grid-template-columns: 140px 1fr !important;
+  gap: 16px !important;
+  align-items: start !important;
+  margin-bottom: 14px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px dashed #f1f5f9;
+}
+body[data-template="left-date"] .container .main .info-unit ul > li h3 {
+  grid-column: 2 / 3 !important;
+  margin-bottom: 4px !important;
+}
+body[data-template="left-date"] .container .main .info-unit ul > li h3 time {
+  grid-column: 1 / 2 !important;
+  grid-row: 1 / 3 !important;
+  float: none !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  color: var(--primary-color) !important;
+  padding-top: 2px;
+}
+body[data-template="left-date"] .container .main .info-unit ul > li .info-content,
+body[data-template="left-date"] .container .main .info-unit ul > li p {
+  grid-column: 2 / 3 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 08. two-row-grid 表格化两行对齐经历版
+ * 第一行：左公司右时间；第二行：左职位右学院/地点，像报表一样整洁
+ * -------------------------------------------------------------------------- */
+body[data-template="two-row-grid"] .container .main .info-unit ul > li h3 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 5px !important;
+  margin-bottom: 6px !important;
+}
+body[data-template="two-row-grid"] .container .main .info-unit ul > li h3 time {
+  font-size: 12.5px !important;
+  color: #64748b !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 09. stream-axis 连续时间轴流版
+ * 左侧贯穿 2px 细轴，条目带圆圈挂点，脉络清晰
+ * -------------------------------------------------------------------------- */
+body[data-template="stream-axis"] .container .info-unit hr { display: none !important; }
+body[data-template="stream-axis"] .container .main .info-unit ul {
+  list-style: none !important;
+  padding-left: 16px !important;
+  border-left: 2px solid #e2e8f0 !important;
+  margin-left: 6px !important;
+}
+body[data-template="stream-axis"] .container .main .info-unit ul > li {
+  position: relative !important;
+  padding-left: 10px !important;
+  margin-bottom: 18px !important;
+}
+body[data-template="stream-axis"] .container .main .info-unit ul > li::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid var(--primary-color);
+}
+body[data-template="stream-axis"] .container .main .info-unit ul > li h3 time {
+  background: var(--primary-light);
+  color: var(--primary-hover) !important;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11.5px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 10. compact-line 紧凑一行流版 (最大化利用首行空间)
+ * 公司 - 职位 - 时间全部压缩在同一行紧凑呈现
+ * -------------------------------------------------------------------------- */
+body[data-template="compact-line"] .container .main .info-unit ul > li h3 {
+  font-size: 14px !important;
+  margin-bottom: 3px !important;
+}
+body[data-template="compact-line"] .container .main .info-unit ul > li {
+  margin-bottom: 10px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 11. tag-prefix 标签索引前缀版
+ * 每个经历项前面带有小方块年份徽章
+ * -------------------------------------------------------------------------- */
+body[data-template="tag-prefix"] .container .main .info-unit ul > li h3 time {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-radius: 3px !important;
+  padding: 2px 8px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 12. full-rule 贯穿细横线版 (对标超级简历 WonderCV 标题版式)
+ * 章节标题文字左对齐，右侧延伸一条 1px 细线贯穿整个版面
+ * -------------------------------------------------------------------------- */
+body[data-template="full-rule"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  display: flex !important;
+  align-items: center !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 12px !important;
+}
+body[data-template="full-rule"] .container .info-unit h2::after {
+  content: "";
+  flex: 1;
+  height: 1.5px;
+  background: #0f172a;
+  margin-left: 14px;
+}
+body[data-template="full-rule"] .info-unit hr { display: none !important; }
+
+/* --------------------------------------------------------------------------
+ * 13. bracket-tag 代码注释前缀版 (程序员/算法工程师首选)
+ * 章节标题带 // 或 ## 前缀，等宽技术感强
+ * -------------------------------------------------------------------------- */
+body[data-template="bracket-tag"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  font-family: Consolas, "Fira Code", monospace !important;
+  color: #0f172a !important;
+  display: flex !important;
+  align-items: center !important;
+}
+body[data-template="bracket-tag"] .container .info-unit h2::before {
+  content: "// ";
+  color: var(--primary-color);
+  font-weight: 800;
+  margin-right: 4px;
+}
+body[data-template="bracket-tag"] .container .info-unit h2 i { display: none !important; }
+body[data-template="bracket-tag"] .info-unit hr {
+  height: 1px !important;
+  background: #e2e8f0 !important;
+  border: none !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 14. band-strip 整行浅底衬带版 (政府公文/管理报告式稳重)
+ * 整个标题栏是一条浅底色条，带有色块包裹感
+ * -------------------------------------------------------------------------- */
+body[data-template="band-strip"] .container .info-unit h2 {
+  background: #f1f5f9 !important;
+  border-left: 5px solid var(--primary-color) !important;
+  padding: 8px 14px !important;
+  border-radius: 4px;
+  font-size: 14.5px !important;
+  margin-bottom: 12px !important;
+}
+body[data-template="band-strip"] .info-unit hr { display: none !important; }
+
+/* --------------------------------------------------------------------------
+ * 15. center-caps 学术双横线版 (对标 Overleaf LaTeX 官方论文风)
+ * 全衬线字体，标题居中，大写间距拉开，上下双细线
+ * -------------------------------------------------------------------------- */
+body[data-template="center-caps"],
+body[data-template="center-caps"] h1,
+body[data-template="center-caps"] h2,
+body[data-template="center-caps"] h3,
+body[data-template="center-caps"] p,
+body[data-template="center-caps"] span,
+body[data-template="center-caps"] time {
+  font-family: "Times New Roman", Times, "Songti SC", "SimSun", serif !important;
+}
+body[data-template="center-caps"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  text-align: center !important;
+  font-size: 15.5px !important;
+  letter-spacing: 3px !important;
+  font-weight: 700 !important;
+}
+body[data-template="center-caps"] .container .info-unit h2 i { display: none !important; }
+body[data-template="center-caps"] .info-unit hr {
+  display: block !important;
+  height: 0 !important;
+  border: none !important;
+  border-top: 1px solid #0f172a !important;
+  position: relative !important;
+  margin: 4px 0 14px 0 !important;
+}
+body[data-template="center-caps"] .info-unit hr::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+ * 16. bottom-accent 标题底边短实线版 (日系 MUJI 极简无印风)
+ * 标题下方带一条仅与文字同宽的 3px 加粗实线，其余留白
+ * -------------------------------------------------------------------------- */
+body[data-template="bottom-accent"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  display: inline-block !important;
+  border-bottom: 3px solid var(--primary-color) !important;
+  padding-bottom: 4px !important;
+  margin-bottom: 12px !important;
+}
+body[data-template="bottom-accent"] .info-unit hr { display: none !important; }
+
+/* --------------------------------------------------------------------------
+ * 17. outline-pill 胶囊圆角边框标题版
+ * 标题整体是一个轻巧圆角胶囊线框
+ * -------------------------------------------------------------------------- */
+body[data-template="outline-pill"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px;
+  border: 1.5px solid var(--primary-color) !important;
+  border-radius: 20px !important;
+  padding: 3px 14px !important;
+  font-size: 13.5px !important;
+  margin-bottom: 12px !important;
+}
+body[data-template="outline-pill"] .info-unit hr { display: none !important; }
+
+/* --------------------------------------------------------------------------
+ * 18. corner-ribbon 立体折角工科版
+ * 标题带有工科机械般的立体倒角几何标识
+ * -------------------------------------------------------------------------- */
+body[data-template="corner-ribbon"] .container .info-unit h2 {
+  border-left: none !important;
+  padding-left: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px;
+}
+body[data-template="corner-ribbon"] .container .info-unit h2::before {
+  content: "";
+  width: 8px;
+  height: 18px;
+  background: var(--primary-color);
+  clip-path: polygon(0 0, 100% 25%, 100% 75%, 0 100%);
+}
+body[data-template="corner-ribbon"] .info-unit hr { display: none !important; }
+
+/* --------------------------------------------------------------------------
+ * 19. dash-bullet 破折号清单版 (欧美投行 / 咨询外企)
+ * 职责要点抛弃圆点，改用优雅的西文长破折号 —
+ * -------------------------------------------------------------------------- */
+body[data-template="dash-bullet"] .container .main .info-unit ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+body[data-template="dash-bullet"] .container .main .info-unit ul li {
+  position: relative !important;
+  padding-left: 18px !important;
+}
+body[data-template="dash-bullet"] .container .main .info-unit ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+ * 20. hollow-square 实心工整方块版 (质检 / 精益管理 / 严密工科)
+ * 要点前缀为规整黑色小方块 ▪，如尺子量出一般整齐
+ * -------------------------------------------------------------------------- */
+body[data-template="hollow-square"] .container .main .info-unit ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+body[data-template="hollow-square"] .container .main .info-unit ul li {
+  position: relative !important;
+  padding-left: 16px !important;
+}
+body[data-template="hollow-square"] .container .main .info-unit ul li::before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------
+ * 21. arrow-lead 行动导向箭头版 (销售开拓 / 业务突破 / 增长运营)
+ * 要点以行动箭头 › 领衔，突出主动推进
+ * -------------------------------------------------------------------------- */
+body[data-template="arrow-lead"] .container .main .info-unit ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+body[data-template="arrow-lead"] .container .main .info-unit ul li {
+  position: relative !important;
+  padding-left: 16px !important;
+}
+body[data-template="arrow-lead"] .container .main .info-unit ul li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+ * 22. hanging-indent 悬挂缩进版 (出版级阅读排版)
+ * 段落首字对齐，内部要点呈现出优美悬挂
+ * -------------------------------------------------------------------------- */
+body[data-template="hanging-indent"] .container .main .info-unit ul li {
+  text-indent: -1.2em !important;
+  padding-left: 1.2em !important;
+  margin-bottom: 7px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 23. dense-paragraph 紧密连贯版 (经历充实 / 文书连贯)
+ * 条目间距紧致，突出厚重经历
+ * -------------------------------------------------------------------------- */
+body[data-template="dense-paragraph"] .container .main .info-unit ul li {
+  margin-bottom: 4px !important;
+  line-height: 1.55 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 24. skill-matrix 技能双列网格版
+ * 技能徽章区域以双列规整排布，整齐对称
+ * -------------------------------------------------------------------------- */
+body[data-template="skill-matrix"] .header-skills-tags {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: 6px 10px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 25. skill-plain-list 极简技能无框平铺版
+ * 技能完全去掉背景与边框，仅以文字+Logo纯粹展示，极致干净
+ * -------------------------------------------------------------------------- */
+body[data-template="skill-plain-list"] .skill-badge-tag {
+  background: transparent !important;
+  border: none !important;
+  padding: 2px 8px !important;
+  color: #0f172a !important;
+}
+body[data-template="skill-plain-list"] .skill-badge-tag:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 26. skill-grouped 高反差深底徽章版
+ * 技能徽章采用高对比度深石板色背景，白字，极其精致高档
+ * -------------------------------------------------------------------------- */
+body[data-template="skill-grouped"] .skill-badge-tag {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid #0f172a !important;
+}
+body[data-template="skill-grouped"] .skill-badge-tag:hover {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 27. borderless-pure 纯白无界通透版
+ * 移除容器所有阴影和边框，如同白纸自然融入视口，呼吸感最强
+ * -------------------------------------------------------------------------- */
+body[data-template="borderless-pure"] {
+  background: #ffffff !important;
+}
+body[data-template="borderless-pure"] .container.layout-one-column {
+  box-shadow: none !important;
+  border: none !important;
+  padding: 24px 32px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 28. framed-border 全封闭细线画框版
+ * 页面四周环绕 1px 细线框，庄重仪式感
+ * -------------------------------------------------------------------------- */
+body[data-template="framed-border"] .container.layout-one-column {
+  border: 1px solid #94a3b8 !important;
+  box-shadow: none !important;
+  padding: 34px 44px !important;
+  border-radius: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 29. executive-spacious 资深总监从容大版
+ * 大行距 1.75，宽阔空间，凸显资历格局与领导力
+ * -------------------------------------------------------------------------- */
+body[data-template="executive-spacious"] .container.layout-one-column {
+  padding: 44px 54px !important;
+}
+body[data-template="executive-spacious"] .header-side-by-side-card .header-name {
+  font-size: 30px !important;
+  letter-spacing: 2px !important;
+}
+body[data-template="executive-spacious"] .container .main .info-unit ul li {
+  line-height: 1.75 !important;
+  margin-bottom: 10px !important;
+}
+
+/* --------------------------------------------------------------------------
+ * 30. compact-ultra 极致高密单页版 (经历超多/绝对单页强迫症)
+ * 全站行距收缩至 1.35，上下间距紧致，无论写多少内容都能安全塞进一页 A4
+ * -------------------------------------------------------------------------- */
+body[data-template="compact-ultra"] .container.layout-one-column {
+  padding: 16px 24px !important;
+  margin: 6px auto !important;
+}
+body[data-template="compact-ultra"] .header-side-by-side-card {
+  padding: 6px 10px !important;
+  margin-bottom: 6px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+body[data-template="compact-ultra"] .container .info-unit {
+  margin-bottom: 6px !important;
+}
+body[data-template="compact-ultra"] .container .info-unit h2 {
+  font-size: 13px !important;
+  margin-bottom: 3px !important;
+  padding-left: 6px !important;
+  border-left-width: 3px !important;
+}
+body[data-template="compact-ultra"] .container .main .info-unit ul li {
+  margin-bottom: 2px !important;
+  line-height: 1.38 !important;
+  font-size: 12px !important;
+}
+body[data-template="compact-ultra"] .container .main .info-unit ul li h3 {
+  font-size: 13px !important;
+  margin-bottom: 1px !important;
+}
+body[data-template="compact-ultra"] .skill-badge-tag {
+  font-size: 11px !important;
+  padding: 1px 8px !important;
+}
+
+/* ==========================================================================
+ * 全模板打印优化（A4 纸单页无瑕疵导出）
+ * ========================================================================== */
+@media print {
+  body[data-template] .container.layout-one-column {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+}

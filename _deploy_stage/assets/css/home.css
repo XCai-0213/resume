@@ -1,0 +1,615 @@
+/* ==========================================================================
+ * 个人主页与门户 (Homepage) - 赛博像素与毛玻璃悬浮质感样式表
+ * 融合 AyagawaSeirin/homepage 经典卡片设计与 15387 视听交互
+ * ========================================================================== */
+
+:root {
+  --home-primary: #38bdf8;
+  --home-primary-dark: #0284c7;
+  --home-primary-light: rgba(56, 189, 248, 0.15);
+  --home-accent: #f43f5e;
+  --home-text-main: #f8fafc;
+  --home-text-muted: #94a3b8;
+  --home-glass-bg: rgba(15, 23, 42, 0.78);
+  --home-glass-border: rgba(255, 255, 255, 0.14);
+  --home-glass-hover: rgba(255, 255, 255, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--home-text-main);
+  background-color: #0b0f19;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+ * 全屏背景图（马里奥赛博像素夜景 GIF / WebP）
+ * ========================================================================== */
+#home-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: opacity 0.5s ease;
+  transform: scale(1.02); /* 微放大抗锯齿 */
+}
+
+/* 渐变遮罩：微暗调暗角保护文字对比度与像素氛围 */
+#home-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.75) 100%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* ==========================================================================
+ * 顶部悬浮操作胶囊导航栏（主页 / 简历 / 投递记录 / 后台 / 音乐）
+ * ========================================================================== */
+.home-quick-bar {
+  position: fixed;
+  top: 16px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 6px 12px;
+  border-radius: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--home-glass-border);
+  font-size: 13px;
+  animation: fadeInDown 0.4s ease;
+}
+
+.home-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.home-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.home-nav-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(56, 189, 248, 0.4);
+}
+
+.home-nav-btn.highlight {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.45);
+}
+
+.home-nav-btn.highlight:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  transform: translateY(-1px);
+}
+
+.bar-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  margin: 0 4px;
+}
+
+/* 音乐胶囊播放器 */
+.music-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.music-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.music-toggle-btn.playing {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.music-disc {
+  font-size: 13px;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.music-toggle-btn.playing .music-disc {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+ * 页面主布局容器
+ * ========================================================================== */
+.home-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 76px 20px 60px;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+  animation: fadeInUp 0.5s ease;
+}
+
+/* ==========================================================================
+ * 左侧个人名片卡片（毛玻璃悬浮拟态）
+ * ========================================================================== */
+.home-sidebar-card {
+  background: var(--home-glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px;
+  border: 1px solid var(--home-glass-border);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  padding: 30px 22px;
+  text-align: center;
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-avatar-wrap {
+  width: 110px;
+  height: 138px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.home-subtitle {
+  font-size: 13px;
+  color: var(--home-text-muted);
+  font-family: Consolas, monospace;
+  margin-bottom: 8px;
+}
+
+.home-tagline-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.home-slogan {
+  font-size: 12.5px;
+  color: #cbd5e1;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 22px;
+  padding: 0 10px;
+}
+
+/* 左侧主要操作按钮组 */
+.home-action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+}
+
+.action-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+ * 右侧主要内容卡片
+ * ========================================================================== */
+.home-main-card {
+  background: var(--home-glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px;
+  border: 1px solid var(--home-glass-border);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  padding: 34px 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.section-title i {
+  color: var(--home-primary);
+  font-size: 16px;
+}
+
+/* 关于我 */
+.about-greeting {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.about-bio {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #cbd5e1;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+
+.about-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.about-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+}
+
+.about-badge-label {
+  color: var(--home-text-muted);
+}
+
+.about-badge-val {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 技能矩阵 */
+.skills-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-category-row {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.skill-category-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skill-items-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 10px;
+}
+
+.home-skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  color: #f1f5f9;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.home-skill-pill:hover {
+  background: var(--home-primary-light);
+  border-color: var(--home-primary);
+  color: var(--home-primary);
+  transform: translateY(-1px);
+}
+
+/* 代表作品卡片 */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.project-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.project-card-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  white-space: nowrap;
+}
+
+.project-card-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #cbd5e1;
+  margin-bottom: 14px;
+}
+
+.project-card-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.project-card-link:hover {
+  text-decoration: underline;
+}
+
+/* 社交联系网格 */
+.social-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.social-card-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.social-card-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+
+.social-card-item i {
+  font-size: 20px;
+  color: #38bdf8;
+  width: 24px;
+  text-align: center;
+}
+
+.social-card-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-card-name {
+  font-size: 11.5px;
+  color: var(--home-text-muted);
+}
+
+.social-card-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 页脚 */
+.home-footer {
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: var(--home-text-muted);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+ * 进场动画与响应式
+ * ========================================================================== */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 960px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    padding-top: 70px;
+  }
+  .home-sidebar-card {
+    position: static;
+    padding: 24px 20px;
+  }
+  .home-main-card {
+    padding: 24px 20px;
+  }
+  .home-quick-bar {
+    top: auto;
+    bottom: 16px;
+    right: 50%;
+    transform: translateX(50%);
+    padding: 5px 8px;
+    gap: 4px;
+  }
+  .home-nav-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

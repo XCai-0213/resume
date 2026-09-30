@@ -1,0 +1,169 @@
+{
+  "columns": [
+    {
+      "key": "company",
+      "label": "公司名称",
+      "visible": true,
+      "width": 160,
+      "type": "text"
+    },
+    {
+      "key": "companyType",
+      "label": "公司类型",
+      "visible": true,
+      "width": 100,
+      "type": "tag"
+    },
+    {
+      "key": "industry",
+      "label": "所属行业",
+      "visible": true,
+      "width": 110,
+      "type": "text"
+    },
+    {
+      "key": "batch",
+      "label": "招聘类型",
+      "visible": true,
+      "width": 90,
+      "type": "tag"
+    },
+    {
+      "key": "target",
+      "label": "招聘对象",
+      "visible": true,
+      "width": 110,
+      "type": "tag"
+    },
+    {
+      "key": "location",
+      "label": "工作地点",
+      "visible": true,
+      "width": 180,
+      "type": "text"
+    },
+    {
+      "key": "position",
+      "label": "岗位",
+      "visible": true,
+      "width": 240,
+      "type": "text"
+    },
+    {
+      "key": "status",
+      "label": "投递进度",
+      "visible": true,
+      "width": 110,
+      "type": "status"
+    },
+    {
+      "key": "updatedAt",
+      "label": "更新时间",
+      "visible": true,
+      "width": 110,
+      "type": "date"
+    },
+    {
+      "key": "deadline",
+      "label": "投递截止",
+      "visible": true,
+      "width": 110,
+      "type": "date"
+    },
+    {
+      "key": "link",
+      "label": "相关链接",
+      "visible": true,
+      "width": 100,
+      "type": "link"
+    },
+    {
+      "key": "announcement",
+      "label": "招聘公告",
+      "visible": true,
+      "width": 100,
+      "type": "link"
+    },
+    {
+      "key": "writtenTest",
+      "label": "笔试情况",
+      "visible": true,
+      "width": 100,
+      "type": "text"
+    },
+    {
+      "key": "scale",
+      "label": "公司规模",
+      "visible": true,
+      "width": 100,
+      "type": "text"
+    },
+    {
+      "key": "note",
+      "label": "备注",
+      "visible": true,
+      "width": 160,
+      "type": "text"
+    }
+  ],
+  "rows": [
+    {
+      "company": "国网山东省电力公司",
+      "companyType": "央国企",
+      "industry": "国企",
+      "batch": "秋招",
+      "target": "2027届",
+      "location": "济南,青岛,淄博,枣庄,东营,烟台,潍坊,济宁,泰安,威海,日照,临沂,德州,聊城,滨州,菏泽",
+      "position": "电气工程、电力系统及其自动化、高电压与绝缘技术、计算机科学与技术、软件工程、人工智能、信息与通信工程、电子与通信工程",
+      "status": "未投递",
+      "updatedAt": "2026-09-21",
+      "deadline": "2026-10-05",
+      "link": "",
+      "announcement": "",
+      "writtenTest": "",
+      "scale": "",
+      "note": "",
+      "id": "job_seed_mubd5g5y_0",
+      "createdAt": "2026-09-21"
+    },
+    {
+      "company": "兴业银行",
+      "companyType": "银行",
+      "industry": "银行/金融",
+      "batch": "秋招",
+      "target": "2027届,海外往届",
+      "location": "全国",
+      "position": "管理培训生，科技专项人才，资金营运中心管理培训生，科技研发中心研发岗，市场营销类，运营支持类",
+      "status": "未投递",
+      "updatedAt": "2026-09-21",
+      "deadline": "2026-10-25",
+      "link": "",
+      "announcement": "",
+      "writtenTest": "",
+      "scale": "",
+      "note": "",
+      "id": "job_seed_mubd5g5z_1",
+      "createdAt": "2026-09-21"
+    },
+    {
+      "company": "浙江省自然资源集团",
+      "companyType": "央国企",
+      "industry": "国企",
+      "batch": "秋招",
+      "target": "2027届",
+      "location": "南京,杭州,宁波,温州,嘉兴,绍兴,金华,丽水,株洲,醴陵",
+      "position": "地质服务类,工程技术类,测绘地信类,资源检测类,管理职能类。地质工程、采矿工程、资源勘查工程、地质学、水文地质、地球物理、地球化学",
+      "status": "未投递",
+      "updatedAt": "2026-09-21",
+      "deadline": "招满为止",
+      "link": "",
+      "announcement": "",
+      "writtenTest": "",
+      "scale": "",
+      "note": "",
+      "id": "job_seed_mubd5g5z_2",
+      "createdAt": "2026-09-21"
+    }
+  ],
+  "updatedAt": "2026-09-21T14:51:37.390Z"
+}
