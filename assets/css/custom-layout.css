@@ -775,7 +775,7 @@ body.pdf-mode .skill-badge-tag img {
 }
 
 body.pdf-mode .info-unit {
-  margin-bottom: 8px !important;
+  margin-bottom: 6px !important;
 }
 
 body.pdf-mode .info-unit h2 {
@@ -795,8 +795,8 @@ body.pdf-mode .info-unit ul {
 
 /* 项目之间加间距 */
 body.pdf-mode .info-unit ul > li {
-  padding-bottom: 8px !important;
-  margin-bottom: 10px !important;
+  padding-bottom: 4px !important;
+  margin-bottom: 6px !important;
 }
 
 body.pdf-mode .info-unit ul > li:last-child {

@@ -616,11 +616,9 @@
     if (!container) return null;
 
     document.body.classList.add('pdf-mode');
-
     container.style.zoom = '';
     container.style.width = '';
 
-    // 内容真实底边（所有可见元素的最低点）
     const contentBottom = () => {
       let maxB = 0;
       container.querySelectorAll('*').forEach(el => {
@@ -632,37 +630,40 @@
 
     const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
     const PX_PER_MM = 3.7795;
-    const MARGIN_MM = 10;                                 // 四边统一 10mm（与 CSS @page/padding 一致）
-    const usableW = (210 - 2 * MARGIN_MM) * PX_PER_MM;    // 内容可用宽度
-    const usableBottom = (297 - MARGIN_MM) * PX_PER_MM;   // 内容底边不得超过的位置
-    const target = usableBottom * 0.998;                  // 填充目标（留 1.5% 呼吸）
-    const ZOOM_MIN = 0.6, ZOOM_MAX = 1.35;
+    const MARGIN_MM = 10;
+    const usableW = (210 - 2 * MARGIN_MM) * PX_PER_MM;
+    const usableBottom = (297 - MARGIN_MM) * PX_PER_MM;
+    const target = usableBottom * 0.99;
 
-    // 自然状态测量
+    // ===== 字号下限约束 =====
+    // zoom 缩小字号的硬下限：zoomed 后正文视觉字号不得低于 9pt（印刷可读下限）
+    // CSS 基线正文 9.4pt => zoom >= 9/9.4 ≈ 0.957；留余量取 0.95
+    // 超过下限仍装不下时，宁可排两页也不缩小字号
+    const ZOOM_FLOOR = 0.96;
+    const ZOOM_CEIL = 1.35;
+
     void container.offsetHeight;
     const bottom1 = contentBottom();
     if (bottom1 <= 0) return null;
 
-    // ===== 宽度补偿式 zoom：=====
-    // 直接 zoom 会等比放大宽度导致横向溢出；先把布局宽度收窄为 availW/zoom，
-    // 再 zoom 放大回可用宽度 —— 视觉宽度不变，高度被拉伸填满。
+    // 宽度补偿式 zoom：先收窄布局宽度再 zoom 放大，视觉宽度不变
     let zoom;
     if (bottom1 < target) {
-      zoom = clamp(target / bottom1, 1, ZOOM_MAX);      // 不足一页 → 放大
+      zoom = clamp(target / bottom1, 1, ZOOM_CEIL);     // 不足一页 → 放大填满
     } else {
-      zoom = clamp(target / bottom1, ZOOM_MIN, 1);      // 超过一页 → 缩小
+      zoom = clamp(target / bottom1, ZOOM_FLOOR, 1);    // 超过 → 最多缩到字号下限
     }
     container.style.width = (usableW / zoom) + 'px';
     container.style.zoom = zoom;
-    void container.offsetHeight;   // 宽度变化会触发文字重排，必须重排后再量
+    void container.offsetHeight;
 
-    // 迭代收敛（重排导致高度与 zoom 非线性）
+    // 迭代收敛
     for (let i = 0; i < 6; i++) {
       const b = contentBottom();
       if (b <= 0) break;
       const diff = target - b;
       if (Math.abs(diff) < 5) break;
-      const nz = clamp(zoom * (target / b), ZOOM_MIN, ZOOM_MAX);
+      const nz = clamp(zoom * (target / b), ZOOM_FLOOR, ZOOM_CEIL);
       if (Math.abs(nz - zoom) < 0.002) break;
       zoom = nz;
       container.style.width = (usableW / zoom) + 'px';
@@ -670,16 +671,8 @@
       void container.offsetHeight;
     }
 
-    // 最终安全阀：内容底边若超出可用范围（会溢出到第二页），逐步回退
-    let guard = 0;
-    while (contentBottom() > usableBottom && zoom > ZOOM_MIN && guard < 12) {
-      zoom *= 0.97;
-      container.style.width = (usableW / zoom) + 'px';
-      container.style.zoom = zoom;
-      void container.offsetHeight;
-      guard++;
-    }
-
+    // 不再有"压到一页"的安全阀 —— 字号可读性优先于页数。
+    // zoom 已到达下限（0.95）仍超一页时，自然分页到第二页（内容完整可读）。
     return { zoom: Math.round(zoom * 1000) / 1000 };
   }
 
