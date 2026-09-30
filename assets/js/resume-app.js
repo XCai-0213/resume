@@ -617,31 +617,16 @@
 
     document.body.classList.add('pdf-mode');
 
-    // Font Awesome 图标 → Unicode 符号（导出环境可能没加载 FA 字体，避免显示为方框）
-    const FA_TO_UNICODE = {
-      'fa-phone': '📞', 'fa-envelope': '✉', 'fa-github': '', 'fa-wechat': '💬',
-      'fa-map-marker': '📍', 'fa-code': '⌨', 'fa-graduation-cap': '🎓',
-      'fa-cubes': '📦', 'fa-pencil-square-o': '✎', 'fa-table': '▦',
-      'fa-user': '👤', 'fa-briefcase': '💼', 'fa-star': '★',
-      'fa-link': '🔗', 'fa-qrcode': '▨', 'fa-print': '🖨',
-      'fa-file-text': '📄', 'fa-paper-plane-o': '➤', 'fa-flag': '⚑',
-      'fa-save': '💾', 'fa-cloud': '☁', 'fa-th-large': '▦'
-    };
-    container.querySelectorAll('i.fa').forEach(el => {
-      const cls = Array.from(el.classList).find(c => c.startsWith('fa-') && c !== 'fa');
-      const sym = cls ? FA_TO_UNICODE[cls] : null;
-      if (sym) {
-        const span = document.createElement('span');
-        span.className = 'fa-unicode-fallback';
-        span.textContent = sym;
-        el.replaceWith(span);
-      } else {
-        el.style.display = 'none';
-      }
+    // 1. 隐藏所有图标字体元素（导出环境字体加载不可靠，缺字形会显示为方框 □。
+    //    联系信息本身有"手机:""邮箱:"等文字标签，图标冗余；章节标题纯文字更干净）
+    container.querySelectorAll('i.fa, i.fas, i.far, span.fa, em.fa').forEach(el => {
+      el.style.display = 'none';
     });
 
     container.style.zoom = '';
+    container.style.width = '';
 
+    // 内容真实底边（所有可见元素的最低点）
     const contentBottom = () => {
       let maxB = 0;
       container.querySelectorAll('*').forEach(el => {
@@ -651,53 +636,57 @@
       return maxB;
     };
 
-    void container.offsetHeight;
-    const naturalBottom = contentBottom();
-    if (naturalBottom <= 0) return null;
-
     const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-    const density = clamp((naturalBottom - 500) / (1100 - 500), 0, 1);
-    const padX = Math.round(clamp(PAD_X_MAX - density * (PAD_X_MAX - PAD_X_MIN), PAD_X_MIN, PAD_X_MAX) * 10) / 10;
-    const padY = Math.round(clamp(PAD_Y_MAX - density * (PAD_Y_MAX - PAD_Y_MIN), PAD_Y_MIN, PAD_Y_MAX) * 10) / 10;
+    const PX_PER_MM = 3.7795;
+    const MARGIN_MM = 10;                                 // 四边统一 10mm（与 CSS @page/padding 一致）
+    const usableW = (210 - 2 * MARGIN_MM) * PX_PER_MM;    // 内容可用宽度
+    const usableBottom = (297 - MARGIN_MM) * PX_PER_MM;   // 内容底边不得超过的位置
+    const target = usableBottom * 0.998;                  // 填充目标（留 1.5% 呼吸）
+    const ZOOM_MIN = 0.6, ZOOM_MAX = 1.35;
 
-    document.documentElement.style.setProperty('--page-pad-x', padX + 'mm');
-    document.documentElement.style.setProperty('--page-pad-y', padY + 'mm');
-
+    // 自然状态测量
     void container.offsetHeight;
     const bottom1 = contentBottom();
     if (bottom1 <= 0) return null;
 
-    const targetBottomPx = (A4_H_MM - padY) * PX_PER_MM;
-    const fillGap = targetBottomPx - bottom1;
-
-    // 放大填满时空上限 1.0（不能溢出到第二页）
+    // ===== 宽度补偿式 zoom：=====
+    // 直接 zoom 会等比放大宽度导致横向溢出；先把布局宽度收窄为 availW/zoom，
+    // 再 zoom 放大回可用宽度 —— 视觉宽度不变，高度被拉伸填满。
     let zoom;
-    if (fillGap > 0) {
-      zoom = clamp(1 + fillGap / bottom1, ZOOM_MIN, 1.0);
+    if (bottom1 < target) {
+      zoom = clamp(target / bottom1, 1, ZOOM_MAX);      // 不足一页 → 放大
     } else {
-      zoom = clamp(1 + fillGap / bottom1, ZOOM_MIN, ZOOM_MAX);
+      zoom = clamp(target / bottom1, ZOOM_MIN, 1);      // 超过一页 → 缩小
     }
+    container.style.width = (usableW / zoom) + 'px';
     container.style.zoom = zoom;
+    void container.offsetHeight;   // 宽度变化会触发文字重排，必须重排后再量
 
-    for (let i = 0; i < 5; i++) {
+    // 迭代收敛（重排导致高度与 zoom 非线性）
+    for (let i = 0; i < 6; i++) {
       const b = contentBottom();
       if (b <= 0) break;
-      const gap = targetBottomPx - b;
-      if (Math.abs(gap) < 4) break;
-      if (gap > 0 && zoom >= 1.0) break;
-      zoom = clamp(zoom * (targetBottomPx / b), ZOOM_MIN, ZOOM_MAX);
-      if (fillGap > 0 && zoom > 1.0) { zoom = 1.0; container.style.zoom = zoom; break; }
+      const diff = target - b;
+      if (Math.abs(diff) < 5) break;
+      const nz = clamp(zoom * (target / b), ZOOM_MIN, ZOOM_MAX);
+      if (Math.abs(nz - zoom) < 0.002) break;
+      zoom = nz;
+      container.style.width = (usableW / zoom) + 'px';
       container.style.zoom = zoom;
+      void container.offsetHeight;
     }
 
-    const w = container.getBoundingClientRect().width;
-    const availW = (A4_W_MM - padX * 2) * PX_PER_MM;
-    if (w > availW * 1.01) {
-      zoom = clamp(zoom * (availW / w), ZOOM_MIN, 1.0);
+    // 最终安全阀：内容底边若超出可用范围（会溢出到第二页），逐步回退
+    let guard = 0;
+    while (contentBottom() > usableBottom && zoom > ZOOM_MIN && guard < 12) {
+      zoom *= 0.97;
+      container.style.width = (usableW / zoom) + 'px';
       container.style.zoom = zoom;
+      void container.offsetHeight;
+      guard++;
     }
 
-    return { padX, padY, zoom: Math.round(zoom * 1000) / 1000 };
+    return { zoom: Math.round(zoom * 1000) / 1000 };
   }
 
   // 退出导出排版态，恢复正常屏幕显示
@@ -705,7 +694,7 @@
     document.body.classList.remove('pdf-mode', 'printing-single-page');
     document.body.removeAttribute('data-fit');
     const c = document.getElementById('resume-container');
-    if (c) c.style.zoom = '';
+    if (c) { c.style.zoom = ''; c.style.width = ''; }
   }
 
   // 顶部快捷控制栏（含跨页面导航）
